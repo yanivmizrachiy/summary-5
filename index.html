@@ -10,8 +10,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="סיכום שבועי">
-<link rel="icon" href="https://raw.githubusercontent.com/yanivmizrachiy/zaviyot-digital-workbook/main/public/logo.png">
-<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/yanivmizrachiy/zaviyot-digital-workbook/main/public/logo.png">
+<link rel="icon" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
 <title>סיכום שבועי</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -668,7 +668,7 @@ const SUMMARY = {
 
   /* ───── שער ───── */
   cover: {
-    logo:     "https://raw.githubusercontent.com/yanivmizrachiy/zaviyot-digital-workbook/main/public/logo.png",
+    logo:     "assets/logo.png",
     title:    "סיכום שבועי",
     edition:  "סיכום מס׳ 5",
     district: "הדרכה במחוז ירושלים והעיר ירושלים – מנח״י",
@@ -677,7 +677,7 @@ const SUMMARY = {
 
   /* ───── כותב הסיכום ───── */
   author: {
-    photo: "https://jerusalem-weekly-sep10.vercel.app/assets/yaniv.jpg",
+    photo: "assets/yaniv.jpg",
     name:  "יניב רז",
     role:  "מדריך מחוזי חט״ב בעיר ירושלים"
   },
@@ -923,7 +923,7 @@ const SUMMARY = {
         '<h2 class="hello">' + esc(S.greeting) + "</h2>" +
         '<div class="author">' +
           '<img src="' + esc(S.author.photo) + '" alt="' + esc(S.author.name) +
-            '" width="66" height="66" loading="lazy" decoding="async">' +
+            '" width="66" height="66" decoding="async">' +
           '<div class="author-txt"><strong>' + esc(S.author.name) + "</strong>" +
             "<span>" + esc(S.author.role) + "</span></div>" +
         "</div>" +
