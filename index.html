@@ -155,17 +155,47 @@ body{
   flex:1;display:flex;flex-direction:column;justify-content:space-evenly;
   align-items:center;text-align:center;padding:12px 0 16px;
 }
+/* שכבת אור רכה שנעה לאט מאחורי תוכן השער */
+.cover-aurora{
+  position:absolute;inset:-25%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(38% 30% at 22% 18%,rgba(24,189,181,.24),transparent 70%),
+    radial-gradient(34% 28% at 78% 74%,rgba(45,104,167,.20),transparent 70%),
+    radial-gradient(26% 22% at 62% 34%,rgba(255,214,120,.14),transparent 72%);
+  animation:auroraDrift 24s ease-in-out infinite alternate;
+}
+.cover .datebar,.cover-main{position:relative;z-index:1}
+
+/* הלוגו נשאר זקוף כדי שהכיתוב בתוכו יהיה קריא. התנועה עברה לטבעת */
+.cover-logo-wrap{position:relative;display:grid;place-items:center}
+.cover-logo-ring{
+  position:absolute;inset:-10px;border-radius:50%;pointer-events:none;
+  background:conic-gradient(from 0deg,#17bdb5,#2f69a5,#d9fffb,#17a99d,#2f69a5,#17bdb5);
+  -webkit-mask:radial-gradient(circle,transparent 0 calc(50% - 4px),#000 calc(50% - 4px));
+  mask:radial-gradient(circle,transparent 0 calc(50% - 4px),#000 calc(50% - 4px));
+  animation:ringSpin 9s linear infinite;
+  opacity:.9;
+}
 .cover-logo{
   width:132px;height:132px;object-fit:cover;border-radius:50%;
-  border:2px solid rgba(45,104,167,.55);background:#fff;
-  box-shadow:0 0 0 9px rgba(45,104,167,.045),0 20px 46px rgba(23,62,98,.15);
-  animation:logoTurn 12s linear infinite;
+  border:2px solid rgba(255,255,255,.9);background:#fff;
+  box-shadow:0 0 0 9px rgba(45,104,167,.05),0 22px 48px rgba(23,62,98,.18);
+  animation:logoFloat 7s ease-in-out infinite alternate;
 }
 .cover h1{
-  margin:0;color:var(--blue-deep);
+  margin:0;
   font:900 clamp(2.7rem,12vw,4rem)/1 Assistant,'Noto Sans Hebrew',Arial;
   letter-spacing:-.03em;
+  background:linear-gradient(172deg,#1e5183 0%,var(--blue-deep) 48%,#0c6a64 100%);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
 }
+
+/* כניסה מדורגת של רכיבי השער */
+.cover .datebar{animation:coverRise .85s cubic-bezier(.2,.75,.2,1) both}
+.cover-logo-wrap{animation:coverRise .9s cubic-bezier(.2,.75,.2,1) .10s both}
+.cover h1,.cover .edition{animation:coverRise .9s cubic-bezier(.2,.75,.2,1) .20s both}
+.cover .district{animation:coverRise .9s cubic-bezier(.2,.75,.2,1) .32s both}
 .edition{margin:10px 0 0;color:#496c88;font:800 1.14rem/1.25 Assistant,'Noto Sans Hebrew',Arial}
 .district{
   max-width:640px;margin:0;color:#31556e;
@@ -303,33 +333,29 @@ body{
   padding:.02em .16em;font-weight:900;white-space:nowrap;
   /* השורה שבה יושב הסימון מתרחבת, כדי שיהיה מקום לעיגול
      בלי שידרוס את השורות שמעל ומתחת */
-  line-height:2.5;
+  line-height:3.05;
 }
 /* גובה העיגול נקבע ביחס לגודל האות ולא לגובה השורה, אחרת הוא
    נמתח ומחליק מתחת לטקסט כשגובה השורה גדול. */
 .pen-mark svg{
   position:absolute;pointer-events:none;overflow:visible;
-  left:-.62em;
-  width:calc(100% + 1.24em);
+  /* הרוחב יחסי (ולא ב-em קבוע) כדי שהתנאי הגאומטרי יתקיים גם
+     לטקסט ארוך: (רוחב הטקסט / רוחב התיבה)² + (גובה / גובה התיבה)² < 1 */
+  left:-9%;
+  width:118%;
   top:50%;
-  height:2.9em;
+  height:3.5em;
   translate:0 -50%;
 }
+/* העיגול מצויר תמיד ובמלואו. בעבר הוא נמשך באנימציית גלילה, אבל
+   אנימציה שקופאת (לשונית רקע, דף מוסתר) הותירה אותו חלקי או נעלם.
+   סימון עט הוא הערה סטטית — אין סיבה שיהיה תלוי באנימציה. */
 .pen-mark path{
   fill:none;stroke:#dc2626;stroke-width:2.7;
   stroke-linecap:round;stroke-linejoin:round;
   vector-effect:non-scaling-stroke;
-  stroke-dasharray:1;
-  stroke-dashoffset:0;          /* ברירת המחדל: העיגול מצויר ונראה */
 }
 .pen-mark .rough2{opacity:.42;stroke-width:1.5;translate:.7px -.4px}
-
-/* הקוד מוסיף pen-anim רק כשאפשר להנפיש. אז העיגול מתחיל מוסתר,
-   ונמשך ברגע שהוא נכנס לתוך המסך. אם משהו משתבש, הכלל למעלה
-   מבטיח שהעיגול פשוט יופיע מצויר. */
-.pen-mark.pen-anim path{stroke-dashoffset:1}
-.pen-mark.pen-draw path{animation:drawPen .95s ease-out forwards}
-.pen-mark.pen-draw .rough2{animation-delay:.1s}
 
 /* ══════════════════════════════════════════════════════════════════
    8 · טבלת "מה אנחנו מלמדים"
@@ -470,6 +496,8 @@ body{
   width:100%;height:100%;
   object-fit:cover;object-position:center;
   animation:kenBurns 26s ease-in-out infinite alternate;
+  /* בלי filter ובלי will-change: שניהם מאלצים רינדור לבאפר נפרד,
+     ואז התמונה עלולה לא להיצבע כלל. התנועה נעשית ב-transform בלבד. */
 }
 /* הבזק אור שחולף על התמונה */
 .finale-sweep{
@@ -526,9 +554,20 @@ body{
 /* ══════════════════════════════════════════════════════════════════
    11 · אנימציות
    ══════════════════════════════════════════════════════════════════ */
-@keyframes logoTurn{to{transform:rotate(1turn)}}
 @keyframes orbSpin{to{rotate:1turn}}
-@keyframes drawPen{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes ringSpin{to{rotate:1turn}}
+@keyframes logoFloat{
+  from{translate:0 -5px;scale:.985}
+  to{translate:0 6px;scale:1.015}
+}
+@keyframes auroraDrift{
+  from{transform:translate(-3%,-2%) scale(1)}
+  to{transform:translate(3%,2.5%) scale(1.12)}
+}
+@keyframes coverRise{
+  from{opacity:0;transform:translateY(26px)}
+  to{opacity:1;transform:none}
+}
 
 @keyframes btnShine{
   0%{transform:translateX(-130%)}
@@ -657,10 +696,13 @@ body{
    ══════════════════════════════════════════════════════════════════ */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .cover-logo,.orb,.pen-mark path,
+  .cover-logo,.cover-logo-ring,.cover-aurora,.cover .datebar,
+  .cover h1,.cover .edition,.cover .district,
+  .orb,.pen-mark path,
   .finale-img,.finale-caption,.finale-caption p{
     animation:none!important;stroke-dashoffset:0!important;
   }
+  .finale-img{filter:none}
   .btn{transition:none}
   .btn::after{display:none}
   .finale-sweep,.spark{display:none}
@@ -676,8 +718,10 @@ body{
   /* שומרים על הצבעים והמילויים גם בהדפסה */
   .sheet{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .btn::after{display:none!important}
-  /* בהדפסה התמונה נשארת סטטית */
-  .finale-img{animation:none!important;transform:none!important}
+  /* בהדפסה התמונה נשארת סטטית וללא עיוות */
+  .finale-img{animation:none!important;transform:none!important;filter:none!important}
+  .cover-aurora,.cover-logo-ring{animation:none!important}
+  .cover-logo,.cover .datebar,.cover h1,.cover .edition,.cover .district{animation:none!important}
   .finale-caption{animation:none!important}
   .finale-caption p{animation:none!important}
   .finale-sweep,.spark{display:none!important}
@@ -881,34 +925,33 @@ const SUMMARY = {
     };
   }
 
-  /* עיגול עט אדום: רוחב לפי אורך הטקסט, עם רעידת יד קלה וקבועה */
+  /* ───── עיגול עט אדום ─────
+     הנתיב הוא אליפסה מתמטית מדויקת בתוך viewBox של 100×100, שנמתחת
+     לגודל התיבה שב-CSS. "רעידת היד" דוחפת כל נקודה החוצה בלבד
+     (המקדם תמיד ≥ 1), ולכן הקו לעולם לא נכנס פנימה אל האותיות.
+     גודל התיבה עצמה נקבע ב-CSS ביחס לרוחב הטקסט, כך שהתנאי
+     (רוחב/תיבה)² + (גובה/תיבה)² < 1 מתקיים לכל אורך טקסט. */
+  var KAPPA = 0.5523;   /* המקדם לבניית מעגל מארבע עקומות בזייה */
+
+  function ellipsePath(rnd, spread, base){
+    var R = 50 * base, k = 50 * base * KAPPA, c = 50;
+    var out = function(){ return 1 + rnd() * spread; };   /* תמיד החוצה */
+    var rE = R * out(), rS = R * out(), rW = R * out(), rN = R * out();
+    var n = function(v){ return Math.round(v * 10) / 10; };
+
+    return "M" + n(c + rE) + " " + n(c) +
+      " C" + n(c + rE) + " " + n(c + k) + ", " + n(c + k) + " " + n(c + rS) + ", " + n(c) + " " + n(c + rS) +
+      " C" + n(c - k) + " " + n(c + rS) + ", " + n(c - rW) + " " + n(c + k) + ", " + n(c - rW) + " " + n(c) +
+      " C" + n(c - rW) + " " + n(c - k) + ", " + n(c - k) + " " + n(c - rN) + ", " + n(c) + " " + n(c - rN) +
+      " C" + n(c + k) + " " + n(c - rN) + ", " + n(c + rE) + " " + n(c - k) + ", " + n(c + rE) + " " + n(c);
+  }
+
   function penMark(text){
-    var w   = Math.max(96, Math.round(72 + 6 * text.length));
-    var rnd = seeded(text);
-    var j   = function(v, a){ return Math.round((v + (rnd() * 2 - 1) * a) * 10) / 10; };
-    var sx  = j(6, .8), sy = j(23, .8);
-
-    var main = "M" + sx + " " + sy +
-      " C" + j(w/30+5, 1.4)     + " " + j(5, 1.2)  +
-      ", "  + j(.8833*w-8, 3)   + " " + j(2, 1.2)  +
-      ", "  + j(.9833*w-4, 2)   + " " + j(18, 1.2) +
-      " C" + j(1.0333*w-3, 2)   + " " + j(34, 1.2) +
-      ", "  + j(.15*w+4, 3)     + " " + j(42, 1.2) +
-      ", "  + j(5, .8)          + " " + j(27, .8)  +
-      " C" + j(2, .8)           + " " + j(24, .8)  +
-      ", "  + j(2, .8)          + " " + j(21, .8)  +
-      ", "  + sx + " " + sy;
-
-    var rough = "M" + j(8, .8) + " " + j(24, .8) +
-      " C" + j(.0333*w+8, 1.4) + " " + j(7, 1.2)  +
-      ", "  + j(.8833*w-6, 3)  + " " + j(4, 1.2)  +
-      ", "  + j(.9833*w-6, 2)  + " " + j(19, 1.2) +
-      " C" + j(1.0167*w-5, 2)  + " " + j(32, 1.2) +
-      ", "  + j(.15*w+6, 3)    + " " + j(39, 1.2) +
-      ", "  + j(7, .8)         + " " + j(27, .8);
+    var main  = ellipsePath(seeded(text), 0.05, 1.00);
+    var rough = ellipsePath(seeded(text + "~"), 0.05, 1.035);
 
     return '<span class="pen-mark">' + text +
-           '<svg viewBox="0 0 ' + w + ' 42" preserveAspectRatio="none" aria-hidden="true">' +
+           '<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">' +
            '<path pathLength="1" d="' + main + '"/>' +
            '<path class="rough2" pathLength="1" d="' + rough + '"/>' +
            '</svg></span>';
@@ -972,9 +1015,13 @@ const SUMMARY = {
         '<div class="date-gregorian" dir="ltr">' + esc(S.dateGregorian) + "</div>" +
         '<div class="date-hebrew"><span class="bsd">בס״ד</span> ' + esc(S.dateHebrew) + "</div>" +
       "</div>" +
+      '<span class="cover-aurora" aria-hidden="true"></span>' +
       '<div class="cover-main">' +
-        '<img class="cover-logo" src="' + esc(S.cover.logo) + '" alt="' + esc(S.cover.title) +
-          '" width="132" height="132" decoding="async" fetchpriority="high">' +
+        '<div class="cover-logo-wrap">' +
+          '<span class="cover-logo-ring" aria-hidden="true"></span>' +
+          '<img class="cover-logo" src="' + esc(S.cover.logo) + '" alt="' + esc(S.cover.title) +
+            '" width="132" height="132" decoding="async" fetchpriority="high">' +
+        "</div>" +
         "<div><h1>" + esc(S.cover.title) + '</h1><p class="edition">' + esc(S.cover.edition) + "</p></div>" +
         '<p class="district"><span>' + esc(S.cover.district) + "</span>" +
           '<span class="district-lead">' + esc(S.cover.lead) + "</span></p>" +
@@ -1048,40 +1095,6 @@ const SUMMARY = {
   var desc = document.querySelector('meta[name="description"]');
   if (desc) desc.setAttribute("content", S.cover.title + " — " + S.dateHebrew);
 
-  /* ───── ציור העיגולים האדומים ─────
-     כל עיגול נמשך ברגע שהוא נכנס לתוך המסך, ונשאר מצויר אחר כך.
-     הבדיקה רצה בתוך לולאת הגלילה הרגילה, כי היא פועלת גם כשהדף
-     נפתח בלשונית רקע. אם הקוד לא רץ כלל, או כשמבקשים תנועה
-     מופחתת, ברירת המחדל ב-CSS מציגה את העיגולים מצוירים. */
-  var penMarks = [];
-
-  if (!window.matchMedia("(prefers-reduced-motion:reduce)").matches){
-    Array.prototype.forEach.call(document.querySelectorAll(".pen-mark"), function(m){
-      m.classList.add("pen-anim");
-      penMarks.push(m);
-    });
-  }
-
-  function drawVisiblePenMarks(){
-    if (!penMarks.length) return;
-    var h = window.innerHeight || 0;
-    penMarks = penMarks.filter(function(m){
-      var r = m.getBoundingClientRect();
-      if (r.bottom > 0 && r.top < h * 0.94){
-        m.classList.add("pen-draw");
-        /* רשת ביטחון: הציור אורך כשנייה. אחרי 1.4 שניות מסירים את שתי
-           המחלקות, וכך העיגול חוזר לברירת המחדל של ה-CSS — מצויר ונראה.
-           זה מבטיח שהעיגול יופיע גם אם האנימציה לא רצה בכלל. */
-        setTimeout(function(){
-          m.classList.remove("pen-draw");
-          m.classList.remove("pen-anim");
-        }, 1400);
-        return false;                 /* צויר — אין צורך לבדוק שוב */
-      }
-      return true;
-    });
-  }
-
   /* ───── ניווט נייד: נקודות בתחתית המסך ופס התקדמות למעלה ───── */
   var sections = Array.prototype.slice.call(document.querySelectorAll("section.sheet"));
   var names    = ["שער", "עדכוני השבוע", t.title.replace(/\?/g, ""), w.title, b.text];
@@ -1153,7 +1166,6 @@ const SUMMARY = {
 
   function refresh(){
     queued = false;
-    drawVisiblePenMarks();
     var max = document.documentElement.scrollHeight - window.innerHeight;
     bar.style.width = (max > 0 ? Math.min(100, Math.max(0, window.scrollY / max * 100)) : 0) + "%";
 
