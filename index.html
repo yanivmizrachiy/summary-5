@@ -242,35 +242,34 @@ body{
 .item-links a.link{
   display:inline-flex;align-items:center;gap:9px;
   align-self:flex-start;max-width:100%;
-  min-height:48px;padding:11px 20px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.20);
-  background:linear-gradient(135deg,var(--turq-deep),var(--blue));
-  color:#fff;
-  font:900 1rem/1.35 Assistant,'Noto Sans Hebrew',Arial;
+  min-height:40px;padding:8px 13px 8px 11px;
+  border-radius:12px;
+  border:1px solid rgba(13,120,115,.26);
+  background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(23,189,181,.09));
+  color:var(--turq-deep);
+  font:900 .9rem/1.3 Assistant,'Noto Sans Hebrew',Arial;
   text-decoration:none;
-  box-shadow:
-    0 10px 20px -8px rgba(45,104,167,.62),
-    inset 0 1px 0 rgba(255,255,255,.30),
-    inset 0 -1px 0 rgba(0,0,0,.14);
+  box-shadow:0 2px 5px rgba(13,120,115,.09),inset 0 1px 0 rgba(255,255,255,.85);
   touch-action:manipulation;
-  transition:transform .2s ease,box-shadow .2s ease;
+  transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
 }
+/* חץ קטן ונקי — רומז שזה נפתח, בלי לצעוק */
 .item-links a.link::after{
-  content:"";flex:none;width:7px;height:7px;
-  border-left:2.2px solid #fff;border-bottom:2.2px solid #fff;
+  content:"";flex:none;
+  width:6px;height:6px;
+  border-left:2px solid var(--turq-deep);
+  border-bottom:2px solid var(--turq-deep);
   rotate:45deg;
+  opacity:.75;
 }
 @media(hover:hover){
   .item-links a.link:hover{
-    transform:translateY(-2px);
-    box-shadow:
-      0 16px 26px -10px rgba(45,104,167,.7),
-      inset 0 1px 0 rgba(255,255,255,.38),
-      inset 0 -1px 0 rgba(0,0,0,.14);
+    border-color:rgba(13,120,115,.52);
+    background:linear-gradient(180deg,#fff,rgba(23,189,181,.15));
+    box-shadow:0 5px 12px rgba(13,120,115,.16),inset 0 1px 0 rgba(255,255,255,.9);
   }
 }
-.item-links a.link:active{transform:translateY(1px)}
+.item-links a.link:active{box-shadow:inset 0 1px 4px rgba(13,120,115,.18)}
 
 .orb{
   width:18px;height:18px;margin-top:.52em;border-radius:50%;
@@ -302,15 +301,18 @@ body{
 .pen-mark{
   position:relative;display:inline-block;
   padding:.02em .16em;font-weight:900;white-space:nowrap;
+  /* השורה שבה יושב הסימון מתרחבת, כדי שיהיה מקום לעיגול
+     בלי שידרוס את השורות שמעל ומתחת */
+  line-height:2.5;
 }
 /* גובה העיגול נקבע ביחס לגודל האות ולא לגובה השורה, אחרת הוא
    נמתח ומחליק מתחת לטקסט כשגובה השורה גדול. */
 .pen-mark svg{
   position:absolute;pointer-events:none;overflow:visible;
-  left:-.38em;
-  width:calc(100% + .76em);
+  left:-.62em;
+  width:calc(100% + 1.24em);
   top:50%;
-  height:1.72em;
+  height:2.9em;
   translate:0 -50%;
 }
 .pen-mark path{
@@ -786,7 +788,7 @@ const SUMMARY = {
     },
 
     {
-      text: "**10.11.2026 — כינוסי רכזי מתמטיקה.**"
+      text: "**10.11.2026 — כינוסי רכזי מתמטיקה.** פרטים בהמשך."
     }
 
   ],
@@ -796,19 +798,19 @@ const SUMMARY = {
     title:   "מה אנחנו מלמדים?",
     columns: ["שכבה", "ספטמבר", "אוקטובר"],
     rows: [
-      ["ז׳",
+      ["שכבת ז׳",
        "מערכת צירים ברביע הראשון; הכרת מספרים שליליים; זוויות – סימון, השוואה, מדידה ואומדן.",
        "הכרת מספרים שליליים ומספרים נגדיים; חיבור וחיסור מספרים מכוונים; הרחבת מערכת הצירים; חוצה זווית; סכום והפרש של זוויות; זוויות סמוכות; זוויות מתכותיות."],
 
-      ["ח׳",
+      ["שכבת ח׳",
        "משפט פיתגורס; יחס, פרופורציה וקנה מידה.",
        "המשך משפט פיתגורס; גליל וחרוט; המשך יחס, פרופורציה וקנה מידה; אחוזים."],
 
-      ["ט׳",
+      ["שכבת ט׳",
        "טכניקה אלגברית; דלתון.",
        "טכניקה אלגברית; משולש שווה שוקיים."],
 
-      ["ט׳ – מצומצמת",
+      ["שכבת ט׳ – מצומצמת",
        "קריאת גרפים; גאומטריה – חישוב שטח משולש.",
        "פונקציה קווית; טכניקה אלגברית – חוק הפילוג המורחב; המשך גאומטריה – חישוב שטח משולש; משפט פיתגורס."]
     ]
