@@ -160,7 +160,6 @@ body{
   border:2px solid rgba(45,104,167,.55);background:#fff;
   box-shadow:0 0 0 9px rgba(45,104,167,.045),0 20px 46px rgba(23,62,98,.15);
   animation:logoTurn 12s linear infinite;
-  will-change:transform;
 }
 .cover h1{
   margin:0;color:var(--blue-deep);
@@ -278,7 +277,6 @@ body{
   background:conic-gradient(from 0deg,#0c7772,#18bdb5,#c8fff9,#5a86bf,#0c7772);
   box-shadow:0 0 0 4px rgba(24,189,181,.08),0 7px 15px rgba(12,119,114,.13);
   animation:orbSpin 3s linear infinite;
-  will-change:rotate;
 }
 .link{
   color:var(--turq-deep);font-weight:900;
@@ -447,31 +445,30 @@ body{
   isolation:isolate;
 }
 /* התמונה זזה לאט פנימה והחוצה, כמו מצלמה שנעה */
+/* בלי will-change כאן: הוא מעביר את התמונה לשכבת קומפוזיציה נפרדת,
+   ובשילוב עם שכבות שמעליה היא עלולה לא להיצבע כלל. האנימציה עובדת
+   מצוין גם בלעדיו. */
 .finale-img{
   position:absolute;inset:0;z-index:0;
   width:100%;height:100%;
   object-fit:cover;object-position:center;
   animation:kenBurns 26s ease-in-out infinite alternate;
-  will-change:transform;
 }
 /* הבזק אור שחולף על התמונה */
 .finale-sweep{
   position:absolute;inset:-40% -60%;z-index:1;pointer-events:none;
   background:linear-gradient(104deg,
     transparent 40%,
-    rgba(255,255,255,.30) 47%,
-    rgba(255,238,190,.16) 52%,
+    rgba(255,255,255,.26) 47%,
+    rgba(255,238,190,.14) 52%,
     transparent 60%);
-  mix-blend-mode:screen;
   animation:sweep 9s ease-in-out infinite;
-  will-change:transform;
 }
 /* ניצוצות מנצנצים */
 .spark{
   position:absolute;z-index:2;width:12px;height:12px;pointer-events:none;
   background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(255,231,160,.55) 34%,transparent 70%);
   animation:twinkle 3.4s ease-in-out infinite;
-  will-change:transform,opacity;
 }
 .spark::before,.spark::after{
   content:"";position:absolute;top:50%;left:50%;translate:-50% -50%;
