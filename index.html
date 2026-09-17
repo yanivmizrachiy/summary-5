@@ -342,18 +342,33 @@ body{
 }
 .teach-table th{
   padding:13px 9px;
-  background:linear-gradient(135deg,#2d68a7,#0c7772);
+  background:linear-gradient(135deg,#173e62,#2f69a5);
   color:#fff;font:900 .96rem/1.2 Assistant,'Noto Sans Hebrew',Arial;text-align:center;
 }
-.teach-table th.c1{background:linear-gradient(135deg,#0c7772,#19a9a2)}
-.teach-table th.c2{background:linear-gradient(135deg,#315d9a,#557bb5)}
+
+/* ── צבע לכל שכבה ──
+   כל שורה בטבלה מקבלת גוון משלה לפי מיקומה. הצבעים מתחלפים במחזור
+   של חמישה, כך ששכבה נוספת מקבלת את הגוון הבא אוטומטית.
+   --g1/--g2 = הגרדיאנט של תא השכבה, --s1/--s2 = גווני הרקע לחודשים. */
+.teach-table tbody tr:nth-child(5n+1){--g1:#0a6660;--g2:#17a99d;--s1:#e2f8f5;--s2:#f1fcfb}
+.teach-table tbody tr:nth-child(5n+2){--g1:#1a3c6e;--g2:#4079c4;--s1:#e5eefb;--s2:#f3f7fe}
+.teach-table tbody tr:nth-child(5n+3){--g1:#472768;--g2:#7d4fb0;--s1:#efe8f9;--s2:#f8f4fd}
+.teach-table tbody tr:nth-child(5n+4){--g1:#7a1f3d;--g2:#bf3f64;--s1:#fce7ee;--s2:#fdf3f6}
+.teach-table tbody tr:nth-child(5n+5){--g1:#8a5a0f;--g2:#d09832;--s1:#fdf1de;--s2:#fef8ee}
+
 .teach-table td{
   padding:16px 13px;border-bottom:1px solid var(--line);vertical-align:middle;
   color:#274d65;font:700 .95rem/1.7 'Noto Sans Hebrew',Arial;
 }
-.teach-table td:first-child{width:17%;text-align:center;color:var(--blue-deep);font-weight:900}
-.teach-table td.c1{background:#effbf9}
-.teach-table td.c2{background:#eef4ff}
+.teach-table td:first-child{
+  width:19%;text-align:center;
+  background:linear-gradient(135deg,var(--g1),var(--g2));
+  color:#fff;font-weight:900;
+  text-shadow:0 1px 2px rgba(0,0,0,.22);
+  border-bottom:1px solid rgba(255,255,255,.22);
+}
+.teach-table td.c1{background:var(--s1)}
+.teach-table td.c2{background:var(--s2)}
 .teach-table tbody tr:last-child td{border-bottom:0}
 
 /* ══════════════════════════════════════════════════════════════════
@@ -563,17 +578,17 @@ body{
   .teach-table thead{display:none}
   .teach-table tr{margin-bottom:15px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
   .teach-table td{border:0}
+  /* בנייד כל שכבה היא כרטיס, והכותרת שלו נושאת את צבע השכבה */
   .teach-table td:first-child{
-    width:100%;padding:13px;background:#fff;
-    border-bottom:1px solid var(--line);font-size:1.22rem;
+    width:100%;padding:14px;border-bottom:0;
+    font-size:1.24rem;letter-spacing:-.01em;
   }
-  .teach-table td.c1,.teach-table td.c2{padding:16px 14px}
+  .teach-table td.c1,.teach-table td.c2{padding:16px 15px}
   .teach-table td[data-label]::before{
     content:attr(data-label);
     display:block;margin-bottom:6px;font-size:.82rem;font-weight:900;
+    color:var(--g1);
   }
-  .teach-table td.c1::before{color:#0d746f}
-  .teach-table td.c2::before{color:#315d9a}
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -765,30 +780,30 @@ const SUMMARY = {
   comingUp: [
 
     {
-      text: "**07.10.2026 — מפגש ראשון בהשתלמות קהילת מורים.** יום רביעי, 19:00–21:30."
+      text: "**07.10.2026 · יום רביעי** מפגש ראשון בהשתלמות קהילת מורים, 19:00–21:30."
     },
 
     {
-      text: "**25.10.2026 — מפגש ראשון בהשתלמות קהילת רכזים.** יום ראשון, 19:00–21:30. [[מספר המקומות מוגבל]].",
+      text: "**25.10.2026 · יום ראשון** מפגש ראשון בהשתלמות קהילת רכזים, 19:00–21:30. [[מספר המקומות מוגבל]].",
       links: [
         { text: "להרשמה לקהילת רכזים", url: "https://docs.google.com/forms/d/1bnZ2j8x9UpR4l-2R5dr6-z0eg0Ai6EO1qpPkGnFm8fk/preview" }
       ]
     },
 
     {
-      text: "**25.10.2026 — שכבת ח׳ מתחילה להגיש את משימת ההערכה הראשונה ב־Moodle.** חלון ההגשה: 25.10.26–6.11.26. הנושאים: יחס, פרופורציה, קנה מידה, אחוזים, זוויות מתחלפות ומתאימות בין ישרים מקבילים, משפט פיתגורס, היקף מעגל, שטח עיגול ומשוואות לינאריות. 50% שאלות קצרות / 50% שאלה אוריינית."
+      text: "**25.10.2026 · יום ראשון** שכבת ח׳ מתחילה להגיש את משימת ההערכה הראשונה ב־Moodle. חלון ההגשה: 25.10.26–6.11.26. הנושאים: יחס, פרופורציה, קנה מידה, אחוזים, זוויות מתחלפות ומתאימות בין ישרים מקבילים, משפט פיתגורס, היקף מעגל, שטח עיגול ומשוואות לינאריות. 50% שאלות קצרות / 50% שאלה אוריינית."
     },
 
     {
-      text: "**28.10.2026 — כנס מורים בפסג״ה מודיעין.** זהו מפגש הפתיחה של השתלמות „בינה מלאכותית ModEL-i בהוראת מתמטיקה”, והמפגש היחיד שמתקיים פנים אל פנים. כל שאר מפגשי ההשתלמות מתקיימים בזום."
+      text: "**28.10.2026 · יום רביעי** כנס מורים בפסג״ה מודיעין. זהו מפגש הפתיחה של השתלמות „בינה מלאכותית ModEL-i בהוראת מתמטיקה”, והמפגש היחיד שמתקיים פנים אל פנים. כל שאר מפגשי ההשתלמות מתקיימים בזום."
     },
 
     {
-      text: "**01.11.2026 — שכבת ז׳ מתחילה להגיש את משימת ההערכה הראשונה ב־Moodle.** חלון ההגשה: 1.11.26–13.11.26. מערכת צירים ברביע ראשון: קריאת נקודות, סימון נקודות, אורך קטע, השלמת נקודה חסרה למלבן וחישוב שטח מלבן; זוויות: מדידה, אומדן, סוגי זוויות, חוצה זווית, סכום והפרש; מספרים מכוונים: סדר על ציר המספרים, חיבור וחיסור. 50% שאלות קצרות / 50% שאלה אוריינית."
+      text: "**01.11.2026 · יום ראשון** שכבת ז׳ מתחילה להגיש את משימת ההערכה הראשונה ב־Moodle. חלון ההגשה: 1.11.26–13.11.26. מערכת צירים ברביע ראשון: קריאת נקודות, סימון נקודות, אורך קטע, השלמת נקודה חסרה למלבן וחישוב שטח מלבן; זוויות: מדידה, אומדן, סוגי זוויות, חוצה זווית, סכום והפרש; מספרים מכוונים: סדר על ציר המספרים, חיבור וחיסור. 50% שאלות קצרות / 50% שאלה אוריינית."
     },
 
     {
-      text: "**10.11.2026 — כינוסי רכזי מתמטיקה.** פרטים בהמשך."
+      text: "**10.11.2026 · יום שלישי** כינוסי רכזי מתמטיקה. פרטים בהמשך."
     }
 
   ],
