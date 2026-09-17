@@ -237,9 +237,41 @@ body{
 .item-lead{display:block;color:var(--blue-deep);font-weight:900;line-height:1.6}
 .item-body{display:block;margin-top:var(--gap-lead)}
 
-/* קישורים שמופיעים כרשימה מתחת לפסקה */
-.item-links{display:flex;flex-direction:column;gap:var(--gap-links);margin-top:var(--gap-links)}
-.item-links a{display:inline-block;align-self:flex-start}
+/* קישורים שמופיעים מתחת לפסקה מעוצבים ככפתורים, כדי שיהיה ברור
+   שאפשר ללחוץ עליהם. קישור בתוך רצף הטקסט נשאר קישור רגיל. */
+.item-links{display:flex;flex-direction:column;gap:11px;margin-top:var(--gap-links)}
+.item-links a.link{
+  display:inline-flex;align-items:center;gap:9px;
+  align-self:flex-start;max-width:100%;
+  min-height:48px;padding:11px 20px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.20);
+  background:linear-gradient(135deg,var(--turq-deep),var(--blue));
+  color:#fff;
+  font:900 1rem/1.35 Assistant,'Noto Sans Hebrew',Arial;
+  text-decoration:none;
+  box-shadow:
+    0 10px 20px -8px rgba(45,104,167,.62),
+    inset 0 1px 0 rgba(255,255,255,.30),
+    inset 0 -1px 0 rgba(0,0,0,.14);
+  touch-action:manipulation;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.item-links a.link::after{
+  content:"";flex:none;width:7px;height:7px;
+  border-left:2.2px solid #fff;border-bottom:2.2px solid #fff;
+  rotate:45deg;
+}
+@media(hover:hover){
+  .item-links a.link:hover{
+    transform:translateY(-2px);
+    box-shadow:
+      0 16px 26px -10px rgba(45,104,167,.7),
+      inset 0 1px 0 rgba(255,255,255,.38),
+      inset 0 -1px 0 rgba(0,0,0,.14);
+  }
+}
+.item-links a.link:active{transform:translateY(1px)}
 
 .orb{
   width:18px;height:18px;margin-top:.52em;border-radius:50%;
@@ -273,10 +305,15 @@ body{
   position:relative;display:inline-block;
   padding:.02em .16em;font-weight:900;white-space:nowrap;
 }
+/* גובה העיגול נקבע ביחס לגודל האות ולא לגובה השורה, אחרת הוא
+   נמתח ומחליק מתחת לטקסט כשגובה השורה גדול. */
 .pen-mark svg{
   position:absolute;pointer-events:none;overflow:visible;
-  left:-.36em;top:-.29em;
-  width:calc(100% + .72em);height:calc(100% + .56em);
+  left:-.38em;
+  width:calc(100% + .76em);
+  top:50%;
+  height:1.72em;
+  translate:0 -50%;
 }
 .pen-mark path{
   fill:none;stroke:#dc2626;stroke-width:2.7;
@@ -568,6 +605,13 @@ body{
   .summary-page .item-lead{line-height:1.38}
   .summary-page .item-body{margin-top:.42em}
   .summary-page .item-links{gap:calc(1.7mm * var(--fit));margin-top:calc(1.7mm * var(--fit))}
+  /* ב-A4 אין צורך באזור נגיעה, ולכן הכפתורים קומפקטיים */
+  .summary-page .item-links a.link{
+    min-height:calc(26px * var(--fit));
+    padding:calc(4px * var(--fit)) calc(12px * var(--fit));
+    font-size:calc(.8rem * var(--fit));
+    gap:calc(6px * var(--fit));
+  }
   .summary-page .future-heading{
     margin:calc(4mm * var(--fit)) 2px calc(2mm * var(--fit));
     font-size:calc(2.45rem * var(--fit));
@@ -701,7 +745,10 @@ const SUMMARY = {
 
     {
       mark: true,
-      text: "**השבוע פרסמנו מדריך מקיף ל־Moodle למורים.** המדריך מרכז את כל מה שצריך לדעת על מרחבי הלמידה. [לפתיחת המדריך](https://yanivmizrachiy.github.io/moodle-guide-presentation/)."
+      text: "**השבוע פרסמנו מדריך מקיף ל־Moodle למורים.** המדריך מרכז את כל מה שצריך לדעת על מרחבי הלמידה.",
+      links: [
+        { text: "לפתיחת המדריך", url: "https://yanivmizrachiy.github.io/moodle-guide-presentation/" }
+      ]
     },
 
     {
@@ -723,7 +770,10 @@ const SUMMARY = {
     },
 
     {
-      text: "**25.10.2026 — מפגש ראשון בהשתלמות קהילת רכזים.** יום ראשון, 19:00–21:30. [[מספר המקומות מוגבל]]. [להרשמה](https://docs.google.com/forms/d/1bnZ2j8x9UpR4l-2R5dr6-z0eg0Ai6EO1qpPkGnFm8fk/preview)."
+      text: "**25.10.2026 — מפגש ראשון בהשתלמות קהילת רכזים.** יום ראשון, 19:00–21:30. [[מספר המקומות מוגבל]].",
+      links: [
+        { text: "להרשמה לקהילת רכזים", url: "https://docs.google.com/forms/d/1bnZ2j8x9UpR4l-2R5dr6-z0eg0Ai6EO1qpPkGnFm8fk/preview" }
+      ]
     },
 
     {
