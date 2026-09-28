@@ -68,7 +68,7 @@ jobs:
               await page.goto(url,{waitUntil:'networkidle'});
               await page.evaluate(()=>document.fonts?.ready);
               await page.waitForTimeout(250);
-              const pages=page.locator('.sheet.source-page[data-t="p"]');
+              const pages=page.locator('.sheet.source-page');
               const count=await pages.count();
               const rows=[];
               for(let i=0;i<count;i++){
@@ -107,7 +107,7 @@ jobs:
 
             const errors=[];
             for(const [mode,rows] of Object.entries(results)){
-              if(rows.length!==5) errors.push(`${mode}: expected 5 source pages, got ${rows.length}`);
+              if(rows.length!==15) errors.push(`${mode}: expected 15 source pages, got ${rows.length}`);
               for(const row of rows){
                 if(mode==='desktop' && (Math.abs(row.sheet.width-794)>1 || Math.abs(row.sheet.height-1123)>1)) errors.push(`p${row.page}: desktop not 794x1123`);
                 if(row.outside.length) errors.push(`p${row.page} ${mode}: outside=${row.outside.length}`);
