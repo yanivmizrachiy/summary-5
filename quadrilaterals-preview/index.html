@@ -9,7 +9,7 @@
 *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;line-height:1.52;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-kerning:normal;font-synthesis:none;font-feature-settings:"kern" 1,"liga" 1}
 .top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);padding:10px 12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .top button{border:1px solid #cddae3;background:#fff;color:#23465f;border-radius:999px;padding:8px 15px;font-weight:850;cursor:pointer}.top button.active{background:#173b57;color:#fff;border-color:#173b57}.top .print-a4{background:#173b57;color:#fff;border-color:#173b57;margin-inline-start:8px}
-.topic{display:none}.topic.active{display:block}.pages{display:grid;gap:26px;padding:26px 12px 60px}.sheet{position:relative;width:794px;height:1123px;min-height:1123px;max-height:1123px;margin:auto;background:#fff;border:1px solid #dfe7ed;border-radius:8px;box-shadow:0 12px 34px rgba(22,48,70,.12);padding:28px 32px 34px;overflow:hidden}.sheet:before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--c1)}.sheet[data-t="p"]{--c1:#2563c8;--c2:#168472;--c3:#df8429}.sheet[data-t="r"]{--c1:#168472;--c2:#2563c8;--c3:#7653c5}.sheet[data-t="h"]{--c1:#7653c5;--c2:#2563c8;--c3:#df8429}.sheet[data-t="s"]{--c1:#2563c8;--c2:#7653c5;--c3:#168472}
+.topic{display:none}.topic.active{display:block}.pages{display:grid;gap:26px;padding:26px 12px 60px}.sheet-shell{direction:ltr}.sheet{direction:rtl}.sheet{position:relative;width:794px;height:1123px;min-height:1123px;max-height:1123px;margin:auto;background:#fff;border:1px solid #dfe7ed;border-radius:8px;box-shadow:0 12px 34px rgba(22,48,70,.12);padding:28px 32px 34px;overflow:hidden}.sheet:before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--c1)}.sheet[data-t="p"]{--c1:#2563c8;--c2:#168472;--c3:#df8429}.sheet[data-t="r"]{--c1:#168472;--c2:#2563c8;--c3:#7653c5}.sheet[data-t="h"]{--c1:#7653c5;--c2:#2563c8;--c3:#df8429}.sheet[data-t="s"]{--c1:#2563c8;--c2:#7653c5;--c3:#168472}
 .num{position:absolute;left:18px;top:14px;font-weight:800;color:#8a9aa6;font-size:10px}
 .kicker{text-align:right;color:var(--c1);font-weight:800;font-size:10px;line-height:1.1;margin:0 0 2px}
 .title{text-align:center;font-weight:950;font-size:32px;line-height:1;margin:0 0 8px;color:#123a58}
@@ -67,34 +67,38 @@
 .source-exact .src-geo svg,.source-exact .src-geo2 svg,.source-exact .src-geo3 svg{width:100%;height:100%;max-height:none}
 .sheet.source-page{padding:0!important}
 .sheet.source-page>.title,.sheet.source-page>.stack,.sheet.source-page>.num,.sheet.source-page>.footer{display:none!important}
-.textbook-source{position:absolute;inset:0;padding:24px 30px 28px;background:#fff;display:grid;grid-template-rows:auto auto auto 1fr 1fr;gap:12px;overflow:hidden}
-.textbook-source .tb-title{text-align:center;font-size:39px;line-height:1;font-weight:950;color:#123a58;margin:0;padding:4px 0 7px;border-bottom:2px solid #dbe7ef}
-.textbook-source .tb-definition{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(250px,.65fr);gap:18px;align-items:center;padding:10px 12px;border:1px solid #d9e4eb;border-radius:10px;background:#fbfdfe}
-.textbook-source .tb-definition-text{font-size:18px;line-height:1.4;font-weight:720;text-align:right}
-.textbook-source .tb-definition-math{display:grid;grid-template-rows:auto 132px auto;gap:4px;align-content:center;justify-items:stretch}
-.textbook-source .tb-def-figure{height:132px;display:grid;place-items:center}
-.textbook-source .tb-def-figure .geo{height:132px;min-height:0;padding:0;background:transparent}
-.textbook-source .tb-def-figure .geo svg{height:132px;width:205px;max-height:none}
-.textbook-source .tb-def-completion{direction:ltr;unicode-bidi:isolate;display:grid;grid-template-columns:1fr auto 1fr;gap:9px;align-items:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:18px}
-.textbook-source .tb-def-completion .pair{display:flex;align-items:center;justify-content:center;gap:7px}
-.textbook-source .tb-def-completion .line{display:inline-block;width:48px;height:1em;border-bottom:2px solid #17324d}
-.textbook-source .tb-def-completion .join{direction:rtl;font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;font-size:13px;font-weight:850}
-.textbook-source .tb-def-completion .par-symbol{font-size:19px;font-weight:700}
-.textbook-source .tb-caption{font-size:15px;font-weight:800;color:#244b65;text-align:center;white-space:nowrap}
-.textbook-source .tb-heading{font-size:25px;line-height:1.1;font-weight:950;color:#17324d;text-align:right;padding:3px 2px 1px}
-.textbook-source .tb-property{min-height:0;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(235px,.78fr);grid-template-rows:auto 1fr auto;column-gap:16px;row-gap:5px;align-items:center;padding:10px 12px;border-top:1px solid #dce6ec}
-.textbook-source .tb-property-text{grid-column:1;grid-row:1;font-size:18px;line-height:1.35;font-weight:740;text-align:right}
-.textbook-source .tb-property .geo{grid-column:2;grid-row:1 / span 2;min-height:0;height:185px;padding:0;background:transparent}
-.textbook-source .tb-property .geo svg{width:100%;height:100%;max-height:none}
-.textbook-source .tb-caption-row{grid-column:2;grid-row:3;text-align:center;font-size:14px;font-weight:800;color:#244b65;white-space:nowrap}
-.textbook-source .tb-completion{grid-column:1;grid-row:2 / span 2;align-self:center;direction:ltr;unicode-bidi:isolate;display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;padding:5px 4px;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:21px}
-.textbook-source .tb-completion.eq{font-size:22px}
-.textbook-source .tb-completion .pair{display:flex;gap:9px;align-items:center;justify-content:center;min-width:0}
-.textbook-source .tb-completion .line{display:inline-block;width:72px;border-bottom:2px solid #17324d;height:1em}
-.textbook-source .tb-completion .join{direction:rtl;font-family:"Noto Sans Hebrew",Arial,sans-serif;font-size:15px;font-weight:850}
-.textbook-source .tb-symbolic{direction:ltr;unicode-bidi:isolate;display:flex;justify-content:center;align-items:center;gap:15px;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:21px;font-weight:650}
-.textbook-source .tb-symbolic .he{direction:rtl;font-family:"Noto Sans Hebrew",Arial,sans-serif;font-size:15px;font-weight:850}
-.textbook-source .math-token{direction:ltr;unicode-bidi:isolate;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-style:italic;font-weight:650}
+.textbook-source{position:absolute;inset:0;padding:22px 30px 26px;background:#fff;display:grid;grid-template-rows:auto auto auto minmax(0,1fr) minmax(0,1fr);gap:9px;overflow:hidden}
+.textbook-source *{min-width:0}
+.textbook-source .tb-title{text-align:center;font-size:38px;line-height:1;font-weight:950;letter-spacing:.01em;color:#123a58;margin:0;padding:2px 0 8px;border-bottom:2px solid #d5e6f0}
+.textbook-source .tb-intro{display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:7px;padding:7px 2px 4px}
+.textbook-source .tb-line{font-size:18px;line-height:1.35;font-weight:720;text-align:right;overflow:visible}
+.textbook-source .tb-two{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:20px;align-items:center;min-height:0}
+.textbook-source .tb-diagram{display:grid;place-items:center;min-height:0;height:100%}
+.textbook-source .tb-diagram .geo{height:100%;min-height:0;max-height:190px;padding:0;background:transparent}
+.textbook-source .tb-diagram .geo svg{width:min(100%,290px);height:100%;max-height:190px}
+.textbook-source .tb-given{direction:ltr;unicode-bidi:isolate;display:flex;align-items:center;justify-content:center;gap:14px;white-space:nowrap;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:25px;font-weight:650}
+.textbook-source .tb-given .he{direction:rtl;unicode-bidi:isolate;font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;font-size:16px;font-weight:850;font-style:normal}
+.textbook-source .tb-given .answer-line{display:inline-block;width:95px;height:.92em;border-bottom:2px solid #17324d}
+.textbook-source .tb-heading{font-size:25px;line-height:1.05;font-weight:950;color:#17324d;text-align:right;padding:7px 10px 6px;background:linear-gradient(90deg,#eef8fd,#d7f1fb);border-inline-end:7px solid #0d3b5f}
+.textbook-source .tb-property{display:grid;grid-template-rows:auto minmax(0,1fr);gap:5px;padding:5px 2px 3px;border-bottom:1px solid #e0e8ed;min-height:0}
+.textbook-source .tb-property:last-child{border-bottom:0}
+.textbook-source .tb-property-text{font-size:18px;line-height:1.32;font-weight:740;text-align:right}
+.textbook-source .tb-work{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:22px;align-items:center;min-height:0}
+.textbook-source .tb-work .tb-diagram .geo{max-height:150px}
+.textbook-source .tb-work .tb-diagram .geo svg{max-height:150px;width:min(100%,240px)}
+.textbook-source .tb-derive{display:grid;grid-template-rows:auto 27px auto;gap:4px;justify-items:center;align-content:center}
+.textbook-source .tb-caption{font-size:15px;line-height:1.1;font-weight:800;color:#244b65;text-align:center;white-space:nowrap}
+.textbook-source .tb-arrow{width:24px;height:27px;display:block}
+.textbook-source .tb-arrow path{fill:none;stroke:#17324d;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.textbook-source .tb-completion{direction:ltr;unicode-bidi:isolate;display:flex;align-items:center;justify-content:center;gap:12px;white-space:nowrap;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;font-weight:650}
+.textbook-source .tb-completion .he{direction:rtl;unicode-bidi:isolate;font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;font-size:15px;font-weight:850;font-style:normal}
+.textbook-source .tb-completion .answer-line{display:inline-block;width:64px;height:.88em;border-bottom:2px solid #17324d}
+.textbook-source .tb-completion .symbol{font-size:21px;line-height:1}
+.textbook-source .blank{min-width:112px;height:1.02em;border-bottom:2px solid #17324d;vertical-align:-.05em;margin-inline:4px}
+.textbook-source .math-token{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-style:italic;font-weight:650}
+.sheet.source-page{padding:0!important;direction:rtl}
+.sheet.source-page>.title,.sheet.source-page>.stack,.sheet.source-page>.num,.sheet.source-page>.footer{display:none!important}
+.source-exact{display:none!important}
 @media(max-width:800px){
   .textbook-source{padding:24px 30px 28px!important}
 }
@@ -127,8 +131,8 @@ body{overflow-x:hidden}
 .top button{padding:6px 9px;font-size:12px}
 .top .print-a4{margin-inline-start:0}
 .pages{gap:14px;padding:10px 0 26px}
-.sheet-shell{position:relative;margin:0 auto;overflow:visible}
-.sheet{width:794px!important;height:1123px!important;min-height:1123px!important;max-height:1123px!important;margin:0!important;transform-origin:top left;border-radius:7px!important;box-shadow:0 7px 20px rgba(22,48,70,.14)}
+.sheet-shell{position:relative;margin:0 auto;overflow:visible;direction:ltr}
+.sheet{position:absolute!important;left:0!important;top:0!important;direction:rtl;width:794px!important;height:1123px!important;min-height:1123px!important;max-height:1123px!important;margin:0!important;transform-origin:top left;border-radius:7px!important;box-shadow:0 7px 20px rgba(22,48,70,.14)}
 .grid2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
 }
 @media print{
@@ -223,17 +227,16 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
 <div class="textbook-source">
   <h1 class="tb-title">מקבילית</h1>
 
-  <section class="tb-definition">
-    <div class="tb-definition-text">
-      הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות <span class="blank long"></span> זו לזו.
-    </div>
-    <div class="tb-definition-math">
-      <div class="tb-caption">המרובע <span class="math-token">ABCD</span> הוא מקבילית:</div>
-      <div class="tb-def-figure">${GEO('parallelogram',{parallel:true})}</div>
-      <div class="tb-def-completion" aria-label="השלמת זוגות הצלעות המקבילות">
-        <div class="pair"><span class="line"></span><span class="par-symbol">∥</span><span class="line"></span></div>
-        <div class="join">וגם</div>
-        <div class="pair"><span class="line"></span><span class="par-symbol">∥</span><span class="line"></span></div>
+  <section class="tb-intro">
+    <div class="tb-line">הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות <span class="blank long"></span> זו לזו.</div>
+    <div class="tb-line">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מקבילית:</div>
+    <div class="tb-two">
+      <div class="tb-diagram">${GEO('parallelogram',{parallel:true})}</div>
+      <div class="tb-given" aria-label="השלמה לפי ההגדרה">
+        <bdi class="math-token" dir="ltr">AB ∥ DC</bdi>
+        <span class="he">וגם</span>
+        <bdi class="math-token" dir="ltr">AD ∥</bdi>
+        <span class="answer-line" aria-hidden="true"></span>
       </div>
     </div>
   </section>
@@ -242,24 +245,34 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
 
   <section class="tb-property">
     <div class="tb-property-text">במקבילית כל זוג צלעות <span class="blank"></span> מקבילות זו לזו (לפי ההגדרה).</div>
-    ${GEO('parallelogram',{parallel:true})}
-    <div class="tb-completion">
-      <div class="pair"><span class="line"></span><span class="line"></span></div>
-      <div class="join">וגם</div>
-      <div class="pair"><span class="line"></span><span class="line"></span></div>
+    <div class="tb-work">
+      <div class="tb-diagram">${GEO('parallelogram',{parallel:true})}</div>
+      <div class="tb-derive">
+        <div class="tb-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
+        <svg class="tb-arrow" viewBox="0 0 24 27" aria-hidden="true"><path d="M12 2v17M5 13l7 8 7-8"/></svg>
+        <div class="tb-completion" aria-label="השלמת זוגות הצלעות המקבילות">
+          <span class="answer-line"></span><span class="symbol">∥</span><span class="answer-line"></span>
+          <span class="he">וגם</span>
+          <span class="answer-line"></span><span class="symbol">∥</span><span class="answer-line"></span>
+        </div>
+      </div>
     </div>
-    <div class="tb-caption-row">מקבילית <span class="math-token">ABCD</span></div>
   </section>
 
   <section class="tb-property">
     <div class="tb-property-text">במקבילית כל שתי <span class="blank"></span> נגדיות שוות זו לזו.</div>
-    ${GEO('parallelogram',{oppEqual:true})}
-    <div class="tb-completion eq">
-      <div class="pair"><span class="line"></span><span>=</span><span class="line"></span></div>
-      <div class="join">וגם</div>
-      <div class="pair"><span class="line"></span><span>=</span><span class="line"></span></div>
+    <div class="tb-work">
+      <div class="tb-diagram">${GEO('parallelogram',{oppEqual:true})}</div>
+      <div class="tb-derive">
+        <div class="tb-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
+        <svg class="tb-arrow" viewBox="0 0 24 27" aria-hidden="true"><path d="M12 2v17M5 13l7 8 7-8"/></svg>
+        <div class="tb-completion" aria-label="השלמת זוגות הצלעות השוות">
+          <span class="answer-line"></span><span class="symbol">=</span><span class="answer-line"></span>
+          <span class="he">וגם</span>
+          <span class="answer-line"></span><span class="symbol">=</span><span class="answer-line"></span>
+        </div>
+      </div>
     </div>
-    <div class="tb-caption-row">מקבילית <span class="math-token">ABCD</span></div>
   </section>
 </div>
 </article>`,
