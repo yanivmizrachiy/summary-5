@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-09-28",
+  "purpose": "Canonical Canva source package for quadrilaterals website. Claude Code must compare against these sources before changing rectangle/rhombus layout or wording.",
+  "rules": [
+    "The PNG page snapshots are visual source-of-truth, not inspiration.",
+    "The exact Canva text is content-locked.",
+    "Do not fill blanks, rewrite wording, change order, or infer missing answers.",
+    "Website may improve typography/geometry rendering while preserving source content and didactic structure."
+  ],
+  "designs": {
+    "rectangle": {
+      "hebrew_name": "מלבן",
+      "canva_design_id": "DAGlS_3_YFA",
+      "canonical_page_size": {
+        "width": 794,
+        "height": 1123
+      },
+      "pages": [
+        {
+          "page": 1,
+          "page_id": "PBqDl8Lbs38lPST5",
+          "source_png": "rectangle/page-1.png"
+        },
+        {
+          "page": 2,
+          "page_id": "PBcBCx1pZbslvDkc",
+          "source_png": "rectangle/page-2.png"
+        },
+        {
+          "page": 3,
+          "page_id": "PBk3xzzKjcLk87sZ",
+          "source_png": "rectangle/page-3.png"
+        },
+        {
+          "page": 4,
+          "page_id": "PByMSmzL4cnZcHKx",
+          "source_png": "rectangle/page-4.png"
+        },
+        {
+          "page": 5,
+          "page_id": "PBPDwZfvQ2r8Z6wL",
+          "source_png": "rectangle/page-5.png"
+        }
+      ],
+      "canva_content_raw": "תכונות המלבן:\nבמלבן כל שתי_______ נגדיות מקבילות זו לזו . במלבן כל שתי צלעות ______ שוות זו לזו.   במלבן ה________ חוצים זה את זה. \nלמלבן תכונות מיוחדות שאין לכל מקבילית: \nבמלבן כל ה__________ ישרות (לפי הגדרה). \n המרובע \nABCD\n הוא מלבן\nהגדרה: מלבן הוא מרובע שבו כל ה________ ישרות. \n המרובע \nABCD\n הוא מלבן:\n = \n = \n______\n_____\n_____= _____\nכל התכונות של המקבילית  מתקיימות\n גם ב __________.\nוגם:\nC\nמלבן\n = \nבמלבן ה ________ שווים זה לזה. \n \n \nABCD\n מלבן\nDB = \n_____\nתכונות המלבן:\nD\nאיך מוכיחים  שמרובע הוא מלבן?\nאיך מוכיחים  שמרובע הוא מלבן?\nבמרובע\n:ABCD\nלפי הגדרה: אם במרובע יש שלוש זוויות ישרות אז המרובע הוא מלבן. \nגם הזווית הרביעית ישרה. מדוע?\nאם: \n = \nD=\nאז המרובע \nABCD\nכי סכום _________________\n_____\n_____\n_____\nהוא מלבן\n_____\nD\nאיך מוכיחים  שמרובע הוא מלבן?\nהמרובע \nאיך מוכיחים  שמרובע הוא מלבן?\nהמלבןהוא מקבילית מיוחדת\nאם במקבילית יש _________ ישרה,אז המקבילית היא ________.\nאז כל הזוויות של המקבילית הן ישרות. מדוע?\n אז המרובע \nABCD\n הוא \nאם המרובע \nABCD\n הוא מקבילית\n.__________\n = \n_____\nוגם:\nהמלבןהוא מקבילית מיוחדת\nאם במקבילית האלכסונים ________ זה לזה, אז המקבילית היא ________.\nוגם:\nאם המרובע \n הוא מקבילית\nABCD\nABCD\n הוא מלבן\nDB = \n_____\nהמלבן\nבמלבן כל שתי צלעות נגדיות מקבילות זו לזו\n2. במלבן כל שתי צלעות נגדיות שוות זו לזו\n3. במלבן האלכסונים חוצים זה את זה\n4. במלבן כל הזוויות ישרות\n5. במלבן האלכסונים שווים זה לזה\nכמו במקבילית\nהגדרה: מרובע שבו כל הזוויות ישרות הוא מלבן.\nתכונות המלבן:\nאיך מוכיחים שמרובע הוא מלבן?\nלפי הגדרה: אם במרובע יש שלוש זוויות ישרות,      אז המרובע הוא מלבן. \n2. אם במקבילית יש זווית ישרה    אז המקבילית היא מלבן.\n3. אם במקבילית האלכסונים שווים זה לזה    אז המקבילית היא מלבן."
+    },
+    "rhombus": {
+      "hebrew_name": "מעויין",
+      "canva_design_id": "DAGlPGPc5sM",
+      "canonical_page_size": {
+        "width": 794,
+        "height": 1123
+      },
+      "pages": [
+        {
+          "page": 1,
+          "page_id": "PBqDl8Lbs38lPST5",
+          "source_png": "rhombus/page-1.png"
+        },
+        {
+          "page": 2,
+          "page_id": "PBcBCx1pZbslvDkc",
+          "source_png": "rhombus/page-2.png"
+        },
+        {
+          "page": 3,
+          "page_id": "PBk3xzzKjcLk87sZ",
+          "source_png": "rhombus/page-3.png"
+        },
+        {
+          "page": 4,
+          "page_id": "PBtPj7GSVQTR1Qmy",
+          "source_png": "rhombus/page-4.png"
+        },
+        {
+          "page": 5,
+          "page_id": "PBtZJN4rrzlm6cpL",
+          "source_png": "rhombus/page-5.png"
+        }
+      ],
+      "canva_content_raw": "C\nB\nD\nA\n שוות זו לזו. \nבמעויין כל זוג צלעות _______ מקבילות זו לזו . במעויין כל שתי זוויות ______ שוות זו לזו. במעויין סכום כל שתי זוויות ________ שווה ל -  במעויין ה________ חוצים זה את זה. \nלמעויין תכונות מיוחדות שאין לכל מקבילית: \nבמעויין כל ה__________ שוות (לפי הגדרה). \n המרובע \nABCD\n הוא מעויין\nהגדרה: מעויין הוא מרובע שכל \n המרובע \nABCD\n הוא מעויין:\n__________\nAB = \n = \n = CD = \n = \n______\n_____\n_____\n_____\n_____= _____\nכל התכונות של המקבילית  מתקיימות\n גם ב __________.\nתכונות המעויין:\nוגם:\nמעויין\nC\nB\nD\nA\nתכונות המעויין:\nAC\n______\n את הזוויות. \nוגם\nוגם\nבמעויין ה ________ מאונכים זה לזה. \n \nABCD\n מעויין\nבמעויין האלכסונים \n \nABCD\n מעויין\n_______\n______\nאיך מוכיחים שמרובע הוא מעויין?\nC\nB\nD\nA\n שוות, \n הוא מעויין.\n אז המרובע \nABCD\n הוא \nאם המרובע \nABCD\n הוא מקבילית\n____ =AB :\nוגם\nאז המרובע \nABCD\n הוא\nאם:\nהמעויין הוא מקבילית מיוחדת אם במקבילית ה ________ מאונכים זה לזה אז המקבילית היא ________.\nאם המרובע \nABCD\n הוא מקבילית וגם: \nלפי הגדרה: אם במרובע כל הצלעות \n אז המרובע הוא מעויין.\nהמעויין הוא מקבילית מיוחדת\nאם במקבילית שתי צלעות אז ה _________ היא מעויין.\n אז המרובע \n ________\n.__________\n.__________\n________\n________\nAB = \n = CD = \n_____\n_____\nהמסקנה תהיה שכל הצלעות שוות. מדוע?\nD\nA\nC\nB\n______\nBD\n אז המרובע \nABCD\n הוא \nהמעויין הוא מקבילית מיוחדת\nאם במקבילית אחד האלכסונים חוצה את אחת ה אז המקבילית היא ________.\nאם המרובע וגם ___\nABCD\n הוא מקבילית\n,______\n.__________\nאיך מוכיחים שמרובע הוא מעויין?\nאיך מחשבים שטח של מעויין?\n h2\n h1\nשטח של עויין שווה למכפלה של צלע המעויין באורך הגובה לצלע זו. \nשטח של מעויין שווה למחצית מכפלת ה \na\na\na\na\nS\nS\nABCD\nABCD\n.________\nאו\n2"
+    }
+  }
+}
