@@ -852,6 +852,146 @@
   height:34px;
   margin:0 auto;
 }
+
+/* === TEXTBOOK MONOCHROME V1 START === */
+/* Printed-workbook palette: black text, grayscale structure, no colored prose. */
+.sheet,
+.sheet *{
+  color:#111 !important;
+}
+
+/* Headings: black type, no decorative color banners. */
+.textbook-source .tb-title,
+.source-worksheet .sw-title,
+.textbook-source .tb-heading,
+.textbook-source-p2 .tb-heading,
+.textbook-proof .proof-title,
+.textbook-area .area-title,
+.source-worksheet .sw-heading{
+  color:#111 !important;
+  background:#fff !important;
+  border-color:#777 !important;
+  box-shadow:none !important;
+}
+
+.textbook-source .tb-title::before,
+.source-worksheet .sw-title::before,
+.textbook-source .tb-heading::before,
+.textbook-source-p2 .tb-heading::before,
+.textbook-proof .proof-title::before,
+.textbook-area .area-title::before,
+.source-worksheet .sw-heading::before{
+  display:none !important;
+}
+
+/* Section hierarchy is carried by rules and weight, not color. */
+.textbook-source .tb-heading,
+.textbook-source-p2 .tb-heading,
+.textbook-proof .proof-title,
+.textbook-area .area-title,
+.source-worksheet .sw-heading{
+  border-right:0 !important;
+  border-bottom:1.4px solid #444 !important;
+  padding-inline:2px !important;
+  border-radius:0 !important;
+}
+
+/* Secondary text stays grayscale, never colored. */
+.tb-caption,
+.p2-caption,
+.sw-caption,
+.sw-note,
+.if-label,
+.kicker,
+.footer,
+.num{
+  color:#333 !important;
+}
+
+/* Math and completion fields. */
+.math,
+.math-token,
+.proof-double-arrow,
+.source-rel,
+.source-chain,
+.tb-completion,
+.p2-completion,
+.proof-completion,
+.area-formula,
+.angle-label,
+bdi[dir="ltr"]{
+  color:#111 !important;
+}
+
+.blank,
+.answer-line{
+  border-color:#111 !important;
+}
+
+/* Geometry: grayscale only. Different concepts remain distinguishable by
+   thickness/count/shape instead of color. */
+.shape{
+  stroke:#111 !important;
+  fill:none !important;
+}
+.diag,
+.extension{
+  stroke:#555 !important;
+}
+.tick,
+.par,
+.right,
+.arc,
+.height,
+.mid-a,
+.mid-b,
+.diag-eq,
+.angle-a,
+.angle-b{
+  stroke:#111 !important;
+}
+.angle-label,
+.angle-label.a,
+.angle-label.b,
+.lbl{
+  fill:#111 !important;
+  color:#111 !important;
+}
+.center,
+.pt{
+  fill:#111 !important;
+}
+
+/* Remove colored page-accent strip. */
+.sheet:before{
+  background:#777 !important;
+  height:1px !important;
+}
+
+/* Soft grayscale separators only. */
+.sw-section,
+.tb-property,
+.p2-block,
+.proof-block,
+.height-task{
+  border-color:#d4d4d4 !important;
+}
+
+/* No tinted worksheet backgrounds. */
+.sheet,
+.geo,
+.card,
+.box,
+.textbook-source,
+.textbook-source-p2,
+.textbook-proof,
+.textbook-area,
+.source-worksheet{
+  background:#fff !important;
+}
+
+/* === TEXTBOOK MONOCHROME V1 END === */
+
 @media(max-width:800px){
 body{overflow-x:hidden}
 .top{position:sticky;top:0;padding:6px 4px;gap:4px}
