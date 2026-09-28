@@ -829,15 +829,7 @@
 /* === DIAGRAM LEGIBILITY V5 END === */
 
 /* === DOUBLE ARROW + PROPERTY NUMBERING V1 START === */
-.tb-arrow,.p2-arrow{
-  width:24px!important;
-  height:34px!important;
-}
-.tb-arrow path,.p2-arrow path{
-  stroke-width:2.5!important;
-  stroke-linecap:round!important;
-  stroke-linejoin:round!important;
-}
+
 .prop-index{
   display:inline-block;
   margin-left:6px;
@@ -845,6 +837,21 @@
   font-weight:800;
 }
 /* === DOUBLE ARROW + PROPERTY NUMBERING V1 END === */
+
+.proof-double-arrow{
+  display:block;
+  direction:ltr;
+  unicode-bidi:isolate;
+  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
+  font-size:31px;
+  line-height:1;
+  font-weight:600;
+  color:#17324d;
+  text-align:center;
+  width:36px;
+  height:34px;
+  margin:0 auto;
+}
 @media(max-width:800px){
 body{overflow-x:hidden}
 .top{position:sticky;top:0;padding:6px 4px;gap:4px}
@@ -978,7 +985,7 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
       <div class="tb-diagram">${GEO('parallelogram',{parallel:true})}</div>
       <div class="tb-derive">
         <div class="tb-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <svg class="tb-arrow" viewBox="0 0 24 27" aria-hidden="true"><path d="M12 2v17M5 13l7 8 7-8"/></svg>
+        <span class="proof-double-arrow" aria-hidden="true">⇓</span>
         <div class="tb-completion" aria-label="השלמת זוגות הצלעות המקבילות">
           <span class="answer-line"></span><span class="symbol">∥</span><span class="answer-line"></span>
           <span class="he">וגם</span>
@@ -994,7 +1001,7 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
       <div class="tb-diagram">${GEO('parallelogram',{oppEqual:true})}</div>
       <div class="tb-derive">
         <div class="tb-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <svg class="tb-arrow" viewBox="0 0 24 27" aria-hidden="true"><path d="M12 2v17M5 13l7 8 7-8"/></svg>
+        <span class="proof-double-arrow" aria-hidden="true">⇓</span>
         <div class="tb-completion" aria-label="השלמת זוגות הצלעות השוות">
           <span class="answer-line"></span><span class="symbol">=</span><span class="answer-line"></span>
           <span class="he">וגם</span>
@@ -1015,7 +1022,7 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
       <div class="p2-diagram">${GEO('parallelogram',{oppAngles:true})}</div>
       <div class="p2-derive">
         <div class="p2-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <svg class="p2-arrow" viewBox="0 0 27 34" aria-hidden="true"><path d="M13.5 2v10 M5.5 9.5l8 8 8-8 M13.5 16v10 M5.5 23.5l8 8 8-8"/></svg>
+        <span class="proof-double-arrow" aria-hidden="true">⇓</span>
         <div class="p2-completion">
           <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
           <span class="he">וגם</span>
@@ -1031,7 +1038,7 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
       <div class="p2-diagram">${GEO('parallelogram',{diag:true,center:true,midpoints:true})}</div>
       <div class="p2-derive">
         <div class="p2-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <svg class="p2-arrow" viewBox="0 0 27 34" aria-hidden="true"><path d="M13.5 2v10 M5.5 9.5l8 8 8-8 M13.5 16v10 M5.5 23.5l8 8 8-8"/></svg>
+        <span class="proof-double-arrow" aria-hidden="true">⇓</span>
         <div class="p2-completion">
           <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
           <span class="he">וגם</span>
@@ -1047,7 +1054,7 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
       <div class="p2-diagram">${GEO('parallelogram',{adjacentAngles:true})}</div>
       <div class="p2-derive">
         <div class="p2-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <svg class="p2-arrow" viewBox="0 0 27 34" aria-hidden="true"><path d="M13.5 2v10 M5.5 9.5l8 8 8-8 M13.5 16v10 M5.5 23.5l8 8 8-8"/></svg>
+        <span class="proof-double-arrow" aria-hidden="true">⇓</span>
         <div class="p2-formula">α + β = 180°</div>
       </div>
     </div>
