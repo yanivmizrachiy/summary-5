@@ -57,6 +57,7 @@ jobs:
           cat > .a4-qa.cjs <<'NODE'
           const fs=require('node:fs');
           const { chromium }=require('playwright-core');
+          (async()=>{
 
           const executablePath = process.env.BROWSER === 'playwright' ? undefined : process.env.BROWSER;
           const browser = await chromium.launch({headless:true, executablePath, args:['--no-sandbox']});
@@ -119,6 +120,7 @@ jobs:
           if(m.clipped.length) errors.push('mobile horizontal clipping: '+m.clipped.length);
           if(errors.length){ console.error(errors.join('\n')); process.exit(1); }
           await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
           NODE
           node .a4-qa.cjs
           rm -f .a4-qa.cjs
