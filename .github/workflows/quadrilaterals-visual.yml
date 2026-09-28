@@ -125,6 +125,16 @@ jobs:
           node .a4-qa.cjs
           rm -f .a4-qa.cjs
 
+      - name: Fetch original Canva page 1
+        if: always()
+        shell: bash
+        env:
+          CANVA_SOURCE_URL: "https://export-download.canva.com/8bc2f7a3-4b2e-4c22-ba47-c80050f82ca0/0/0001-4157339769000157916.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260928%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260928T031606Z&X-Amz-Expires=46047&X-Amz-Signature=8722cd08770ab2935f53ec961bc029d276cb3dfb587bd8376e9d74f184efb7e4&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Mon%2C%2028%20Sep%202026%2016%3A03%3A33%20GMT"
+        run: |
+          curl -fL --retry 2 "$CANVA_SOURCE_URL" -o /tmp/canva-source.png
+          file /tmp/canva-source.png
+          identify /tmp/canva-source.png || true
+
       - name: Upload visual proof
         if: always()
         uses: actions/upload-artifact@v4
@@ -134,4 +144,5 @@ jobs:
             /tmp/desktop.png
             /tmp/mobile.png
             /tmp/layout.json
+            /tmp/canva-source.png
           if-no-files-found: warn
