@@ -853,14 +853,39 @@
   margin:0 auto;
 }
 
-/* === TEXTBOOK MONOCHROME V1 START === */
-/* Printed-workbook palette: black text, grayscale structure, no colored prose. */
-.sheet,
-.sheet *{
-  color:#111 !important;
+
+
+/* === TEXTBOOK MONOCHROME V2 START === */
+/* Hard black-and-white textbook override. */
+html,body{
+  background:#ffffff !important;
 }
 
-/* Headings: black type, no decorative color banners. */
+/* Kill all colored decorative layers */
+.tb-title::before,
+.sw-title::before,
+.tb-heading::before,
+.proof-title::before,
+.area-title::before,
+.sw-heading::before,
+.sheet::before{
+  display:none !important;
+  background:none !important;
+  content:none !important;
+}
+
+/* Global text: BLACK באמת */
+.sheet,
+.sheet *,
+.sheet *::before,
+.sheet *::after{
+  color:#000000 !important;
+  -webkit-text-fill-color:#000000 !important;
+  text-shadow:none !important;
+  box-shadow:none !important;
+}
+
+/* Titles / headings must be white background + black text only */
 .textbook-source .tb-title,
 .source-worksheet .sw-title,
 .textbook-source .tb-heading,
@@ -868,78 +893,67 @@
 .textbook-proof .proof-title,
 .textbook-area .area-title,
 .source-worksheet .sw-heading{
-  color:#111 !important;
-  background:#fff !important;
-  border-color:#777 !important;
-  box-shadow:none !important;
-}
-
-.textbook-source .tb-title::before,
-.source-worksheet .sw-title::before,
-.textbook-source .tb-heading::before,
-.textbook-source-p2 .tb-heading::before,
-.textbook-proof .proof-title::before,
-.textbook-area .area-title::before,
-.source-worksheet .sw-heading::before{
-  display:none !important;
-}
-
-/* Section hierarchy is carried by rules and weight, not color. */
-.textbook-source .tb-heading,
-.textbook-source-p2 .tb-heading,
-.textbook-proof .proof-title,
-.textbook-area .area-title,
-.source-worksheet .sw-heading{
+  color:#000000 !important;
+  -webkit-text-fill-color:#000000 !important;
+  background:#ffffff !important;
+  background-image:none !important;
   border-right:0 !important;
-  border-bottom:1.4px solid #444 !important;
-  padding-inline:2px !important;
+  border-left:0 !important;
+  border-top:0 !important;
+  border-bottom:1.4px solid #000000 !important;
   border-radius:0 !important;
 }
 
-/* Secondary text stays grayscale, never colored. */
+/* Secondary text */
 .tb-caption,
 .p2-caption,
 .sw-caption,
 .sw-note,
 .if-label,
-.kicker,
 .footer,
-.num{
-  color:#333 !important;
+.num,
+.prop-index,
+.proof-double-arrow{
+  color:#000000 !important;
+  -webkit-text-fill-color:#000000 !important;
 }
 
-/* Math and completion fields. */
-.math,
-.math-token,
-.proof-double-arrow,
-.source-rel,
-.source-chain,
-.tb-completion,
-.p2-completion,
-.proof-completion,
-.area-formula,
-.angle-label,
-bdi[dir="ltr"]{
-  color:#111 !important;
-}
-
+/* Completion lines */
 .blank,
 .answer-line{
-  border-color:#111 !important;
+  border-color:#000000 !important;
 }
 
-/* Geometry: grayscale only. Different concepts remain distinguishable by
-   thickness/count/shape instead of color. */
-.shape{
-  stroke:#111 !important;
-  fill:none !important;
+/* All worksheet containers must stay white */
+.sheet,
+.geo,
+.textbook-source,
+.textbook-source-p2,
+.textbook-proof,
+.textbook-area,
+.source-worksheet,
+.card,
+.box{
+  background:#ffffff !important;
+  background-image:none !important;
 }
-.diag,
-.extension{
-  stroke:#555 !important;
+
+/* SVG text and labels – force black */
+svg text,
+svg tspan,
+.lbl,
+.angle-label,
+.angle-label.a,
+.angle-label.b{
+  fill:#000000 !important;
+  color:#000000 !important;
+  stroke:none !important;
 }
-.tick,
+
+/* Geometry strokes – grayscale only */
+.shape,
 .par,
+.tick,
 .right,
 .arc,
 .height,
@@ -948,50 +962,42 @@ bdi[dir="ltr"]{
 .diag-eq,
 .angle-a,
 .angle-b{
-  stroke:#111 !important;
+  stroke:#000000 !important;
 }
-.angle-label,
-.angle-label.a,
-.angle-label.b,
-.lbl{
-  fill:#111 !important;
-  color:#111 !important;
+
+.diag,
+.extension{
+  stroke:#666666 !important;
 }
+
 .center,
 .pt{
-  fill:#111 !important;
+  fill:#000000 !important;
 }
 
-/* Remove colored page-accent strip. */
-.sheet:before{
-  background:#777 !important;
-  height:1px !important;
+/* If any inline hex survived, this class-level override still wins visually */
+.math,
+.math-token,
+.source-rel,
+.source-chain,
+.tb-completion,
+.p2-completion,
+.proof-completion,
+.area-formula,
+bdi[dir="ltr"]{
+  color:#000000 !important;
+  -webkit-text-fill-color:#000000 !important;
 }
 
-/* Soft grayscale separators only. */
+/* clean section rules */
 .sw-section,
 .tb-property,
 .p2-block,
 .proof-block,
 .height-task{
-  border-color:#d4d4d4 !important;
+  border-color:#cfcfcf !important;
 }
-
-/* No tinted worksheet backgrounds. */
-.sheet,
-.geo,
-.card,
-.box,
-.textbook-source,
-.textbook-source-p2,
-.textbook-proof,
-.textbook-area,
-.source-worksheet{
-  background:#fff !important;
-}
-
-/* === TEXTBOOK MONOCHROME V1 END === */
-
+/* === TEXTBOOK MONOCHROME V2 END === */
 @media(max-width:800px){
 body{overflow-x:hidden}
 .top{position:sticky;top:0;padding:6px 4px;gap:4px}
