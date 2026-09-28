@@ -53,6 +53,77 @@
 .bullet{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#eef4f8;font-size:11px;font-weight:900}
 .footer{position:absolute;inset:auto 28px 7px;border:0;padding:0;text-align:center;font-size:9px;color:#8a9aa6;font-weight:700}
 .source-exact{display:none!important}
+.angle-a,.angle-b{fill:none;stroke-width:3;stroke-linecap:round}
+.angle-a{stroke:#d85f66}.angle-b{stroke:#4f78c8}
+.angle-label{font-family:"Cambria Math","Times New Roman",serif;font-size:21px;font-style:italic;font-weight:700}
+.angle-label.a{fill:#d85f66}.angle-label.b{fill:#4f78c8}
+.textbook-source-p2{
+  position:absolute;inset:0;padding:16px 24px 20px;background:#fff;
+  display:grid;grid-template-rows:68px 338px 338px 338px;gap:7px;overflow:hidden
+}
+.textbook-source-p2 .tb-heading{
+  position:relative;isolation:isolate;display:flex;align-items:center;justify-content:flex-start;
+  font-size:27px;line-height:1;font-weight:950;color:#fff;text-align:right;padding:0 18px
+}
+.textbook-source-p2 .tb-heading::before{
+  content:"";position:absolute;z-index:-1;inset:4px 0;
+  background:linear-gradient(90deg,#8bdaf0 0%,#48b4d6 35%,#0a3b60 78%,#082f50 100%);
+  clip-path:polygon(0 20%,10% 10%,25% 18%,38% 5%,52% 15%,66% 4%,82% 13%,100% 3%,99% 85%,86% 95%,71% 84%,56% 96%,40% 86%,24% 95%,9% 86%,1% 94%)
+}
+.textbook-source-p2 .p2-block{
+  display:grid;grid-template-rows:42px 289px;gap:7px;padding:0 4px;
+  border-bottom:1px solid #e3eaee;min-height:0
+}
+.textbook-source-p2 .p2-block:last-child{border-bottom:0}
+.textbook-source-p2 .p2-text{
+  display:flex;align-items:center;gap:6px;
+  font-size:18px;line-height:1.28;font-weight:740;text-align:right
+}
+.textbook-source-p2 .p2-text::before{
+  content:"❮❮";font-size:14px;letter-spacing:-3px;color:#17324d;font-weight:950;flex:0 0 auto
+}
+.textbook-source-p2 .p2-row{
+  direction:ltr;display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
+  gap:18px;align-items:center;min-height:0
+}
+.textbook-source-p2 .p2-diagram{height:190px;display:grid;place-items:center}
+.textbook-source-p2 .p2-diagram .geo{height:190px;min-height:0;padding:0;background:transparent}
+.textbook-source-p2 .p2-diagram .geo svg{height:190px;width:min(100%,275px);max-height:none}
+.textbook-source-p2 .p2-derive{
+  direction:rtl;display:grid;grid-template-rows:auto 34px auto;gap:5px;
+  justify-items:center;align-content:center
+}
+.textbook-source-p2 .p2-caption{
+  font-size:15px;line-height:1.1;font-weight:800;color:#244b65;text-align:center;white-space:nowrap
+}
+.textbook-source-p2 .p2-arrow{width:27px;height:34px;display:block}
+.textbook-source-p2 .p2-arrow path{
+  fill:none;stroke:#17324d;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round
+}
+.textbook-source-p2 .p2-completion{
+  direction:ltr;unicode-bidi:isolate;display:flex;align-items:center;justify-content:center;
+  gap:12px;white-space:nowrap;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
+  font-size:22px;font-weight:650
+}
+.textbook-source-p2 .p2-completion .answer-line{
+  display:inline-block;width:70px;height:.86em;border-bottom:2px solid #17324d
+}
+.textbook-source-p2 .p2-completion .he{
+  direction:rtl;unicode-bidi:isolate;font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;
+  font-size:15px;font-weight:850
+}
+.textbook-source-p2 .p2-formula{
+  direction:ltr;unicode-bidi:isolate;font-family:"Cambria Math","Times New Roman",serif;
+  font-size:24px;font-style:italic
+}
+.textbook-source-p2 .blank{
+  min-width:108px;height:1em;border-bottom:2px solid #17324d;vertical-align:-.05em;margin-inline:4px
+}
+.textbook-source-p2 .blank.short{min-width:72px}
+.textbook-source-p2 .shape{stroke:#17324d!important;stroke-width:3.6!important}
+.textbook-source-p2 .par{stroke:#65737e!important}
+.textbook-source-p2 .tick,.textbook-source-p2 .mid-a,.textbook-source-p2 .mid-b{stroke:#356ed0!important}
+.textbook-source-p2 .lbl{font-size:19px!important}
 .source-exact .src-text{position:absolute;direction:rtl;text-align:right;white-space:normal;font-size:20px;line-height:1.25;font-weight:650;color:#17324d}
 .source-exact .src-title{font-size:58px;line-height:1.05;font-weight:950;text-align:center}
 .source-exact .src-heading{font-size:34px;line-height:1.1;font-weight:950;text-align:right}
@@ -306,6 +377,7 @@ function slash(a,b,t,count,cls){const c=pt(a,b,t),u=unit(V.sub(b,a)),n=normal(a,
 function chevrons(a,b,count){const m=V.mid(a,b),u=unit(V.sub(b,a)),n=normal(a,b);let out='';for(let k=0;k<count;k++){const sh=(k-(count-1)/2)*10,c=V.add(m,V.mul(u,sh));out+=`<path class="par" d="M ${c[0]-u[0]*8-n[0]*5} ${c[1]-u[1]*8-n[1]*5} L ${c[0]} ${c[1]} L ${c[0]-u[0]*8+n[0]*5} ${c[1]-u[1]*8+n[1]*5}"/>`}return out}
 function projection(p,a,b){const ab=V.sub(b,a),t=V.dot(V.sub(p,a),ab)/V.dot(ab,ab);return {q:V.add(a,V.mul(ab,t)),t}}
 function angleArc(vertex,a,b,r=24){const u=unit(V.sub(a,vertex)),v=unit(V.sub(b,vertex));const p1=V.add(vertex,V.mul(u,r)),p2=V.add(vertex,V.mul(v,r));return `<path class="arc" d="M ${p1[0]} ${p1[1]} Q ${vertex[0]} ${vertex[1]} ${p2[0]} ${p2[1]}"/>`}
+function angleArcC(vertex,a,b,r=24,cls='arc'){const u=unit(V.sub(a,vertex)),v=unit(V.sub(b,vertex));const p1=V.add(vertex,V.mul(u,r)),p2=V.add(vertex,V.mul(v,r));return `<path class="${cls}" d="M ${p1[0]} ${p1[1]} Q ${vertex[0]} ${vertex[1]} ${p2[0]} ${p2[1]}"/>`}
 function rightMark(p,u,v,size=12,cls='right'){const a=unit(u),b=unit(v),p1=V.add(p,V.mul(a,size)),p2=V.add(p1,V.mul(b,size)),p3=V.add(p,V.mul(b,size));return `<path class="${cls}" d="M ${p1[0]} ${p1[1]} L ${p2[0]} ${p2[1]} L ${p3[0]} ${p3[1]}"/>`}
 function svg(kind,opts={}){
  const P=MODELS[kind], pts=[P.A,P.B,P.C,P.D].map(p=>p.join(',')).join(' '), O=V.mid(P.A,P.C);
@@ -320,6 +392,8 @@ function svg(kind,opts={}){
  if(opts.midpoints&&opts.diag){s+=slash(P.A,P.C,.27,1,'mid-a')+slash(P.A,P.C,.73,1,'mid-a')+slash(P.B,P.D,.27,2,'mid-b')+slash(P.B,P.D,.73,2,'mid-b')}
  if(opts.equalDiags&&opts.diag){s+=slash(P.A,P.C,.19,1,'diag-eq')+slash(P.B,P.D,.19,1,'diag-eq')}
  if(opts.angleBisectors&&opts.diag){s+=angleArc(P.A,P.B,O,25)+angleArc(P.A,O,P.D,25)+angleArc(P.C,P.D,O,25)+angleArc(P.C,O,P.B,25);if(opts.angleBisectors!=='ac')s+=angleArc(P.B,P.A,O,25)+angleArc(P.B,O,P.C,25)+angleArc(P.D,P.C,O,25)+angleArc(P.D,O,P.A,25)}
+ if(opts.oppAngles){s+=angleArcC(P.A,P.B,P.D,25,'angle-a')+angleArcC(P.C,P.D,P.B,25,'angle-a')+angleArcC(P.B,P.A,P.C,22,'angle-b')+angleArcC(P.D,P.C,P.A,22,'angle-b')}
+ if(opts.adjacentAngles){s+=angleArcC(P.A,P.B,P.D,25,'angle-a')+angleArcC(P.D,P.A,P.C,25,'angle-b');s+=`<text class="angle-label a" x="${P.A[0]+26}" y="${P.A[1]+30}">α</text><text class="angle-label b" x="${P.D[0]+25}" y="${P.D[1]-12}">β</text>`}
  if(opts.height){const {q,t}=projection(P.C,P.A,P.B);if(t<0||t>1)s+=`<line class="extension" x1="${P.A[0]}" y1="${P.A[1]}" x2="${q[0]}" y2="${q[1]}"/>`;s+=`<line class="height" x1="${P.C[0]}" y1="${P.C[1]}" x2="${q[0]}" y2="${q[1]}"/>`+rightMark(q,V.sub(P.A,q),V.sub(P.C,q),10)+`<text class="lbl" x="${(P.C[0]+q[0])/2+8}" y="${(P.C[1]+q[1])/2}">h</text>`}
  if(opts.center)s+=`<circle class="center" cx="${O[0]}" cy="${O[1]}" r="4"/><text class="lbl" x="${O[0]+8}" y="${O[1]-8}">O</text>`;
  [['A',P.A,-14,-8],['B',P.B,8,-8],['C',P.C,8,22],['D',P.D,-18,22]].forEach(([t,p,dx,dy])=>s+=`<circle class="pt" cx="${p[0]}" cy="${p[1]}" r="3"/><text class="lbl" x="${p[0]+dx}" y="${p[1]+dy}">${t}</text>`);
@@ -386,7 +460,55 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
   </section>
 </div>
 </article>`,
-()=>page('p',2,'מקבילית','',`<div class="grid2">${GEO('parallelogram',{diag:true,center:true,midpoints:true})}${box('prop','תכונות המקבילית',st(`במקבילית האלכסונים ${B()} זה את זה.`)+st(`במקבילית סכום כל שתי זוויות ${B()} שווה ל - ${B('short')}`)+st(`במקבילית כל שתי זוויות נגדיות ${B()} זו לזו.`)+`<div class="mathline">${M('AO = OC')} &nbsp;&nbsp; ${M('BO = OD')}</div>`)}</div>`),
+()=>`<article class="sheet source-page" data-t="p" data-page="2">
+<div class="textbook-source-p2">
+  <div class="tb-heading">תכונות המקבילית:</div>
+
+  <section class="p2-block">
+    <div class="p2-text">במקבילית כל שתי זוויות נגדיות <span class="blank"></span> זו לזו.</div>
+    <div class="p2-row">
+      <div class="p2-diagram">${GEO('parallelogram',{oppAngles:true})}</div>
+      <div class="p2-derive">
+        <div class="p2-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
+        <svg class="p2-arrow" viewBox="0 0 27 34" aria-hidden="true"><path d="M13.5 2v22M5 17l8.5 10 8.5-10"/></svg>
+        <div class="p2-completion">
+          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
+          <span class="he">וגם</span>
+          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="p2-block">
+    <div class="p2-text">במקבילית האלכסונים <span class="blank"></span> זה את זה.</div>
+    <div class="p2-row">
+      <div class="p2-diagram">${GEO('parallelogram',{diag:true,center:true,midpoints:true})}</div>
+      <div class="p2-derive">
+        <div class="p2-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
+        <svg class="p2-arrow" viewBox="0 0 27 34" aria-hidden="true"><path d="M13.5 2v22M5 17l8.5 10 8.5-10"/></svg>
+        <div class="p2-completion">
+          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
+          <span class="he">וגם</span>
+          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="p2-block">
+    <div class="p2-text">במקבילית סכום כל שתי זוויות <span class="blank"></span> שווה ל - <span class="blank short"></span></div>
+    <div class="p2-row">
+      <div class="p2-diagram">${GEO('parallelogram',{adjacentAngles:true})}</div>
+      <div class="p2-derive">
+        <div class="p2-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
+        <svg class="p2-arrow" viewBox="0 0 27 34" aria-hidden="true"><path d="M13.5 2v22M5 17l8.5 10 8.5-10"/></svg>
+        <div class="p2-formula">α + β = 180°</div>
+      </div>
+    </div>
+  </section>
+</div>
+</article>`,
 ()=>page('p',3,'מקבילית','',box('proof','איך מוכיחים שמרובע הוא מקבילית?',L([`לפי הגדרה: אם במרובע כל זוג צלעות נגדיות הן ${B()} זו לזו, אז המרובע הוא מקבילית.`,`אם במרובע כל זוג של צלעות ${B()} הן שוות זו לזו, אז המרובע הוא ${B()}.`,`אם במרובע כל זוג של זוויות נגדיות ${B()},אז ה ${B()} הוא מקבילית.`]))),
 ()=>page('p',4,'מקבילית','',box('proof','איך מוכיחים שמרובע הוא מקבילית?',L([`אם במרובע האלכסונים ${B()} זה את זה, אז המרובע הוא ${B()}.`,`אם במרובע קיים זוג אחד של צלעות נגדיות שהן גם ${B()} וגם ${B()}, אז המרובע הוא ${B()}.`]))+`<div class="grid2">${GEO('parallelogram',{diag:true,center:true,midpoints:true})}${GEO('parallelogram',{parallel:true,oppEqual:true})}</div>`),
 ()=>page('p',5,'מקבילית','',`<div class="grid2">${GEO('parallelogram',{height:true})}${box('def','איך מחשבים שטח של מקבילית?',st(`שטח של מקבילית שווה למכפלת צלע המקבילית באורך ה ${B()} לצלע זו.`)+st(`${B()} הוא גובה במקבילית היוצא מקודקוד ${B()} אל הצלע ${B()}.`)+`<div class="mathline">${M('S')}<sub>ABCD</sub> = ${B('long')}</div>`+st(`${B()} הוא גובה במקבילית היוצא מקודקוד ${B()} אל הצלע BC.`)+`<div class="mathline">${M('S')}<sub>ABCD</sub> = ${B('long')}</div>`)}</div>`)
@@ -451,16 +573,16 @@ function fitA4Pages(){
   });
 }
 function validateSourceA4(){
-  const sheet=document.querySelector('.sheet.source-page[data-page="1"]');
-  if(!sheet)return;
-  const sr=sheet.getBoundingClientRect();
-  const bad=[...sheet.querySelectorAll('*')].filter(node=>{
-    const r=node.getBoundingClientRect();
-    if(!r.width&&!r.height)return false;
-    return r.left<sr.left-1||r.right>sr.right+1||r.top<sr.top-1||r.bottom>sr.bottom+1;
+  document.querySelectorAll('.sheet.source-page').forEach(sheet=>{
+    const sr=sheet.getBoundingClientRect();
+    const bad=[...sheet.querySelectorAll('*')].filter(node=>{
+      const r=node.getBoundingClientRect();
+      if(!r.width&&!r.height)return false;
+      return r.left<sr.left-1||r.right>sr.right+1||r.top<sr.top-1||r.bottom>sr.bottom+1;
+    });
+    sheet.dataset.layoutOk=bad.length?'false':'true';
+    sheet.dataset.overflowCount=String(bad.length);
   });
-  sheet.dataset.layoutOk=bad.length?'false':'true';
-  sheet.dataset.overflowCount=String(bad.length);
 }
 fitA4Pages();
 validateSourceA4();
