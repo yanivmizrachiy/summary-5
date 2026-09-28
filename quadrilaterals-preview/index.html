@@ -228,6 +228,74 @@
 .textbook-area .height{stroke:#168472!important;stroke-width:3!important;stroke-dasharray:7 5}
 .textbook-area .right{stroke:#168472!important;stroke-width:3!important}
 .textbook-area .lbl{font-size:19px!important}
+.source-worksheet{
+  position:absolute;inset:0;padding:16px 24px 20px;background:#fff;
+  display:flex;flex-direction:column;gap:9px;overflow:hidden
+}
+.source-worksheet .sw-title{
+  position:relative;isolation:isolate;display:grid;place-items:center;
+  min-height:70px;margin:0;font-size:34px;line-height:1;font-weight:950;color:#0f3858
+}
+.source-worksheet .sw-title::before{
+  content:"";position:absolute;z-index:-1;inset:4px 0;
+  background:linear-gradient(105deg,rgba(216,248,255,.96),rgba(120,221,245,.76) 48%,rgba(219,249,255,.96));
+  clip-path:polygon(0 13%,8% 5%,18% 12%,31% 3%,44% 10%,57% 2%,72% 9%,84% 4%,100% 12%,99% 87%,87% 94%,74% 87%,61% 96%,48% 89%,34% 97%,19% 90%,7% 96%,1% 86%)
+}
+.source-worksheet .sw-heading{
+  position:relative;isolation:isolate;display:flex;align-items:center;justify-content:flex-start;
+  min-height:54px;font-size:25px;line-height:1;font-weight:950;color:#fff;padding:0 16px
+}
+.source-worksheet .sw-heading::before{
+  content:"";position:absolute;z-index:-1;inset:4px 0;
+  background:linear-gradient(90deg,#8bdaf0 0%,#48b4d6 35%,#0a3b60 78%,#082f50 100%);
+  clip-path:polygon(0 20%,10% 10%,25% 18%,38% 5%,52% 15%,66% 4%,82% 13%,100% 3%,99% 85%,86% 95%,71% 84%,56% 96%,40% 86%,24% 95%,9% 86%,1% 94%)
+}
+.source-worksheet .sw-section{
+  border-bottom:1px solid #e3eaee;padding:7px 6px;min-height:0
+}
+.source-worksheet .sw-section:last-child{border-bottom:0}
+.source-worksheet .sw-text{font-size:17px;line-height:1.34;font-weight:720;text-align:right;margin:4px 0}
+.source-worksheet .sw-note{font-size:15px;line-height:1.3;font-weight:800;color:#244b65}
+.source-worksheet .sw-grid{
+  direction:ltr;display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
+  gap:16px;align-items:center;min-height:0
+}
+.source-worksheet .sw-diagram{display:grid;place-items:center;min-height:0}
+.source-worksheet .sw-diagram .geo{height:170px;min-height:0;padding:0;background:transparent}
+.source-worksheet .sw-diagram .geo svg{height:170px;width:min(100%,260px);max-height:none}
+.source-worksheet .sw-work{
+  direction:rtl;display:grid;gap:7px;justify-items:center;align-content:center
+}
+.source-worksheet .sw-caption{font-size:15px;font-weight:800;color:#244b65;text-align:center}
+.source-worksheet .source-rel,
+.source-worksheet .source-chain{
+  direction:ltr;unicode-bidi:isolate;display:flex;align-items:center;justify-content:center;
+  gap:10px;white-space:nowrap;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
+  font-size:21px;font-weight:650
+}
+.source-worksheet .source-rel .answer-line,
+.source-worksheet .source-chain .answer-line,
+.source-worksheet .sw-work .answer-line{
+  display:inline-block;width:66px;height:.86em;border-bottom:2px solid #17324d
+}
+.source-worksheet .source-rel .he{
+  direction:rtl;font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;
+  font-size:14px;font-weight:850
+}
+.source-worksheet .sw-conclusion{font-size:16px;line-height:1.25;font-weight:800;text-align:center}
+.source-worksheet .sw-conclusion .answer-line{display:inline-block;width:88px;height:.86em;border-bottom:2px solid #17324d}
+.source-worksheet .blank{min-width:96px;height:1em;border-bottom:2px solid #17324d;vertical-align:-.05em;margin-inline:3px}
+.source-worksheet .blank.short{min-width:62px}
+.source-worksheet .math-token{direction:ltr;unicode-bidi:isolate;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-style:italic;font-weight:650}
+.source-worksheet .shape{stroke:#17324d!important;stroke-width:3.5!important}
+.source-worksheet .par{stroke:#65737e!important}
+.source-worksheet .tick,.source-worksheet .mid-a,.source-worksheet .mid-b{stroke:#356ed0!important}
+.source-worksheet .right{stroke:#168472!important}
+.source-worksheet .lbl{font-size:18px!important}
+.source-worksheet.summary{gap:7px}
+.source-worksheet.summary .sw-text{font-size:18px;line-height:1.42}
+.source-worksheet.summary .summary-list{display:grid;gap:7px;padding:2px 14px}
+.source-worksheet.summary .summary-item{font-size:17px;line-height:1.32;font-weight:720}
 .source-exact .src-text{position:absolute;direction:rtl;text-align:right;white-space:normal;font-size:20px;line-height:1.25;font-weight:650;color:#17324d}
 .source-exact .src-title{font-size:58px;line-height:1.05;font-weight:950;text-align:center}
 .source-exact .src-heading{font-size:34px;line-height:1.1;font-weight:950;text-align:right}
@@ -508,6 +576,10 @@ function svg(kind,opts={}){
 const GEO=(k,o)=>svg(k,o);
 const box=(cls,title,html)=>`<section class="box ${cls}">${title?`<h2>${title}</h2>`:""}${html}</section>`;
 const st=x=>`<p class="statement">${x}</p>`;
+const REL=(op='=')=>`<span class="answer-line"></span><span class="rel-op">${op}</span><span class="answer-line"></span>`;
+const REL2=(op='=')=>`<div class="source-rel">${REL(op)}<span class="he">וגם</span>${REL(op)}</div>`;
+const CHAIN4=()=>`<div class="source-chain"><span class="answer-line"></span><span>=</span><span class="answer-line"></span><span>=</span><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>`;
+
 const sourceText=(text,top,left,width,height,cls='')=>`<div class="src-text ${cls}" style="top:${top}px;left:${left}px;width:${width}px;min-height:${height}px">${text}</div>`;
 const sourceBlank=(top,left,width=67,height=25)=>`<span class="src-blank" style="top:${top}px;left:${left}px;width:${width}px;height:${height}px"></span>`;
 const page=(t,n,title,sub,html)=>`<article class="sheet" data-t="${t}" data-page="${n}"><span class="num">${n}</span><h1 class="title">${title}</h1><div class="stack">${html}</div><div class="footer">${n}</div></article>`;
@@ -724,18 +796,250 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
 
 ]},
 rectangle:{label:'מלבן',t:'r',pages:[
-()=>page('r',1,'מלבן','',box('def','',st(`הגדרה: מלבן הוא מרובע שבו כל ה${B()} ישרות.`))+`<div class="grid2">${GEO('rectangle',{right:true,parallel:true,oppEqual:true})}${box('prop','תכונות המלבן',st(`במלבן כל שתי${B()} נגדיות מקבילות זו לזו .`)+st(`במלבן כל שתי צלעות ${B()} שוות זו לזו.`)+st(`במלבן ה${B()} חוצים זה את זה.`)+st(`למלבן תכונות מיוחדות שאין לכל מקבילית:`)+st(`במלבן כל ה${B()} ישרות (לפי הגדרה).`))}</div>`+box('imp','',st(`כל התכונות של המקבילית מתקיימות גם ב${B()}.`))),
-()=>page('r',2,'מלבן','',`<div class="grid2">${GEO('rectangle',{diag:true,center:true,midpoints:true,equalDiags:true})}${box('spec','תכונות המלבן:',st(`במלבן ה ${B()} שווים זה לזה.`)+`<div class="mathline">${M('DB = AC')}</div>`)}</div>`),
-()=>page('r',3,'מלבן','',box('proof','איך מוכיחים  שמרובע הוא מלבן?',st(`לפי הגדרה: אם במרובע יש שלוש זוויות ישרות אז המרובע הוא מלבן.`)+st(`גם הזווית הרביעית ישרה. מדוע?`)+st(`כי סכום ${B('long')}`))+GEO('rectangle',{right:true})),
-()=>page('r',4,'מלבן','',box('proof','המלבן הוא מקבילית מיוחדת',L([`אם במקבילית יש ${B()} ישרה,אז המקבילית היא ${B()}. אז כל הזוויות של המקבילית הן ישרות. מדוע?`,`אם במקבילית האלכסונים ${B()} זה לזה, אז המקבילית היא ${B()}.`]))+`<div class="grid2">${GEO('rectangle',{right:true})}${GEO('rectangle',{diag:true,equalDiags:true})}</div>`),
-()=>page('r',5,'מלבן','',box('def','המלבן',st('הגדרה: מרובע שבו כל הזוויות ישרות הוא מלבן.'))+box('prop','תכונות המלבן',L(['כל שתי צלעות נגדיות מקבילות זו לזו.','כל שתי צלעות נגדיות שוות זו לזו.','האלכסונים חוצים זה את זה.','כל הזוויות ישרות.','האלכסונים שווים זה לזה.']))+box('proof','איך מוכיחים שמרובע הוא מלבן?',L(['לפי הגדרה: אם במרובע יש שלוש זוויות ישרות, אז המרובע הוא מלבן.','אם במקבילית יש זווית ישרה אז המקבילית היא מלבן.','אם במקבילית האלכסונים שווים זה לזה אז המקבילית היא מלבן.'])))
+()=>`<article class="sheet source-page" data-t="r" data-page="1"><div class="source-worksheet">
+  <h1 class="sw-title">מלבן</h1>
+  <section class="sw-section">
+    <div class="sw-text">הגדרה: מלבן הוא מרובע שבו כל ה<span class="blank"></span> ישרות.</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('rectangle',{right:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מלבן:</div>
+        ${CHAIN4()}
+      </div>
+    </div>
+  </section>
+  <div class="sw-heading">תכונות המלבן:</div>
+  <section class="sw-section">
+    <div class="sw-text">במלבן כל שתי<span class="blank"></span> נגדיות מקבילות זו לזו .</div>
+    <div class="sw-text">במלבן כל שתי צלעות <span class="blank"></span> שוות זו לזו.</div>
+    <div class="sw-text">במלבן ה<span class="blank"></span> חוצים זה את זה.</div>
+    <div class="sw-text">כל התכונות של המקבילית מתקיימות גם ב <span class="blank"></span>.</div>
+    <div class="sw-note">וגם:</div>
+  </section>
+  <section class="sw-section">
+    <div class="sw-text">למלבן תכונות מיוחדות שאין לכל מקבילית:</div>
+    <div class="sw-text">במלבן כל ה<span class="blank"></span> ישרות (לפי הגדרה).</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('rectangle',{right:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מלבן</div>
+        ${CHAIN4()}
+      </div>
+    </div>
+  </section>
+</div></article>`,
+()=>`<article class="sheet source-page" data-t="r" data-page="2"><div class="source-worksheet">
+  <div class="sw-heading">תכונות המלבן:</div>
+  <section class="sw-section" style="flex:1;display:grid;place-items:center">
+    <div style="width:100%">
+      <div class="sw-text" style="font-size:21px">במלבן ה <span class="blank"></span> שווים זה לזה.</div>
+      <div class="sw-grid" style="margin-top:24px">
+        <div class="sw-diagram">${GEO('rectangle',{diag:true,center:true,midpoints:true,equalDiags:true})}</div>
+        <div class="sw-work">
+          <div class="sw-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מלבן</div>
+          <div class="source-rel" style="gap:7px"><bdi dir="ltr">DB</bdi><span>=</span><span class="answer-line"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div></article>`,
+()=>`<article class="sheet source-page" data-t="r" data-page="3"><div class="source-worksheet">
+  <div class="sw-heading">איך מוכיחים שמרובע הוא מלבן?</div>
+  <section class="sw-section">
+    <div class="sw-text">לפי הגדרה: אם במרובע יש שלוש זוויות ישרות אז המרובע הוא מלבן.</div>
+    <div class="sw-text">גם הזווית הרביעית ישרה. מדוע?</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('rectangle',{right:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption">במרובע <bdi class="math-token" dir="ltr">ABCD</bdi>:</div>
+        <div class="sw-note">אם:</div>
+        <div class="source-chain"><span class="answer-line"></span><span>=</span><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>
+        <div class="sw-text">כי סכום <span class="blank long"></span></div>
+        <div class="source-rel" style="gap:7px"><bdi dir="ltr">D</bdi><span>=</span><span class="answer-line"></span></div>
+      </div>
+    </div>
+    <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מלבן</div>
+  </section>
+</div></article>`,
+()=>`<article class="sheet source-page" data-t="r" data-page="4"><div class="source-worksheet">
+  <div class="sw-heading">איך מוכיחים שמרובע הוא מלבן?</div>
+  <section class="sw-section" style="flex:1">
+    <div class="sw-text">המלבןהוא מקבילית מיוחדת</div>
+    <div class="sw-text">אם במקבילית יש <span class="blank"></span> ישרה,אז המקבילית היא <span class="blank"></span>.</div>
+    <div class="sw-text">אז כל הזוויות של המקבילית הן ישרות. מדוע?</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('rectangle',{right:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מקבילית</div>
+        <div class="sw-note">וגם:</div>
+        <div class="source-rel" style="gap:7px"><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>
+        <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
+      </div>
+    </div>
+  </section>
+  <section class="sw-section" style="flex:1">
+    <div class="sw-text">המלבןהוא מקבילית מיוחדת</div>
+    <div class="sw-text">אם במקבילית האלכסונים <span class="blank"></span> זה לזה, אז המקבילית היא <span class="blank"></span>.</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('rectangle',{diag:true,equalDiags:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מקבילית</div>
+        <div class="sw-note">וגם:</div>
+        <div class="source-rel" style="gap:7px"><bdi dir="ltr">DB</bdi><span>=</span><span class="answer-line"></span></div>
+        <div class="sw-conclusion">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מלבן</div>
+      </div>
+    </div>
+  </section>
+</div></article>`,
+()=>`<article class="sheet source-page" data-t="r" data-page="5"><div class="source-worksheet summary">
+  <h1 class="sw-title">המלבן</h1>
+  <section class="sw-section"><div class="sw-text">הגדרה: מרובע שבו כל הזוויות ישרות הוא מלבן.</div></section>
+  <div class="sw-heading">תכונות המלבן:</div>
+  <section class="sw-section">
+    <div class="summary-list">
+      <div class="summary-item">במלבן כל שתי צלעות נגדיות מקבילות זו לזו</div>
+      <div class="summary-item">2. במלבן כל שתי צלעות נגדיות שוות זו לזו</div>
+      <div class="summary-item">3. במלבן האלכסונים חוצים זה את זה</div>
+      <div class="summary-item">4. במלבן כל הזוויות ישרות</div>
+      <div class="summary-item">5. במלבן האלכסונים שווים זה לזה</div>
+      <div class="sw-note">כמו במקבילית</div>
+    </div>
+  </section>
+  <div class="sw-heading">איך מוכיחים שמרובע הוא מלבן?</div>
+  <section class="sw-section">
+    <div class="summary-list">
+      <div class="summary-item">לפי הגדרה: אם במרובע יש שלוש זוויות ישרות, אז המרובע הוא מלבן.</div>
+      <div class="summary-item">2. אם במקבילית יש זווית ישרה אז המקבילית היא מלבן.</div>
+      <div class="summary-item">3. אם במקבילית האלכסונים שווים זה לזה אז המקבילית היא מלבן.</div>
+    </div>
+  </section>
+</div></article>`
 ]},
 rhombus:{label:'מעויין',t:'h',pages:[
-()=>page('h',1,'מעויין','',box('def','',st(`הגדרה: מעויין הוא מרובע שכל ${B('long')} שוות זו לזו.`))+`<div class="grid2">${GEO('rhombus',{equal:true,parallel:true})}${box('prop','תכונות המעויין',st(`במעויין כל זוג צלעות ${B()} מקבילות זו לזו .`)+st(`במעויין כל שתי זוויות ${B()} שוות זו לזו.`)+st(`במעויין סכום כל שתי זוויות ${B()} שווה ל - ${B('short')}`)+st(`במעויין ה${B()} חוצים זה את זה.`)+st(`למעויין תכונות מיוחדות שאין לכל מקבילית:`)+st(`במעויין כל ה${B()} שוות (לפי הגדרה).`))}</div>`+box('imp','',st(`כל התכונות של המקבילית מתקיימות גם ב${B()}.`))),
-()=>page('h',2,'מעויין','',`<div class="grid2">${GEO('rhombus',{diag:true,center:true,perp:true,midpoints:true,angleBisectors:true})}${box('spec','תכונות המעויין:',st(`במעויין ה ${B()} מאונכים זה לזה.`)+st(`במעויין האלכסונים ${B()} את הזוויות.`)+`<div class="mathline">${M('AC ⟂ BD')}</div>`)}</div>`),
-()=>page('h',3,'מעויין','',box('proof','איך מוכיחים שמרובע הוא מעויין?',L([`לפי הגדרה: אם במרובע כל הצלעות ${B()} שוות, אז המרובע הוא מעויין.`,`המעויין הוא מקבילית מיוחדת אם במקבילית שתי צלעות ${B()} אז ה ${B()} היא מעויין.`,`המעויין הוא מקבילית מיוחדת אם במקבילית ה ${B()} מאונכים זה לזה אז המקבילית היא ${B()}.`,`המסקנה תהיה שכל הצלעות שוות. מדוע?`]))+GEO('rhombus',{equal:true})),
-()=>page('h',4,'מעויין','',box('proof','איך מוכיחים שמרובע הוא מעויין?',L([`המעויין הוא מקבילית מיוחדת`,`אם במקבילית אחד האלכסונים חוצה את אחת ה${B()} אז המקבילית היא ${B()}.`]))+`<div class="grid2">${GEO('rhombus',{diag:true,perp:true})}${GEO('rhombus',{diag:true,angleBisectors:'ac'})}</div>`),
-()=>page('h',5,'מעויין','',`<div class="grid2">${box('def','',st(`שטח של עויין שווה למכפלה של צלע המעויין באורך הגובה לצלע זו.`)+`<div class="mathline">${M('S = a · h')}</div>`)}${box('spec','',st(`שטח של מעויין שווה למחצית מכפלת ה ${B('long')}.`)+`<div class="mathline">${M('S = (d₁ · d₂) / 2')}</div>`)}</div>`+GEO('rhombus',{diag:true,perp:true,height:true}))
+()=>`<article class="sheet source-page" data-t="h" data-page="1"><div class="source-worksheet">
+  <h1 class="sw-title">מעויין</h1>
+  <section class="sw-section">
+    <div class="sw-text">הגדרה: מעויין הוא מרובע שכל <span class="blank"></span> שוות זו לזו.</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('rhombus',{equal:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מעויין:</div>
+        <div class="source-chain"><bdi dir="ltr">AB</bdi><span>=</span><span class="answer-line"></span><span>=</span><bdi dir="ltr">CD</bdi><span>=</span><span class="answer-line"></span></div>
+      </div>
+    </div>
+  </section>
+  <div class="sw-heading">תכונות המעויין:</div>
+  <section class="sw-section">
+    <div class="sw-text">במעויין כל זוג צלעות <span class="blank"></span> מקבילות זו לזו .</div>
+    <div class="sw-text">במעויין כל שתי זוויות <span class="blank"></span> שוות זו לזו.</div>
+    <div class="sw-text">במעויין סכום כל שתי זוויות <span class="blank"></span> שווה ל - <span class="blank short"></span></div>
+    <div class="sw-text">במעויין ה<span class="blank"></span> חוצים זה את זה.</div>
+    <div class="sw-text">כל התכונות של המקבילית מתקיימות גם ב <span class="blank"></span>.</div>
+    <div class="sw-note">וגם:</div>
+  </section>
+  <section class="sw-section">
+    <div class="sw-text">למעויין תכונות מיוחדות שאין לכל מקבילית:</div>
+    <div class="sw-text">במעויין כל ה<span class="blank"></span> שוות (לפי הגדרה).</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('rhombus',{equal:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מעויין</div>
+        ${CHAIN4()}
+      </div>
+    </div>
+  </section>
+</div></article>`,
+()=>`<article class="sheet source-page" data-t="h" data-page="2"><div class="source-worksheet">
+  <div class="sw-heading">תכונות המעויין:</div>
+  <section class="sw-section" style="flex:1">
+    <div class="sw-text">במעויין ה <span class="blank"></span> מאונכים זה לזה.</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('rhombus',{diag:true,perp:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מעויין</div>
+        <div class="source-rel" style="gap:7px"><bdi dir="ltr">AC</bdi><span class="answer-line"></span><bdi dir="ltr">BD</bdi></div>
+      </div>
+    </div>
+  </section>
+  <section class="sw-section" style="flex:1">
+    <div class="sw-text">במעויין האלכסונים <span class="blank"></span> את הזוויות.</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('rhombus',{diag:true,angleBisectors:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מעויין</div>
+        <div class="sw-note">וגם</div>
+        <div class="source-rel"><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>
+        <div class="sw-note">וגם</div>
+        <div class="source-rel"><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>
+      </div>
+    </div>
+  </section>
+</div></article>`,
+()=>`<article class="sheet source-page" data-t="h" data-page="3"><div class="source-worksheet">
+  <div class="sw-heading">איך מוכיחים שמרובע הוא מעויין?</div>
+  <section class="sw-section">
+    <div class="sw-text">לפי הגדרה: אם במרובע כל הצלעות <span class="blank"></span> שוות, אז המרובע הוא מעויין.</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('rhombus',{equal:true})}</div>
+      <div class="sw-work"><div class="sw-note">אם:</div><div class="source-chain"><bdi dir="ltr">AB</bdi><span>=</span><span class="answer-line"></span><span>=</span><bdi dir="ltr">CD</bdi><span>=</span><span class="answer-line"></span></div></div>
+    </div>
+    <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
+  </section>
+  <section class="sw-section">
+    <div class="sw-text">המעויין הוא מקבילית מיוחדת</div>
+    <div class="sw-text">אם במקבילית שתי צלעות אז ה <span class="blank"></span> היא מעויין.</div>
+    <div class="sw-note">המסקנה תהיה שכל הצלעות שוות. מדוע?</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('rhombus',{equal:true})}</div>
+      <div class="sw-work"><div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מקבילית</div><div class="sw-note">וגם</div><div class="source-rel" style="gap:7px"><bdi dir="ltr">AB</bdi><span>=</span><span class="answer-line"></span></div></div>
+    </div>
+    <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
+  </section>
+  <section class="sw-section">
+    <div class="sw-text">המעויין הוא מקבילית מיוחדת אם במקבילית ה <span class="blank"></span> מאונכים זה לזה אז המקבילית היא <span class="blank"></span>.</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('rhombus',{diag:true,perp:true})}</div>
+      <div class="sw-work"><div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מקבילית וגם:</div><div class="source-rel" style="gap:7px"><bdi dir="ltr">BD</bdi><span class="answer-line"></span><span class="answer-line"></span></div></div>
+    </div>
+    <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מעויין.</div>
+  </section>
+</div></article>`,
+()=>`<article class="sheet source-page" data-t="h" data-page="4"><div class="source-worksheet">
+  <div class="sw-heading">איך מוכיחים שמרובע הוא מעויין?</div>
+  <section class="sw-section" style="flex:1;display:grid;align-content:center">
+    <div class="sw-text">המעויין הוא מקבילית מיוחדת</div>
+    <div class="sw-text">אם במקבילית אחד האלכסונים חוצה את אחת ה<span class="blank"></span>, אז המקבילית היא <span class="blank"></span>.</div>
+    <div class="sw-grid" style="margin-top:20px">
+      <div class="sw-diagram">${GEO('rhombus',{diag:true,angleBisectors:'ac'})}</div>
+      <div class="sw-work">
+        <div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מקבילית וגם <span class="answer-line"></span></div>
+      </div>
+    </div>
+    <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
+  </section>
+</div></article>`,
+()=>`<article class="sheet source-page" data-t="h" data-page="5"><div class="source-worksheet">
+  <div class="sw-heading">איך מחשבים שטח של מעויין?</div>
+  <section class="sw-section" style="flex:1">
+    <div class="sw-text">שטח של עויין שווה למכפלה של צלע המעויין באורך הגובה לצלע זו.</div>
+    <div class="sw-grid" style="margin-top:12px">
+      <div class="sw-diagram">${GEO('rhombus',{height:true,height2:true})}</div>
+      <div class="sw-work">
+        <div class="source-rel" style="gap:8px"><span>S</span><span class="rel-op">=</span><span class="answer-line"></span></div>
+      </div>
+    </div>
+  </section>
+  <div class="sw-note" style="text-align:center;font-size:18px">או</div>
+  <section class="sw-section" style="flex:1">
+    <div class="sw-text">שטח של מעויין שווה למחצית מכפלת ה <span class="blank"></span>.</div>
+    <div class="sw-grid" style="margin-top:12px">
+      <div class="sw-diagram">${GEO('rhombus',{diag:true,perp:true})}</div>
+      <div class="sw-work">
+        <div class="source-rel" style="gap:8px"><span>S</span><span class="rel-op">=</span><span class="answer-line"></span><span style="border-top:2px solid #17324d;padding:5px 14px 0">2</span></div>
+      </div>
+    </div>
+  </section>
+</div></article>`
 ]},
 square:{label:'ריבוע',t:'s',pages:[
 ()=>page('s',1,'ריבוע','',box('def','',st(`הגדרה: ריבוע הוא מרובע שכל ה${B()} שוות וכל ה${B()} ישרות.`))+`<div class="grid2">${GEO('square',{equal:true,right:true,parallel:true})}${box('prop','תכונות הריבוע:',st(`בריבוע כל זוג צלעות ${B()} מקבילות זו לזו.`)+st(`בריבוע כל ה${B()} שוות זו לזו.`)+st(`בריבוע ה${B()} חוצים זה את זה.`)+st(`בריבוע כל ה${B()} ישרות.`))}</div>`+box('imp','',`<div class="grid2"><div class="card"><h3>הריבוע הוא מלבן כי...</h3>${st(`כל הזוויות שלו ${B()}.`)}</div><div class="card"><h3>הריבוע הוא מעויין כי...</h3>${st(`כל הצלעות שלו ${B()}.`)}</div></div>`)),
