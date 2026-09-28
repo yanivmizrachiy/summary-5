@@ -676,6 +676,158 @@
 .diag{stroke-width:2!important}
 .tick,.par,.right,.arc{stroke-width:2.4!important}
 
+
+/* === DIAGRAM LEGIBILITY V5 START ===
+   Student-workbook geometry layer.
+   Typography/prose/worksheet wording are intentionally untouched.
+*/
+
+/* Give diagrams a useful share of each teaching row. */
+.textbook-source .tb-two,
+.textbook-source .tb-work,
+.textbook-source-p2 .p2-row,
+.textbook-proof .proof-work,
+.source-worksheet .sw-grid {
+  grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr) !important;
+}
+
+/* Parallelogram page 1. */
+.textbook-source .tb-diagram .geo {
+  max-height:175px !important;
+}
+.textbook-source .tb-diagram .geo svg {
+  width:min(100%,270px) !important;
+  max-height:175px !important;
+  overflow:visible !important;
+}
+.textbook-source .tb-work .tb-diagram .geo {
+  max-height:180px !important;
+}
+.textbook-source .tb-work .tb-diagram .geo svg {
+  width:min(100%,278px) !important;
+  max-height:180px !important;
+}
+
+/* Properties page. */
+.textbook-source-p2 .p2-diagram,
+.textbook-source-p2 .p2-diagram .geo {
+  height:180px !important;
+}
+.textbook-source-p2 .p2-diagram .geo svg {
+  width:min(100%,275px) !important;
+  height:180px !important;
+  max-height:180px !important;
+  overflow:visible !important;
+}
+
+/* Proof pages: strong enough to read, still secondary to the exercise. */
+.textbook-proof .proof-diagram,
+.textbook-proof .proof-diagram .geo {
+  height:158px !important;
+}
+.textbook-proof .proof-diagram .geo svg {
+  width:min(100%,245px) !important;
+  height:158px !important;
+  max-height:158px !important;
+  overflow:visible !important;
+}
+
+/* Rectangle / rhombus / square worksheets. */
+.source-worksheet .sw-diagram .geo {
+  height:178px !important;
+}
+.source-worksheet .sw-diagram .geo svg {
+  width:min(100%,270px) !important;
+  height:178px !important;
+  max-height:178px !important;
+  overflow:visible !important;
+}
+
+/* Area drawings can be larger because they carry the mathematical idea. */
+.textbook-area .area-diagram .geo {
+  height:305px !important;
+}
+.textbook-area .area-diagram .geo svg {
+  width:min(100%,465px) !important;
+  height:305px !important;
+  max-height:305px !important;
+  overflow:visible !important;
+}
+
+/* Geometry line hierarchy. */
+.sheet .shape {
+  stroke:#17324d !important;
+  stroke-width:3.9px !important;
+  stroke-linejoin:round !important;
+}
+
+.sheet .diag {
+  stroke:#607487 !important;
+  stroke-width:2.45px !important;
+}
+
+.sheet .par {
+  stroke:#325b78 !important;
+  stroke-width:3.25px !important;
+}
+
+.sheet .tick,
+.sheet .mid-a,
+.sheet .mid-b,
+.sheet .diag-eq {
+  stroke-width:3.25px !important;
+}
+
+.sheet .right {
+  stroke:#147868 !important;
+  stroke-width:3.15px !important;
+}
+
+.sheet .arc,
+.sheet .angle-a,
+.sheet .angle-b {
+  stroke-width:3.05px !important;
+}
+
+/* A/B/C/D are instructional labels, not decorative fine print. */
+.sheet .lbl {
+  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif !important;
+  font-size:20px !important;
+  font-weight:700 !important;
+  fill:#102f48 !important;
+  paint-order:stroke !important;
+  stroke:#fff !important;
+  stroke-width:2.6px !important;
+  stroke-linejoin:round !important;
+}
+
+/* Center and angle labels. */
+.sheet .angle-label {
+  font-size:20px !important;
+  font-weight:700 !important;
+}
+.sheet .center {
+  r:4px;
+}
+
+/* Mathematical completion rows remain restrained,
+   so the actual geometry gets the visual emphasis. */
+.textbook-source .tb-completion,
+.textbook-source-p2 .p2-completion,
+.textbook-proof .proof-completion,
+.source-worksheet .source-rel,
+.source-worksheet .source-chain {
+  font-weight:600 !important;
+}
+
+/* Never let SVG artwork be silently clipped. */
+.sheet figure.geo,
+.sheet figure.geo svg {
+  overflow:visible !important;
+}
+
+/* === DIAGRAM LEGIBILITY V5 END === */
+
 @media(max-width:800px){
 body{overflow-x:hidden}
 .top{position:sticky;top:0;padding:6px 4px;gap:4px}
@@ -752,7 +904,7 @@ function rightMark(p,u,v,size=12,cls='right'){const a=unit(u),b=unit(v),p1=V.add
 function svg(kind,opts={}){
  const P=MODELS[kind], pts=[P.A,P.B,P.C,P.D].map(p=>p.join(',')).join(' '), O=V.mid(P.A,P.C);
  const label={parallelogram:'מקבילית',rectangle:'מלבן',rhombus:'מעויין',square:'ריבוע'}[kind];
- let s=`<figure class="geo"><svg viewBox="0 0 360 310" role="img" aria-label="${label} ABCD עם סימונים גאומטריים מדויקים"><polygon class="shape" points="${pts}"/>`;
+ let s=`<figure class="geo"><svg viewBox="18 12 324 286" role="img" aria-label="${label} ABCD עם סימונים גאומטריים מדויקים"><polygon class="shape" points="${pts}"/>`;
  if(opts.diag)s+=`<line class="diag" x1="${P.A[0]}" y1="${P.A[1]}" x2="${P.C[0]}" y2="${P.C[1]}"/><line class="diag" x1="${P.B[0]}" y1="${P.B[1]}" x2="${P.D[0]}" y2="${P.D[1]}"/>`;
  if(opts.right){[[P.A,[18,18]],[P.B,[-18,18]],[P.C,[-18,-18]],[P.D,[18,-18]]].forEach(([p,d])=>s+=`<path class="right" d="M ${p[0]} ${p[1]+d[1]/2} L ${p[0]+d[0]/2} ${p[1]+d[1]/2} L ${p[0]+d[0]/2} ${p[1]}"/>`)}
  if(opts.equal){[[P.A,P.B],[P.B,P.C],[P.C,P.D],[P.D,P.A]].forEach(([a,b])=>s+=slash(a,b,.5,1,'tick'))}
