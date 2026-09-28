@@ -54,9 +54,9 @@ jobs:
       - name: Render and measure desktop + mobile
         shell: bash
         run: |
-          cat > /tmp/a4-qa.mjs <<'NODE'
-          import fs from 'node:fs';
-          import { chromium } from 'playwright-core';
+          cat > .a4-qa.cjs <<'NODE'
+          const fs=require('node:fs');
+          const { chromium }=require('playwright-core');
 
           const executablePath = process.env.BROWSER === 'playwright' ? undefined : process.env.BROWSER;
           const browser = await chromium.launch({headless:true, executablePath, args:['--no-sandbox']});
@@ -120,7 +120,8 @@ jobs:
           if(errors.length){ console.error(errors.join('\n')); process.exit(1); }
           await browser.close();
           NODE
-          node /tmp/a4-qa.mjs
+          node .a4-qa.cjs
+          rm -f .a4-qa.cjs
 
       - name: Upload visual proof
         if: always()
