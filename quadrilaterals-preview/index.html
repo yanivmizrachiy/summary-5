@@ -478,6 +478,204 @@
 .sheet.fit-airy .geo{min-height:300px}
 .sheet.fit-airy .geo svg{max-height:315px;width:min(100%,410px)}
 .sheet.fit-airy .mathline{font-size:24px}
+
+/* === Professional student-workbook typography v3 === */
+.sheet{
+  font-family:"Noto Sans Hebrew","Segoe UI",Arial,sans-serif;
+  color:#17324d;
+}
+.sheet:before{height:2px;background:#9cc8dc}
+.sheet.source-page,.sheet.derived-page{background:#fff}
+
+/* Page 1 — parallelogram source */
+.textbook-source{
+  padding:14px 22px 16px;
+  grid-template-rows:52px 230px 42px 360px 360px;
+  gap:6px
+}
+.textbook-source .tb-title{
+  font-size:28px;line-height:1.05;font-weight:850;color:#17324d;
+  border-bottom:1px solid #d8e4eb;padding:0;margin:0
+}
+.textbook-source .tb-title::before{display:none}
+.textbook-source .tb-intro{
+  grid-template-rows:27px 24px 167px;
+  gap:4px;padding:0 2px
+}
+.textbook-source .tb-line{font-size:15.5px;line-height:1.34;font-weight:650}
+.textbook-source .tb-two{
+  grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);
+  gap:14px
+}
+.textbook-source .tb-diagram .geo{max-height:148px}
+.textbook-source .tb-diagram .geo svg{width:min(100%,235px);max-height:148px}
+.textbook-source .tb-given{gap:10px;font-size:18px;font-weight:600}
+.textbook-source .tb-given .he{font-size:13px;font-weight:750}
+.textbook-source .tb-given .answer-line{width:68px;border-bottom-width:1.7px}
+.textbook-source .tb-heading{
+  min-height:0;font-size:20px;line-height:1.1;font-weight:800;color:#17324d;
+  padding:0 10px;background:#eef6fa;border-right:4px solid #5ba8c8;
+  border-radius:2px
+}
+.textbook-source .tb-heading::before{display:none}
+.textbook-source .tb-property{
+  grid-template-rows:31px 319px;
+  gap:4px;padding:4px 2px;
+  border-bottom:1px solid #e3eaee
+}
+.textbook-source .tb-property-text{
+  font-size:15.5px;line-height:1.32;font-weight:650;gap:5px
+}
+.textbook-source .tb-property-text::before{display:none}
+.textbook-source .tb-work{
+  grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
+  gap:12px
+}
+.textbook-source .tb-work .tb-diagram .geo{max-height:145px}
+.textbook-source .tb-work .tb-diagram .geo svg{max-height:145px;width:min(100%,225px)}
+.textbook-source .tb-derive{grid-template-rows:auto 22px auto;gap:3px}
+.textbook-source .tb-caption{font-size:13px;font-weight:700}
+.textbook-source .tb-arrow{width:20px;height:22px}
+.textbook-source .tb-arrow path{stroke-width:2}
+.textbook-source .tb-completion{gap:8px;font-size:17px;font-weight:600}
+.textbook-source .tb-completion .he{font-size:13px;font-weight:750}
+.textbook-source .tb-completion .answer-line{width:54px;border-bottom-width:1.7px}
+.textbook-source .tb-completion .symbol{font-size:17px}
+.textbook-source .blank{min-width:78px;border-bottom-width:1.7px}
+.textbook-source .lbl{font-size:16px!important}
+
+/* Parallelogram page 2 */
+.textbook-source-p2{
+  padding:14px 22px 16px;
+  grid-template-rows:42px 347px 347px 347px;
+  gap:5px
+}
+.textbook-source-p2 .tb-heading{
+  font-size:20px;font-weight:800;color:#17324d;padding:0 10px;
+  background:#eef6fa;border-right:4px solid #5ba8c8;border-radius:2px
+}
+.textbook-source-p2 .tb-heading::before{display:none}
+.textbook-source-p2 .p2-block{grid-template-rows:30px 311px;gap:4px;padding:2px}
+.textbook-source-p2 .p2-text{font-size:15.5px;line-height:1.3;font-weight:650}
+.textbook-source-p2 .p2-text::before{display:none}
+.textbook-source-p2 .p2-row{gap:12px}
+.textbook-source-p2 .p2-diagram,
+.textbook-source-p2 .p2-diagram .geo{height:150px}
+.textbook-source-p2 .p2-diagram .geo svg{height:150px;width:min(100%,230px)}
+.textbook-source-p2 .p2-derive{grid-template-rows:auto 22px auto;gap:3px}
+.textbook-source-p2 .p2-caption{font-size:13px;font-weight:700}
+.textbook-source-p2 .p2-arrow{width:20px;height:22px}
+.textbook-source-p2 .p2-arrow path{stroke-width:2}
+.textbook-source-p2 .p2-completion{gap:8px;font-size:17px}
+.textbook-source-p2 .p2-completion .answer-line{width:54px;border-bottom-width:1.7px}
+.textbook-source-p2 .p2-completion .he{font-size:13px;font-weight:750}
+.textbook-source-p2 .p2-formula{font-size:18px}
+.textbook-source-p2 .blank{min-width:80px;border-bottom-width:1.7px}
+.textbook-source-p2 .blank.short{min-width:54px}
+.textbook-source-p2 .lbl{font-size:16px!important}
+
+/* Proof pages */
+.textbook-proof{
+  padding:14px 22px 16px;gap:5px
+}
+.textbook-proof.p3{grid-template-rows:44px repeat(3,1fr)}
+.textbook-proof.p4{grid-template-rows:44px repeat(2,1fr)}
+.textbook-proof .proof-title{
+  font-size:21px;font-weight:800;color:#17324d;text-align:right;
+  place-items:center end;padding:0 10px;background:#eef6fa;border-right:4px solid #5ba8c8
+}
+.textbook-proof .proof-title::before{display:none}
+.textbook-proof .proof-block{gap:4px;padding:5px 2px}
+.textbook-proof .proof-text{font-size:15px;line-height:1.3;font-weight:650}
+.textbook-proof .proof-work{gap:10px}
+.textbook-proof .proof-diagram,
+.textbook-proof .proof-diagram .geo{height:125px}
+.textbook-proof .proof-diagram .geo svg{height:125px;width:min(100%,205px)}
+.textbook-proof .proof-if{gap:4px}
+.textbook-proof .if-label{font-size:13px;font-weight:750}
+.textbook-proof .proof-completion{gap:7px;font-size:16px}
+.textbook-proof .proof-completion .answer-line{width:52px;border-bottom-width:1.7px}
+.textbook-proof .proof-completion .he{font-size:12.5px;font-weight:750}
+.textbook-proof .proof-given{gap:7px;font-size:16px}
+.textbook-proof .proof-given .he{font-size:12.5px}
+.textbook-proof .proof-given .answer-line,
+.textbook-proof .conclusion .answer-line{width:66px;border-bottom-width:1.7px}
+.textbook-proof .conclusion{font-size:14px;font-weight:700}
+.textbook-proof .blank{min-width:72px;border-bottom-width:1.7px}
+.textbook-proof .lbl{font-size:15px!important}
+
+/* Area page */
+.textbook-area{
+  padding:14px 22px 16px;
+  grid-template-rows:44px 72px 365px 285px 285px;
+  gap:5px
+}
+.textbook-area .area-title{
+  font-size:21px;font-weight:800;color:#17324d;text-align:right;
+  place-items:center end;padding:0 10px;background:#eef6fa;border-right:4px solid #5ba8c8
+}
+.textbook-area .area-title::before{display:none}
+.textbook-area .area-rule{font-size:15.5px;line-height:1.32;font-weight:650;padding:0 4px}
+.textbook-area .area-diagram .geo{height:285px}
+.textbook-area .area-diagram .geo svg{height:285px;width:min(100%,430px)}
+.textbook-area .height-task{gap:12px;padding:5px 6px}
+.textbook-area .height-text{font-size:15px;line-height:1.3;font-weight:650}
+.textbook-area .area-formula{gap:6px;font-size:19px}
+.textbook-area .answer-line{width:70px;border-bottom-width:1.7px}
+.textbook-area .blank{min-width:78px;border-bottom-width:1.7px}
+.textbook-area .lbl{font-size:16px!important}
+
+/* Rectangle / rhombus / square pages */
+.source-worksheet{
+  padding:14px 22px 16px;
+  gap:6px
+}
+.source-worksheet .sw-title{
+  min-height:48px;font-size:27px;line-height:1.05;font-weight:850;color:#17324d;
+  border-bottom:1px solid #d8e4eb
+}
+.source-worksheet .sw-title::before{display:none}
+.source-worksheet .sw-heading{
+  min-height:40px;font-size:19px;line-height:1.15;font-weight:800;color:#17324d;
+  padding:0 10px;background:#eef6fa;border-right:4px solid #5ba8c8;border-radius:2px
+}
+.source-worksheet .sw-heading::before{display:none}
+.source-worksheet .sw-section{padding:5px 4px}
+.source-worksheet .sw-text{font-size:15px;line-height:1.34;font-weight:650;margin:3px 0}
+.source-worksheet .sw-note{font-size:13px;line-height:1.25;font-weight:700}
+.source-worksheet .sw-grid{
+  grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);
+  gap:10px
+}
+.source-worksheet .sw-diagram .geo{height:145px}
+.source-worksheet .sw-diagram .geo svg{height:145px;width:min(100%,225px)}
+.source-worksheet .sw-work{gap:5px}
+.source-worksheet .sw-caption{font-size:13px;font-weight:700}
+.source-worksheet .source-rel,
+.source-worksheet .source-chain{gap:7px;font-size:16.5px;font-weight:600}
+.source-worksheet .source-rel .answer-line,
+.source-worksheet .source-chain .answer-line,
+.source-worksheet .sw-work .answer-line{width:52px;border-bottom-width:1.7px}
+.source-worksheet .source-rel .he{font-size:12.5px;font-weight:750}
+.source-worksheet .sw-conclusion{font-size:14px;font-weight:700}
+.source-worksheet .sw-conclusion .answer-line{width:66px;border-bottom-width:1.7px}
+.source-worksheet .blank{min-width:72px;border-bottom-width:1.7px}
+.source-worksheet .blank.short{min-width:48px}
+.source-worksheet .lbl{font-size:15px!important}
+.source-worksheet.summary{gap:5px}
+.source-worksheet.summary .sw-text{font-size:15.5px;line-height:1.35}
+.source-worksheet.summary .summary-list{gap:5px;padding:2px 8px}
+.source-worksheet.summary .summary-item{font-size:15px;line-height:1.3;font-weight:650}
+
+/* Keep math clean but restrained */
+.math,.math-token,bdi[dir="ltr"]{
+  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif
+}
+.answer-line,.blank{border-color:#29475d!important}
+.shape{stroke-width:3.2!important}
+.diag{stroke-width:2!important}
+.tick,.par,.right,.arc{stroke-width:2.4!important}
+
 @media(max-width:800px){
 body{overflow-x:hidden}
 .top{position:sticky;top:0;padding:6px 4px;gap:4px}
@@ -1056,8 +1254,8 @@ square:{label:'ריבוע',t:'s',pages:[
   </section>
   <div class="sw-heading">הריבוע שייך לשתי משפחות:</div>
   <section class="sw-section" style="flex:1;display:grid;align-content:center;gap:18px">
-    <div class="sw-text" style="font-size:20px">הריבוע הוא מלבן כי כל הזוויות שלו ישרות.</div>
-    <div class="sw-text" style="font-size:20px">הריבוע הוא מעויין כי כל הצלעות שלו שוות.</div>
+    <div class="sw-text" style="font-size:15.5px">הריבוע הוא מלבן כי כל הזוויות שלו ישרות.</div>
+    <div class="sw-text" style="font-size:15.5px">הריבוע הוא מעויין כי כל הצלעות שלו שוות.</div>
   </section>
 </div></article>`,
 ()=>`<article class="sheet derived-page" data-t="s" data-page="2"><div class="source-worksheet">
