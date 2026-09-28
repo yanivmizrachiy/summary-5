@@ -1,0 +1,57 @@
+name: Codex Quadrilaterals A4 Repair
+
+on:
+  push:
+    branches:
+      - codex/quadrilaterals-a4-fix
+    paths:
+      - ".codex/tasks/quadrilaterals-a4.md"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  codex-repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout exact branch
+        uses: actions/checkout@v5
+        with:
+          ref: codex/quadrilaterals-a4-fix
+          fetch-depth: 0
+
+      - name: Run OpenAI Codex
+        id: codex
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          permission-profile: ":workspace"
+          effort: "high"
+          working-directory: "."
+          prompt-file: ".codex/tasks/quadrilaterals-a4.md"
+
+      - name: Static guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f quadrilaterals-preview/index.html
+          python - <<'PY'
+          from pathlib import Path
+          s=Path("quadrilaterals-preview/index.html").read_text(encoding="utf-8")
+          assert "מקבילית" in s
+          assert "הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות" in s
+          assert "במקבילית כל זוג צלעות" in s
+          assert "במקבילית כל שתי" in s
+          assert "AB ∥ CD" not in s
+          assert "AD ∥ BC" not in s
+          assert "@page{size:A4" in s.replace(" ","")
+          print("STATIC_GUARD_PASS")
+          PY
+
+      - name: Commit Codex result
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "codex: repair quadrilaterals A4 fidelity and layout"
+          file_pattern: "quadrilaterals-preview/index.html"
