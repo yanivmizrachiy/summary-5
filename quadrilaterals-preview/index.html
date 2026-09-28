@@ -67,44 +67,154 @@
 .source-exact .src-geo svg,.source-exact .src-geo2 svg,.source-exact .src-geo3 svg{width:100%;height:100%;max-height:none}
 .sheet.source-page{padding:0!important}
 .sheet.source-page>.title,.sheet.source-page>.stack,.sheet.source-page>.num,.sheet.source-page>.footer{display:none!important}
-.textbook-source{position:absolute;inset:0;padding:22px 30px 26px;background:#fff;display:grid;grid-template-rows:auto auto auto minmax(0,1fr) minmax(0,1fr);gap:9px;overflow:hidden}
+.textbook-source{
+  position:absolute;inset:0;
+  padding:18px 24px 20px;
+  background:#fff;
+  display:grid;
+  grid-template-rows:88px 292px 62px 305px 305px;
+  gap:7px;
+  overflow:hidden
+}
 .textbook-source *{min-width:0}
-.textbook-source .tb-title{text-align:center;font-size:38px;line-height:1;font-weight:950;letter-spacing:.01em;color:#123a58;margin:0;padding:12px 10px 13px;background:linear-gradient(90deg,#eafaff 0%,#ccefff 48%,#eafaff 100%);border-bottom:1px solid #b9ddea}
-.textbook-source .tb-intro{display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:7px;padding:7px 2px 4px}
-.textbook-source .tb-line{font-size:18px;line-height:1.35;font-weight:720;text-align:right;overflow:visible}
-.textbook-source .tb-two{direction:ltr;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:20px;align-items:center;min-height:0}
-.textbook-source .tb-diagram{display:grid;place-items:center;min-height:0;height:100%}
-.textbook-source .tb-diagram .geo{height:100%;min-height:0;max-height:190px;padding:0;background:transparent}
-.textbook-source .tb-diagram .geo svg{width:min(100%,290px);height:100%;max-height:190px}
-.textbook-source .tb-given{direction:ltr;unicode-bidi:isolate;display:flex;align-items:center;justify-content:center;gap:14px;white-space:nowrap;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:25px;font-weight:650}
-.textbook-source .tb-given .he{direction:rtl;unicode-bidi:isolate;font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;font-size:16px;font-weight:850;font-style:normal}
-.textbook-source .tb-given .answer-line{display:inline-block;width:95px;height:.92em;border-bottom:2px solid #17324d}
-.textbook-source .tb-heading{font-size:25px;line-height:1.05;font-weight:950;color:#fff;text-align:right;padding:9px 14px 8px;background:linear-gradient(90deg,#ccefff 0%,#6fcbea 58%,#0d3b5f 100%);border:0}
-.textbook-source .tb-property{display:grid;grid-template-rows:auto minmax(0,1fr);gap:5px;padding:5px 2px 3px;border-bottom:1px solid #e0e8ed;min-height:0}
+.textbook-source .tb-title{
+  position:relative;isolation:isolate;
+  display:grid;place-items:center;
+  text-align:center;font-size:46px;line-height:1;
+  font-weight:950;letter-spacing:.01em;color:#0f3858;
+  margin:0;padding:0 10px
+}
+.textbook-source .tb-title::before{
+  content:"";position:absolute;z-index:-1;
+  inset:6px 0 4px;
+  background:
+    linear-gradient(105deg,rgba(216,248,255,.96),rgba(120,221,245,.78) 48%,rgba(219,249,255,.96)),
+    repeating-linear-gradient(174deg,rgba(255,255,255,.18) 0 3px,rgba(37,99,200,.03) 3px 7px);
+  clip-path:polygon(0 13%,8% 5%,18% 12%,31% 3%,44% 10%,57% 2%,72% 9%,84% 4%,100% 12%,99% 87%,87% 94%,74% 87%,61% 96%,48% 89%,34% 97%,19% 90%,7% 96%,1% 86%)
+}
+.textbook-source .tb-intro{
+  display:grid;
+  grid-template-rows:34px 30px 216px;
+  gap:6px;padding:0 4px
+}
+.textbook-source .tb-line{
+  font-size:18px;line-height:1.28;font-weight:720;
+  text-align:right;overflow:visible
+}
+.textbook-source .tb-two{
+  direction:ltr;
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:22px;align-items:center;min-height:0
+}
+.textbook-source .tb-diagram{
+  display:grid;place-items:center;min-height:0;height:100%
+}
+.textbook-source .tb-diagram .geo{
+  height:100%;min-height:0;max-height:178px;padding:0;background:transparent
+}
+.textbook-source .tb-diagram .geo svg{
+  width:min(100%,285px);height:100%;max-height:178px
+}
+.textbook-source .tb-given{
+  direction:ltr;unicode-bidi:isolate;
+  display:flex;align-items:center;justify-content:center;
+  gap:14px;white-space:nowrap;
+  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
+  font-size:24px;font-weight:650
+}
+.textbook-source .tb-given .he{
+  direction:rtl;unicode-bidi:isolate;
+  font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;
+  font-size:15px;font-weight:850;font-style:normal
+}
+.textbook-source .tb-given .answer-line{
+  display:inline-block;width:94px;height:.9em;border-bottom:2px solid #17324d
+}
+.textbook-source .tb-heading{
+  position:relative;isolation:isolate;
+  display:flex;align-items:center;justify-content:flex-start;
+  font-size:27px;line-height:1;font-weight:950;color:#fff;
+  text-align:right;padding:0 18px
+}
+.textbook-source .tb-heading::before{
+  content:"";position:absolute;z-index:-1;inset:5px 0;
+  background:linear-gradient(90deg,#8bdaf0 0%,#48b4d6 35%,#0a3b60 78%,#082f50 100%);
+  clip-path:polygon(0 20%,10% 10%,25% 18%,38% 5%,52% 15%,66% 4%,82% 13%,100% 3%,99% 85%,86% 95%,71% 84%,56% 96%,40% 86%,24% 95%,9% 86%,1% 94%)
+}
+.textbook-source .tb-property{
+  display:grid;
+  grid-template-rows:38px 257px;
+  gap:7px;padding:0 4px;
+  border-bottom:1px solid #e3eaee;
+  min-height:0
+}
 .textbook-source .tb-property:last-child{border-bottom:0}
-.textbook-source .tb-property-text{font-size:18px;line-height:1.32;font-weight:740;text-align:right}
-.textbook-source .tb-work{direction:ltr;display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:22px;align-items:center;min-height:0}
-.textbook-source .tb-work .tb-diagram .geo{max-height:150px}
-.textbook-source .tb-work .tb-diagram .geo svg{max-height:150px;width:min(100%,240px)}
-.textbook-source .tb-derive{direction:rtl;display:grid;grid-template-rows:auto 27px auto;gap:4px;justify-items:center;align-content:center}
-.textbook-source .tb-caption{font-size:15px;line-height:1.1;font-weight:800;color:#244b65;text-align:center;white-space:nowrap}
-.textbook-source .tb-arrow{width:24px;height:27px;display:block}
-.textbook-source .tb-arrow path{fill:none;stroke:#17324d;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.textbook-source .tb-completion{direction:ltr;unicode-bidi:isolate;display:flex;align-items:center;justify-content:center;gap:12px;white-space:nowrap;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:22px;font-weight:650}
-.textbook-source .tb-completion .he{direction:rtl;unicode-bidi:isolate;font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;font-size:15px;font-weight:850;font-style:normal}
-.textbook-source .tb-completion .answer-line{display:inline-block;width:64px;height:.88em;border-bottom:2px solid #17324d}
+.textbook-source .tb-property-text{
+  font-size:18px;line-height:1.28;font-weight:740;text-align:right;
+  display:flex;align-items:center;justify-content:flex-start;
+  gap:6px
+}
+.textbook-source .tb-property-text::before{
+  content:"❮❮";font-size:14px;letter-spacing:-3px;
+  color:#17324d;font-weight:950;flex:0 0 auto
+}
+.textbook-source .tb-work{
+  direction:ltr;
+  display:grid;
+  grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
+  gap:18px;align-items:center;min-height:0
+}
+.textbook-source .tb-work .tb-diagram .geo{max-height:165px}
+.textbook-source .tb-work .tb-diagram .geo svg{
+  max-height:165px;width:min(100%,250px)
+}
+.textbook-source .tb-derive{
+  direction:rtl;
+  display:grid;
+  grid-template-rows:auto 30px auto;
+  gap:4px;justify-items:center;align-content:center
+}
+.textbook-source .tb-caption{
+  font-size:15px;line-height:1.1;font-weight:800;color:#244b65;
+  text-align:center;white-space:nowrap
+}
+.textbook-source .tb-arrow{width:25px;height:30px;display:block}
+.textbook-source .tb-arrow path{
+  fill:none;stroke:#17324d;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round
+}
+.textbook-source .tb-completion{
+  direction:ltr;unicode-bidi:isolate;
+  display:flex;align-items:center;justify-content:center;
+  gap:12px;white-space:nowrap;
+  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
+  font-size:22px;font-weight:650
+}
+.textbook-source .tb-completion .he{
+  direction:rtl;unicode-bidi:isolate;
+  font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;
+  font-size:15px;font-weight:850;font-style:normal
+}
+.textbook-source .tb-completion .answer-line{
+  display:inline-block;width:70px;height:.86em;border-bottom:2px solid #17324d
+}
 .textbook-source .tb-completion .symbol{font-size:21px;line-height:1}
-.textbook-source .blank{min-width:112px;height:1.02em;border-bottom:2px solid #17324d;vertical-align:-.05em;margin-inline:4px}
-.textbook-source .math-token{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-style:italic;font-weight:650}
+.textbook-source .blank{
+  min-width:108px;height:1em;border-bottom:2px solid #17324d;
+  vertical-align:-.05em;margin-inline:4px
+}
+.textbook-source .math-token{
+  direction:ltr;unicode-bidi:isolate;display:inline-block;
+  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
+  font-style:italic;font-weight:650
+}
+.textbook-source .par{stroke:#65737e!important}
+.textbook-source .tick{stroke:#356ed0!important}
+.textbook-source .shape{stroke:#17324d!important;stroke-width:3.6!important}
+.textbook-source .lbl{font-size:19px!important}
 .sheet.source-page{padding:0!important;direction:rtl}
 .sheet.source-page>.title,.sheet.source-page>.stack,.sheet.source-page>.num,.sheet.source-page>.footer{display:none!important}
 .source-exact{display:none!important}
-@media(max-width:800px){
-  .textbook-source{padding:24px 30px 28px!important}
-}
-@media print{
-  .textbook-source{padding:24px 30px 28px!important}
-}
 
 /* Density classes are applied automatically from the real rendered height. */
 .sheet.fit-compact .statement{font-size:17px;line-height:1.28}
@@ -340,8 +450,21 @@ function fitA4Pages(){
     }
   });
 }
+function validateSourceA4(){
+  const sheet=document.querySelector('.sheet.source-page[data-page="1"]');
+  if(!sheet)return;
+  const sr=sheet.getBoundingClientRect();
+  const bad=[...sheet.querySelectorAll('*')].filter(node=>{
+    const r=node.getBoundingClientRect();
+    if(!r.width&&!r.height)return false;
+    return r.left<sr.left-1||r.right>sr.right+1||r.top<sr.top-1||r.bottom>sr.bottom+1;
+  });
+  sheet.dataset.layoutOk=bad.length?'false':'true';
+  sheet.dataset.overflowCount=String(bad.length);
+}
 fitA4Pages();
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitA4Pages);
+validateSourceA4();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{fitA4Pages();validateSourceA4()});
 window.addEventListener('beforeprint',fitWorksheetDensity);
 window.addEventListener('resize',fitA4Pages,{passive:true});
 window.addEventListener('orientationchange',()=>setTimeout(fitA4Pages,100),{passive:true});
