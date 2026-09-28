@@ -7,3 +7,7 @@
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# quadrilaterals QA harness: dependencies and generated artifacts
+quadrilaterals-preview/qa/node_modules/
+quadrilaterals-preview/qa/artifacts/

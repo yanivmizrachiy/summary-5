@@ -1,0 +1,15 @@
+{
+  "name": "quadrilaterals-qa",
+  "private": true,
+  "type": "module",
+  "description": "Browser, print, geometry and source-lock QA for quadrilaterals-preview/index.html",
+  "scripts": {
+    "qa": "node run.mjs",
+    "baseline": "node run.mjs --baseline"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0",
+    "pixelmatch": "7.1.0",
+    "pngjs": "7.0.0"
+  }
+}
