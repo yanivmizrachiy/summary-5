@@ -190,6 +190,44 @@
 .textbook-proof .par{stroke:#65737e!important}
 .textbook-proof .tick,.textbook-proof .mid-a,.textbook-proof .mid-b{stroke:#356ed0!important}
 .textbook-proof .lbl{font-size:18px!important}
+.textbook-area{
+  position:absolute;inset:0;padding:16px 26px 22px;background:#fff;
+  display:grid;grid-template-rows:72px 110px 410px 210px 210px;gap:8px;overflow:hidden
+}
+.textbook-area .area-title{
+  position:relative;isolation:isolate;display:grid;place-items:center;
+  font-size:31px;line-height:1;font-weight:950;color:#fff;text-align:center
+}
+.textbook-area .area-title::before{
+  content:"";position:absolute;z-index:-1;inset:4px 0;
+  background:linear-gradient(90deg,#8bdaf0 0%,#3fa8ce 34%,#0c466d 78%,#082f50 100%);
+  clip-path:polygon(0 18%,10% 9%,25% 16%,39% 5%,54% 15%,68% 4%,84% 12%,100% 4%,99% 86%,86% 95%,71% 85%,56% 96%,40% 86%,24% 95%,9% 86%,1% 94%)
+}
+.textbook-area .area-rule{
+  display:flex;align-items:center;justify-content:flex-start;
+  font-size:19px;line-height:1.35;font-weight:740;text-align:right;padding:0 10px
+}
+.textbook-area .area-diagram{display:grid;place-items:center;min-height:0}
+.textbook-area .area-diagram .geo{height:370px;min-height:0;padding:0;background:transparent}
+.textbook-area .area-diagram .geo svg{height:370px;width:min(100%,540px);max-height:none}
+.textbook-area .height-task{
+  display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.55fr);
+  gap:18px;align-items:center;padding:8px 12px;border-top:1px solid #e3eaee
+}
+.textbook-area .height-text{
+  font-size:18px;line-height:1.35;font-weight:720;text-align:right
+}
+.textbook-area .area-formula{
+  direction:ltr;unicode-bidi:isolate;display:flex;align-items:flex-end;justify-content:center;
+  gap:8px;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:25px
+}
+.textbook-area .area-formula .sub{font-size:.62em;transform:translateY(3px)}
+.textbook-area .answer-line{display:inline-block;width:96px;height:.86em;border-bottom:2px solid #17324d}
+.textbook-area .blank{min-width:102px;height:1em;border-bottom:2px solid #17324d;vertical-align:-.05em;margin-inline:4px}
+.textbook-area .shape{stroke:#17324d!important;stroke-width:3.6!important}
+.textbook-area .height{stroke:#168472!important;stroke-width:3!important;stroke-dasharray:7 5}
+.textbook-area .right{stroke:#168472!important;stroke-width:3!important}
+.textbook-area .lbl{font-size:19px!important}
 .source-exact .src-text{position:absolute;direction:rtl;text-align:right;white-space:normal;font-size:20px;line-height:1.25;font-weight:650;color:#17324d}
 .source-exact .src-title{font-size:58px;line-height:1.05;font-weight:950;text-align:center}
 .source-exact .src-heading{font-size:34px;line-height:1.1;font-weight:950;text-align:right}
@@ -461,7 +499,8 @@ function svg(kind,opts={}){
  if(opts.angleBisectors&&opts.diag){s+=angleArc(P.A,P.B,O,25)+angleArc(P.A,O,P.D,25)+angleArc(P.C,P.D,O,25)+angleArc(P.C,O,P.B,25);if(opts.angleBisectors!=='ac')s+=angleArc(P.B,P.A,O,25)+angleArc(P.B,O,P.C,25)+angleArc(P.D,P.C,O,25)+angleArc(P.D,O,P.A,25)}
  if(opts.oppAngles){s+=angleArcC(P.A,P.B,P.D,25,'angle-a')+angleArcC(P.C,P.D,P.B,25,'angle-a')+angleArcC(P.B,P.A,P.C,22,'angle-b')+angleArcC(P.D,P.C,P.A,22,'angle-b')}
  if(opts.adjacentAngles){s+=angleArcC(P.A,P.B,P.D,25,'angle-a')+angleArcC(P.D,P.A,P.C,25,'angle-b');s+=`<text class="angle-label a" x="${P.A[0]+26}" y="${P.A[1]+30}">α</text><text class="angle-label b" x="${P.D[0]+25}" y="${P.D[1]-12}">β</text>`}
- if(opts.height){const {q,t}=projection(P.C,P.A,P.B);if(t<0||t>1)s+=`<line class="extension" x1="${P.A[0]}" y1="${P.A[1]}" x2="${q[0]}" y2="${q[1]}"/>`;s+=`<line class="height" x1="${P.C[0]}" y1="${P.C[1]}" x2="${q[0]}" y2="${q[1]}"/>`+rightMark(q,V.sub(P.A,q),V.sub(P.C,q),10)+`<text class="lbl" x="${(P.C[0]+q[0])/2+8}" y="${(P.C[1]+q[1])/2}">h</text>`}
+ if(opts.height){const {q,t}=projection(P.C,P.A,P.B);if(t<0||t>1)s+=`<line class="extension" x1="${P.A[0]}" y1="${P.A[1]}" x2="${q[0]}" y2="${q[1]}"/>`;s+=`<line class="height" x1="${P.C[0]}" y1="${P.C[1]}" x2="${q[0]}" y2="${q[1]}"/>`+rightMark(q,V.sub(P.A,q),V.sub(P.C,q),10)}
+ if(opts.height2){const {q,t}=projection(P.A,P.B,P.C);if(t<0||t>1)s+=`<line class="extension" x1="${P.B[0]}" y1="${P.B[1]}" x2="${q[0]}" y2="${q[1]}"/>`;s+=`<line class="height" x1="${P.A[0]}" y1="${P.A[1]}" x2="${q[0]}" y2="${q[1]}"/>`+rightMark(q,V.sub(P.B,q),V.sub(P.A,q),10)}
  if(opts.center)s+=`<circle class="center" cx="${O[0]}" cy="${O[1]}" r="4"/><text class="lbl" x="${O[0]+8}" y="${O[1]-8}">O</text>`;
  [['A',P.A,-14,-8],['B',P.B,8,-8],['C',P.C,8,22],['D',P.D,-18,22]].forEach(([t,p,dx,dy])=>s+=`<circle class="pt" cx="${p[0]}" cy="${p[1]}" r="3"/><text class="lbl" x="${p[0]+dx}" y="${p[1]+dy}">${t}</text>`);
  return s+`</svg></figure>`;
@@ -664,7 +703,25 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
   </section>
 </div>
 </article>`,
-()=>page('p',5,'מקבילית','',`<div class="grid2">${GEO('parallelogram',{height:true})}${box('def','איך מחשבים שטח של מקבילית?',st(`שטח של מקבילית שווה למכפלת צלע המקבילית באורך ה ${B()} לצלע זו.`)+st(`${B()} הוא גובה במקבילית היוצא מקודקוד ${B()} אל הצלע ${B()}.`)+`<div class="mathline">${M('S')}<sub>ABCD</sub> = ${B('long')}</div>`+st(`${B()} הוא גובה במקבילית היוצא מקודקוד ${B()} אל הצלע BC.`)+`<div class="mathline">${M('S')}<sub>ABCD</sub> = ${B('long')}</div>`)}</div>`)
+()=>`<article class="sheet source-page" data-t="p" data-page="5">
+<div class="textbook-area">
+  <div class="area-title">איך מחשבים שטח של מקבילית?</div>
+  <div class="area-rule">שטח של מקבילית שווה למכפלת צלע המקבילית באורך ה <span class="blank"></span> לצלע זו.</div>
+
+  <div class="area-diagram">${GEO('parallelogram',{height:true,height2:true})}</div>
+
+  <section class="height-task">
+    <div class="height-text"><span class="blank"></span> הוא גובה במקבילית היוצא מקודקוד <bdi class="math-token" dir="ltr">DE</bdi> אל הצלע <span class="blank"></span>.</div>
+    <div class="area-formula"><span>S</span><span class="sub">ABCD</span><span>=</span><span class="answer-line"></span></div>
+  </section>
+
+  <section class="height-task">
+    <div class="height-text"><span class="blank"></span> הוא גובה במקבילית היוצא מקודקוד <span class="blank"></span> אל הצלע <bdi class="math-token" dir="ltr">BC</bdi>.</div>
+    <div class="area-formula"><span>S</span><span class="sub">ABCD</span><span>=</span><span class="answer-line"></span></div>
+  </section>
+</div>
+</article>`
+
 ]},
 rectangle:{label:'מלבן',t:'r',pages:[
 ()=>page('r',1,'מלבן','',box('def','',st(`הגדרה: מלבן הוא מרובע שבו כל ה${B()} ישרות.`))+`<div class="grid2">${GEO('rectangle',{right:true,parallel:true,oppEqual:true})}${box('prop','תכונות המלבן',st(`במלבן כל שתי${B()} נגדיות מקבילות זו לזו .`)+st(`במלבן כל שתי צלעות ${B()} שוות זו לזו.`)+st(`במלבן ה${B()} חוצים זה את זה.`)+st(`למלבן תכונות מיוחדות שאין לכל מקבילית:`)+st(`במלבן כל ה${B()} ישרות (לפי הגדרה).`))}</div>`+box('imp','',st(`כל התכונות של המקבילית מתקיימות גם ב${B()}.`))),
