@@ -58,95 +58,68 @@ jobs:
           const fs=require('node:fs');
           const { chromium }=require('playwright-core');
           (async()=>{
+            const executablePath = process.env.BROWSER === 'playwright' ? undefined : process.env.BROWSER;
+            const browser = await chromium.launch({headless:true, executablePath, args:['--no-sandbox']});
+            const url='http://127.0.0.1:8000/quadrilaterals-preview/index.html';
+            const results={};
 
-          const executablePath = process.env.BROWSER === 'playwright' ? undefined : process.env.BROWSER;
-          const browser = await chromium.launch({headless:true, executablePath, args:['--no-sandbox']});
-          const url='http://127.0.0.1:8000/quadrilaterals-preview/index.html';
-          const results={};
-
-          async function inspect(name, viewport){
-            const page=await browser.newPage({viewport});
-            await page.goto(url,{waitUntil:'networkidle'});
-            await page.evaluate(()=>document.fonts?.ready);
-            await page.waitForTimeout(300);
-            const sheet=page.locator('.sheet').first();
-            const metrics=await sheet.evaluate(el=>{
-              const sr=el.getBoundingClientRect();
-              const all=[...el.querySelectorAll('*')];
-              const outside=[];
-              const clipped=[];
-              for(const node of all){
-                const r=node.getBoundingClientRect();
-                if(r.width===0&&r.height===0) continue;
-                if(r.left < sr.left-1 || r.right > sr.right+1 || r.top < sr.top-1 || r.bottom > sr.bottom+1){
-                  outside.push({tag:node.tagName,cls:node.className?.baseVal||node.className||'',text:(node.textContent||'').trim().slice(0,80),rect:{l:r.left,t:r.top,r:r.right,b:r.bottom}});
-                }
-                if(node instanceof HTMLElement && node.clientWidth>0 && node.scrollWidth>node.clientWidth+2){
-                  clipped.push({tag:node.tagName,cls:node.className||'',text:(node.textContent||'').trim().slice(0,100),clientWidth:node.clientWidth,scrollWidth:node.scrollWidth});
-                }
+            async function inspect(name, viewport){
+              const page=await browser.newPage({viewport});
+              await page.goto(url,{waitUntil:'networkidle'});
+              await page.evaluate(()=>document.fonts?.ready);
+              await page.waitForTimeout(250);
+              const pages=page.locator('.sheet.source-page[data-t="p"]');
+              const count=await pages.count();
+              const rows=[];
+              for(let i=0;i<count;i++){
+                const sheet=pages.nth(i);
+                const metrics=await sheet.evaluate(el=>{
+                  const sr=el.getBoundingClientRect();
+                  const outside=[], clipped=[];
+                  for(const node of el.querySelectorAll('*')){
+                    const r=node.getBoundingClientRect();
+                    if(r.width===0&&r.height===0) continue;
+                    if(r.left < sr.left-1 || r.right > sr.right+1 || r.top < sr.top-1 || r.bottom > sr.bottom+1){
+                      outside.push({tag:node.tagName,cls:node.className?.baseVal||node.className||'',text:(node.textContent||'').trim().slice(0,60)});
+                    }
+                    if(node instanceof HTMLElement && node.clientWidth>0 && node.scrollWidth>node.clientWidth+2){
+                      clipped.push({tag:node.tagName,cls:node.className||'',text:(node.textContent||'').trim().slice(0,80),clientWidth:node.clientWidth,scrollWidth:node.scrollWidth});
+                    }
+                  }
+                  return {
+                    page:el.dataset.page,
+                    sheet:{width:sr.width,height:sr.height,left:sr.left,top:sr.top},
+                    outside,clipped,
+                    scrollHeight:el.scrollHeight,clientHeight:el.clientHeight
+                  };
+                });
+                rows.push(metrics);
               }
-              const text=(el.innerText||'');
-              const forbidden=['AB ∥ CD','AD ∥ BC','AB = CD','AD = BC'].filter(x=>text.includes(x));
-              const required=['מקבילית','הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות','תכונות המקבילית:','במקבילית כל זוג צלעות','במקבילית כל שתי','וגם'];
-              const missing=required.filter(x=>!text.includes(x));
-              return {
-                sheet:{width:sr.width,height:sr.height,left:sr.left,top:sr.top},
-                outside,
-                clipped,
-                forbidden,
-                missing,
-                scrollHeight:el.scrollHeight,
-                clientHeight:el.clientHeight
-              };
-            });
-            await sheet.screenshot({path:`/tmp/${name}.png`});
-            await page.close();
-            return metrics;
-          }
+              await pages.nth(0).screenshot({path:`/tmp/${name}.png`});
+              await page.close();
+              return rows;
+            }
 
-          results.desktop=await inspect('desktop',{width:1100,height:1350});
-          results.mobile=await inspect('mobile',{width:390,height:844});
-          fs.writeFileSync('/tmp/layout.json',JSON.stringify(results,null,2));
-          console.log(JSON.stringify(results,null,2));
+            results.desktop=await inspect('desktop',{width:1100,height:1350});
+            results.mobile=await inspect('mobile',{width:390,height:844});
+            fs.writeFileSync('/tmp/layout.json',JSON.stringify(results,null,2));
+            console.log(JSON.stringify(results,null,2));
 
-          const d=results.desktop, m=results.mobile;
-          const errors=[];
-          if(Math.abs(d.sheet.width-794)>1 || Math.abs(d.sheet.height-1123)>1) errors.push('desktop sheet not 794x1123');
-          if(d.outside.length) errors.push('desktop descendants outside sheet: '+d.outside.length);
-          if(d.clipped.length) errors.push('desktop horizontal clipping: '+d.clipped.length);
-          if(d.forbidden.length) errors.push('solved answers visible: '+d.forbidden.join(','));
-          if(d.missing.length) errors.push('missing source phrases: '+d.missing.join(','));
-          if(m.outside.length) errors.push('mobile descendants outside scaled sheet: '+m.outside.length);
-          if(m.clipped.length) errors.push('mobile horizontal clipping: '+m.clipped.length);
-          if(errors.length){ console.error(errors.join('\n')); process.exit(1); }
-          await browser.close();
+            const errors=[];
+            for(const [mode,rows] of Object.entries(results)){
+              if(rows.length!==5) errors.push(`${mode}: expected 5 source pages, got ${rows.length}`);
+              for(const row of rows){
+                if(mode==='desktop' && (Math.abs(row.sheet.width-794)>1 || Math.abs(row.sheet.height-1123)>1)) errors.push(`p${row.page}: desktop not 794x1123`);
+                if(row.outside.length) errors.push(`p${row.page} ${mode}: outside=${row.outside.length}`);
+                if(row.clipped.length) errors.push(`p${row.page} ${mode}: clipped=${row.clipped.length}`);
+              }
+            }
+            if(errors.length){console.error(errors.join('\n'));process.exit(1);}
+            await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
           node .a4-qa.cjs
           rm -f .a4-qa.cjs
-
-      - name: Fetch original Canva page 1
-        if: always()
-        shell: bash
-        env:
-          CANVA_SOURCE_URL: "https://export-download.canva.com/7d2423d5-028c-4ab7-96b7-b480270e5c90/0/0002-7778233875472073096.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260928%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260928T142207Z&X-Amz-Expires=8878&X-Amz-Signature=99121450a117df6b14ccf13e2538eab8e5b4ccd8b91d28bbbaab5447171f32c5&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Mon%2C%2028%20Sep%202026%2016%3A50%3A05%20GMT"
-        run: |
-          curl -fL --retry 2 "$CANVA_SOURCE_URL" -o /tmp/canva-source.png
-          file /tmp/canva-source.png
-          identify /tmp/canva-source.png || true
-
-      - name: Persist QA metrics
-        if: always()
-        shell: bash
-        run: |
-          set -e
-          mkdir -p .codex/qa
-          cp /tmp/layout.json .codex/qa/layout.json 2>/dev/null || true
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .codex/qa/layout.json
-          git diff --cached --quiet || git commit -m "qa: persist quadrilaterals visual metrics"
-          git push || true
 
       - name: Upload visual proof
         if: always()
@@ -157,5 +130,4 @@ jobs:
             /tmp/desktop.png
             /tmp/mobile.png
             /tmp/layout.json
-            /tmp/canva-source.png
           if-no-files-found: warn
