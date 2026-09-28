@@ -1,0 +1,59 @@
+name: quadrilaterals visual QA
+
+# Deterministic browser, print, geometry and source-lock QA for
+# quadrilaterals-preview/index.html. No deploy side effects, no secrets.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'quadrilaterals-preview/**'
+      - '.github/workflows/quadrilaterals-visual.yml'
+  pull_request:
+    paths:
+      - 'quadrilaterals-preview/**'
+      - '.github/workflows/quadrilaterals-visual.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: quadrilaterals-preview/qa
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20.18.1'
+
+      - name: Set up Python
+        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
+        with:
+          python-version: '3.12'
+
+      - name: Install PyMuPDF (PDF rasterization)
+        run: python -m pip install -r requirements.txt
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Run visual QA
+        run: node run.mjs --out artifacts
+
+      - name: Upload QA report and screenshots
+        if: always()
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        with:
+          name: quadrilaterals-qa
+          path: quadrilaterals-preview/qa/artifacts
+          retention-days: 14
