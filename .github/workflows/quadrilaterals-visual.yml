@@ -129,7 +129,7 @@ jobs:
         if: always()
         shell: bash
         env:
-          CANVA_SOURCE_URL: "https://export-download.canva.com/8bc2f7a3-4b2e-4c22-ba47-c80050f82ca0/0/0001-4157339769000157916.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260928%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260928T031606Z&X-Amz-Expires=46047&X-Amz-Signature=8722cd08770ab2935f53ec961bc029d276cb3dfb587bd8376e9d74f184efb7e4&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Mon%2C%2028%20Sep%202026%2016%3A03%3A33%20GMT"
+          CANVA_SOURCE_URL: "https://export-download.canva.com/7d2423d5-028c-4ab7-96b7-b480270e5c90/0/0002-7778233875472073096.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260928%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260928T142207Z&X-Amz-Expires=8878&X-Amz-Signature=99121450a117df6b14ccf13e2538eab8e5b4ccd8b91d28bbbaab5447171f32c5&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Mon%2C%2028%20Sep%202026%2016%3A50%3A05%20GMT"
         run: |
           curl -fL --retry 2 "$CANVA_SOURCE_URL" -o /tmp/canva-source.png
           file /tmp/canva-source.png
