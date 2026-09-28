@@ -71,7 +71,15 @@
 .textbook-source .tb-title{text-align:center;font-size:39px;line-height:1;font-weight:950;color:#123a58;margin:0;padding:4px 0 7px;border-bottom:2px solid #dbe7ef}
 .textbook-source .tb-definition{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(250px,.65fr);gap:18px;align-items:center;padding:10px 12px;border:1px solid #d9e4eb;border-radius:10px;background:#fbfdfe}
 .textbook-source .tb-definition-text{font-size:18px;line-height:1.4;font-weight:720;text-align:right}
-.textbook-source .tb-definition-math{display:grid;gap:5px;align-content:center;justify-items:center}
+.textbook-source .tb-definition-math{display:grid;grid-template-rows:auto 132px auto;gap:4px;align-content:center;justify-items:stretch}
+.textbook-source .tb-def-figure{height:132px;display:grid;place-items:center}
+.textbook-source .tb-def-figure .geo{height:132px;min-height:0;padding:0;background:transparent}
+.textbook-source .tb-def-figure .geo svg{height:132px;width:205px;max-height:none}
+.textbook-source .tb-def-completion{direction:ltr;unicode-bidi:isolate;display:grid;grid-template-columns:1fr auto 1fr;gap:9px;align-items:center;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:18px}
+.textbook-source .tb-def-completion .pair{display:flex;align-items:center;justify-content:center;gap:7px}
+.textbook-source .tb-def-completion .line{display:inline-block;width:48px;height:1em;border-bottom:2px solid #17324d}
+.textbook-source .tb-def-completion .join{direction:rtl;font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;font-size:13px;font-weight:850}
+.textbook-source .tb-def-completion .par-symbol{font-size:19px;font-weight:700}
 .textbook-source .tb-caption{font-size:15px;font-weight:800;color:#244b65;text-align:center;white-space:nowrap}
 .textbook-source .tb-heading{font-size:25px;line-height:1.1;font-weight:950;color:#17324d;text-align:right;padding:3px 2px 1px}
 .textbook-source .tb-property{min-height:0;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(235px,.78fr);grid-template-rows:auto 1fr auto;column-gap:16px;row-gap:5px;align-items:center;padding:10px 12px;border-top:1px solid #dce6ec}
@@ -221,10 +229,11 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
     </div>
     <div class="tb-definition-math">
       <div class="tb-caption">המרובע <span class="math-token">ABCD</span> הוא מקבילית:</div>
-      <div class="tb-symbolic">
-        <span class="math-token">AB ∥ CD</span>
-        <span class="he">וגם</span>
-        <span class="math-token">AD ∥ BC</span>
+      <div class="tb-def-figure">${GEO('parallelogram',{parallel:true})}</div>
+      <div class="tb-def-completion" aria-label="השלמת זוגות הצלעות המקבילות">
+        <div class="pair"><span class="line"></span><span class="par-symbol">∥</span><span class="line"></span></div>
+        <div class="join">וגם</div>
+        <div class="pair"><span class="line"></span><span class="par-symbol">∥</span><span class="line"></span></div>
       </div>
     </div>
   </section>
