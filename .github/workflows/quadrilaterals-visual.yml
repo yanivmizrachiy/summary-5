@@ -69,14 +69,14 @@ jobs:
               await page.evaluate(()=>document.fonts?.ready);
               await page.waitForTimeout(250);
               const rows=[];
-              const topicIds=['parallelogram','rectangle','rhombus'];
+              const topicIds=['parallelogram','rectangle','rhombus','square'];
               for(const topicId of topicIds){
                 await page.evaluate(id=>{
                   document.querySelectorAll('.topic').forEach(x=>x.classList.toggle('active',x.id===id));
                   if(typeof fitA4Pages==='function') fitA4Pages();
                 },topicId);
                 await page.waitForTimeout(80);
-                const pages=page.locator(`#${topicId} .sheet.source-page`);
+                const pages=page.locator(`#${topicId} .sheet`);
                 const count=await pages.count();
                 for(let i=0;i<count;i++){
                   const sheet=pages.nth(i);
@@ -116,7 +116,7 @@ jobs:
 
             const errors=[];
             for(const [mode,rows] of Object.entries(results)){
-              if(rows.length!==15) errors.push(`${mode}: expected 15 source pages, got ${rows.length}`);
+              if(rows.length!==20) errors.push(`${mode}: expected 20 worksheet pages, got ${rows.length}`);
               for(const row of rows){
                 if(mode==='desktop' && (Math.abs(row.sheet.width-794)>1 || Math.abs(row.sheet.height-1123)>1)) errors.push(`p${row.page}: desktop not 794x1123`);
                 if(row.outside.length) errors.push(`p${row.page} ${mode}: outside=${row.outside.length}`);
