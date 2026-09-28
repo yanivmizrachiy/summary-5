@@ -828,6 +828,23 @@
 
 /* === DIAGRAM LEGIBILITY V5 END === */
 
+/* === DOUBLE ARROW + PROPERTY NUMBERING V1 START === */
+.tb-arrow,.p2-arrow{
+  width:24px!important;
+  height:34px!important;
+}
+.tb-arrow path,.p2-arrow path{
+  stroke-width:2.5!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+.prop-index{
+  display:inline-block;
+  margin-left:6px;
+  color:#17324d;
+  font-weight:800;
+}
+/* === DOUBLE ARROW + PROPERTY NUMBERING V1 END === */
 @media(max-width:800px){
 body{overflow-x:hidden}
 .top{position:sticky;top:0;padding:6px 4px;gap:4px}
@@ -998,7 +1015,7 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
       <div class="p2-diagram">${GEO('parallelogram',{oppAngles:true})}</div>
       <div class="p2-derive">
         <div class="p2-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <svg class="p2-arrow" viewBox="0 0 27 34" aria-hidden="true"><path d="M13.5 2v22M5 17l8.5 10 8.5-10"/></svg>
+        <svg class="p2-arrow" viewBox="0 0 27 34" aria-hidden="true"><path d="M13.5 2v10 M5.5 9.5l8 8 8-8 M13.5 16v10 M5.5 23.5l8 8 8-8"/></svg>
         <div class="p2-completion">
           <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
           <span class="he">וגם</span>
@@ -1014,7 +1031,7 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
       <div class="p2-diagram">${GEO('parallelogram',{diag:true,center:true,midpoints:true})}</div>
       <div class="p2-derive">
         <div class="p2-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <svg class="p2-arrow" viewBox="0 0 27 34" aria-hidden="true"><path d="M13.5 2v22M5 17l8.5 10 8.5-10"/></svg>
+        <svg class="p2-arrow" viewBox="0 0 27 34" aria-hidden="true"><path d="M13.5 2v10 M5.5 9.5l8 8 8-8 M13.5 16v10 M5.5 23.5l8 8 8-8"/></svg>
         <div class="p2-completion">
           <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
           <span class="he">וגם</span>
@@ -1030,7 +1047,7 @@ parallelogram:{label:'מקבילית',t:'p',pages:[
       <div class="p2-diagram">${GEO('parallelogram',{adjacentAngles:true})}</div>
       <div class="p2-derive">
         <div class="p2-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <svg class="p2-arrow" viewBox="0 0 27 34" aria-hidden="true"><path d="M13.5 2v22M5 17l8.5 10 8.5-10"/></svg>
+        <svg class="p2-arrow" viewBox="0 0 27 34" aria-hidden="true"><path d="M13.5 2v10 M5.5 9.5l8 8 8-8 M13.5 16v10 M5.5 23.5l8 8 8-8"/></svg>
         <div class="p2-formula">α + β = 180°</div>
       </div>
     </div>
@@ -1551,6 +1568,57 @@ window.addEventListener('beforeprint',fitWorksheetDensity);
 window.addEventListener('resize',fitA4Pages,{passive:true});
 window.addEventListener('orientationchange',()=>setTimeout(fitA4Pages,100),{passive:true});
 document.querySelectorAll('.top button[data-id]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.top button[data-id]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.topic').forEach(x=>x.classList.toggle('active',x.id===b.dataset.id));window.scrollTo({top:0,behavior:'smooth'});requestAnimationFrame(fitA4Pages)});
+</script>
+<script id="double-arrow-property-numbering-v1">
+(()=>{
+  function clearOld(el){
+    el.querySelectorAll(':scope > .prop-index').forEach(x=>x.remove());
+    el.dataset.propsNumbered='0';
+  }
+
+  function numberList(nodes){
+    let i=1;
+    nodes.forEach(el=>{
+      clearOld(el);
+      const span=document.createElement('span');
+      span.className='prop-index';
+      span.textContent=i+'.';
+      el.insertBefore(span, el.firstChild);
+      el.dataset.propsNumbered='1';
+      i++;
+    });
+  }
+
+  function directChildren(parent, selector){
+    return [...parent.children].filter(el=>el.matches(selector));
+  }
+
+  function numberProperties(){
+    document.querySelectorAll('.sheet').forEach(sheet=>{
+      const tb=[...sheet.querySelectorAll('.tb-property-text')];
+      if(tb.length) numberList(tb);
+
+      const p2=[...sheet.querySelectorAll('.p2-text')];
+      if(p2.length) numberList(p2);
+
+      sheet.querySelectorAll('.sw-heading').forEach(h=>{
+        const t=(h.textContent||'').replace(/\s+/g,' ').trim();
+        if(!t.includes('תכונות')) return;
+        let sec=h.nextElementSibling;
+        if(!sec || !sec.classList.contains('sw-section')) return;
+        const items=directChildren(sec,'.sw-text');
+        if(items.length) numberList(items);
+      });
+    });
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',numberProperties,{once:true});
+  }else{
+    numberProperties();
+  }
+  window.addEventListener('load',numberProperties,{once:true});
+})();
 </script>
 </body>
 </html>
