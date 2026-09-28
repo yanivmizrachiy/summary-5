@@ -9,38 +9,36 @@
 *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Hebrew","Rubik","Assistant","Arial Hebrew","Segoe UI",Arial,sans-serif;line-height:1.52;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-kerning:normal;font-synthesis:none;font-feature-settings:"kern" 1,"liga" 1}
 .top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);padding:10px 12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .top button{border:1px solid #cddae3;background:#fff;color:#23465f;border-radius:999px;padding:8px 15px;font-weight:850;cursor:pointer}.top button.active{background:#173b57;color:#fff;border-color:#173b57}.top .print-a4{background:#173b57;color:#fff;border-color:#173b57;margin-inline-start:8px}
-.topic{display:none}.topic.active{display:block}.pages{display:grid;gap:26px;padding:26px 12px 60px}.sheet{position:relative;width:794px;height:1123px;min-height:1123px;max-height:1123px;margin:auto;background:#fff;border:1px solid #dfe7ed;border-radius:10px;box-shadow:0 16px 44px rgba(22,48,70,.13);padding:40px 46px 48px;overflow:hidden}.sheet:before{content:"";position:absolute;inset:0 0 auto 0;height:9px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3))}.sheet[data-t="p"]{--c1:#2563c8;--c2:#168472;--c3:#df8429}.sheet[data-t="r"]{--c1:#168472;--c2:#2563c8;--c3:#7653c5}.sheet[data-t="h"]{--c1:#7653c5;--c2:#2563c8;--c3:#df8429}.sheet[data-t="s"]{--c1:#2563c8;--c2:#7653c5;--c3:#168472}
-.num{position:absolute;left:22px;top:18px;font-weight:900;color:#7890a1;font-size:12px}
-.kicker{text-align:center;color:var(--c1);font-weight:900;font-size:13px;line-height:1.15;margin:0 0 5px}
-.title{text-align:center;font-weight:950;font-size:40px;line-height:1.02;margin:0 0 16px;color:#123a58}
+.topic{display:none}.topic.active{display:block}.pages{display:grid;gap:26px;padding:26px 12px 60px}.sheet{position:relative;width:794px;height:1123px;min-height:1123px;max-height:1123px;margin:auto;background:#fff;border:1px solid #dfe7ed;border-radius:8px;box-shadow:0 12px 34px rgba(22,48,70,.12);padding:28px 32px 34px;overflow:hidden}.sheet:before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--c1)}.sheet[data-t="p"]{--c1:#2563c8;--c2:#168472;--c3:#df8429}.sheet[data-t="r"]{--c1:#168472;--c2:#2563c8;--c3:#7653c5}.sheet[data-t="h"]{--c1:#7653c5;--c2:#2563c8;--c3:#df8429}.sheet[data-t="s"]{--c1:#2563c8;--c2:#7653c5;--c3:#168472}
+.num{position:absolute;left:18px;top:14px;font-weight:800;color:#8a9aa6;font-size:10px}
+.kicker{text-align:right;color:var(--c1);font-weight:800;font-size:10px;line-height:1.1;margin:0 0 2px}
+.title{text-align:center;font-weight:950;font-size:32px;line-height:1;margin:0 0 8px;color:#123a58}
 .sub{display:none}
-.stack{display:flex;flex-direction:column;gap:16px;min-height:calc(100% - 104px);padding-bottom:26px}
-.stack>.grid2:only-child,.stack>.geo:only-child,.stack>.box:only-child{margin-block:auto}
-.box{border:1.4px solid #cfdde6;border-radius:11px;padding:14px 17px;background:#fff}
-.def{border-inline-start:5px solid #5aa678}
-.prop{border-inline-start:5px solid #5b8fd1}
-.imp{border-inline-start:5px solid #d99a4f}
-.spec{border-inline-start:5px solid #866bc6}
-.proof{border-inline-start:5px solid #789aaa}
-.box h2{font-size:23px;line-height:1.15;margin:0 0 9px;font-weight:950;color:#173b57}
+.stack{height:calc(100% - 62px);display:flex;flex-direction:column;gap:9px;padding-bottom:16px}
+.stack>.grid2:only-child{flex:1;min-height:0}
+.stack>.grid2:only-child>.geo{height:100%;min-height:0}
+.stack>.box:only-child{margin-block:auto}
+.box{border:0;border-inline-start:4px solid #a8bac6;border-bottom:1px solid #e2e9ee;border-radius:0;padding:8px 10px;background:transparent}
+.def{border-inline-start-color:#5aa678}.prop{border-inline-start-color:#5b8fd1}.imp{border-inline-start-color:#d99a4f}.spec{border-inline-start-color:#866bc6}.proof{border-inline-start-color:#789aaa}
+.box h2{font-size:19px;line-height:1.12;margin:0 0 4px;font-weight:950;color:#173b57}
 .box>p:first-child{margin-top:0}.box>p:last-child{margin-bottom:0}
 .box,.card,.geo,.mathline{break-inside:avoid;page-break-inside:avoid}
 .def h2{color:#2b8250}.prop h2{color:#2361ad}.imp h2{color:#b96b1f}.spec h2{color:#6f48b8}
-.statement{font-size:20px;line-height:1.42;font-weight:720;margin:5px 0}
-.large{font-size:22px}
-.grid2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:18px;align-items:center}
-.card{border:1.2px solid #d8e3e9;border-radius:10px;padding:13px 15px;background:#fff}
-.card h3{font-size:19px;line-height:1.2;margin:0 0 7px;color:#244b65}
-.blank{display:inline-block;min-width:108px;border-bottom:2.4px solid #35566d;height:1.12em;vertical-align:-.08em;margin:0 4px}
-.blank.short{min-width:68px}.blank.long{min-width:165px}
-.math{direction:ltr;unicode-bidi:isolate;display:inline-flex;vertical-align:-.13em;white-space:nowrap;font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:1.06em;font-weight:600}
-.mathline{direction:ltr;unicode-bidi:isolate;text-align:center;border:0;background:transparent;padding:6px 4px;margin:7px 0;font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:23px;line-height:1.25}
+.statement{font-size:18px;line-height:1.33;font-weight:690;margin:3px 0}
+.large{font-size:20px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:stretch}
+.card{border:0;border-bottom:1px solid #dde6ec;padding:8px 10px;background:transparent}
+.card h3{font-size:17px;line-height:1.15;margin:0 0 4px;color:#244b65}
+.blank{display:inline-block;min-width:102px;border-bottom:2.2px solid #35566d;height:1.08em;vertical-align:-.08em;margin:0 3px}
+.blank.short{min-width:64px}.blank.long{min-width:150px}
+.math{direction:ltr;unicode-bidi:isolate;display:inline-flex;vertical-align:-.13em;white-space:nowrap;font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:1.05em;font-weight:600}
+.mathline{direction:ltr;unicode-bidi:isolate;text-align:center;border:0;background:transparent;padding:2px;margin:3px 0;font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:21px;line-height:1.18}
 .mathline.mixed{direction:rtl;unicode-bidi:plaintext}
 .mathline math,.math math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:1em}
-.geo{display:grid;place-items:center;margin:0;border:0;border-radius:0;background:#fff;min-height:255px;padding:8px}
-.geo svg{width:min(100%,360px);max-height:250px;height:auto;overflow:visible}
+.geo{display:grid;place-items:center;margin:0;border:0;background:#fff;min-height:220px;padding:2px}
+.geo svg{width:min(100%,350px);max-height:230px;height:auto;overflow:visible}
 .geo figcaption{display:none}
-.shape{fill:rgba(37,99,200,.025);stroke:#17324d;stroke-width:4;stroke-linejoin:round}
+.shape{fill:rgba(37,99,200,.018);stroke:#17324d;stroke-width:4;stroke-linejoin:round}
 .diag{stroke:#6c8294;stroke-width:2.3}
 .tick,.par,.right,.arc,.height,.extension{fill:none;stroke-linecap:round;stroke-linejoin:round}
 .tick{stroke:#7653c5;stroke-width:3.2}.par{stroke:#df8429;stroke-width:3}.right{stroke:#168472;stroke-width:3}.arc{stroke:#df8429;stroke-width:2.7}
@@ -48,24 +46,39 @@
 .diag-eq{stroke:#b35c2b;stroke-width:3.1;stroke-linecap:round}.mid-a{stroke:#2563c8;stroke-width:3.1}.mid-b{stroke:#168472;stroke-width:3.1}
 .pt{fill:#17324d}.center{fill:#b35c2b}
 .lbl{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:20px;font-style:italic;font-weight:700;fill:#0f2e46;paint-order:stroke;stroke:#fff;stroke-width:3px}
-.list{display:grid;gap:10px}
-.li{display:grid;grid-template-columns:28px 1fr;gap:9px;align-items:start;font-size:19px;line-height:1.35;font-weight:700}
-.bullet{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#eef4f8;font-weight:900}
-.footer{position:absolute;inset:auto 38px 13px;border-top:1px solid #dbe5eb;padding-top:5px;text-align:center;font-size:10px;color:#7a8d9b;font-weight:700}
+.list{display:grid;gap:5px}
+.li{display:grid;grid-template-columns:22px 1fr;gap:6px;align-items:start;font-size:17px;line-height:1.3;font-weight:690}
+.bullet{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#eef4f8;font-size:11px;font-weight:900}
+.footer{position:absolute;inset:auto 28px 7px;border:0;padding:0;text-align:center;font-size:9px;color:#8a9aa6;font-weight:700}
 
-/* Balance sparse source pages without changing a single word. */
-.sheet[data-page="2"] .stack>.grid2:only-child{margin-block:54px auto}
-.sheet[data-page="3"] .stack>.proof:only-child{margin-block:34px auto}
-.sheet[data-page="5"] .stack{justify-content:space-between}
+/* Density classes are applied automatically from the real rendered height. */
+.sheet.fit-compact .statement{font-size:17px;line-height:1.28}
+.sheet.fit-compact .box{padding:6px 9px}
+.sheet.fit-compact .box h2{font-size:18px;margin-bottom:3px}
+.sheet.fit-compact .grid2{gap:9px}
+.sheet.fit-compact .geo{min-height:190px}
+.sheet.fit-compact .geo svg{max-height:200px}
+.sheet.fit-compact .list{gap:3px}
+.sheet.fit-compact .li{font-size:16px;line-height:1.24}
+.sheet.fit-dense .statement{font-size:16px;line-height:1.22;margin:2px 0}
+.sheet.fit-dense .box{padding:5px 8px}
+.sheet.fit-dense .box h2{font-size:17px}
+.sheet.fit-dense .geo{min-height:170px}
+.sheet.fit-dense .geo svg{max-height:178px}
+.sheet.fit-dense .li{font-size:15px;line-height:1.2}
+.sheet.fit-airy .statement{font-size:20px}
+.sheet.fit-airy .geo{min-height:300px}
+.sheet.fit-airy .geo svg{max-height:315px;width:min(100%,410px)}
+.sheet.fit-airy .mathline{font-size:24px}
 @media(max-width:800px){
 body{overflow-x:hidden}
-.top{position:sticky;top:0;padding:7px 5px;gap:5px}
-.top button{padding:7px 10px;font-size:12px}
+.top{position:sticky;top:0;padding:6px 4px;gap:4px}
+.top button{padding:6px 9px;font-size:12px}
 .top .print-a4{margin-inline-start:0}
-.pages{gap:18px;padding:14px 0 34px}
+.pages{gap:14px;padding:10px 0 26px}
 .sheet-shell{position:relative;margin:0 auto;overflow:visible}
-.sheet{width:794px!important;height:1123px!important;min-height:1123px!important;max-height:1123px!important;margin:0!important;transform-origin:top left;border-radius:8px!important;box-shadow:0 8px 24px rgba(22,48,70,.16)}
-.grid2{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)!important}
+.sheet{width:794px!important;height:1123px!important;min-height:1123px!important;max-height:1123px!important;margin:0!important;transform-origin:top left;border-radius:7px!important;box-shadow:0 7px 20px rgba(22,48,70,.14)}
+.grid2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
 }
 @media print{
 html,body{width:210mm!important;min-width:210mm!important;margin:0!important;padding:0!important;background:#fff!important}
@@ -73,31 +86,8 @@ body{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!importa
 .top{display:none!important}.topic{display:none!important}.topic.active{display:block!important}
 .pages{display:block!important;margin:0!important;padding:0!important}
 .sheet-shell{width:210mm!important;height:297mm!important;margin:0!important;overflow:visible!important}
-.sheet{width:210mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;transform:none!important;margin:0!important;padding:10.5mm 12mm 12mm!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:hidden!important;break-after:page!important;page-break-after:always!important;break-inside:avoid!important;page-break-inside:avoid!important}
+.sheet{width:210mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;transform:none!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;break-after:page!important;page-break-after:always!important}
 .sheet:last-child{break-after:auto!important;page-break-after:auto!important}
-.sheet:before{height:2mm!important}
-.kicker{font-size:9.5pt!important;line-height:1.1!important;margin:0 0 1mm!important}
-.title{font-size:26pt!important;line-height:1!important;margin:0 0 4mm!important}
-.stack{gap:4mm!important;min-height:calc(100% - 28mm)!important;padding-bottom:7mm!important}
-.box{padding:3.8mm 4.5mm!important;border-radius:2.5mm!important}
-.box h2{font-size:15.5pt!important;line-height:1.15!important;margin:0 0 2mm!important}
-.statement{font-size:13.4pt!important;line-height:1.38!important;margin:1.2mm 0!important}
-.large{font-size:14.5pt!important}
-.grid2{gap:4.5mm!important}
-.card{padding:3.5mm 4mm!important;border-radius:2.5mm!important}
-.card h3{font-size:13.5pt!important;line-height:1.2!important;margin:0 0 1.5mm!important}
-.blank{min-width:28mm!important}.blank.short{min-width:18mm!important}.blank.long{min-width:42mm!important}
-.geo{min-height:62mm!important;padding:2mm!important}
-.geo svg{width:min(100%,92mm)!important;max-height:60mm!important}
-.mathline{font-size:16.5pt!important;line-height:1.2!important;padding:1.5mm!important;margin:1.5mm 0!important}
-.list{gap:2.5mm!important}
-.li{font-size:13.2pt!important;line-height:1.32!important;grid-template-columns:7mm 1fr!important;gap:2.2mm!important}
-.bullet{width:6.5mm!important;height:6.5mm!important}
-.footer{right:12mm!important;left:12mm!important;bottom:3mm!important;padding-top:1mm!important;font-size:7.5pt!important}
-.num{left:6mm!important;top:5mm!important;font-size:8.5pt!important}
-.box,.card,.geo,.mathline{break-inside:avoid!important;page-break-inside:avoid!important}
-.sheet[data-page="2"] .stack>.grid2:only-child{margin-block:12mm auto!important}
-.sheet[data-page="3"] .stack>.proof:only-child{margin-block:8mm auto!important}
 @page{size:A4 portrait;margin:0}
 }
 </style>
@@ -204,7 +194,26 @@ square:{label:'ריבוע',t:'s',pages:[
 ()=>page('s',5,'ריבוע','',box('def','הריבוע',st('הגדרה: מרובע שבו כל הצלעות שוות וכל הזוויות ישרות הוא ריבוע.'))+box('prop','תכונות הריבוע:',st('בריבוע כל שתי צלעות נגדיות מקבילות זו לזו')+st('2. בריבוע כל ארבע הצלעות שוות זו לזו')+st('3. בריבוע האלכסונים חוצים זה את זה')+st('4. בריבוע כל הזוויות ישרות')+st('5. בריבוע האלכסונים שווים זה לזה')+st('6. בריבוע האלכסונים מאונכים זה לזה')+st('7. בריבוע האלכסונים חוצים את הזוויות'))+box('proof','איך מוכיחים שמרובע הוא ריבוע?',st('לפי הגדרה: אם במרובע כל הצלעות שוות וכל הזוויות ישרות, אז המרובע הוא ריבוע.')+st('2. אם במלבן שתי צלעות סמוכות שוות אז המלבן הוא ריבוע.')+st('3. אם במעויין האלכסונים שווים זה לזה אז המעויין הוא ריבוע.')))
 ]}
 };
-const root=document.getElementById('root');Object.entries(topics).forEach(([id,t],i)=>{const sec=document.createElement('section');sec.id=id;sec.className='topic'+(i===0?' active':'');sec.innerHTML=`<div class="pages">${t.pages.map(f=>`<div class="sheet-shell">${f()}</div>`).join('')}</div>`;root.appendChild(sec)});function fitA4Pages(){
+const root=document.getElementById('root');Object.entries(topics).forEach(([id,t],i)=>{const sec=document.createElement('section');sec.id=id;sec.className='topic'+(i===0?' active':'');sec.innerHTML=`<div class="pages">${t.pages.map(f=>`<div class="sheet-shell">${f()}</div>`).join('')}</div>`;root.appendChild(sec)});function fitWorksheetDensity(){
+  document.querySelectorAll('.sheet').forEach(sheet=>{
+    sheet.classList.remove('fit-airy','fit-compact','fit-dense');
+    const stack=sheet.querySelector('.stack');
+    if(!stack)return;
+    const available=stack.clientHeight;
+    let used=stack.scrollHeight;
+    if(!available||!used)return;
+    if(used>available*1.08){
+      sheet.classList.add('fit-compact');
+      used=stack.scrollHeight;
+      if(used>stack.clientHeight*1.04) sheet.classList.add('fit-dense');
+    }else if(used<available*.62){
+      sheet.classList.add('fit-airy');
+      if(stack.scrollHeight>stack.clientHeight*1.02) sheet.classList.remove('fit-airy');
+    }
+  });
+}
+function fitA4Pages(){
+  fitWorksheetDensity();
   const mobile=window.matchMedia('(max-width:800px)').matches;
   document.querySelectorAll('.sheet-shell').forEach(shell=>{
     const sheet=shell.querySelector('.sheet');
@@ -223,6 +232,8 @@ const root=document.getElementById('root');Object.entries(topics).forEach(([id,t
   });
 }
 fitA4Pages();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitA4Pages);
+window.addEventListener('beforeprint',fitWorksheetDensity);
 window.addEventListener('resize',fitA4Pages,{passive:true});
 window.addEventListener('orientationchange',()=>setTimeout(fitA4Pages,100),{passive:true});
 document.querySelectorAll('.top button[data-id]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.top button[data-id]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.topic').forEach(x=>x.classList.toggle('active',x.id===b.dataset.id));window.scrollTo({top:0,behavior:'smooth'});requestAnimationFrame(fitA4Pages)});
