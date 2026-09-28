@@ -9,82 +9,95 @@
 *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Hebrew","Rubik","Assistant","Arial Hebrew","Segoe UI",Arial,sans-serif;line-height:1.52;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-kerning:normal;font-synthesis:none;font-feature-settings:"kern" 1,"liga" 1}
 .top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);padding:10px 12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .top button{border:1px solid #cddae3;background:#fff;color:#23465f;border-radius:999px;padding:8px 15px;font-weight:850;cursor:pointer}.top button.active{background:#173b57;color:#fff;border-color:#173b57}.top .print-a4{background:#173b57;color:#fff;border-color:#173b57;margin-inline-start:8px}
-.topic{display:none}.topic.active{display:block}.pages{display:grid;gap:26px;padding:26px 12px 60px}.sheet{position:relative;width:794px;height:1123px;min-height:1123px;max-height:1123px;margin:auto;background:#fff;border:1px solid #dfe7ed;border-radius:16px;box-shadow:0 18px 52px rgba(22,48,70,.12);padding:21px 26px 27px;overflow:hidden}.sheet:before{content:"";position:absolute;inset:0 0 auto 0;height:9px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3))}.sheet[data-t="p"]{--c1:#2563c8;--c2:#168472;--c3:#df8429}.sheet[data-t="r"]{--c1:#168472;--c2:#2563c8;--c3:#7653c5}.sheet[data-t="h"]{--c1:#7653c5;--c2:#2563c8;--c3:#df8429}.sheet[data-t="s"]{--c1:#2563c8;--c2:#7653c5;--c3:#168472}
-.num{position:absolute;left:19px;top:15px;font-weight:900;color:#7890a1;font-size:11px}.kicker{text-align:center;color:var(--c1);font-weight:900;font-size:12px;line-height:1.1;margin:0 0 3px}.title{text-align:center;font-weight:950;font-size:37px;line-height:1;margin:0 0 8px;color:#123a58}.sub{text-align:center;color:#607486;font-size:16px;font-weight:800;margin:8px 0 22px}.stack{display:grid;gap:8px}.box{border:1.6px solid #d6e3eb;border-radius:14px;padding:9px 12px;background:#fbfdfe}.def{border-color:#91cfaa;background:#f2fbf5}.prop{border-color:#91b9ea;background:#f4f8ff}.imp{border-color:#f0bd86;background:#fff8f0}.spec{border-color:#c5b2ec;background:#faf7ff}.proof{border-color:#a7bfce;background:#f7fafc}.box h2{font-size:20px;line-height:1.1;margin:0 0 4px;font-weight:950;color:#173b57}.box>p:first-child{margin-top:0}.box>p:last-child{margin-bottom:0}.box,.card,.geo,.mathline{break-inside:avoid;page-break-inside:avoid}.def h2{color:#2b8250}.prop h2{color:#2361ad}.imp h2{color:#c76f1a}.spec h2{color:#6f48b8}.statement{font-size:17px;line-height:1.24;font-weight:740;margin:2px 0}.large{font-size:18px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:stretch}.card{border:1.3px solid #dbe5eb;border-radius:12px;padding:8px;background:#fff}.card h3{font-size:17px;line-height:1.15;margin:0 0 3px;color:#244b65}.blank{display:inline-block;min-width:95px;border-bottom:2.5px solid #35566d;height:1.15em;vertical-align:-.08em;margin:0 4px}.blank.short{min-width:62px}.blank.long{min-width:150px}.math{direction:ltr;unicode-bidi:isolate;display:inline-flex;vertical-align:-.13em;white-space:nowrap;font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:1.06em;font-weight:600}.mathline{direction:ltr;unicode-bidi:isolate;text-align:center;border:1px solid #cedde7;background:#fbfdff;border-radius:10px;padding:5px;margin:4px 0;font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:19px;line-height:1.15}.mathline.mixed{direction:rtl;unicode-bidi:plaintext}.mathline math,.math math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:1em}.geo{display:grid;place-items:center;margin:0;border:1.5px solid #d9e5ec;border-radius:12px;background:linear-gradient(90deg,rgba(216,228,236,.18) 1px,transparent 1px),linear-gradient(rgba(216,228,236,.18) 1px,transparent 1px),#fbfdfe;background-size:22px 22px;min-height:174px;padding:5px}.geo svg{width:min(100%,310px);max-height:174px;height:auto;overflow:visible}.geo figcaption{display:none}.shape{fill:rgba(37,99,200,.035);stroke:#17324d;stroke-width:4;stroke-linejoin:round}.diag{stroke:#6c8294;stroke-width:2.3}.tick,.par,.right,.arc,.height,.extension{fill:none;stroke-linecap:round;stroke-linejoin:round}.tick{stroke:#7653c5;stroke-width:3.2}.par{stroke:#df8429;stroke-width:3}.right{stroke:#168472;stroke-width:3}.arc{stroke:#df8429;stroke-width:2.7}.height{stroke:#168472;stroke-width:2.7;stroke-dasharray:7 5}.extension{stroke:#9aabb7;stroke-width:1.8;stroke-dasharray:4 5}.diag-eq{stroke:#b35c2b;stroke-width:3.1;stroke-linecap:round}.mid-a{stroke:#2563c8;stroke-width:3.1}.mid-b{stroke:#168472;stroke-width:3.1}.pt{fill:#17324d}.center{fill:#b35c2b}.lbl{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:20px;font-style:italic;font-weight:700;fill:#0f2e46;paint-order:stroke;stroke:#fff;stroke-width:3px}.list{display:grid;gap:4px}.li{display:grid;grid-template-columns:23px 1fr;gap:5px;align-items:start;font-size:16px;line-height:1.22;font-weight:720}.bullet{width:21px;height:21px;border-radius:50%;display:grid;place-items:center;background:#eef4f8;font-weight:900}.footer{position:absolute;inset:auto 26px 8px;border-top:1px solid #dbe5eb;padding-top:3px;text-align:center;font-size:10px;color:#7a8d9b;font-weight:700}
+.topic{display:none}.topic.active{display:block}.pages{display:grid;gap:26px;padding:26px 12px 60px}.sheet{position:relative;width:794px;height:1123px;min-height:1123px;max-height:1123px;margin:auto;background:#fff;border:1px solid #dfe7ed;border-radius:10px;box-shadow:0 16px 44px rgba(22,48,70,.13);padding:40px 46px 48px;overflow:hidden}.sheet:before{content:"";position:absolute;inset:0 0 auto 0;height:9px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3))}.sheet[data-t="p"]{--c1:#2563c8;--c2:#168472;--c3:#df8429}.sheet[data-t="r"]{--c1:#168472;--c2:#2563c8;--c3:#7653c5}.sheet[data-t="h"]{--c1:#7653c5;--c2:#2563c8;--c3:#df8429}.sheet[data-t="s"]{--c1:#2563c8;--c2:#7653c5;--c3:#168472}
+.num{position:absolute;left:22px;top:18px;font-weight:900;color:#7890a1;font-size:12px}
+.kicker{text-align:center;color:var(--c1);font-weight:900;font-size:13px;line-height:1.15;margin:0 0 5px}
+.title{text-align:center;font-weight:950;font-size:40px;line-height:1.02;margin:0 0 16px;color:#123a58}
+.sub{display:none}
+.stack{display:flex;flex-direction:column;gap:16px;min-height:calc(100% - 104px);padding-bottom:26px}
+.stack>.grid2:only-child,.stack>.geo:only-child,.stack>.box:only-child{margin-block:auto}
+.box{border:1.4px solid #cfdde6;border-radius:11px;padding:14px 17px;background:#fff}
+.def{border-inline-start:5px solid #5aa678}
+.prop{border-inline-start:5px solid #5b8fd1}
+.imp{border-inline-start:5px solid #d99a4f}
+.spec{border-inline-start:5px solid #866bc6}
+.proof{border-inline-start:5px solid #789aaa}
+.box h2{font-size:23px;line-height:1.15;margin:0 0 9px;font-weight:950;color:#173b57}
+.box>p:first-child{margin-top:0}.box>p:last-child{margin-bottom:0}
+.box,.card,.geo,.mathline{break-inside:avoid;page-break-inside:avoid}
+.def h2{color:#2b8250}.prop h2{color:#2361ad}.imp h2{color:#b96b1f}.spec h2{color:#6f48b8}
+.statement{font-size:20px;line-height:1.42;font-weight:720;margin:5px 0}
+.large{font-size:22px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:18px;align-items:center}
+.card{border:1.2px solid #d8e3e9;border-radius:10px;padding:13px 15px;background:#fff}
+.card h3{font-size:19px;line-height:1.2;margin:0 0 7px;color:#244b65}
+.blank{display:inline-block;min-width:108px;border-bottom:2.4px solid #35566d;height:1.12em;vertical-align:-.08em;margin:0 4px}
+.blank.short{min-width:68px}.blank.long{min-width:165px}
+.math{direction:ltr;unicode-bidi:isolate;display:inline-flex;vertical-align:-.13em;white-space:nowrap;font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:1.06em;font-weight:600}
+.mathline{direction:ltr;unicode-bidi:isolate;text-align:center;border:0;background:transparent;padding:6px 4px;margin:7px 0;font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:23px;line-height:1.25}
+.mathline.mixed{direction:rtl;unicode-bidi:plaintext}
+.mathline math,.math math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:1em}
+.geo{display:grid;place-items:center;margin:0;border:0;border-radius:0;background:#fff;min-height:255px;padding:8px}
+.geo svg{width:min(100%,360px);max-height:250px;height:auto;overflow:visible}
+.geo figcaption{display:none}
+.shape{fill:rgba(37,99,200,.025);stroke:#17324d;stroke-width:4;stroke-linejoin:round}
+.diag{stroke:#6c8294;stroke-width:2.3}
+.tick,.par,.right,.arc,.height,.extension{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tick{stroke:#7653c5;stroke-width:3.2}.par{stroke:#df8429;stroke-width:3}.right{stroke:#168472;stroke-width:3}.arc{stroke:#df8429;stroke-width:2.7}
+.height{stroke:#168472;stroke-width:2.7;stroke-dasharray:7 5}.extension{stroke:#9aabb7;stroke-width:1.8;stroke-dasharray:4 5}
+.diag-eq{stroke:#b35c2b;stroke-width:3.1;stroke-linecap:round}.mid-a{stroke:#2563c8;stroke-width:3.1}.mid-b{stroke:#168472;stroke-width:3.1}
+.pt{fill:#17324d}.center{fill:#b35c2b}
+.lbl{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:20px;font-style:italic;font-weight:700;fill:#0f2e46;paint-order:stroke;stroke:#fff;stroke-width:3px}
+.list{display:grid;gap:10px}
+.li{display:grid;grid-template-columns:28px 1fr;gap:9px;align-items:start;font-size:19px;line-height:1.35;font-weight:700}
+.bullet{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#eef4f8;font-weight:900}
+.footer{position:absolute;inset:auto 38px 13px;border-top:1px solid #dbe5eb;padding-top:5px;text-align:center;font-size:10px;color:#7a8d9b;font-weight:700}
+
+/* Balance sparse source pages without changing a single word. */
+.sheet[data-page="2"] .stack>.grid2:only-child{margin-block:54px auto}
+.sheet[data-page="3"] .stack>.proof:only-child{margin-block:34px auto}
+.sheet[data-page="5"] .stack{justify-content:space-between}
 @media(max-width:800px){
-  body{overflow-x:hidden}
-  .top{position:sticky;top:0;padding:8px 6px;gap:6px}
-  .top button{padding:7px 11px;font-size:13px}
-  .pages{gap:16px;padding:14px 0 36px}
-  .sheet-shell{
-    position:relative;
-    width:calc(100vw - 12px);
-    max-width:794px;
-    margin:0 auto;
-    overflow:visible;
-  }
-  .sheet{
-    width:794px!important;
-    height:1123px!important;
-    min-height:1123px!important;
-    max-height:1123px!important;
-    margin:0!important;
-    border-radius:12px!important;
-    transform-origin:top left;
-    box-shadow:0 10px 28px rgba(22,48,70,.16);
-  }
-  .grid2{grid-template-columns:1fr 1fr!important}
+body{overflow-x:hidden}
+.top{position:sticky;top:0;padding:7px 5px;gap:5px}
+.top button{padding:7px 10px;font-size:12px}
+.top .print-a4{margin-inline-start:0}
+.pages{gap:18px;padding:14px 0 34px}
+.sheet-shell{position:relative;margin:0 auto;overflow:visible}
+.sheet{width:794px!important;height:1123px!important;min-height:1123px!important;max-height:1123px!important;margin:0!important;transform-origin:top left;border-radius:8px!important;box-shadow:0 8px 24px rgba(22,48,70,.16)}
+.grid2{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)!important}
 }
 @media print{
 html,body{width:210mm!important;min-width:210mm!important;margin:0!important;padding:0!important;background:#fff!important}
 body{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-.top{display:none!important}
-.topic{display:none!important}
-.topic.active{display:block!important}
+.top{display:none!important}.topic{display:none!important}.topic.active{display:block!important}
 .pages{display:block!important;margin:0!important;padding:0!important}
-.sheet{
-  width:210mm!important;
-  height:297mm!important;
-  transform:none!important;
-  min-height:297mm!important;
-  max-height:297mm!important;
-  margin:0!important;
-  padding:5.5mm 7mm 7mm!important;
-  border:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-  overflow:hidden!important;
-  break-after:page!important;
-  page-break-after:always!important;
-  break-inside:avoid!important;
-  page-break-inside:avoid!important;
-}
+.sheet-shell{width:210mm!important;height:297mm!important;margin:0!important;overflow:visible!important}
+.sheet{width:210mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;transform:none!important;margin:0!important;padding:10.5mm 12mm 12mm!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:hidden!important;break-after:page!important;page-break-after:always!important;break-inside:avoid!important;page-break-inside:avoid!important}
 .sheet:last-child{break-after:auto!important;page-break-after:auto!important}
-.sheet:before{height:1.8mm!important}
-.kicker{font-size:9pt!important;line-height:1.1!important;margin:0 0 .8mm!important}
-.title{font-size:28pt!important;line-height:1!important;margin:0 0 2mm!important}
-.sub{display:none!important}
-.stack{display:grid!important;gap:2.1mm!important}
-.box{padding:2.5mm 3.3mm!important;border-radius:3.5mm!important}
-.box h2{font-size:15pt!important;line-height:1.1!important;margin:0 0 1.1mm!important}
-.statement{font-size:12.5pt!important;line-height:1.24!important;margin:.6mm 0!important}
-.large{font-size:13.6pt!important}
-.grid2{gap:2mm!important}
-.card{padding:2.2mm!important;border-radius:3mm!important}
-.card h3{font-size:12.7pt!important;line-height:1.15!important;margin:0 0 .8mm!important}
-.geo{min-height:46mm!important;padding:1.2mm!important;border-radius:3mm!important}
-.geo svg{width:min(100%,82mm)!important;max-height:46mm!important}
-.geo figcaption{display:none!important}
-.mathline{font-size:14pt!important;line-height:1.15!important;padding:1.2mm!important;margin:1mm 0!important}
-.list{gap:1.1mm!important}
-.li{font-size:12.3pt!important;line-height:1.22!important;grid-template-columns:5.8mm 1fr!important;gap:1.3mm!important}
-.bullet{width:5.4mm!important;height:5.4mm!important}
-.blank{min-width:21mm!important}
-.blank.short{min-width:14mm!important}
-.blank.long{min-width:34mm!important}
-.footer{right:7mm!important;left:7mm!important;bottom:1.8mm!important;padding-top:.7mm!important;font-size:7.3pt!important}
-.num{left:5mm!important;top:4mm!important;font-size:8.3pt!important}
+.sheet:before{height:2mm!important}
+.kicker{font-size:9.5pt!important;line-height:1.1!important;margin:0 0 1mm!important}
+.title{font-size:26pt!important;line-height:1!important;margin:0 0 4mm!important}
+.stack{gap:4mm!important;min-height:calc(100% - 28mm)!important;padding-bottom:7mm!important}
+.box{padding:3.8mm 4.5mm!important;border-radius:2.5mm!important}
+.box h2{font-size:15.5pt!important;line-height:1.15!important;margin:0 0 2mm!important}
+.statement{font-size:13.4pt!important;line-height:1.38!important;margin:1.2mm 0!important}
+.large{font-size:14.5pt!important}
+.grid2{gap:4.5mm!important}
+.card{padding:3.5mm 4mm!important;border-radius:2.5mm!important}
+.card h3{font-size:13.5pt!important;line-height:1.2!important;margin:0 0 1.5mm!important}
+.blank{min-width:28mm!important}.blank.short{min-width:18mm!important}.blank.long{min-width:42mm!important}
+.geo{min-height:62mm!important;padding:2mm!important}
+.geo svg{width:min(100%,92mm)!important;max-height:60mm!important}
+.mathline{font-size:16.5pt!important;line-height:1.2!important;padding:1.5mm!important;margin:1.5mm 0!important}
+.list{gap:2.5mm!important}
+.li{font-size:13.2pt!important;line-height:1.32!important;grid-template-columns:7mm 1fr!important;gap:2.2mm!important}
+.bullet{width:6.5mm!important;height:6.5mm!important}
+.footer{right:12mm!important;left:12mm!important;bottom:3mm!important;padding-top:1mm!important;font-size:7.5pt!important}
+.num{left:6mm!important;top:5mm!important;font-size:8.5pt!important}
 .box,.card,.geo,.mathline{break-inside:avoid!important;page-break-inside:avoid!important}
+.sheet[data-page="2"] .stack>.grid2:only-child{margin-block:12mm auto!important}
+.sheet[data-page="3"] .stack>.proof:only-child{margin-block:8mm auto!important}
 @page{size:A4 portrait;margin:0}
 }
 </style>
@@ -160,7 +173,7 @@ function svg(kind,opts={}){
 const GEO=(k,o)=>svg(k,o);
 const box=(cls,title,html)=>`<section class="box ${cls}">${title?`<h2>${title}</h2>`:""}${html}</section>`;
 const st=x=>`<p class="statement">${x}</p>`;
-const page=(t,n,title,sub,html)=>`<article class="sheet" data-t="${t}"><span class="num">${n}</span><div class="kicker">שאלות מתוך תוכנית הלימודים</div><h1 class="title">${title}</h1><div class="stack">${html}</div><div class="footer">${n}</div></article>`;
+const page=(t,n,title,sub,html)=>`<article class="sheet" data-t="${t}" data-page="${n}"><span class="num">${n}</span><div class="kicker">שאלות מתוך תוכנית הלימודים</div><h1 class="title">${title}</h1><div class="stack">${html}</div><div class="footer">${n}</div></article>`;
 const topics={
 parallelogram:{label:'מקבילית',t:'p',pages:[
 ()=>page('p',1,'מקבילית','',box('def','הגדרה',st(`הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות ${B('long')} זו לזו.`))+`<div class="grid2">${GEO('parallelogram',{parallel:true,oppEqual:true})}${box('prop','תכונות המקבילית',st(`במקבילית כל זוג צלעות ${B()} מקבילות זו לזו (לפי ההגדרה).`)+st(`במקבילית כל שתי ${B()} נגדיות שוות זו לזו.`)+`<div class="mathline">${M('AB ∥ CD')} &nbsp;&nbsp; ${M('AD ∥ BC')}<br>${M('AB = CD')} &nbsp;&nbsp; ${M('AD = BC')}</div>`)}</div>`),
