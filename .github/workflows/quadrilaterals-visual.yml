@@ -121,6 +121,18 @@ jobs:
           node .a4-qa.cjs
           rm -f .a4-qa.cjs
 
+      - name: Persist QA metrics
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p .codex/qa
+          test -f /tmp/layout.json && cp /tmp/layout.json .codex/qa/layout.json || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .codex/qa/layout.json 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "qa: persist quadrilaterals visual metrics"
+          git push || true
+
       - name: Upload visual proof
         if: always()
         uses: actions/upload-artifact@v4
