@@ -52,6 +52,21 @@
 .li{display:grid;grid-template-columns:22px 1fr;gap:6px;align-items:start;font-size:17px;line-height:1.3;font-weight:690}
 .bullet{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#eef4f8;font-size:11px;font-weight:900}
 .footer{position:absolute;inset:auto 28px 7px;border:0;padding:0;text-align:center;font-size:9px;color:#8a9aa6;font-weight:700}
+.source-exact{position:absolute;inset:0;width:794px;height:1123px;background:#fff;overflow:hidden}
+.source-exact .src-text{position:absolute;direction:rtl;text-align:right;white-space:normal;font-size:20px;line-height:1.25;font-weight:650;color:#17324d}
+.source-exact .src-title{font-size:58px;line-height:1.05;font-weight:950;text-align:center}
+.source-exact .src-heading{font-size:34px;line-height:1.1;font-weight:950;text-align:right}
+.source-exact .src-caption{font-size:18px;font-weight:700;text-align:center}
+.source-exact .src-and{font-size:20px;font-weight:800;text-align:center}
+.source-exact .src-eq{font-size:26px;font-weight:700;text-align:center;direction:ltr}
+.source-exact .src-blank{position:absolute;border-bottom:2.4px solid #17324d}
+.source-exact .src-geo{position:absolute;left:70px;top:225px;width:255px;height:175px}
+.source-exact .src-geo2{position:absolute;left:40px;top:590px;width:255px;height:170px}
+.source-exact .src-geo3{position:absolute;left:40px;top:905px;width:255px;height:165px}
+.source-exact .src-geo .geo,.source-exact .src-geo2 .geo,.source-exact .src-geo3 .geo{min-height:0;height:100%;padding:0}
+.source-exact .src-geo svg,.source-exact .src-geo2 svg,.source-exact .src-geo3 svg{width:100%;height:100%;max-height:none}
+.sheet.source-page{padding:0!important}
+.sheet.source-page>.title,.sheet.source-page>.stack,.sheet.source-page>.num,.sheet.source-page>.footer{display:none!important}
 
 /* Density classes are applied automatically from the real rendered height. */
 .sheet.fit-compact .statement{font-size:17px;line-height:1.28}
@@ -165,30 +180,44 @@ function svg(kind,opts={}){
 const GEO=(k,o)=>svg(k,o);
 const box=(cls,title,html)=>`<section class="box ${cls}">${title?`<h2>${title}</h2>`:""}${html}</section>`;
 const st=x=>`<p class="statement">${x}</p>`;
-const page=(t,n,title,sub,html)=>`<article class="sheet" data-t="${t}" data-page="${n}"><span class="num">${n}</span><div class="kicker">שאלות מתוך תוכנית הלימודים</div><h1 class="title">${title}</h1><div class="stack">${html}</div><div class="footer">${n}</div></article>`;
+const sourceText=(text,top,left,width,height,cls='')=>`<div class="src-text ${cls}" style="top:${top}px;left:${left}px;width:${width}px;min-height:${height}px">${text}</div>`;
+const sourceBlank=(top,left,width=67,height=25)=>`<span class="src-blank" style="top:${top}px;left:${left}px;width:${width}px;height:${height}px"></span>`;
+const page=(t,n,title,sub,html)=>`<article class="sheet" data-t="${t}" data-page="${n}"><span class="num">${n}</span><h1 class="title">${title}</h1><div class="stack">${html}</div><div class="footer">${n}</div></article>`;
 const topics={
 parallelogram:{label:'מקבילית',t:'p',pages:[
-()=>page('p',1,'מקבילית','',
-  box('def','',st(`הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות ${B('long')} זו לזו.`))+
-  st(`המרובע ${M('ABCD')} הוא מקבילית:`)+
-  `<div class="grid2">
-    ${GEO('parallelogram',{parallel:true,oppEqual:true})}
-    ${box('prop','תכונות המקבילית:',
-      st(`במקבילית כל זוג צלעות ${B()} מקבילות זו לזו (לפי ההגדרה).`)+
-      `<div class="source-symbolic">
-        <div><bdi dir="ltr">AB</bdi> ${B('short')} <bdi dir="ltr">CD</bdi></div>
-        <div class="and">וגם</div>
-        <div><bdi dir="ltr">AD</bdi> ${B('short')} <bdi dir="ltr">BC</bdi></div>
-      </div>`+
-      st(`במקבילית כל שתי ${B()} נגדיות שוות זו לזו.`)+
-      `<div class="source-symbolic">
-        <div><bdi dir="ltr">AB</bdi> = ${B('short')}</div>
-        <div class="and">וגם</div>
-        <div><bdi dir="ltr">AD</bdi> = ${B('short')}</div>
-      </div>`
-    )}
-  </div>`
-),
+()=>`<article class="sheet source-page" data-t="p" data-page="1">
+<div class="source-exact">
+  ${sourceText('מקבילית',24.763,62.799,672.954,77.755,'src-title')}
+  ${sourceText('הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות ________ זו לזו.',161.737,0,770,27)}
+  ${sourceText('המרובע <bdi dir="ltr">ABCD</bdi> הוא מקבילית:',202.781,7,763,27)}
+  <div class="src-geo">${GEO('parallelogram',{parallel:true})}</div>
+  ${sourceBlank(289.849,619.346,94.985,35.202)}
+  ${sourceText('וגם',289.849,491.085,41.074,35.202,'src-and')}
+
+  ${sourceText('תכונות המקבילית:',441.511,455.936,312.5,48,'src-heading')}
+  ${sourceText('במקבילית כל זוג צלעות _______ מקבילות זו לזו (לפי ההגדרה).',565.533,186.839,543.009,25)}
+  ${sourceText('מקבילית <bdi dir="ltr">ABCD</bdi>',629.999,84,380,25,'src-caption')}
+  <div class="src-geo2">${GEO('parallelogram',{parallel:true})}</div>
+
+  ${sourceBlank(747.676,377.778,66.738,24.733)}
+  ${sourceBlank(747.676,294.987,66.738,24.733)}
+  ${sourceText('וגם',747.676,449.247,41.094,24.733,'src-and')}
+  ${sourceBlank(747.676,571.587,66.738,24.733)}
+  ${sourceBlank(747.676,488.795,66.738,24.733)}
+
+  ${sourceText('במקבילית כל שתי _______ נגדיות שוות זו לזו.',868.903,326.097,405.42,25)}
+  ${sourceText('מקבילית <bdi dir="ltr">ABCD</bdi>',950.507,84,380,25,'src-caption')}
+  <div class="src-geo3">${GEO('parallelogram',{oppEqual:true})}</div>
+
+  ${sourceBlank(1025.340,379.446,66.738,61.2)}
+  ${sourceBlank(1025.340,296.655,66.738,61.2)}
+  ${sourceText('=',1055.940,337.808,66.738,28.2,'src-eq')}
+  ${sourceText('וגם',1058.340,448.184,41.094,24.733,'src-and')}
+  ${sourceBlank(1027.205,579.045,66.738,61.2)}
+  ${sourceBlank(1027.205,496.254,66.738,61.2)}
+  ${sourceText('=',1057.805,536.197,66.738,24.733,'src-eq')}
+</div>
+</article>`,
 ()=>page('p',2,'מקבילית','',`<div class="grid2">${GEO('parallelogram',{diag:true,center:true,midpoints:true})}${box('prop','תכונות המקבילית',st(`במקבילית האלכסונים ${B()} זה את זה.`)+st(`במקבילית סכום כל שתי זוויות ${B()} שווה ל - ${B('short')}`)+st(`במקבילית כל שתי זוויות נגדיות ${B()} זו לזו.`)+`<div class="mathline">${M('AO = OC')} &nbsp;&nbsp; ${M('BO = OD')}</div>`)}</div>`),
 ()=>page('p',3,'מקבילית','',box('proof','איך מוכיחים שמרובע הוא מקבילית?',L([`לפי הגדרה: אם במרובע כל זוג צלעות נגדיות הן ${B()} זו לזו, אז המרובע הוא מקבילית.`,`אם במרובע כל זוג של צלעות ${B()} הן שוות זו לזו, אז המרובע הוא ${B()}.`,`אם במרובע כל זוג של זוויות נגדיות ${B()},אז ה ${B()} הוא מקבילית.`]))),
 ()=>page('p',4,'מקבילית','',box('proof','איך מוכיחים שמרובע הוא מקבילית?',L([`אם במרובע האלכסונים ${B()} זה את זה, אז המרובע הוא ${B()}.`,`אם במרובע קיים זוג אחד של צלעות נגדיות שהן גם ${B()} וגם ${B()}, אז המרובע הוא ${B()}.`]))+`<div class="grid2">${GEO('parallelogram',{diag:true,center:true,midpoints:true})}${GEO('parallelogram',{parallel:true,oppEqual:true})}</div>`),
