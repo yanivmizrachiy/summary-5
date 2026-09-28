@@ -1042,11 +1042,107 @@ rhombus:{label:'מעויין',t:'h',pages:[
 </div></article>`
 ]},
 square:{label:'ריבוע',t:'s',pages:[
-()=>page('s',1,'ריבוע','',box('def','',st(`הגדרה: ריבוע הוא מרובע שכל ה${B()} שוות וכל ה${B()} ישרות.`))+`<div class="grid2">${GEO('square',{equal:true,right:true,parallel:true})}${box('prop','תכונות הריבוע:',st(`בריבוע כל זוג צלעות ${B()} מקבילות זו לזו.`)+st(`בריבוע כל ה${B()} שוות זו לזו.`)+st(`בריבוע ה${B()} חוצים זה את זה.`)+st(`בריבוע כל ה${B()} ישרות.`))}</div>`+box('imp','',`<div class="grid2"><div class="card"><h3>הריבוע הוא מלבן כי...</h3>${st(`כל הזוויות שלו ${B()}.`)}</div><div class="card"><h3>הריבוע הוא מעויין כי...</h3>${st(`כל הצלעות שלו ${B()}.`)}</div></div>`)),
-()=>page('s',2,'ריבוע','',`<div class="grid2">${GEO('square',{diag:true,center:true,perp:true,midpoints:true,equalDiags:true,angleBisectors:true})}${box('spec','תכונות הריבוע:',st(`בריבוע ה ${B()} שווים זה לזה.`)+st(`בריבוע ה ${B()} מאונכים זה לזה.`)+st(`בריבוע האלכסונים ${B()} את הזוויות.`)+`<div class="mathline">${M('AC = BD')}<br>${M('AC ⟂ BD')}</div>`)}</div>`),
-()=>page('s',3,'ריבוע','',box('proof','איך מוכיחים שמרובע הוא ריבוע?',st(`לפי הגדרה: אם במרובע כל הצלעות ${B()} וכל הזוויות ${B()}, אז המרובע הוא ריבוע.`)+st(`גם הזווית הרביעית ישרה. מדוע?`)+st(`כי סכום ${B('long')}`))+GEO('square',{equal:true,right:true})),
-()=>page('s',4,'ריבוע','',box('proof','איך מוכיחים שמרובע הוא ריבוע?',st('הריבוע הוא מלבן מיוחד')+st(`אם במלבן שתי צלעות סמוכות ${B()}, אז המלבן הוא ${B()}.`)+st('אז כל ארבע הצלעות שוות. מדוע?')+`<div class="mathline mixed"><bdi dir="ltr">ABCD</bdi> מלבן&nbsp;&nbsp; וגם &nbsp;&nbsp;${M('AB = BC')}<br>אז המרובע <bdi dir="ltr">ABCD</bdi> הוא ריבוע.</div>`+st('הריבוע הוא מעויין מיוחד')+st(`אם במעויין האלכסונים ${B()} זה לזה, אז המעויין הוא ${B()}.`)+`<div class="mathline mixed"><bdi dir="ltr">ABCD</bdi> מעויין&nbsp;&nbsp; וגם &nbsp;&nbsp;${M('AC = BD')}<br>אז המרובע <bdi dir="ltr">ABCD</bdi> הוא ריבוע.</div>`)),
-()=>page('s',5,'ריבוע','',box('def','הריבוע',st('הגדרה: מרובע שבו כל הצלעות שוות וכל הזוויות ישרות הוא ריבוע.'))+box('prop','תכונות הריבוע:',st('בריבוע כל שתי צלעות נגדיות מקבילות זו לזו')+st('2. בריבוע כל ארבע הצלעות שוות זו לזו')+st('3. בריבוע האלכסונים חוצים זה את זה')+st('4. בריבוע כל הזוויות ישרות')+st('5. בריבוע האלכסונים שווים זה לזה')+st('6. בריבוע האלכסונים מאונכים זה לזה')+st('7. בריבוע האלכסונים חוצים את הזוויות'))+box('proof','איך מוכיחים שמרובע הוא ריבוע?',st('לפי הגדרה: אם במרובע כל הצלעות שוות וכל הזוויות ישרות, אז המרובע הוא ריבוע.')+st('2. אם במלבן שתי צלעות סמוכות שוות אז המלבן הוא ריבוע.')+st('3. אם במעויין האלכסונים שווים זה לזה אז המעויין הוא ריבוע.')))
+()=>`<article class="sheet derived-page" data-t="s" data-page="1"><div class="source-worksheet">
+  <h1 class="sw-title">ריבוע</h1>
+  <section class="sw-section">
+    <div class="sw-text">הגדרה: ריבוע הוא מרובע שכל ה<span class="blank"></span> שוות וכל ה<span class="blank"></span> ישרות.</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('square',{equal:true,right:true,parallel:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא ריבוע</div>
+        ${CHAIN4()}
+      </div>
+    </div>
+  </section>
+  <div class="sw-heading">הריבוע שייך לשתי משפחות:</div>
+  <section class="sw-section" style="flex:1;display:grid;align-content:center;gap:18px">
+    <div class="sw-text" style="font-size:20px">הריבוע הוא מלבן כי כל הזוויות שלו ישרות.</div>
+    <div class="sw-text" style="font-size:20px">הריבוע הוא מעויין כי כל הצלעות שלו שוות.</div>
+  </section>
+</div></article>`,
+()=>`<article class="sheet derived-page" data-t="s" data-page="2"><div class="source-worksheet">
+  <div class="sw-heading">תכונות הריבוע:</div>
+  <section class="sw-section" style="flex:1">
+    <div class="sw-text">בריבוע ה <span class="blank"></span> שווים זה לזה.</div>
+    <div class="sw-text">בריבוע ה <span class="blank"></span> מאונכים זה לזה.</div>
+    <div class="sw-text">בריבוע ה<span class="blank"></span> חוצים זה את זה.</div>
+    <div class="sw-text">בריבוע האלכסונים <span class="blank"></span> את הזוויות.</div>
+    <div class="sw-grid" style="margin-top:18px">
+      <div class="sw-diagram">${GEO('square',{diag:true,center:true,perp:true,midpoints:true,equalDiags:true,angleBisectors:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> ריבוע</div>
+        <div class="source-rel"><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>
+        <div class="source-rel"><span class="answer-line"></span><span>⟂</span><span class="answer-line"></span></div>
+        ${REL2('=')}
+      </div>
+    </div>
+  </section>
+</div></article>`,
+()=>`<article class="sheet derived-page" data-t="s" data-page="3"><div class="source-worksheet">
+  <div class="sw-heading">איך מוכיחים שמרובע הוא ריבוע?</div>
+  <section class="sw-section" style="flex:1;display:grid;align-content:center">
+    <div class="sw-text">לפי הגדרה: אם במרובע כל הצלעות <span class="blank"></span> וכל הזוויות <span class="blank"></span>, אז המרובע הוא ריבוע.</div>
+    <div class="sw-grid" style="margin-top:24px">
+      <div class="sw-diagram">${GEO('square',{equal:true,right:true})}</div>
+      <div class="sw-work">
+        <div class="sw-note">אם:</div>
+        <div class="source-chain"><span class="answer-line"></span><span>=</span><span class="answer-line"></span><span>=</span><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>
+        <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא ריבוע.</div>
+      </div>
+    </div>
+  </section>
+</div></article>`,
+()=>`<article class="sheet derived-page" data-t="s" data-page="4"><div class="source-worksheet">
+  <div class="sw-heading">איך מוכיחים שמרובע הוא ריבוע?</div>
+  <section class="sw-section" style="flex:1">
+    <div class="sw-text">הריבוע הוא מלבן מיוחד</div>
+    <div class="sw-text">אם במלבן שתי צלעות סמוכות <span class="blank"></span>, אז המלבן הוא <span class="blank"></span>.</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('square',{right:true,equal:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מלבן וגם:</div>
+        <div class="source-rel" style="gap:7px"><bdi dir="ltr">AB</bdi><span>=</span><bdi dir="ltr">BC</bdi></div>
+        <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא ריבוע.</div>
+      </div>
+    </div>
+  </section>
+  <section class="sw-section" style="flex:1">
+    <div class="sw-text">הריבוע הוא מעויין מיוחד</div>
+    <div class="sw-text">אם במעויין האלכסונים <span class="blank"></span> זה לזה, אז המעויין הוא <span class="blank"></span>.</div>
+    <div class="sw-grid">
+      <div class="sw-diagram">${GEO('square',{diag:true,equalDiags:true})}</div>
+      <div class="sw-work">
+        <div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מעויין וגם:</div>
+        <div class="source-rel" style="gap:7px"><bdi dir="ltr">AC</bdi><span>=</span><bdi dir="ltr">BD</bdi></div>
+        <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא ריבוע.</div>
+      </div>
+    </div>
+  </section>
+</div></article>`,
+()=>`<article class="sheet derived-page" data-t="s" data-page="5"><div class="source-worksheet summary">
+  <h1 class="sw-title">הריבוע</h1>
+  <section class="sw-section"><div class="sw-text">הגדרה: מרובע שכל הצלעות שלו שוות וכל הזוויות שלו ישרות הוא ריבוע.</div></section>
+  <div class="sw-heading">תכונות הריבוע:</div>
+  <section class="sw-section">
+    <div class="summary-list">
+      <div class="summary-item">בריבוע כל שתי צלעות נגדיות מקבילות זו לזו</div>
+      <div class="summary-item">2. בריבוע כל ארבע הצלעות שוות זו לזו</div>
+      <div class="summary-item">3. בריבוע האלכסונים חוצים זה את זה</div>
+      <div class="summary-item">4. בריבוע כל הזוויות ישרות</div>
+      <div class="summary-item">5. בריבוע האלכסונים שווים זה לזה</div>
+      <div class="summary-item">6. בריבוע האלכסונים מאונכים זה לזה</div>
+      <div class="summary-item">7. בריבוע האלכסונים חוצים את הזוויות</div>
+    </div>
+  </section>
+  <div class="sw-heading">איך מוכיחים שמרובע הוא ריבוע?</div>
+  <section class="sw-section">
+    <div class="summary-list">
+      <div class="summary-item">לפי הגדרה: אם במרובע כל הצלעות שוות וכל הזוויות ישרות, אז המרובע הוא ריבוע.</div>
+      <div class="summary-item">2. אם במלבן שתי צלעות סמוכות שוות אז המלבן הוא ריבוע.</div>
+      <div class="summary-item">3. אם במעויין האלכסונים שווים זה לזה אז המעויין הוא ריבוע.</div>
+    </div>
+  </section>
+</div></article>`
 ]}
 };
 const root=document.getElementById('root');Object.entries(topics).forEach(([id,t],i)=>{const sec=document.createElement('section');sec.id=id;sec.className='topic'+(i===0?' active':'');sec.innerHTML=`<div class="pages">${t.pages.map(f=>`<div class="sheet-shell">${f()}</div>`).join('')}</div>`;root.appendChild(sec)});function fitWorksheetDensity(){
