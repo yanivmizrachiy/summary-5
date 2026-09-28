@@ -34,6 +34,8 @@
 .math{direction:ltr;unicode-bidi:isolate;display:inline-flex;vertical-align:-.13em;white-space:nowrap;font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:1.05em;font-weight:600}
 .mathline{direction:ltr;unicode-bidi:isolate;text-align:center;border:0;background:transparent;padding:2px;margin:3px 0;font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:21px;line-height:1.18}
 .mathline.mixed{direction:rtl;unicode-bidi:plaintext}
+.source-symbolic{direction:ltr;unicode-bidi:isolate;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin:7px 0;font-family:"STIX Two Math","Cambria Math","Times New Roman",serif;font-size:20px;text-align:center}
+.source-symbolic .and{direction:rtl;font-family:"Noto Sans Hebrew","Rubik","Arial Hebrew","Segoe UI",Arial,sans-serif;font-size:15px;font-weight:800}
 .mathline math,.math math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:1em}
 .geo{display:grid;place-items:center;margin:0;border:0;background:#fff;min-height:220px;padding:2px}
 .geo svg{width:min(100%,350px);max-height:230px;height:auto;overflow:visible}
@@ -166,7 +168,27 @@ const st=x=>`<p class="statement">${x}</p>`;
 const page=(t,n,title,sub,html)=>`<article class="sheet" data-t="${t}" data-page="${n}"><span class="num">${n}</span><div class="kicker">שאלות מתוך תוכנית הלימודים</div><h1 class="title">${title}</h1><div class="stack">${html}</div><div class="footer">${n}</div></article>`;
 const topics={
 parallelogram:{label:'מקבילית',t:'p',pages:[
-()=>page('p',1,'מקבילית','',box('def','הגדרה',st(`הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות ${B('long')} זו לזו.`))+`<div class="grid2">${GEO('parallelogram',{parallel:true,oppEqual:true})}${box('prop','תכונות המקבילית',st(`במקבילית כל זוג צלעות ${B()} מקבילות זו לזו (לפי ההגדרה).`)+st(`במקבילית כל שתי ${B()} נגדיות שוות זו לזו.`)+`<div class="mathline">${M('AB ∥ CD')} &nbsp;&nbsp; ${M('AD ∥ BC')}<br>${M('AB = CD')} &nbsp;&nbsp; ${M('AD = BC')}</div>`)}</div>`),
+()=>page('p',1,'מקבילית','',
+  box('def','',st(`הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות ${B('long')} זו לזו.`))+
+  st(`המרובע ${M('ABCD')} הוא מקבילית:`)+
+  `<div class="grid2">
+    ${GEO('parallelogram',{parallel:true,oppEqual:true})}
+    ${box('prop','תכונות המקבילית:',
+      st(`במקבילית כל זוג צלעות ${B()} מקבילות זו לזו (לפי ההגדרה).`)+
+      `<div class="source-symbolic">
+        <div><bdi dir="ltr">AB</bdi> ${B('short')} <bdi dir="ltr">CD</bdi></div>
+        <div class="and">וגם</div>
+        <div><bdi dir="ltr">AD</bdi> ${B('short')} <bdi dir="ltr">BC</bdi></div>
+      </div>`+
+      st(`במקבילית כל שתי ${B()} נגדיות שוות זו לזו.`)+
+      `<div class="source-symbolic">
+        <div><bdi dir="ltr">AB</bdi> = ${B('short')}</div>
+        <div class="and">וגם</div>
+        <div><bdi dir="ltr">AD</bdi> = ${B('short')}</div>
+      </div>`
+    )}
+  </div>`
+),
 ()=>page('p',2,'מקבילית','',`<div class="grid2">${GEO('parallelogram',{diag:true,center:true,midpoints:true})}${box('prop','תכונות המקבילית',st(`במקבילית האלכסונים ${B()} זה את זה.`)+st(`במקבילית סכום כל שתי זוויות ${B()} שווה ל - ${B('short')}`)+st(`במקבילית כל שתי זוויות נגדיות ${B()} זו לזו.`)+`<div class="mathline">${M('AO = OC')} &nbsp;&nbsp; ${M('BO = OD')}</div>`)}</div>`),
 ()=>page('p',3,'מקבילית','',box('proof','איך מוכיחים שמרובע הוא מקבילית?',L([`לפי הגדרה: אם במרובע כל זוג צלעות נגדיות הן ${B()} זו לזו, אז המרובע הוא מקבילית.`,`אם במרובע כל זוג של צלעות ${B()} הן שוות זו לזו, אז המרובע הוא ${B()}.`,`אם במרובע כל זוג של זוויות נגדיות ${B()},אז ה ${B()} הוא מקבילית.`]))),
 ()=>page('p',4,'מקבילית','',box('proof','איך מוכיחים שמרובע הוא מקבילית?',L([`אם במרובע האלכסונים ${B()} זה את זה, אז המרובע הוא ${B()}.`,`אם במרובע קיים זוג אחד של צלעות נגדיות שהן גם ${B()} וגם ${B()}, אז המרובע הוא ${B()}.`]))+`<div class="grid2">${GEO('parallelogram',{diag:true,center:true,midpoints:true})}${GEO('parallelogram',{parallel:true,oppEqual:true})}</div>`),
