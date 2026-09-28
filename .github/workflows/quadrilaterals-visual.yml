@@ -1,0 +1,134 @@
+name: Quadrilaterals Visual A4 QA
+
+on:
+  push:
+    branches:
+      - codex/quadrilaterals-a4-fix
+    paths:
+      - "quadrilaterals-preview/index.html"
+      - ".github/workflows/quadrilaterals-visual.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  visual-a4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: codex/quadrilaterals-a4-fix
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Install browser harness
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --no-save playwright-core@latest
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$CHROME" ]; then
+            npm install --no-save playwright@latest
+            npx playwright install chromium
+            echo "BROWSER=playwright" >> "$GITHUB_ENV"
+          else
+            echo "BROWSER=$CHROME" >> "$GITHUB_ENV"
+          fi
+
+      - name: Serve site
+        shell: bash
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/a4-server.log 2>&1 &
+          echo $! >/tmp/a4-server.pid
+          for i in {1..30}; do
+            curl -fsS http://127.0.0.1:8000/quadrilaterals-preview/index.html >/dev/null && exit 0
+            sleep 0.2
+          done
+          cat /tmp/a4-server.log
+          exit 1
+
+      - name: Render and measure desktop + mobile
+        shell: bash
+        run: |
+          cat > /tmp/a4-qa.mjs <<'NODE'
+          import fs from 'node:fs';
+          import { chromium } from 'playwright-core';
+
+          const executablePath = process.env.BROWSER === 'playwright' ? undefined : process.env.BROWSER;
+          const browser = await chromium.launch({headless:true, executablePath, args:['--no-sandbox']});
+          const url='http://127.0.0.1:8000/quadrilaterals-preview/index.html';
+          const results={};
+
+          async function inspect(name, viewport){
+            const page=await browser.newPage({viewport});
+            await page.goto(url,{waitUntil:'networkidle'});
+            await page.evaluate(()=>document.fonts?.ready);
+            await page.waitForTimeout(300);
+            const sheet=page.locator('.sheet').first();
+            const metrics=await sheet.evaluate(el=>{
+              const sr=el.getBoundingClientRect();
+              const all=[...el.querySelectorAll('*')];
+              const outside=[];
+              const clipped=[];
+              for(const node of all){
+                const r=node.getBoundingClientRect();
+                if(r.width===0&&r.height===0) continue;
+                if(r.left < sr.left-1 || r.right > sr.right+1 || r.top < sr.top-1 || r.bottom > sr.bottom+1){
+                  outside.push({tag:node.tagName,cls:node.className?.baseVal||node.className||'',text:(node.textContent||'').trim().slice(0,80),rect:{l:r.left,t:r.top,r:r.right,b:r.bottom}});
+                }
+                if(node instanceof HTMLElement && node.clientWidth>0 && node.scrollWidth>node.clientWidth+2){
+                  clipped.push({tag:node.tagName,cls:node.className||'',text:(node.textContent||'').trim().slice(0,100),clientWidth:node.clientWidth,scrollWidth:node.scrollWidth});
+                }
+              }
+              const text=(el.innerText||'');
+              const forbidden=['AB ∥ CD','AD ∥ BC','AB = CD','AD = BC'].filter(x=>text.includes(x));
+              const required=['מקבילית','הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות','תכונות המקבילית:','במקבילית כל זוג צלעות','במקבילית כל שתי','וגם'];
+              const missing=required.filter(x=>!text.includes(x));
+              return {
+                sheet:{width:sr.width,height:sr.height,left:sr.left,top:sr.top},
+                outside,
+                clipped,
+                forbidden,
+                missing,
+                scrollHeight:el.scrollHeight,
+                clientHeight:el.clientHeight
+              };
+            });
+            await sheet.screenshot({path:`/tmp/${name}.png`});
+            await page.close();
+            return metrics;
+          }
+
+          results.desktop=await inspect('desktop',{width:1100,height:1350});
+          results.mobile=await inspect('mobile',{width:390,height:844});
+          fs.writeFileSync('/tmp/layout.json',JSON.stringify(results,null,2));
+          console.log(JSON.stringify(results,null,2));
+
+          const d=results.desktop, m=results.mobile;
+          const errors=[];
+          if(Math.abs(d.sheet.width-794)>1 || Math.abs(d.sheet.height-1123)>1) errors.push('desktop sheet not 794x1123');
+          if(d.outside.length) errors.push('desktop descendants outside sheet: '+d.outside.length);
+          if(d.clipped.length) errors.push('desktop horizontal clipping: '+d.clipped.length);
+          if(d.forbidden.length) errors.push('solved answers visible: '+d.forbidden.join(','));
+          if(d.missing.length) errors.push('missing source phrases: '+d.missing.join(','));
+          if(m.outside.length) errors.push('mobile descendants outside scaled sheet: '+m.outside.length);
+          if(m.clipped.length) errors.push('mobile horizontal clipping: '+m.clipped.length);
+          if(errors.length){ console.error(errors.join('\n')); process.exit(1); }
+          await browser.close();
+          NODE
+          node /tmp/a4-qa.mjs
+
+      - name: Upload visual proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quadrilaterals-a4-visual-proof
+          path: |
+            /tmp/desktop.png
+            /tmp/mobile.png
+            /tmp/layout.json
+          if-no-files-found: warn
