@@ -6,7 +6,7 @@
 <title>מרובעים — דפי השלמה</title>
 <style>
 :root{--ink:#17324d;--muted:#5d7385;--blue:#2563c8;--teal:#168472;--purple:#7653c5;--orange:#df8429;--green:#2d8a55;--line:#d8e3ea;--paper:#fff;--bg:#edf3f7}
-*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Hebrew","Rubik","Assistant","Arial Hebrew","Segoe UI",Arial,sans-serif;line-height:1.52;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-kerning:normal;font-synthesis:none;font-feature-settings:"kern" 1,"liga" 1}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;line-height:1.52;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-kerning:normal;font-synthesis:none;font-feature-settings:"kern" 1,"liga" 1}
 .top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);padding:10px 12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .top button{border:1px solid #cddae3;background:#fff;color:#23465f;border-radius:999px;padding:8px 15px;font-weight:850;cursor:pointer}.top button.active{background:#173b57;color:#fff;border-color:#173b57}.top .print-a4{background:#173b57;color:#fff;border-color:#173b57;margin-inline-start:8px}
 .topic{display:none}.topic.active{display:block}.pages{display:grid;gap:26px;padding:26px 12px 60px}.sheet{position:relative;width:794px;height:1123px;min-height:1123px;max-height:1123px;margin:auto;background:#fff;border:1px solid #dfe7ed;border-radius:8px;box-shadow:0 12px 34px rgba(22,48,70,.12);padding:28px 32px 34px;overflow:hidden}.sheet:before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--c1)}.sheet[data-t="p"]{--c1:#2563c8;--c2:#168472;--c3:#df8429}.sheet[data-t="r"]{--c1:#168472;--c2:#2563c8;--c3:#7653c5}.sheet[data-t="h"]{--c1:#7653c5;--c2:#2563c8;--c3:#df8429}.sheet[data-t="s"]{--c1:#2563c8;--c2:#7653c5;--c3:#168472}
@@ -52,7 +52,7 @@
 .li{display:grid;grid-template-columns:22px 1fr;gap:6px;align-items:start;font-size:17px;line-height:1.3;font-weight:690}
 .bullet{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#eef4f8;font-size:11px;font-weight:900}
 .footer{position:absolute;inset:auto 28px 7px;border:0;padding:0;text-align:center;font-size:9px;color:#8a9aa6;font-weight:700}
-.source-exact{position:absolute;inset:0;width:794px;height:1123px;background:#fff;overflow:hidden}
+.source-exact{display:none!important}
 .source-exact .src-text{position:absolute;direction:rtl;text-align:right;white-space:normal;font-size:20px;line-height:1.25;font-weight:650;color:#17324d}
 .source-exact .src-title{font-size:58px;line-height:1.05;font-weight:950;text-align:center}
 .source-exact .src-heading{font-size:34px;line-height:1.1;font-weight:950;text-align:right}
@@ -67,6 +67,32 @@
 .source-exact .src-geo svg,.source-exact .src-geo2 svg,.source-exact .src-geo3 svg{width:100%;height:100%;max-height:none}
 .sheet.source-page{padding:0!important}
 .sheet.source-page>.title,.sheet.source-page>.stack,.sheet.source-page>.num,.sheet.source-page>.footer{display:none!important}
+.textbook-source{position:absolute;inset:0;padding:24px 30px 28px;background:#fff;display:grid;grid-template-rows:auto auto auto 1fr 1fr;gap:12px;overflow:hidden}
+.textbook-source .tb-title{text-align:center;font-size:39px;line-height:1;font-weight:950;color:#123a58;margin:0;padding:4px 0 7px;border-bottom:2px solid #dbe7ef}
+.textbook-source .tb-definition{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(250px,.65fr);gap:18px;align-items:center;padding:10px 12px;border:1px solid #d9e4eb;border-radius:10px;background:#fbfdfe}
+.textbook-source .tb-definition-text{font-size:18px;line-height:1.4;font-weight:720;text-align:right}
+.textbook-source .tb-definition-math{display:grid;gap:5px;align-content:center;justify-items:center}
+.textbook-source .tb-caption{font-size:15px;font-weight:800;color:#244b65;text-align:center;white-space:nowrap}
+.textbook-source .tb-heading{font-size:25px;line-height:1.1;font-weight:950;color:#17324d;text-align:right;padding:3px 2px 1px}
+.textbook-source .tb-property{min-height:0;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(235px,.78fr);grid-template-rows:auto 1fr auto;column-gap:16px;row-gap:5px;align-items:center;padding:10px 12px;border-top:1px solid #dce6ec}
+.textbook-source .tb-property-text{grid-column:1;grid-row:1;font-size:18px;line-height:1.35;font-weight:740;text-align:right}
+.textbook-source .tb-property .geo{grid-column:2;grid-row:1 / span 2;min-height:0;height:185px;padding:0;background:transparent}
+.textbook-source .tb-property .geo svg{width:100%;height:100%;max-height:none}
+.textbook-source .tb-caption-row{grid-column:2;grid-row:3;text-align:center;font-size:14px;font-weight:800;color:#244b65;white-space:nowrap}
+.textbook-source .tb-completion{grid-column:1;grid-row:2 / span 2;align-self:center;direction:ltr;unicode-bidi:isolate;display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;padding:5px 4px;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:21px}
+.textbook-source .tb-completion.eq{font-size:22px}
+.textbook-source .tb-completion .pair{display:flex;gap:9px;align-items:center;justify-content:center;min-width:0}
+.textbook-source .tb-completion .line{display:inline-block;width:72px;border-bottom:2px solid #17324d;height:1em}
+.textbook-source .tb-completion .join{direction:rtl;font-family:"Noto Sans Hebrew",Arial,sans-serif;font-size:15px;font-weight:850}
+.textbook-source .tb-symbolic{direction:ltr;unicode-bidi:isolate;display:flex;justify-content:center;align-items:center;gap:15px;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:21px;font-weight:650}
+.textbook-source .tb-symbolic .he{direction:rtl;font-family:"Noto Sans Hebrew",Arial,sans-serif;font-size:15px;font-weight:850}
+.textbook-source .math-token{direction:ltr;unicode-bidi:isolate;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-style:italic;font-weight:650}
+@media(max-width:800px){
+  .textbook-source{padding:24px 30px 28px!important}
+}
+@media print{
+  .textbook-source{padding:24px 30px 28px!important}
+}
 
 /* Density classes are applied automatically from the real rendered height. */
 .sheet.fit-compact .statement{font-size:17px;line-height:1.28}
@@ -186,36 +212,46 @@ const page=(t,n,title,sub,html)=>`<article class="sheet" data-t="${t}" data-page
 const topics={
 parallelogram:{label:'מקבילית',t:'p',pages:[
 ()=>`<article class="sheet source-page" data-t="p" data-page="1">
-<div class="source-exact">
-  ${sourceText('מקבילית',24.763,62.799,672.954,77.755,'src-title')}
-  ${sourceText('הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות ________ זו לזו.',161.737,0,770,27)}
-  ${sourceText('המרובע <bdi dir="ltr">ABCD</bdi> הוא מקבילית:',202.781,7,763,27)}
-  <div class="src-geo">${GEO('parallelogram',{parallel:true})}</div>
-  ${sourceBlank(289.849,619.346,94.985,35.202)}
-  ${sourceText('וגם',289.849,491.085,41.074,35.202,'src-and')}
+<div class="textbook-source">
+  <h1 class="tb-title">מקבילית</h1>
 
-  ${sourceText('תכונות המקבילית:',441.511,455.936,312.5,48,'src-heading')}
-  ${sourceText('במקבילית כל זוג צלעות _______ מקבילות זו לזו (לפי ההגדרה).',565.533,186.839,543.009,25)}
-  ${sourceText('מקבילית <bdi dir="ltr">ABCD</bdi>',629.999,84,380,25,'src-caption')}
-  <div class="src-geo2">${GEO('parallelogram',{parallel:true})}</div>
+  <section class="tb-definition">
+    <div class="tb-definition-text">
+      הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות <span class="blank long"></span> זו לזו.
+    </div>
+    <div class="tb-definition-math">
+      <div class="tb-caption">המרובע <span class="math-token">ABCD</span> הוא מקבילית:</div>
+      <div class="tb-symbolic">
+        <span class="math-token">AB ∥ CD</span>
+        <span class="he">וגם</span>
+        <span class="math-token">AD ∥ BC</span>
+      </div>
+    </div>
+  </section>
 
-  ${sourceBlank(747.676,377.778,66.738,24.733)}
-  ${sourceBlank(747.676,294.987,66.738,24.733)}
-  ${sourceText('וגם',747.676,449.247,41.094,24.733,'src-and')}
-  ${sourceBlank(747.676,571.587,66.738,24.733)}
-  ${sourceBlank(747.676,488.795,66.738,24.733)}
+  <div class="tb-heading">תכונות המקבילית:</div>
 
-  ${sourceText('במקבילית כל שתי _______ נגדיות שוות זו לזו.',868.903,326.097,405.42,25)}
-  ${sourceText('מקבילית <bdi dir="ltr">ABCD</bdi>',950.507,84,380,25,'src-caption')}
-  <div class="src-geo3">${GEO('parallelogram',{oppEqual:true})}</div>
+  <section class="tb-property">
+    <div class="tb-property-text">במקבילית כל זוג צלעות <span class="blank"></span> מקבילות זו לזו (לפי ההגדרה).</div>
+    ${GEO('parallelogram',{parallel:true})}
+    <div class="tb-completion">
+      <div class="pair"><span class="line"></span><span class="line"></span></div>
+      <div class="join">וגם</div>
+      <div class="pair"><span class="line"></span><span class="line"></span></div>
+    </div>
+    <div class="tb-caption-row">מקבילית <span class="math-token">ABCD</span></div>
+  </section>
 
-  ${sourceBlank(1025.340,379.446,66.738,61.2)}
-  ${sourceBlank(1025.340,296.655,66.738,61.2)}
-  ${sourceText('=',1055.940,337.808,66.738,28.2,'src-eq')}
-  ${sourceText('וגם',1058.340,448.184,41.094,24.733,'src-and')}
-  ${sourceBlank(1027.205,579.045,66.738,61.2)}
-  ${sourceBlank(1027.205,496.254,66.738,61.2)}
-  ${sourceText('=',1057.805,536.197,66.738,24.733,'src-eq')}
+  <section class="tb-property">
+    <div class="tb-property-text">במקבילית כל שתי <span class="blank"></span> נגדיות שוות זו לזו.</div>
+    ${GEO('parallelogram',{oppEqual:true})}
+    <div class="tb-completion eq">
+      <div class="pair"><span class="line"></span><span>=</span><span class="line"></span></div>
+      <div class="join">וגם</div>
+      <div class="pair"><span class="line"></span><span>=</span><span class="line"></span></div>
+    </div>
+    <div class="tb-caption-row">מקבילית <span class="math-token">ABCD</span></div>
+  </section>
 </div>
 </article>`,
 ()=>page('p',2,'מקבילית','',`<div class="grid2">${GEO('parallelogram',{diag:true,center:true,midpoints:true})}${box('prop','תכונות המקבילית',st(`במקבילית האלכסונים ${B()} זה את זה.`)+st(`במקבילית סכום כל שתי זוויות ${B()} שווה ל - ${B('short')}`)+st(`במקבילית כל שתי זוויות נגדיות ${B()} זו לזו.`)+`<div class="mathline">${M('AO = OC')} &nbsp;&nbsp; ${M('BO = OD')}</div>`)}</div>`),
