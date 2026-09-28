@@ -1,0 +1,1448 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#123B5D">
+  <meta name="color-scheme" content="light">
+  <title>מרובעים — דפי השלמה מדויקים</title>
+  <meta name="description" content="דפי השלמה אינטראקטיביים במרובעים: מקבילית, מלבן, מעויין וריבוע. RTL, MathML, SVG וקטורי, שמירה מקומית והדפסת A4.">
+  <style>
+:root {
+  --ink: #17324D;
+  --ink-soft: #45627A;
+  --muted: #6C7E8E;
+  --paper: #FFFFFF;
+  --canvas: #EEF4F8;
+  --line: #D8E4EC;
+  --line-strong: #B9CCD9;
+  --blue: #2367D1;
+  --blue-soft: #EEF5FF;
+  --teal: #0F8A79;
+  --teal-soft: #EEF9F6;
+  --green: #2D9B5D;
+  --green-soft: #F0FAF4;
+  --orange: #E9872B;
+  --orange-soft: #FFF7EE;
+  --purple: #7652C9;
+  --purple-soft: #F7F3FF;
+  --red: #C74444;
+  --red-soft: #FFF1F1;
+  --shadow: 0 18px 50px rgba(20, 48, 72, 0.14);
+  --radius-lg: 26px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --page-w: 794px;
+  --page-h: 1123px;
+  --reading-width: 680px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(35,103,209,.08), transparent 34%),
+    radial-gradient(circle at 100% 22%, rgba(15,138,121,.07), transparent 28%),
+    var(--canvas);
+  color: var(--ink);
+  font-family: "Noto Sans Hebrew", "Arial Hebrew", Arial, "Segoe UI", sans-serif;
+  line-height: 1.52;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+button, input { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid rgba(35, 103, 209, .28);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  z-index: 999;
+  transform: translateY(-160%);
+  background: #111827;
+  color: white;
+  padding: 9px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 800;
+}
+.skip-link:focus { transform: none; }
+
+.appbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,.965);
+  border-bottom: 1px solid rgba(185,204,217,.75);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 6px 22px rgba(33, 58, 78, .07);
+}
+.appbar__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 10px 14px;
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto;
+  gap: 10px 18px;
+  align-items: center;
+}
+.brand { min-width: 0; }
+.brand__title { display: block; font-size: 21px; font-weight: 950; color: #123B5D; }
+.brand__subtitle { display: block; margin-top: 1px; font-size: 11px; font-weight: 750; color: var(--muted); }
+.topic-tabs { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; }
+.topic-tab {
+  border: 1px solid #CCDCE7;
+  background: white;
+  color: #284B65;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 900;
+  transition: .18s ease;
+}
+.topic-tab:hover { transform: translateY(-1px); border-color: #9DB9CC; }
+.topic-tab[aria-selected="true"] { background: #123B5D; color: white; border-color: #123B5D; }
+.toolbar { display: flex; gap: 7px; flex-wrap: wrap; justify-content: end; }
+.tool-button {
+  border: 1px solid #D0DEE8;
+  border-radius: 12px;
+  padding: 9px 12px;
+  font-weight: 850;
+  color: #21445D;
+  background: #F7FAFC;
+}
+.tool-button:hover { background: #EEF5F9; }
+.tool-button--primary { background: #173B57; border-color: #173B57; color: white; }
+.tool-button--danger { background: #B93838; border-color: #B93838; color: white; }
+
+.statusbar { border-bottom: 1px solid rgba(216,228,236,.75); background: rgba(247,251,253,.9); }
+.statusbar__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 8px 14px;
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #D8E4EC;
+  border-radius: 999px;
+  background: white;
+  color: #526A7D;
+  padding: 5px 9px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.status-chip--progress { margin-inline-start: auto; color: #173B57; border-color: #B9CCD9; }
+
+.topic { display: none; }
+.topic.is-active { display: block; }
+.topic-intro {
+  max-width: var(--page-w);
+  margin: 20px auto 10px;
+  padding: 0 18px;
+  color: #64798A;
+  font-size: 14px;
+  font-weight: 750;
+  text-align: center;
+}
+.pages {
+  max-width: 1050px;
+  margin: 0 auto 70px;
+  padding: 0 14px;
+  display: grid;
+  gap: 28px;
+}
+.sheet {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, var(--page-w));
+  min-height: var(--page-h);
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--paper);
+  border: 1px solid #E0E8EE;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 50px 50px 58px;
+}
+.sheet::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 auto 0 0;
+  width: 10px;
+  background: linear-gradient(180deg, var(--topic-a, var(--blue)), var(--topic-b, var(--teal)) 50%, var(--topic-c, var(--orange)) 100%);
+}
+.sheet::after {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  inset: -120px -80px auto auto;
+  background: color-mix(in srgb, var(--topic-a, var(--blue)) 8%, transparent);
+}
+.sheet[data-topic="parallelogram"] { --topic-a: #2367D1; --topic-b: #0F8A79; --topic-c: #E9872B; }
+.sheet[data-topic="rectangle"] { --topic-a: #0F8A79; --topic-b: #2367D1; --topic-c: #7652C9; }
+.sheet[data-topic="rhombus"] { --topic-a: #7652C9; --topic-b: #2367D1; --topic-c: #E9872B; }
+.sheet[data-topic="square"] { --topic-a: #2367D1; --topic-b: #7652C9; --topic-c: #0F8A79; }
+.page-badge {
+  position: absolute;
+  top: 18px;
+  left: 22px;
+  min-width: 54px;
+  text-align: center;
+  border: 1px solid #D5E2EA;
+  border-radius: 999px;
+  background: rgba(247,250,252,.94);
+  color: #64798A;
+  padding: 5px 9px;
+  font-size: 12px;
+  font-weight: 900;
+}
+.sheet-header { margin: 0 auto 24px; max-width: 660px; text-align: center; }
+.sheet-kicker {
+  display: inline-block;
+  margin-bottom: 7px;
+  color: var(--topic-a, var(--blue));
+  font-size: 13px;
+  font-weight: 950;
+  letter-spacing: .25px;
+}
+.sheet-title {
+  margin: 0;
+  color: #123B5D;
+  font-size: 47px;
+  line-height: 1.05;
+  font-weight: 950;
+  letter-spacing: -1px;
+}
+.sheet-subtitle {
+  max-width: 620px;
+  margin: 10px auto 0;
+  color: #617687;
+  font-size: 17px;
+  font-weight: 850;
+}
+.content-stack { display: grid; gap: 16px; }
+
+.panel {
+  border: 1.7px solid var(--panel-line, #D6E3EB);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--panel-bg, #FBFDFE), #FFF 70%);
+  padding: 18px 20px;
+  break-inside: avoid;
+}
+.panel--definition { --panel-line: #83CEA5; --panel-bg: #F1FBF5; }
+.panel--property { --panel-line: #8CB8EF; --panel-bg: #F2F7FF; }
+.panel--important { --panel-line: #F0B878; --panel-bg: #FFF8F0; }
+.panel--special { --panel-line: #BEA8EB; --panel-bg: #F8F5FF; }
+.panel--proof { --panel-line: #9AB8C9; --panel-bg: #F6FAFC; }
+.panel--neutral { --panel-line: #D8E4EC; --panel-bg: #FBFDFE; }
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 10px;
+  color: var(--title-color, #173B57);
+  font-size: 24px;
+  font-weight: 950;
+}
+.panel--definition .panel-title { --title-color: #24844E; }
+.panel--property .panel-title { --title-color: #1F63B8; }
+.panel--important .panel-title { --title-color: #CF741D; }
+.panel--special .panel-title { --title-color: #7042BD; }
+.panel-icon {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: white;
+  border: 1px solid currentColor;
+  font-size: 15px;
+}
+.statement { margin: 8px 0; color: #203D54; font-size: 20px; font-weight: 760; }
+.statement--large { font-size: 22px; }
+.statement--soft { color: #526D81; font-weight: 690; }
+.statement strong { color: #123B5D; }
+
+.layout-2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; align-items: stretch; }
+.layout-3 { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+.card {
+  border: 1.4px solid #D9E5EC;
+  border-radius: var(--radius-md);
+  background: #FBFDFE;
+  padding: 15px;
+  break-inside: avoid;
+}
+.card--teal { border-color: #A8D9CF; background: #F3FBF9; }
+.card--purple { border-color: #CABAE9; background: #FAF8FF; }
+.card--orange { border-color: #F0C499; background: #FFF9F3; }
+.card-title { margin: 0 0 7px; font-size: 19px; font-weight: 950; color: #244B65; }
+
+.geometry-card {
+  min-height: 270px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid #D9E5EC;
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(90deg, rgba(216,228,236,.24) 1px, transparent 1px),
+    linear-gradient(rgba(216,228,236,.24) 1px, transparent 1px),
+    #FBFDFE;
+  background-size: 22px 22px;
+  padding: 10px;
+  overflow: hidden;
+}
+.geometry-svg { width: min(100%, 360px); height: auto; display: block; }
+.geometry-svg .shape { fill: rgba(35,103,209,.045); stroke: #173B57; stroke-width: 4; stroke-linejoin: round; }
+.geometry-svg .diag { stroke: #698096; stroke-width: 2.3; }
+.geometry-svg .diag--accent { stroke: #7652C9; }
+.geometry-svg .mark-equal { stroke: #7652C9; stroke-width: 3.2; stroke-linecap: round; }
+.geometry-svg .mark-parallel { fill: none; stroke: #E9872B; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.geometry-svg .mark-right { fill: none; stroke: #0F8A79; stroke-width: 3; stroke-linejoin: round; }
+.geometry-svg .mark-midpoint-a { stroke: #2367D1; stroke-width: 3.2; }
+.geometry-svg .mark-midpoint-b { stroke: #0F8A79; stroke-width: 3.2; }
+.geometry-svg .angle-arc { fill: none; stroke: #E9872B; stroke-width: 2.8; stroke-linecap: round; }
+.geometry-svg .vertex { fill: #173B57; }
+.geometry-svg .center-point { fill: #C05621; }
+.geometry-svg text {
+  fill: #102E47;
+  font-family: "Cambria Math", "STIX Two Math", "Times New Roman", serif;
+  font-size: 21px;
+  font-style: italic;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: white;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.fill-line {
+  display: inline-grid;
+  grid-template-columns: minmax(72px, auto);
+  vertical-align: baseline;
+  margin-inline: 3px;
+}
+.blank {
+  direction: rtl;
+  min-width: 92px;
+  max-width: 190px;
+  border: 0;
+  border-bottom: 2.5px solid #38566E;
+  background: transparent;
+  color: #173B57;
+  padding: 1px 5px 2px;
+  text-align: center;
+  font-weight: 900;
+  outline: none;
+  transition: .15s ease;
+}
+.blank[data-size="short"] { min-width: 62px; }
+.blank[data-size="long"] { min-width: 155px; }
+.blank:hover { border-bottom-color: var(--blue); }
+.blank.is-correct { border-color: #278B55; background: #EFFAF4; border-radius: 7px 7px 0 0; }
+.blank.is-wrong { border-color: #C74444; background: #FFF1F1; border-radius: 7px 7px 0 0; }
+.answer-chip {
+  display: none;
+  margin-inline-start: 5px;
+  padding: 2px 7px;
+  border-radius: 8px;
+  background: #E8F7ED;
+  color: #197046;
+  font-size: 14px;
+  font-weight: 900;
+}
+body.teacher-mode .answer-chip { display: inline-block; }
+body.teacher-mode .blank { border-bottom-style: dashed; }
+
+.math-inline {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: -0.16em;
+  white-space: nowrap;
+  font-family: "Cambria Math", "STIX Two Math", "Times New Roman", serif;
+  font-size: 1.06em;
+  font-weight: 650;
+}
+.math-display {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: center;
+  overflow-x: auto;
+  border: 1px solid #CFE0EA;
+  border-radius: 14px;
+  background: #F9FCFE;
+  padding: 11px 12px;
+  margin: 10px 0;
+  font-family: "Cambria Math", "STIX Two Math", "Times New Roman", serif;
+  font-size: 23px;
+  font-weight: 700;
+}
+math { font-family: "Cambria Math", "STIX Two Math", "Times New Roman", serif; font-size: 1.05em; }
+math[display="block"] { margin: .25em 0; font-size: 1.12em; }
+
+.proof-list { display: grid; gap: 12px; counter-reset: proof-step; }
+.proof-step {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 11px;
+  align-items: start;
+}
+.proof-step::before {
+  counter-increment: proof-step;
+  content: counter(proof-step);
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #173B57;
+  color: white;
+  font-size: 16px;
+  font-weight: 950;
+}
+.proof-step__body { padding-top: 2px; }
+.logic-arrow { display: inline-block; margin: 0 4px; color: #24844E; font-weight: 950; }
+
+.summary-list { display: grid; gap: 9px; }
+.summary-item { display: grid; grid-template-columns: 36px 1fr; gap: 10px; align-items: center; font-size: 19px; font-weight: 750; }
+.summary-num { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: #EDF4F8; color: #173B57; font-weight: 950; }
+
+.page-footer {
+  position: absolute;
+  inset: auto 50px 17px 50px;
+  padding-top: 8px;
+  border-top: 1px solid #D9E5EC;
+  color: #7B8B98;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.confirm-dialog {
+  max-width: 420px;
+  border: 0;
+  border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(20,48,72,.26);
+  padding: 22px;
+  color: var(--ink);
+}
+.confirm-dialog::backdrop { background: rgba(16, 31, 44, .42); backdrop-filter: blur(3px); }
+.confirm-dialog h2 { margin-top: 0; }
+.dialog-actions { display: flex; gap: 8px; justify-content: end; }
+.noscript { max-width: 760px; margin: 20px auto; background: white; border: 1px solid #D8E4EC; border-radius: 14px; padding: 16px; }
+
+@media (max-width: 820px) {
+  .appbar__inner { grid-template-columns: 1fr; }
+  .toolbar { justify-content: start; }
+  .topic-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 3px; }
+  .topic-tab { white-space: nowrap; }
+  .status-chip--progress { margin-inline-start: 0; }
+  .sheet { min-height: auto; border-radius: 0; padding: 38px 24px 50px; }
+  .sheet-title { font-size: 38px; }
+  .sheet-subtitle { font-size: 15px; }
+  .layout-2, .layout-3 { grid-template-columns: 1fr; }
+  .statement { font-size: 18px; }
+  .statement--large { font-size: 20px; }
+  .panel-title { font-size: 21px; }
+  .geometry-card { min-height: 230px; }
+  .page-footer { position: static; margin-top: 26px; }
+  .page-badge { top: 10px; left: 12px; }
+}
+
+@media print {
+  html, body { background: #fff !important; }
+  .screen-only, .skip-link, .confirm-dialog { display: none !important; }
+  .topic { display: none !important; }
+  .topic.print-target { display: block !important; }
+  .topic-intro { display: none; }
+  .pages { display: block; margin: 0; padding: 0; }
+  .sheet {
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+    max-height: 297mm;
+    overflow: hidden;
+    margin: 0;
+    padding: 12mm 13mm 13mm;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    break-after: page;
+    page-break-after: always;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sheet::before { width: 2.4mm; }
+  .sheet-title { font-size: 34pt; }
+  .sheet-subtitle { font-size: 12pt; }
+  .panel { padding: 10px 12px; margin: 0; }
+  .panel-title { font-size: 16pt; margin-bottom: 6px; }
+  .statement { font-size: 13.5pt; line-height: 1.36; }
+  .geometry-card { min-height: 54mm; }
+  .geometry-svg { max-height: 52mm; }
+  .page-footer { position: absolute; right: 13mm; left: 13mm; bottom: 6mm; font-size: 8pt; }
+  .blank { min-width: 23mm; }
+  .answer-chip { display: none !important; }
+  @page { size: A4; margin: 0; }
+}
+
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">דלג לתוכן</a>
+  <header class="appbar screen-only" role="banner">
+    <div class="appbar__inner">
+      <div class="brand" aria-label="מרובעים — דפי השלמה">
+        <span class="brand__title">מרובעים — דפי השלמה</span>
+        <span class="brand__subtitle">הגדרה ← תכונות ← סימון מתמטי ← הוכחה ← שטח / סיכום</span>
+      </div>
+      <nav class="topic-tabs" id="topicTabs" aria-label="בחירת נושא"></nav>
+      <div class="toolbar" aria-label="כלי עבודה">
+        <button class="tool-button" id="teacherBtn" type="button" aria-pressed="false">מצב מורה</button>
+        <button class="tool-button" id="checkBtn" type="button">בדיקה</button>
+        <button class="tool-button" id="resetBtn" type="button">איפוס נושא</button>
+        <button class="tool-button tool-button--primary" id="printBtn" type="button">הדפסה / PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="statusbar screen-only" aria-label="מצב האתר">
+    <div class="statusbar__inner">
+      <span class="status-chip"><span aria-hidden="true">✓</span> RTL מלא</span>
+      <span class="status-chip"><span aria-hidden="true">✓</span> MathML סמנטי</span>
+      <span class="status-chip"><span aria-hidden="true">✓</span> SVG גאומטרי וקטורי</span>
+      <span class="status-chip"><span aria-hidden="true">✓</span> עובד ללא אינטרנט</span>
+      <span class="status-chip"><span aria-hidden="true">✓</span> A4 + נייד</span>
+      <span class="status-chip status-chip--progress" id="progressChip">0% הושלם</span>
+    </div>
+  </section>
+
+  <main id="main" tabindex="-1">
+    <div id="app" aria-live="polite"></div>
+  </main>
+
+  <dialog id="resetDialog" class="confirm-dialog">
+    <form method="dialog">
+      <h2>לאפס את הנושא?</h2>
+      <p>כל התשובות השמורות בנושא הנוכחי יימחקו מהמכשיר הזה.</p>
+      <div class="dialog-actions">
+        <button value="cancel" class="tool-button">ביטול</button>
+        <button value="confirm" class="tool-button tool-button--danger">איפוס</button>
+      </div>
+    </form>
+  </dialog>
+
+  <noscript>
+    <div class="noscript">כדי להשתמש בדפי ההשלמה האינטראקטיביים יש להפעיל JavaScript. ההדפסה והטקסט עדיין זמינים דרך קובצי המקור.</div>
+  </noscript>
+
+  <script>
+(() => {
+  'use strict';
+
+  const esc = (s) => String(s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+  const Q = (id, answer, answers = [], size = '') => {
+    const accepted = [answer, ...answers].map(String).join('¦');
+    return `<span class="fill-line"><input class="blank" ${size ? `data-size="${esc(size)}"` : ''} data-qid="${esc(id)}" data-answer="${esc(answer)}" data-answers="${esc(accepted)}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="השלמה: ${esc(answer)}"><span class="answer-chip" aria-hidden="true">${esc(answer)}</span></span>`;
+  };
+
+  const M = (body, display = false, aria = '') => {
+    const wrapper = display ? 'math-display' : 'math-inline';
+    return `<span class="${wrapper}" ${aria ? `aria-label="${esc(aria)}"` : ''}><math xmlns="http://www.w3.org/1998/Math/MathML"${display ? ' display="block"' : ''}>${body}</math></span>`;
+  };
+  const mi = (x) => `<mi mathvariant="italic">${esc(x)}</mi>`;
+  const mn = (x) => `<mn>${esc(x)}</mn>`;
+  const mo = (x) => `<mo>${esc(x)}</mo>`;
+  const eq = (a,b) => M(`<mrow>${mi(a)}${mo('=')}${mi(b)}</mrow>`, false, `${a} שווה ${b}`);
+  const par = (a,b) => M(`<mrow>${mi(a)}${mo('∥')}${mi(b)}</mrow>`, false, `${a} מקביל ל-${b}`);
+  const perp = (a,b) => M(`<mrow>${mi(a)}${mo('⊥')}${mi(b)}</mrow>`, false, `${a} מאונך ל-${b}`);
+  const angleEq = (a,b) => M(`<mrow>${mo('∠')}${mi(a)}${mo('=')}${mo('∠')}${mi(b)}</mrow>`);
+  const fourRightAngles = M(`<mrow>${mo('∠')}${mi('A')}${mo('=')}${mo('∠')}${mi('B')}${mo('=')}${mo('∠')}${mi('C')}${mo('=')}${mo('∠')}${mi('D')}${mo('=')}${mn('90')}${mo('°')}</mrow>`, true, 'כל ארבע הזוויות שוות לתשעים מעלות');
+
+  const D = (kind, options = {}, caption = '') => `<figure class="geometry-card" data-geometry="${esc(kind)}" data-options="${esc(JSON.stringify(options))}">${caption ? `<figcaption class="sr-only">${esc(caption)}</figcaption>` : ''}</figure>`;
+
+  const panel = (type, title, body, icon = '◆') => `
+    <section class="panel panel--${type}">
+      <h2 class="panel-title"><span class="panel-icon" aria-hidden="true">${icon}</span>${title}</h2>
+      ${body}
+    </section>`;
+
+  const statement = (html, cls = '') => `<p class="statement ${cls}">${html}</p>`;
+  const formula = (html) => `<div class="math-display">${html}</div>`;
+  const proofStep = (html) => `<div class="proof-step"><div class="proof-step__body">${statement(html)}</div></div>`;
+  const proofList = (steps) => `<div class="proof-list">${steps.map(proofStep).join('')}</div>`;
+  const summary = (items) => `<div class="summary-list">${items.map((x,i)=>`<div class="summary-item"><span class="summary-num">${i+1}</span><span>${x}</span></div>`).join('')}</div>`;
+
+  const topics = {
+    parallelogram: {
+      label: 'מקבילית',
+      color: '#2367D1',
+      intro: 'הגדרה ← תכונות ← סימון מתמטי ← דרכי הוכחה ← שטח',
+      pages: [
+        {
+          subtitle: 'עמוד 1 · הגדרה, צלעות וזוויות',
+          html: [
+            panel('definition','הגדרה',
+              statement(`מקבילית היא מרובע בעל שני זוגות של צלעות נגדיות ${Q('para.definition.parallel','מקבילות',['מקבילים'])} זו לזו.`,'statement--large') +
+              `<div class="math-display">${par('AB','CD')} &nbsp;&nbsp; ${par('AD','BC')}</div>`,'הגדרה'),
+            `<div class="layout-2">
+              ${D('parallelogram',{parallelPairs:true,equalOppositeSides:true},'מקבילית ABCD עם סימוני מקבילות ושוויון צלעות נגדיות')}
+              ${panel('property','תכונות המקבילית',
+                statement(`במקבילית כל שתי צלעות ${Q('para.p1.oppositeSides','נגדיות')} שוות זו לזו.`) +
+                statement(`במקבילית כל שתי זוויות ${Q('para.p1.oppositeAngles','נגדיות')} שוות זו לזו.`) +
+                `<div class="math-display">${eq('AB','CD')} &nbsp;&nbsp; ${eq('AD','BC')}<br>${angleEq('A','C')} &nbsp;&nbsp; ${angleEq('B','D')}</div>`,'תכונות')}
+            </div>`
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 2 · אלכסונים וזוויות סמוכות',
+          html: [
+            `<div class="layout-2">
+              ${D('parallelogram',{diagonals:true,center:true,midpointTicks:true},'מקבילית ABCD שאלכסוניה נחתכים בנקודה O וחוצים זה את זה')}
+              ${panel('property','האלכסונים במקבילית',
+                statement(`במקבילית האלכסונים ${Q('para.p2.diagonalsBisect','חוצים')} זה את זה.`) +
+                `<div class="math-display">${eq('AO','OC')} &nbsp;&nbsp; ${eq('BO','OD')}</div>`,'אלכסונים')}
+            </div>`,
+            panel('important','זוויות סמוכות',
+              statement(`במקבילית סכום כל שתי זוויות ${Q('para.p2.adjacentAngles','סמוכות')} שווה ל־${Q('para.p2.sum180','180°',['180','180 מעלות'],'short')}.`) +
+              `<div class="math-display">${M(`<mrow>${mo('∠')}${mi('A')}${mo('+')}${mo('∠')}${mi('B')}${mo('=')}${mn('180')}${mo('°')}</mrow>`)}</div>`,'חשוב')
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 3 · איך מוכיחים שמרובע הוא מקבילית?',
+          html: [
+            panel('proof','איך מוכיחים?', proofList([
+              `לפי ההגדרה: אם במרובע כל זוג צלעות נגדיות ${Q('para.p3.byDefinition','מקבילות',['מקבילים'])} זו לזו — המרובע הוא מקבילית.`,
+              `אם במרובע כל זוג צלעות נגדיות ${Q('para.p3.oppositeSidesEqual','שוות')} זו לזו — המרובע הוא מקבילית.`,
+              `אם במרובע כל זוג זוויות נגדיות ${Q('para.p3.oppositeAnglesEqual','שוות')} זו לזו — המרובע הוא מקבילית.`
+            ]),'הוכחה'),
+            `<div class="layout-2">
+              ${D('parallelogram',{parallelPairs:true},'מקבילית עם שני זוגות צלעות נגדיות מקבילות')}
+              <div class="card card--teal"><h3 class="card-title">כתיבה מתמטית</h3>${statement(`${par('AB','CD')} וגם ${par('AD','BC')}`)}${statement(`<span class="logic-arrow">▼</span> המרובע ABCD הוא מקבילית.`)}</div>
+            </div>`
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 4 · שני משפטי הוכחה חשובים נוספים',
+          html: [
+            panel('proof','משפטים שימושיים', proofList([
+              `אם במרובע האלכסונים ${Q('para.p4.diagonalsBisect','חוצים')} זה את זה — המרובע הוא מקבילית.`,
+              `אם במרובע קיים זוג אחד של צלעות נגדיות שהן גם ${Q('para.p4.parallel','מקבילות',['מקבילים'])} וגם ${Q('para.p4.equal','שוות')} — המרובע הוא מקבילית.`
+            ]),'משפט'),
+            `<div class="layout-2">
+              ${D('parallelogram',{diagonals:true,center:true,midpointTicks:true},'אלכסונים החוצים זה את זה')}
+              ${D('parallelogram',{oneParallelEqualPair:true},'זוג צלעות נגדיות שגם מקבילות וגם שוות')}
+            </div>`
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 5 · איך מחשבים שטח של מקבילית?',
+          html: [
+            panel('definition','שטח מקבילית',
+              statement(`שטח של מקבילית שווה למכפלת אורך הצלע באורך ה${Q('para.p5.height','גובה')} המתאים לצלע זו.`,'statement--large') +
+              `${M(`<mrow><mi>S</mi><mo>=</mo><mi>a</mi><mo>·</mo><mi>h</mi></mrow>`,true,'שטח שווה בסיס כפול גובה')}`,'שטח'),
+            `<div class="layout-2">
+              ${D('parallelogram',{height:true},'מקבילית עם גובה מאונך לבסיס')}
+              <div class="card card--orange"><h3 class="card-title">השלימו</h3>${statement(`הגובה הוא קטע ה${Q('para.p5.perpendicular','מאונך')} לצלע שנבחרה כבסיס.`)}${statement(`אם הבסיס הוא ${M(`<mi>AB</mi>`)}, אז אפשר לכתוב ${M(`<mrow><msub><mi>S</mi><mrow><mi>A</mi><mi>B</mi><mi>C</mi><mi>D</mi></mrow></msub><mo>=</mo><mi>AB</mi><mo>·</mo><mi>h</mi></mrow>`)}.`)}</div>
+            </div>`
+          ].join('')
+        }
+      ]
+    },
+
+    rectangle: {
+      label: 'מלבן',
+      color: '#0F8A79',
+      intro: 'הגדרה ← תכונות המקבילית ← התכונה המיוחדת של האלכסונים ← הוכחה ← סיכום',
+      pages: [
+        {
+          subtitle: 'עמוד 1 · הגדרה ותכונות המלבן',
+          html: [
+            panel('definition','הגדרה',
+              statement(`מלבן הוא מרובע שבו כל ה${Q('rect.p1.angles','זוויות')} ישרות.`,'statement--large') + fourRightAngles,'הגדרה'),
+            `<div class="layout-2">
+              ${D('rectangle',{rightAngles:true,parallelPairs:true,equalOppositeSides:true},'מלבן ABCD עם סימוני זוויות ישרות וצלעות נגדיות')}
+              ${panel('property','תכונות המלבן',
+                statement(`במלבן כל שתי צלעות ${Q('rect.p1.oppositeParallel','נגדיות')} מקבילות זו לזו.`) +
+                statement(`במלבן כל שתי צלעות ${Q('rect.p1.oppositeEqual','נגדיות')} שוות זו לזו.`) +
+                statement(`במלבן האלכסונים ${Q('rect.p1.bisect','חוצים')} זה את זה.`),'תכונות')}
+            </div>`,
+            panel('important','חשוב לדעת',statement(`כל התכונות של המקבילית מתקיימות גם ב${Q('rect.p1.inherit','מלבן')}.`),'חשוב')
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 2 · התכונה המיוחדת של אלכסוני המלבן',
+          html: [
+            `<div class="layout-2">
+              ${D('rectangle',{diagonals:true,center:true,midpointTicks:true,equalDiagonals:true},'מלבן ABCD שאלכסוניו שווים וחוצים זה את זה')}
+              ${panel('special','אלכסוני המלבן',
+                statement(`במלבן האלכסונים ${Q('rect.p2.diagonalsEqual','שווים')} זה לזה.`,'statement--large') +
+                `<div class="math-display">${eq('AC','BD')}</div>` +
+                statement(`כמו בכל מקבילית, האלכסונים גם ${Q('rect.p2.diagonalsBisect','חוצים')} זה את זה.`),'מיוחד')}
+            </div>`
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 3 · איך מוכיחים שמרובע הוא מלבן?',
+          html: [
+            panel('proof','לפי ההגדרה', proofList([
+              `אם במרובע יש שלוש זוויות ${Q('rect.p3.threeRight','ישרות')} — גם הזווית הרביעית ישרה, ולכן המרובע הוא מלבן.`,
+              `הסיבה: סכום הזוויות במרובע הוא ${Q('rect.p3.sum','360°',['360','360 מעלות'],'short')}.`
+            ]),'הוכחה'),
+            `<div class="layout-2">
+              ${D('rectangle',{rightAngles:true},'מלבן עם ארבע זוויות ישרות')}
+              <div class="card card--teal"><h3 class="card-title">מסקנה</h3>${statement(`אם ${M(`<mrow>${mo('∠')}${mi('A')}${mo('=')}${mo('∠')}${mi('B')}${mo('=')}${mo('∠')}${mi('C')}${mo('=')}${mn('90')}${mo('°')}</mrow>`)} — אז גם ${M(`<mrow>${mo('∠')}${mi('D')}${mo('=')}${mn('90')}${mo('°')}</mrow>`)}.`)}</div>
+            </div>`
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 4 · המלבן הוא מקבילית מיוחדת',
+          html: [
+            panel('property','דרך מקבילית', proofList([
+              `אם במקבילית יש זווית ${Q('rect.p4.oneRight','ישרה')} — המקבילית היא מלבן.`,
+              `אם במקבילית האלכסונים ${Q('rect.p4.equalDiagonals','שווים')} זה לזה — המקבילית היא מלבן.`
+            ]),'מקבילית'),
+            `<div class="layout-2">
+              ${D('rectangle',{rightAngles:true},'מקבילית עם זווית ישרה ולכן מלבן')}
+              ${D('rectangle',{diagonals:true,equalDiagonals:true},'מקבילית עם אלכסונים שווים ולכן מלבן')}
+            </div>`
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 5 · סיכום המלבן',
+          html: [
+            panel('definition','הגדרה', statement('מרובע שבו כל הזוויות ישרות הוא מלבן.'),'הגדרה'),
+            panel('property','תכונות המלבן',summary([
+              'כל שתי צלעות נגדיות מקבילות זו לזו.',
+              'כל שתי צלעות נגדיות שוות זו לזו.',
+              'האלכסונים חוצים זה את זה.',
+              'כל ארבע הזוויות ישרות.',
+              'האלכסונים שווים זה לזה.'
+            ]),'סיכום'),
+            panel('important','איך מוכיחים?',summary([
+              'לפי הגדרה: שלוש זוויות ישרות מספיקות כדי להסיק שגם הרביעית ישרה.',
+              'מקבילית שבה זווית אחת ישרה היא מלבן.',
+              'מקבילית שאלכסוניה שווים זה לזה היא מלבן.'
+            ]),'הוכחה')
+          ].join('')
+        }
+      ]
+    },
+
+    rhombus: {
+      label: 'מעויין',
+      color: '#7652C9',
+      intro: 'הגדרה ← תכונות המקבילית ← אלכסונים וזוויות ← הוכחה ← שטח',
+      pages: [
+        {
+          subtitle: 'עמוד 1 · הגדרה ותכונות המעויין',
+          html: [
+            panel('definition','הגדרה',statement(`מעויין הוא מרובע שכל ה${Q('rh.p1.sides','צלעות')} שלו שוות זו לזו.`,'statement--large'),'הגדרה'),
+            `<div class="layout-2">
+              ${D('rhombus',{equalSides:true,parallelPairs:true},'מעויין ABCD עם ארבע צלעות שוות וזוגות צלעות נגדיות מקבילות')}
+              ${panel('property','תכונות המעויין',
+                statement(`במעויין כל זוג צלעות נגדיות ${Q('rh.p1.parallel','מקבילות',['מקבילים'])} זו לזו.`) +
+                statement(`במעויין כל שתי זוויות נגדיות ${Q('rh.p1.oppositeAngles','שוות')} זו לזו.`) +
+                statement(`במעויין האלכסונים ${Q('rh.p1.bisect','חוצים')} זה את זה.`),'תכונות')}
+            </div>`,
+            panel('important','חשוב לדעת',statement(`כל התכונות של המקבילית מתקיימות גם ב${Q('rh.p1.inherit','מעויין',['מעוין'])}.`),'חשוב')
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 2 · תכונות מיוחדות של האלכסונים',
+          html: [
+            `<div class="layout-2">
+              ${D('rhombus',{diagonals:true,center:true,midpointTicks:true,perpendicularDiagonals:true,angleBisectors:true},'מעויין שבו האלכסונים מאונכים וכל אלכסון חוצה את שתי הזוויות שבקצותיו')}
+              ${panel('special','תכונות מיוחדות',
+                statement(`במעויין האלכסונים ${Q('rh.p2.perpendicular','מאונכים')} זה לזה.`) +
+                statement(`כל אלכסון במעויין ${Q('rh.p2.angleBisector','חוצה')} את שתי הזוויות שבקצותיו.`) +
+                `<div class="math-display">${perp('AC','BD')}<br>${M(`<mrow>${mo('∠')}${mi('BAC')}${mo('=')}${mo('∠')}${mi('CAD')}</mrow>`)}</div>`,'מיוחד')}
+            </div>`
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 3 · איך מוכיחים שמרובע הוא מעויין?',
+          html: [
+            panel('proof','איך מוכיחים?',proofList([
+              `לפי ההגדרה: אם במרובע כל הצלעות ${Q('rh.p3.allSidesEqual','שוות')} — המרובע הוא מעויין.`,
+              `אם במקבילית שתי צלעות ${Q('rh.p3.adjacent','סמוכות')} שוות — המקבילית היא מעויין.`
+            ]),'הוכחה'),
+            `<div class="layout-2">
+              ${D('rhombus',{equalSides:true},'מרובע שכל ארבע צלעותיו שוות')}
+              <div class="card card--purple"><h3 class="card-title">כתיבה מתמטית</h3>${statement(`${eq('AB','BC')} וגם ABCD מקבילית`)}${statement(`<span class="logic-arrow">▼</span> ABCD מעויין.`)}</div>
+            </div>`
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 4 · משפטי הוכחה נוספים',
+          html: [
+            panel('proof','המעויין הוא מקבילית מיוחדת',proofList([
+              `אם במקבילית האלכסונים ${Q('rh.p4.perpendicular','מאונכים')} זה לזה — המקבילית היא מעויין.`,
+              `אם במקבילית אחד האלכסונים חוצה אחת ה${Q('rh.p4.angle','זוויות')} — המקבילית היא מעויין.`
+            ]),'משפט'),
+            `<div class="layout-2">
+              ${D('rhombus',{diagonals:true,perpendicularDiagonals:true},'מקבילית שאלכסוניה מאונכים')}
+              ${D('rhombus',{diagonals:true,angleBisectors:true},'מקבילית שבה אלכסון חוצה זווית')}
+            </div>`
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 5 · איך מחשבים שטח של מעויין?',
+          html: [
+            `<div class="layout-2">
+              ${panel('definition','בסיס וגובה',statement(`שטח של מעויין שווה למכפלת אורך הצלע באורך ה${Q('rh.p5.height','גובה')} המתאים לצלע זו.`) + M(`<mrow><mi>S</mi><mo>=</mo><mi>a</mi><mo>·</mo><mi>h</mi></mrow>`,true),'שטח')}
+              ${panel('special','באמצעות האלכסונים',statement(`שטח של מעויין שווה למחצית מכפלת ה${Q('rh.p5.diagonals','אלכסונים')}.`) + M(`<mrow><mi>S</mi><mo>=</mo><mfrac><mrow><msub><mi>d</mi><mn>1</mn></msub><mo>·</mo><msub><mi>d</mi><mn>2</mn></msub></mrow><mn>2</mn></mfrac></mrow>`,true),'אלכסונים')}
+            </div>`,
+            `${D('rhombus',{diagonals:true,perpendicularDiagonals:true,height:true},'מעויין עם אלכסונים וגובה')}`
+          ].join('')
+        }
+      ]
+    },
+
+    square: {
+      label: 'ריבוע',
+      color: '#2367D1',
+      intro: 'המשך ישיר לדפי המלבן והמעויין: הגדרה ← למה מלבן ולמה מעויין ← אלכסונים ← הוכחה ← סיכום',
+      pages: [
+        {
+          subtitle: 'עמוד 1 · הגדרה והקשר למלבן ולמעויין',
+          html: [
+            panel('definition','הגדרה',statement(`ריבוע הוא מרובע שכל צלעותיו ${Q('sq.p1.sides','שוות')} וכל זוויותיו ${Q('sq.p1.angles','ישרות')}.`,'statement--large'),'הגדרה'),
+            `<div class="layout-2">
+              ${D('square',{equalSides:true,rightAngles:true,parallelPairs:true},'ריבוע ABCD עם ארבע צלעות שוות וארבע זוויות ישרות')}
+              ${panel('property','תכונות מרכזיות',summary([
+                'כל ארבע הצלעות שוות.',
+                'כל ארבע הזוויות ישרות.',
+                'כל זוג צלעות נגדיות מקבילות זו לזו.'
+              ]),'תכונות')}
+            </div>`,
+            panel('important','למה הריבוע הוא גם מלבן וגם מעויין?',
+              `<div class="layout-2">
+                <div class="card card--teal"><h3 class="card-title">הריבוע הוא מלבן כי...</h3>${statement(`כל הזוויות שלו ${Q('sq.p1.rectangleWhy','ישרות')}.`)}</div>
+                <div class="card card--purple"><h3 class="card-title">הריבוע הוא מעויין כי...</h3>${statement(`כל הצלעות שלו ${Q('sq.p1.rhombusWhy','שוות')}.`)}</div>
+              </div>`,'חשוב')
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 2 · מה הריבוע מקבל מהמלבן ומהמעויין?',
+          html: [
+            `<div class="layout-2">
+              ${panel('property','מהמלבן',
+                statement('כל הזוויות ישרות.') +
+                statement(`האלכסונים ${Q('sq.p2.fromRectangle','שווים')} זה לזה.`) +
+                `<div class="math-display">${eq('AC','BD')}</div>`,'מלבן')}
+              ${panel('special','מהמעויין',
+                statement('כל הצלעות שוות.') +
+                statement(`האלכסונים ${Q('sq.p2.fromRhombusPerp','מאונכים')} זה לזה.`) +
+                statement(`כל אלכסון ${Q('sq.p2.fromRhombusAngles','חוצה')} את שתי הזוויות שבקצותיו.`),'מעויין')}
+            </div>`,
+            panel('important','מסקנה',statement('הריבוע מקיים את כל תכונות המלבן ואת כל תכונות המעויין.','statement--large'),'מסקנה'),
+            D('square',{diagonals:true,center:true,midpointTicks:true,equalDiagonals:true,perpendicularDiagonals:true,angleBisectors:true},'ריבוע שבו האלכסונים שווים, מאונכים, חוצים זה את זה וחוצים את הזוויות')
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 3 · תכונות האלכסונים בריבוע',
+          html: [
+            `<div class="layout-2">
+              ${D('square',{diagonals:true,center:true,midpointTicks:true,equalDiagonals:true,perpendicularDiagonals:true,angleBisectors:true},'אלכסוני ריבוע ABCD נחתכים בנקודה O')}
+              ${panel('property','השלימו',
+                statement(`האלכסונים ${Q('sq.p3.equal','שווים')} זה לזה.`) +
+                statement(`האלכסונים ${Q('sq.p3.perpendicular','מאונכים')} זה לזה.`) +
+                statement(`האלכסונים ${Q('sq.p3.bisect','חוצים')} זה את זה.`) +
+                statement(`כל אלכסון ${Q('sq.p3.angleBisect','חוצה')} את שתי הזוויות שבקצותיו.`),'אלכסונים')}
+            </div>`,
+            `<div class="math-display">${eq('AC','BD')} &nbsp;&nbsp; ${perp('AC','BD')}<br>${eq('AO','OC')} &nbsp;&nbsp; ${eq('BO','OD')}</div>`
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 4 · איך מוכיחים שמרובע הוא ריבוע?',
+          html: [
+            panel('proof','שלוש דרכים',proofList([
+              `<strong>לפי ההגדרה:</strong> אם כל הצלעות שוות וכל הזוויות ישרות — המרובע הוא ריבוע.`,
+              `<strong>דרך מלבן:</strong> אם ${M(`<mi>ABCD</mi>`)} הוא מלבן וגם ${eq('AB','BC')} — אז ${M(`<mi>ABCD</mi>`)} הוא ריבוע.`,
+              `<strong>דרך מעויין:</strong> אם ${M(`<mi>ABCD</mi>`)} הוא מעויין וגם ${eq('AC','BD')} — אז ${M(`<mi>ABCD</mi>`)} הוא ריבוע.`
+            ]),'הוכחה'),
+            `<div class="layout-2">
+              ${D('square',{rightAngles:true,equalSides:true},'ריבוע לפי הגדרה')}
+              <div class="card card--orange"><h3 class="card-title">הדגש הדידקטי</h3>${statement('<strong>מלבן + שתי צלעות סמוכות שוות ⇒ ריבוע.</strong>')}${statement('<strong>מעויין + אלכסונים שווים ⇒ ריבוע.</strong>')}</div>
+            </div>`
+          ].join('')
+        },
+        {
+          subtitle: 'עמוד 5 · סיכום הריבוע',
+          html: [
+            panel('definition','הגדרה',statement('מרובע שכל צלעותיו שוות וכל זוויותיו ישרות הוא ריבוע.'),'הגדרה'),
+            panel('property','תכונות הריבוע',summary([
+              'כל זוג צלעות נגדיות מקבילות זו לזו.',
+              'כל ארבע הצלעות שוות זו לזו.',
+              'כל ארבע הזוויות ישרות.',
+              'האלכסונים חוצים זה את זה.',
+              'האלכסונים שווים זה לזה.',
+              'האלכסונים מאונכים זה לזה.',
+              'כל אלכסון חוצה את שתי הזוויות שבקצותיו.'
+            ]),'סיכום'),
+            `<div class="layout-2">
+              <div class="card card--teal"><h3 class="card-title">ריבוע הוא מלבן</h3>${statement('כי כל הזוויות שלו ישרות.')}</div>
+              <div class="card card--purple"><h3 class="card-title">ריבוע הוא מעויין</h3>${statement('כי כל הצלעות שלו שוות.')}</div>
+            </div>`
+          ].join('')
+        }
+      ]
+    }
+  };
+
+  window.QUAD_CONTENT = Object.freeze({
+    version: '3.0.0',
+    title: 'מרובעים — דפי השלמה מדויקים',
+    topics
+  });
+})();
+
+  </script>
+  <script>
+(() => {
+  'use strict';
+
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  const W = 360, H = 300;
+  const EPS = 1e-7;
+
+  // Canonical geometry models. Every visible mark is derived from these points.
+  const P = Object.freeze({
+    parallelogram: Object.freeze({A:[95,55], B:[275,55], C:[235,225], D:[55,225]}),
+    rectangle:     Object.freeze({A:[70,60], B:[290,60], C:[290,220], D:[70,220]}),
+    rhombus:       Object.freeze({A:[180,35], B:[310,145], C:[180,255], D:[50,145]}),
+    square:        Object.freeze({A:[70,40], B:[290,40], C:[290,260], D:[70,260]})
+  });
+
+  const sub=(a,b)=>[a[0]-b[0],a[1]-b[1]];
+  const add=(a,b)=>[a[0]+b[0],a[1]+b[1]];
+  const mul=(a,s)=>[a[0]*s,a[1]*s];
+  const dot=(a,b)=>a[0]*b[0]+a[1]*b[1];
+  const cross=(a,b)=>a[0]*b[1]-a[1]*b[0];
+  const len=(a)=>Math.hypot(a[0],a[1]);
+  const dist=(a,b)=>len(sub(a,b));
+  const unit=(a)=>{const l=len(a)||1;return [a[0]/l,a[1]/l];};
+  const mid=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2];
+  const normal=(a,b)=>{const u=unit(sub(b,a));return [-u[1],u[0]];};
+  const pointOn=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
+  const approx=(a,b,tol=1e-6)=>Math.abs(a-b)<=tol*Math.max(1,Math.abs(a),Math.abs(b));
+  const isParallel=(u,v)=>Math.abs(cross(u,v))<=EPS*Math.max(1,len(u)*len(v));
+  const isPerpendicular=(u,v)=>Math.abs(dot(u,v))<=EPS*Math.max(1,len(u)*len(v));
+
+  function projectPointToLine(p,a,b){
+    const ab=sub(b,a); const den=dot(ab,ab)||1;
+    const t=dot(sub(p,a),ab)/den;
+    return {point:add(a,mul(ab,t)),t};
+  }
+
+  function lineIntersection(a,b,c,d){
+    const r=sub(b,a), s=sub(d,c); const den=cross(r,s);
+    if(Math.abs(den)<1e-9) return mid(a,b);
+    const t=cross(sub(c,a),s)/den;
+    return add(a,mul(r,t));
+  }
+
+  function validateModel(kind, pts){
+    const AB=sub(pts.B,pts.A), BC=sub(pts.C,pts.B), CD=sub(pts.D,pts.C), DA=sub(pts.A,pts.D);
+    const sides=[dist(pts.A,pts.B),dist(pts.B,pts.C),dist(pts.C,pts.D),dist(pts.D,pts.A)];
+    const failures=[];
+    const req=(cond,msg)=>{if(!cond) failures.push(msg);};
+    req(isParallel(AB,CD), 'AB ∥ CD');
+    req(isParallel(BC,DA), 'BC ∥ AD');
+    if(kind==='rectangle' || kind==='square') req(isPerpendicular(AB,BC), 'AB ⟂ BC');
+    if(kind==='rhombus' || kind==='square') {
+      req(approx(sides[0],sides[1]) && approx(sides[1],sides[2]) && approx(sides[2],sides[3]), 'all sides equal');
+    }
+    if(kind==='square') req(approx(dist(pts.A,pts.C),dist(pts.B,pts.D)), 'diagonals equal');
+    if(failures.length) throw new Error(`Invalid ${kind} geometry model: ${failures.join(', ')}`);
+    return true;
+  }
+  Object.entries(P).forEach(([k,v])=>validateModel(k,v));
+
+  function el(name, attrs={}){
+    const node=document.createElementNS(SVG_NS,name);
+    Object.entries(attrs).forEach(([k,v])=>node.setAttribute(k,String(v)));
+    return node;
+  }
+  function line(a,b,cls){ return el('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],class:cls}); }
+
+  function equalTicks(svg,a,b,count=1,offset=0,cls='mark-equal'){
+    const m=pointOn(a,b,.5+offset), n=normal(a,b), u=unit(sub(b,a));
+    const spacing=8;
+    for(let i=0;i<count;i++){
+      const shift=(i-(count-1)/2)*spacing;
+      const c=add(m,mul(u,shift));
+      svg.appendChild(line(add(c,mul(n,-7)),add(c,mul(n,7)),cls));
+    }
+  }
+
+  function parallelChevron(svg,a,b,count=1){
+    const m=mid(a,b), u=unit(sub(b,a)), n=normal(a,b);    const spacing=13;
+    for(let i=0;i<count;i++){
+      const c=add(m,mul(u,(i-(count-1)/2)*spacing));
+      const back=add(c,mul(u,-8));
+      const p1=add(back,mul(n,-5));
+      const p2=c;
+      const p3=add(back,mul(n,5));
+      svg.appendChild(el('polyline',{points:`${p1[0]},${p1[1]} ${p2[0]},${p2[1]} ${p3[0]},${p3[1]}`,class:'mark-parallel'}));
+    }
+  }
+
+  function rightAngle(svg,v,pPrev,pNext,size=18,cls='mark-right'){
+    const u=unit(sub(pPrev,v)), w=unit(sub(pNext,v));
+    const p1=add(v,mul(u,size));
+    const p2=add(p1,mul(w,size));
+    const p3=add(v,mul(w,size));
+    svg.appendChild(el('polyline',{points:`${p1[0]},${p1[1]} ${p2[0]},${p2[1]} ${p3[0]},${p3[1]}`,class:cls}));
+  }
+
+  function perpendicularMark(svg,o,aDir,bDir,size=12){
+    const u=unit(aDir), v=unit(bDir);
+    const p1=add(o,mul(u,size));
+    const p2=add(p1,mul(v,size));
+    const p3=add(o,mul(v,size));
+    svg.appendChild(el('polyline',{points:`${p1[0]},${p1[1]} ${p2[0]},${p2[1]} ${p3[0]},${p3[1]}`,class:'mark-right mark-right--diag'}));
+  }
+
+  function midpointTicks(svg,a,o,b,cls,count=1){
+    const t1=pointOn(a,o,.58), t2=pointOn(o,b,.42);
+    const draw=(c,p,q)=>{
+      const n=normal(p,q),u=unit(sub(q,p));
+      for(let i=0;i<count;i++){
+        const shift=(i-(count-1)/2)*7;
+        const cc=add(c,mul(u,shift));
+        svg.appendChild(line(add(cc,mul(n,-6)),add(cc,mul(n,6)),cls));
+      }
+    };
+    draw(t1,a,o); draw(t2,o,b);
+  }
+
+  function angleArc(svg,v,p1,p2,r=27,cls='angle-arc'){
+    const u1=unit(sub(p1,v)), u2=unit(sub(p2,v));
+    const a=add(v,mul(u1,r)), b=add(v,mul(u2,r));
+    const cr=cross(u1,u2); const dp=Math.max(-1,Math.min(1,dot(u1,u2)));
+    const ang=Math.acos(dp)*180/Math.PI;
+    const large=ang>180?1:0, sweep=cr>0?1:0;
+    const d=`M ${a[0]} ${a[1]} A ${r} ${r} 0 ${large} ${sweep} ${b[0]} ${b[1]}`;
+    svg.appendChild(el('path',{d,class:cls}));
+  }
+
+  function angleBisectorMarks(svg,pts){
+    // AC bisects angles A and C. Matching arcs use the same class/radius.
+    angleArc(svg,pts.A,pts.B,pts.C,27,'angle-arc angle-arc--ac');
+    angleArc(svg,pts.A,pts.C,pts.D,27,'angle-arc angle-arc--ac');
+    angleArc(svg,pts.C,pts.B,pts.A,27,'angle-arc angle-arc--ac');
+    angleArc(svg,pts.C,pts.A,pts.D,27,'angle-arc angle-arc--ac');
+    // BD bisects angles B and D. A second visual family distinguishes the second diagonal.
+    angleArc(svg,pts.B,pts.A,pts.D,23,'angle-arc angle-arc--bd');
+    angleArc(svg,pts.B,pts.D,pts.C,23,'angle-arc angle-arc--bd');
+    angleArc(svg,pts.D,pts.A,pts.B,23,'angle-arc angle-arc--bd');
+    angleArc(svg,pts.D,pts.B,pts.C,23,'angle-arc angle-arc--bd');
+  }
+
+  function heightMark(svg,pts,kind){
+    let top, baseA, baseB;
+    if(kind==='parallelogram') { top=pts.C; baseA=pts.A; baseB=pts.B; }
+    else if(kind==='rhombus') { top=pts.A; baseA=pts.D; baseB=pts.C; }
+    else return;
+    const {point:foot,t}=projectPointToLine(top,baseA,baseB);
+    if(t < 0 || t > 1){
+      const extA = t < 0 ? foot : baseA;
+      const extB = t > 1 ? foot : baseB;
+      svg.appendChild(line(extA,extB,'base-extension'));
+    }
+    svg.appendChild(line(top,foot,'height-line'));
+    rightAngle(svg,foot,top,baseB,12,'mark-right mark-right--height');
+    const tLabel=el('text',{x:(top[0]+foot[0])/2-18,y:(top[1]+foot[1])/2});
+    tLabel.textContent='h'; tLabel.setAttribute('class','height-label'); svg.appendChild(tLabel);
+  }
+
+  function equalDiagonalMarks(svg,pts){
+    // Identical triple ticks designate equality of the *whole* diagonals.
+    equalTicks(svg,pts.A,pts.C,3,-0.17,'mark-diagonal-equal');
+    equalTicks(svg,pts.B,pts.D,3,0.17,'mark-diagonal-equal');
+  }
+
+  function render(kind, options={}){
+    const pts=P[kind];
+    if(!pts) throw new Error(`Unknown geometry kind: ${kind}`);
+    validateModel(kind,pts);
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,class:`geometry-svg geometry-svg--${kind}`,role:'img','aria-label':`תרשים ${kind}`});
+    const title=el('title'); title.textContent = options.ariaLabel || `תרשים ${kind}`; svg.appendChild(title);
+
+    const polygon=el('polygon',{points:`${pts.A.join(',')} ${pts.B.join(',')} ${pts.C.join(',')} ${pts.D.join(',')}`,class:'shape'});
+    svg.appendChild(polygon);
+    const O=lineIntersection(pts.A,pts.C,pts.B,pts.D);
+
+    if(options.diagonals){
+      svg.appendChild(line(pts.A,pts.C,'diag diag--ac'));
+      svg.appendChild(line(pts.B,pts.D,'diag diag--bd'));
+    }
+    if(options.parallelPairs){
+      parallelChevron(svg,pts.A,pts.B,1); parallelChevron(svg,pts.C,pts.D,1);
+      parallelChevron(svg,pts.B,pts.C,2); parallelChevron(svg,pts.D,pts.A,2);
+    }
+    if(options.oneParallelEqualPair){
+      parallelChevron(svg,pts.A,pts.B,1); parallelChevron(svg,pts.C,pts.D,1);
+      equalTicks(svg,pts.A,pts.B,1); equalTicks(svg,pts.C,pts.D,1);
+    }
+    if(options.equalSides){
+      [ [pts.A,pts.B],[pts.B,pts.C],[pts.C,pts.D],[pts.D,pts.A] ].forEach(([a,b])=>equalTicks(svg,a,b,1));
+    }
+    if(options.equalOppositeSides){
+      equalTicks(svg,pts.A,pts.B,1); equalTicks(svg,pts.C,pts.D,1);
+      equalTicks(svg,pts.B,pts.C,2); equalTicks(svg,pts.D,pts.A,2);
+    }
+    if(options.rightAngles){
+      rightAngle(svg,pts.A,pts.B,pts.D); rightAngle(svg,pts.B,pts.A,pts.C);
+      rightAngle(svg,pts.C,pts.B,pts.D); rightAngle(svg,pts.D,pts.A,pts.C);
+    }
+    if(options.midpointTicks && options.diagonals){
+      midpointTicks(svg,pts.A,O,pts.C,'mark-midpoint-a',1);
+      midpointTicks(svg,pts.B,O,pts.D,'mark-midpoint-b',2);
+    }
+    if(options.equalDiagonals && options.diagonals) equalDiagonalMarks(svg,pts);
+    if(options.perpendicularDiagonals && options.diagonals) perpendicularMark(svg,O,sub(pts.A,O),sub(pts.B,O),12);
+    if(options.angleBisectors && options.diagonals) angleBisectorMarks(svg,pts);
+    if(options.height) heightMark(svg,pts,kind);
+
+    const labelOffset={A:[-21,-10],B:[9,-10],C:[9,25],D:[-23,25]};
+    for(const k of ['A','B','C','D']){
+      const p=pts[k];
+      svg.appendChild(el('circle',{cx:p[0],cy:p[1],r:3.4,class:'vertex'}));
+      const t=el('text',{x:p[0]+labelOffset[k][0],y:p[1]+labelOffset[k][1],class:'vertex-label'}); t.textContent=k; svg.appendChild(t);
+    }
+    if(options.center || options.diagonals){
+      svg.appendChild(el('circle',{cx:O[0],cy:O[1],r:3.4,class:'center-point'}));
+      const t=el('text',{x:O[0]+8,y:O[1]-8,class:'center-label'}); t.textContent='O'; svg.appendChild(t);
+    }
+
+    const details=[];
+    if(options.parallelPairs) details.push('שני זוגות של צלעות נגדיות מסומנים כמקבילים, בסימון שונה לכל זוג');
+    if(options.equalSides) details.push('כל ארבע הצלעות מסומנות כשוות');
+    if(options.equalOppositeSides) details.push('כל זוג צלעות נגדיות מסומן כשווה');
+    if(options.rightAngles) details.push('כל ארבע הזוויות מסומנות כזוויות ישרות');
+    if(options.midpointTicks) details.push('האלכסונים מסומנים כחוצים זה את זה');
+    if(options.equalDiagonals) details.push('האלכסונים מסומנים כשווים זה לזה');
+    if(options.perpendicularDiagonals) details.push('האלכסונים מסומנים כמאונכים');
+    if(options.angleBisectors) details.push('כל אלכסון מסומן כחוצה את שתי הזוויות שבקצותיו');
+    if(options.height) details.push('מסומן גובה מאונך לבסיס המתאים');
+    const desc=el('desc'); desc.textContent=details.join('. '); svg.appendChild(desc);
+    return svg;
+  }
+
+  function mountAll(root=document){
+    root.querySelectorAll('[data-geometry]').forEach(host=>{
+      if(host.dataset.mounted==='1') return;
+      const kind=host.dataset.geometry; let opts={};
+      try{ opts=JSON.parse(host.dataset.options||'{}'); }catch(_){ opts={}; }
+      host.appendChild(render(kind,opts)); host.dataset.mounted='1';
+    });
+  }
+
+  function selfTest(){
+    const result={models:[],ok:true};
+    for(const [kind,pts] of Object.entries(P)){
+      try{ validateModel(kind,pts); result.models.push({kind,ok:true}); }
+      catch(err){ result.ok=false; result.models.push({kind,ok:false,error:String(err.message||err)}); }
+    }
+    return result;
+  }
+
+  window.Geometry = Object.freeze({ render, mountAll, selfTest });
+})();
+
+  </script>
+  <script>
+(() => {
+  'use strict';
+
+  const content = window.QUAD_CONTENT;
+  if (!content || !window.Geometry) {
+    document.body.innerHTML = '<div class="noscript">שגיאה בטעינת קובצי האתר.</div>';
+    return;
+  }
+
+  const app = document.getElementById('app');
+  const tabs = document.getElementById('topicTabs');
+  const progressChip = document.getElementById('progressChip');
+  const teacherBtn = document.getElementById('teacherBtn');
+  const checkBtn = document.getElementById('checkBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const printBtn = document.getElementById('printBtn');
+  const resetDialog = document.getElementById('resetDialog');
+
+  const STORAGE_PREFIX = `quad-textbook:${content.version}:`;
+  const SETTINGS_KEY = `${STORAGE_PREFIX}settings`;
+
+  const store = {
+    get(key) { try { return localStorage.getItem(key); } catch (_) { return null; } },
+    set(key, val) { try { localStorage.setItem(key, val); } catch (_) {} },
+    remove(key) { try { localStorage.removeItem(key); } catch (_) {} },
+    keys() {
+      try { return Object.keys(localStorage).filter(k => k.startsWith(STORAGE_PREFIX)); }
+      catch (_) { return []; }
+    }
+  };
+
+  function normalizeHebrew(value) {
+    return String(value ?? '')
+      .normalize('NFKC')
+      .replace(/[\u0591-\u05C7]/g, '') // niqqud + cantillation
+      .replace(/[־–—-]/g, ' ')
+      .replace(/["'׳״.,;:!?()[\]{}]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase();
+  }
+
+  function equivalent(answer, accepted) {
+    const a = normalizeHebrew(answer);
+    if (!a) return false;
+    return accepted.some(x => normalizeHebrew(x) === a);
+  }
+
+  function readSettings() {
+    try { return JSON.parse(store.get(SETTINGS_KEY) || '{}'); }
+    catch (_) { return {}; }
+  }
+  function writeSettings(patch) {
+    const next = { ...readSettings(), ...patch };
+    store.set(SETTINGS_KEY, JSON.stringify(next));
+    return next;
+  }
+
+  const params = new URLSearchParams(location.search);
+  const settings = readSettings();
+  let activeTopic = params.get('topic') || settings.activeTopic || 'parallelogram';
+  if (!content.topics[activeTopic]) activeTopic = 'parallelogram';
+
+  function renderPage(topicKey, topic, page, index) {
+    return `
+      <article class="sheet" data-topic="${topicKey}" data-page="${index + 1}">
+        <div class="page-badge" aria-label="עמוד ${index + 1} מתוך ${topic.pages.length}">${index + 1}/${topic.pages.length}</div>
+        <header class="sheet-header">
+          <span class="sheet-kicker">${topic.label}</span>
+          <h1 class="sheet-title">${page.title || topic.label}</h1>
+          <p class="sheet-subtitle">${page.subtitle}</p>
+        </header>
+        <div class="content-stack">${page.html}</div>
+        <footer class="page-footer">${topic.label} · עמוד ${index + 1} · דף השלמה אינטראקטיבי · ${content.version}</footer>
+      </article>`;
+  }
+
+  function render() {
+    tabs.innerHTML = '';
+    app.innerHTML = '';
+
+    Object.entries(content.topics).forEach(([key, topic]) => {
+      const tab = document.createElement('button');
+      tab.type = 'button';
+      tab.className = 'topic-tab';
+      tab.dataset.topic = key;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', `topic-${key}`);
+      tab.textContent = topic.label;
+      tab.addEventListener('click', () => setTopic(key));
+      tabs.appendChild(tab);
+
+      const section = document.createElement('section');
+      section.className = 'topic';
+      section.id = `topic-${key}`;
+      section.dataset.topic = key;
+      section.setAttribute('role', 'tabpanel');
+      section.innerHTML = `
+        <div class="topic-intro screen-only">${topic.label} — ${topic.intro}</div>
+        <div class="pages">${topic.pages.map((p, i) => renderPage(key, topic, p, i)).join('')}</div>`;
+      app.appendChild(section);
+    });
+
+    Geometry.mountAll(app);
+    restoreAnswers();
+    setTopic(activeTopic, false);
+    bindInputs();
+    updateProgress();
+  }
+
+  function setTopic(key, scroll = true) {
+    if (!content.topics[key]) return;
+    activeTopic = key;
+    writeSettings({ activeTopic: key });
+    document.querySelectorAll('.topic').forEach(el => {
+      const on = el.dataset.topic === key;
+      el.classList.toggle('is-active', on);
+      el.hidden = !on;
+    });
+    document.querySelectorAll('.topic-tab').forEach(btn => {
+      const on = btn.dataset.topic === key;
+      btn.setAttribute('aria-selected', String(on));
+      btn.tabIndex = on ? 0 : -1;
+    });
+    if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+    updateProgress();
+  }
+
+  function answerKey(qid) { return `${STORAGE_PREFIX}answer:${qid}`; }
+
+  function bindInputs() {
+    app.querySelectorAll('.blank').forEach(input => {
+      input.addEventListener('input', () => {
+        store.set(answerKey(input.dataset.qid), input.value);
+        input.classList.remove('is-correct', 'is-wrong');
+        input.removeAttribute('aria-invalid');
+        updateProgress();
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const all = [...document.querySelectorAll(`#topic-${activeTopic} .blank`)];
+          const idx = all.indexOf(input);
+          if (idx >= 0 && all[idx + 1]) all[idx + 1].focus();
+          else checkCurrentTopic();
+        }
+      });
+    });
+  }
+
+  function restoreAnswers() {
+    app.querySelectorAll('.blank').forEach(input => {
+      const saved = store.get(answerKey(input.dataset.qid));
+      if (saved !== null) input.value = saved;
+    });
+  }
+
+  function currentInputs() {
+    return [...document.querySelectorAll(`#topic-${activeTopic} .blank`)];
+  }
+
+  function checkCurrentTopic() {
+    let correct = 0, attempted = 0;
+    currentInputs().forEach(input => {
+      const value = input.value.trim();
+      input.classList.remove('is-correct', 'is-wrong');
+      input.removeAttribute('aria-invalid');
+      if (!value) return;
+      attempted++;
+      const accepted = (input.dataset.answers || input.dataset.answer || '').split('¦').filter(Boolean);
+      const ok = equivalent(value, accepted);
+      input.classList.add(ok ? 'is-correct' : 'is-wrong');
+      input.setAttribute('aria-invalid', String(!ok));
+      if (ok) correct++;
+    });
+    updateProgress();
+    progressChip.textContent = attempted ? `${correct}/${attempted} נכונות · ${progressPercent()}% הושלם` : `${progressPercent()}% הושלם`;
+  }
+
+  function progressPercent() {
+    const inputs = currentInputs();
+    if (!inputs.length) return 100;
+    const filled = inputs.filter(i => i.value.trim()).length;
+    return Math.round((filled / inputs.length) * 100);
+  }
+
+  function updateProgress() {
+    progressChip.textContent = `${progressPercent()}% הושלם`;
+  }
+
+  teacherBtn.addEventListener('click', () => {
+    const enabled = !document.body.classList.contains('teacher-mode');
+    document.body.classList.toggle('teacher-mode', enabled);
+    teacherBtn.setAttribute('aria-pressed', String(enabled));
+    teacherBtn.textContent = enabled ? 'מצב תלמיד' : 'מצב מורה';
+    writeSettings({ teacherMode: enabled });
+  });
+
+  checkBtn.addEventListener('click', checkCurrentTopic);
+
+  resetBtn.addEventListener('click', () => {
+    if (typeof resetDialog.showModal === 'function') resetDialog.showModal();
+    else if (confirm('לאפס את כל התשובות בנושא הנוכחי?')) resetCurrentTopic();
+  });
+
+  resetDialog?.addEventListener('close', () => {
+    if (resetDialog.returnValue === 'confirm') resetCurrentTopic();
+  });
+
+  function resetCurrentTopic() {
+    currentInputs().forEach(input => {
+      store.remove(answerKey(input.dataset.qid));
+      input.value = '';
+      input.classList.remove('is-correct', 'is-wrong');
+      input.removeAttribute('aria-invalid');
+    });
+    updateProgress();
+  }
+
+  printBtn.addEventListener('click', () => {
+    document.querySelectorAll('.topic').forEach(el => el.classList.toggle('print-target', el.dataset.topic === activeTopic));
+    window.print();
+  });
+
+  window.addEventListener('afterprint', () => {
+    document.querySelectorAll('.topic').forEach(el => el.classList.remove('print-target'));
+  });
+
+  // Tab-key navigation in the topic selector follows common ARIA tab behavior.
+  tabs.addEventListener('keydown', e => {
+    if (!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
+    const buttons = [...tabs.querySelectorAll('.topic-tab')];
+    const current = buttons.findIndex(x => x.dataset.topic === activeTopic);
+    let next = current;
+    if (e.key === 'ArrowLeft') next = (current + 1) % buttons.length;
+    if (e.key === 'ArrowRight') next = (current - 1 + buttons.length) % buttons.length;
+    if (e.key === 'Home') next = 0;
+    if (e.key === 'End') next = buttons.length - 1;
+    e.preventDefault();
+    buttons[next].focus();
+    setTopic(buttons[next].dataset.topic, false);
+  });
+
+  render();
+
+  if (settings.teacherMode) {
+    document.body.classList.add('teacher-mode');
+    teacherBtn.setAttribute('aria-pressed', 'true');
+    teacherBtn.textContent = 'מצב תלמיד';
+  }
+
+  // PWA registration is intentionally skipped for file://, where the site remains fully usable.
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
+
+  // Lightweight runtime self-check. Exposed only for diagnostics/tests.
+  window.__QUAD_DIAGNOSTICS__ = Object.freeze({
+    version: content.version,
+    topicCount: Object.keys(content.topics).length,
+    pageCount: Object.values(content.topics).reduce((n,t)=>n+t.pages.length,0),
+    questionCount: document.querySelectorAll('.blank').length,
+    geometryCount: document.querySelectorAll('.geometry-svg').length,
+    mathCount: document.querySelectorAll('math').length,
+    activeTopic: () => activeTopic,
+    progressPercent
+  });
+})();
+
+  </script>
+</body>
+</html>
