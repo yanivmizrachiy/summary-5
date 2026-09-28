@@ -68,34 +68,43 @@ jobs:
               await page.goto(url,{waitUntil:'networkidle'});
               await page.evaluate(()=>document.fonts?.ready);
               await page.waitForTimeout(250);
-              const pages=page.locator('.sheet.source-page');
-              const count=await pages.count();
               const rows=[];
-              for(let i=0;i<count;i++){
-                const sheet=pages.nth(i);
-                const metrics=await sheet.evaluate(el=>{
-                  const sr=el.getBoundingClientRect();
-                  const outside=[], clipped=[];
-                  for(const node of el.querySelectorAll('*')){
-                    const r=node.getBoundingClientRect();
-                    if(r.width===0&&r.height===0) continue;
-                    if(r.left < sr.left-1 || r.right > sr.right+1 || r.top < sr.top-1 || r.bottom > sr.bottom+1){
-                      outside.push({tag:node.tagName,cls:node.className?.baseVal||node.className||'',text:(node.textContent||'').trim().slice(0,60)});
+              const topicIds=['parallelogram','rectangle','rhombus'];
+              for(const topicId of topicIds){
+                await page.evaluate(id=>{
+                  document.querySelectorAll('.topic').forEach(x=>x.classList.toggle('active',x.id===id));
+                  if(typeof fitA4Pages==='function') fitA4Pages();
+                },topicId);
+                await page.waitForTimeout(80);
+                const pages=page.locator(`#${topicId} .sheet.source-page`);
+                const count=await pages.count();
+                for(let i=0;i<count;i++){
+                  const sheet=pages.nth(i);
+                  const metrics=await sheet.evaluate(el=>{
+                    const sr=el.getBoundingClientRect();
+                    const outside=[], clipped=[];
+                    for(const node of el.querySelectorAll('*')){
+                      const r=node.getBoundingClientRect();
+                      if(r.width===0&&r.height===0) continue;
+                      if(r.left < sr.left-1 || r.right > sr.right+1 || r.top < sr.top-1 || r.bottom > sr.bottom+1){
+                        outside.push({tag:node.tagName,cls:node.className?.baseVal||node.className||'',text:(node.textContent||'').trim().slice(0,60)});
+                      }
+                      if(node instanceof HTMLElement && node.clientWidth>0 && node.scrollWidth>node.clientWidth+2){
+                        clipped.push({tag:node.tagName,cls:node.className||'',text:(node.textContent||'').trim().slice(0,80),clientWidth:node.clientWidth,scrollWidth:node.scrollWidth});
+                      }
                     }
-                    if(node instanceof HTMLElement && node.clientWidth>0 && node.scrollWidth>node.clientWidth+2){
-                      clipped.push({tag:node.tagName,cls:node.className||'',text:(node.textContent||'').trim().slice(0,80),clientWidth:node.clientWidth,scrollWidth:node.scrollWidth});
-                    }
-                  }
-                  return {
-                    page:el.dataset.page,
-                    sheet:{width:sr.width,height:sr.height,left:sr.left,top:sr.top},
-                    outside,clipped,
-                    scrollHeight:el.scrollHeight,clientHeight:el.clientHeight
-                  };
-                });
-                rows.push(metrics);
+                    return {
+                      topic:el.dataset.t,page:el.dataset.page,
+                      sheet:{width:sr.width,height:sr.height,left:sr.left,top:sr.top},
+                      outside,clipped,
+                      scrollHeight:el.scrollHeight,clientHeight:el.clientHeight
+                    };
+                  });
+                  rows.push(metrics);
+                }
               }
-              await pages.nth(0).screenshot({path:`/tmp/${name}.png`});
+              await page.evaluate(()=>document.querySelectorAll('.topic').forEach(x=>x.classList.toggle('active',x.id==='parallelogram')));
+              await page.locator('#parallelogram .sheet').first().screenshot({path:`/tmp/${name}.png`});
               await page.close();
               return rows;
             }
