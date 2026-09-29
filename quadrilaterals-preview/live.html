@@ -3,12 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
 <title>תצוגה חיה — דפי מרובעים</title>
 <style>
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#eaf0f4;font-family:Arial,"Segoe UI",sans-serif}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fff;font-family:Arial,"Segoe UI",sans-serif}
 #frame{position:fixed;inset:0;width:100%;height:100%;border:0;background:#fff}
-#status{position:fixed;z-index:9999;left:10px;bottom:10px;padding:6px 9px;border-radius:999px;background:rgba(12,45,68,.88);color:#fff;font-size:11px;font-weight:700;box-shadow:0 2px 10px rgba(0,0,0,.15);pointer-events:none}
+#status{position:fixed;z-index:9999;left:max(10px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));padding:6px 9px;border-radius:999px;background:rgba(12,45,68,.9);color:#fff;font-size:11px;font-weight:700;box-shadow:0 2px 10px rgba(0,0,0,.15);pointer-events:none}
 #status.ok::before{content:"● ";color:#65e09a}#status.err::before{content:"● ";color:#ff8b8b}
+@media print{#status{display:none!important}}
 </style>
 </head>
 <body>
@@ -16,53 +18,32 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#eaf0f4;fon
 <div id="status">טוען תצוגה חיה…</div>
 <script>
 (()=>{
-  const RAW='https://raw.githubusercontent.com/yanivmizrachiy/summary-5/main/quadrilaterals-preview/index.html';
+  const params=new URLSearchParams(location.search);
+  const requested=params.get('ref');
+  const REF=requested&&/^[A-Za-z0-9._\/-]+$/.test(requested)?requested:'claude/quadrilaterals-max-quality';
+  const RAW='https://raw.githubusercontent.com/yanivmizrachiy/summary-5/'+REF+'/quadrilaterals-preview/index.html';
   const frame=document.getElementById('frame');
   const status=document.getElementById('status');
-  let lastHash='', loading=false;
+  let lastHash='',loading=false;
 
-  function hash(s){
-    let h=2166136261;
-    for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}
-    return (h>>>0).toString(16);
-  }
+  function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return(h>>>0).toString(16)}
+  function label(prefix){status.textContent=prefix+' • '+(REF==='main'?'main':'גרסת עבודה')}
 
   async function sync(){
-    if(loading)return;
-    loading=true;
+    if(loading)return; loading=true;
     try{
       const r=await fetch(RAW+'?live='+Date.now(),{cache:'no-store',mode:'cors'});
       if(!r.ok)throw new Error('HTTP '+r.status);
-      const html=await r.text();
-      const h=hash(html);
+      const html=await r.text(),h=hash(html);
       if(h!==lastHash){
         const topic=frame.contentWindow?.document?.querySelector('.topic.active')?.id||'';
-        frame.srcdoc=html;
-        lastHash=h;
-        status.className='ok';
-        status.textContent='חי • עודכן עכשיו';
-        if(topic){
-          frame.addEventListener('load',()=>{
-            try{
-              const b=frame.contentWindow.document.querySelector('.top button[data-id="'+topic+'"]');
-              if(b)b.click();
-            }catch{}
-          },{once:true});
-        }
-      }else{
-        status.className='ok';
-        status.textContent='חי • מסונכרן';
-      }
-    }catch(e){
-      status.className='err';
-      status.textContent='מנסה להתחבר מחדש…';
-    }finally{
-      loading=false;
-    }
+        frame.srcdoc=html; lastHash=h; status.className='ok'; label('עודכן עכשיו');
+        if(topic)frame.addEventListener('load',()=>{try{frame.contentWindow.document.querySelector('.top button[data-id="'+topic+'"]')?.click()}catch{}},{once:true});
+      }else{status.className='ok';label('מסונכרן')}
+    }catch(e){status.className='err';status.textContent='מנסה להתחבר מחדש…'}
+    finally{loading=false}
   }
-
-  sync();
-  setInterval(sync,2000);
+  sync(); setInterval(sync,5000);
   window.addEventListener('focus',sync);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});
 })();
