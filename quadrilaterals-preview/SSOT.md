@@ -15,10 +15,10 @@ When authorities conflict on source content, a canonical Canva snapshot+manifest
 
 - **Rectangle / מלבן — 5/5 pages:** canonical Canva PNGs + manifest metadata are present.
 - **Rhombus / מעויין — 5/5 pages:** canonical Canva PNGs + manifest metadata are present.
-- **Parallelogram / מקבילית — 5 pages implemented:** no equivalent canonical PNG+manifest package is currently stored under `canva-source/`.
-- **Square / ריבוע — 5 pages implemented:** no equivalent canonical PNG+manifest package is currently stored under `canva-source/`.
+- **Parallelogram / מקבילית — 5/5 pages:** Canva design `DAHWZm8MckE`, page IDs, dimensions, and exact rich-text provenance are verified and registered in `canva-source/manifest.json`. Durable PNG snapshots are not yet committed locally.
+- **Square / ריבוע — 5/5 pages:** Canva design `DAHWZrMtYEc`, page IDs, dimensions, and exact rich-text provenance are verified and registered in `canva-source/manifest.json`. Durable PNG snapshots are not yet committed locally.
 
-Therefore CI/QA may claim **20 implemented/validated worksheet pages**, but MUST NOT claim **20/20 Canva-fidelity-verified pages** until canonical source packages for parallelogram and square are committed and audited.
+All 20 pages now have verified Canva design provenance. Rectangle/rhombus additionally have durable committed PNG snapshots; parallelogram/square currently rely on registered Canva IDs/page IDs and extracted rich text until durable snapshots are committed.
 
 ## Completion-field invariant
 
