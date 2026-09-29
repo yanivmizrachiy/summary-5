@@ -5,1772 +5,1022 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>מרובעים — דפי השלמה</title>
 <style>
-:root{--ink:#17324d;--muted:#5d7385;--blue:#2563c8;--teal:#168472;--purple:#7653c5;--orange:#df8429;--green:#2d8a55;--line:#d8e3ea;--paper:#fff;--bg:#edf3f7}
-*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;line-height:1.52;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-kerning:normal;font-synthesis:none;font-feature-settings:"kern" 1,"liga" 1}
-.top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);padding:10px 12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.top button{border:1px solid #cddae3;background:#fff;color:#23465f;border-radius:999px;padding:8px 15px;font-weight:850;cursor:pointer}.top button.active{background:#173b57;color:#fff;border-color:#173b57}.top .print-a4{background:#173b57;color:#fff;border-color:#173b57;margin-inline-start:8px}
-.topic{display:none}.topic.active{display:block}.pages{display:grid;gap:26px;padding:26px 12px 60px}.sheet-shell{direction:ltr}.sheet{direction:rtl}.sheet{position:relative;width:794px;height:1123px;min-height:1123px;max-height:1123px;margin:auto;background:#fff;border:1px solid #dfe7ed;border-radius:8px;box-shadow:0 12px 34px rgba(22,48,70,.12);padding:28px 32px 34px;overflow:hidden}.sheet:before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--c1)}.sheet[data-t="p"]{--c1:#2563c8;--c2:#168472;--c3:#df8429}.sheet[data-t="r"]{--c1:#168472;--c2:#2563c8;--c3:#7653c5}.sheet[data-t="h"]{--c1:#7653c5;--c2:#2563c8;--c3:#df8429}.sheet[data-t="s"]{--c1:#2563c8;--c2:#7653c5;--c3:#168472}
-.num{position:absolute;left:18px;top:14px;font-weight:800;color:#8a9aa6;font-size:10px}
-.kicker{text-align:right;color:var(--c1);font-weight:800;font-size:10px;line-height:1.1;margin:0 0 2px}
-.title{text-align:center;font-weight:950;font-size:32px;line-height:1;margin:0 0 8px;color:#123a58}
-.sub{display:none}
-.stack{height:calc(100% - 62px);display:flex;flex-direction:column;gap:9px;padding-bottom:16px}
-.stack>.grid2:only-child{flex:1;min-height:0}
-.stack>.grid2:only-child>.geo{height:100%;min-height:0}
-.stack>.box:only-child{margin-block:auto}
-.box{border:0;border-inline-start:4px solid #a8bac6;border-bottom:1px solid #e2e9ee;border-radius:0;padding:8px 10px;background:transparent}
-.def{border-inline-start-color:#5aa678}.prop{border-inline-start-color:#5b8fd1}.imp{border-inline-start-color:#d99a4f}.spec{border-inline-start-color:#866bc6}.proof{border-inline-start-color:#789aaa}
-.box h2{font-size:19px;line-height:1.12;margin:0 0 4px;font-weight:950;color:#173b57}
-.box>p:first-child{margin-top:0}.box>p:last-child{margin-bottom:0}
-.box,.card,.geo,.mathline{break-inside:avoid;page-break-inside:avoid}
-.def h2{color:#2b8250}.prop h2{color:#2361ad}.imp h2{color:#b96b1f}.spec h2{color:#6f48b8}
-.statement{font-size:18px;line-height:1.33;font-weight:690;margin:3px 0}
-.large{font-size:20px}
-.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:stretch}
-.card{border:0;border-bottom:1px solid #dde6ec;padding:8px 10px;background:transparent}
-.card h3{font-size:17px;line-height:1.15;margin:0 0 4px;color:#244b65}
-.blank{display:inline-block;min-width:102px;border-bottom:2.2px solid #35566d;height:1.08em;vertical-align:-.08em;margin:0 3px}
-.blank.short{min-width:64px}.blank.long{min-width:150px}
-.math{direction:ltr;unicode-bidi:isolate;display:inline-flex;vertical-align:-.13em;white-space:nowrap;font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:1.05em;font-weight:600}
-.mathline{direction:ltr;unicode-bidi:isolate;text-align:center;border:0;background:transparent;padding:2px;margin:3px 0;font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:21px;line-height:1.18}
-.mathline.mixed{direction:rtl;unicode-bidi:plaintext}
-.source-symbolic{direction:ltr;unicode-bidi:isolate;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin:7px 0;font-family:"STIX Two Math","Cambria Math","Times New Roman",serif;font-size:20px;text-align:center}
-.source-symbolic .and{direction:rtl;font-family:"Noto Sans Hebrew","Rubik","Arial Hebrew","Segoe UI",Arial,sans-serif;font-size:15px;font-weight:800}
-.mathline math,.math math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:1em}
-.geo{display:grid;place-items:center;margin:0;border:0;background:#fff;min-height:220px;padding:2px}
-.geo svg{width:min(100%,350px);max-height:230px;height:auto;overflow:visible}
-.geo figcaption{display:none}
-.shape{fill:rgba(37,99,200,.018);stroke:#17324d;stroke-width:4;stroke-linejoin:round}
-.diag{stroke:#6c8294;stroke-width:2.3}
-.tick,.par,.right,.arc,.height,.extension{fill:none;stroke-linecap:round;stroke-linejoin:round}
-.tick{stroke:#7653c5;stroke-width:3.2}.par{stroke:#df8429;stroke-width:3}.right{stroke:#168472;stroke-width:3}.arc{stroke:#df8429;stroke-width:2.7}
-.height{stroke:#168472;stroke-width:2.7;stroke-dasharray:7 5}.extension{stroke:#9aabb7;stroke-width:1.8;stroke-dasharray:4 5}
-.diag-eq{stroke:#b35c2b;stroke-width:3.1;stroke-linecap:round}.mid-a{stroke:#2563c8;stroke-width:3.1}.mid-b{stroke:#168472;stroke-width:3.1}
-.pt{fill:#17324d}.center{fill:#b35c2b}
-.lbl{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Times New Roman",serif;font-size:20px;font-style:italic;font-weight:700;fill:#0f2e46;paint-order:stroke;stroke:#fff;stroke-width:3px}
-.list{display:grid;gap:5px}
-.li{display:grid;grid-template-columns:22px 1fr;gap:6px;align-items:start;font-size:17px;line-height:1.3;font-weight:690}
-.bullet{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#eef4f8;font-size:11px;font-weight:900}
-.footer{position:absolute;inset:auto 28px 7px;border:0;padding:0;text-align:center;font-size:9px;color:#8a9aa6;font-weight:700}
-.source-exact{display:none!important}
-.angle-a,.angle-b{fill:none;stroke-width:3;stroke-linecap:round}
-.angle-a{stroke:#d85f66}.angle-b{stroke:#4f78c8}
-.angle-label{font-family:"Cambria Math","Times New Roman",serif;font-size:21px;font-style:italic;font-weight:700}
-.angle-label.a{fill:#d85f66}.angle-label.b{fill:#4f78c8}
-.textbook-source-p2{
-  position:absolute;inset:0;padding:16px 24px 20px;background:#fff;
-  display:grid;grid-template-rows:68px 338px 338px 338px;gap:7px;overflow:hidden
-}
-.textbook-source-p2 .tb-heading{
-  position:relative;isolation:isolate;display:flex;align-items:center;justify-content:flex-start;
-  font-size:27px;line-height:1;font-weight:950;color:#fff;text-align:right;padding:0 18px
-}
-.textbook-source-p2 .tb-heading::before{
-  content:"";position:absolute;z-index:-1;inset:4px 0;
-  background:linear-gradient(90deg,#8bdaf0 0%,#48b4d6 35%,#0a3b60 78%,#082f50 100%);
-  clip-path:polygon(0 20%,10% 10%,25% 18%,38% 5%,52% 15%,66% 4%,82% 13%,100% 3%,99% 85%,86% 95%,71% 84%,56% 96%,40% 86%,24% 95%,9% 86%,1% 94%)
-}
-.textbook-source-p2 .p2-block{
-  display:grid;grid-template-rows:42px 289px;gap:7px;padding:0 4px;
-  border-bottom:1px solid #e3eaee;min-height:0
-}
-.textbook-source-p2 .p2-block:last-child{border-bottom:0}
-.textbook-source-p2 .p2-text{
-  display:flex;align-items:center;gap:6px;
-  font-size:18px;line-height:1.28;font-weight:740;text-align:right
-}
-.textbook-source-p2 .p2-text::before{
-  content:"❮❮";font-size:14px;letter-spacing:-3px;color:#17324d;font-weight:950;flex:0 0 auto
-}
-.textbook-source-p2 .p2-row{
-  direction:ltr;display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
-  gap:18px;align-items:center;min-height:0
-}
-.textbook-source-p2 .p2-diagram{height:190px;display:grid;place-items:center}
-.textbook-source-p2 .p2-diagram .geo{height:190px;min-height:0;padding:0;background:transparent}
-.textbook-source-p2 .p2-diagram .geo svg{height:190px;width:min(100%,275px);max-height:none}
-.textbook-source-p2 .p2-derive{
-  direction:rtl;display:grid;grid-template-rows:auto 34px auto;gap:5px;
-  justify-items:center;align-content:center
-}
-.textbook-source-p2 .p2-caption{
-  font-size:15px;line-height:1.1;font-weight:800;color:#244b65;text-align:center;white-space:nowrap
-}
-.textbook-source-p2 .p2-arrow{width:27px;height:34px;display:block}
-.textbook-source-p2 .p2-arrow path{
-  fill:none;stroke:#17324d;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round
-}
-.textbook-source-p2 .p2-completion{
-  direction:ltr;unicode-bidi:isolate;display:flex;align-items:center;justify-content:center;
-  gap:12px;white-space:nowrap;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
-  font-size:22px;font-weight:650
-}
-.textbook-source-p2 .p2-completion .answer-line{
-  display:inline-block;width:70px;height:.86em;border-bottom:2px solid #17324d
-}
-.textbook-source-p2 .p2-completion .he{
-  direction:rtl;unicode-bidi:isolate;font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;
-  font-size:15px;font-weight:850
-}
-.textbook-source-p2 .p2-formula{
-  direction:ltr;unicode-bidi:isolate;font-family:"Cambria Math","Times New Roman",serif;
-  font-size:24px;font-style:italic
-}
-.textbook-source-p2 .blank{
-  min-width:108px;height:1em;border-bottom:2px solid #17324d;vertical-align:-.05em;margin-inline:4px
-}
-.textbook-source-p2 .blank.short{min-width:72px}
-.textbook-source-p2 .shape{stroke:#17324d!important;stroke-width:3.6!important}
-.textbook-source-p2 .par{stroke:#65737e!important}
-.textbook-source-p2 .tick,.textbook-source-p2 .mid-a,.textbook-source-p2 .mid-b{stroke:#356ed0!important}
-.textbook-source-p2 .lbl{font-size:19px!important}
-.textbook-proof{
-  position:absolute;inset:0;padding:16px 24px 20px;background:#fff;
-  display:grid;gap:8px;overflow:hidden
-}
-.textbook-proof.p3{grid-template-rows:70px repeat(3,1fr)}
-.textbook-proof.p4{grid-template-rows:70px repeat(2,1fr)}
-.textbook-proof .proof-title{
-  position:relative;isolation:isolate;display:grid;place-items:center;
-  font-size:31px;line-height:1;font-weight:950;color:#fff;text-align:center
-}
-.textbook-proof .proof-title::before{
-  content:"";position:absolute;z-index:-1;inset:4px 0;
-  background:linear-gradient(90deg,#8bdaf0 0%,#3fa8ce 34%,#0c466d 78%,#082f50 100%);
-  clip-path:polygon(0 18%,10% 9%,25% 16%,39% 5%,54% 15%,68% 4%,84% 12%,100% 4%,99% 86%,86% 95%,71% 85%,56% 96%,40% 86%,24% 95%,9% 86%,1% 94%)
-}
-.textbook-proof .proof-block{
-  display:grid;grid-template-rows:auto 1fr auto;
-  gap:6px;padding:7px 5px;border-bottom:1px solid #e3eaee;min-height:0
-}
-.textbook-proof .proof-block:last-child{border-bottom:0}
-.textbook-proof .proof-text{
-  font-size:17px;line-height:1.28;font-weight:720;text-align:right
-}
-.textbook-proof .proof-work{
-  direction:ltr;display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
-  gap:16px;align-items:center;min-height:0
-}
-.textbook-proof .proof-diagram{display:grid;place-items:center;height:150px}
-.textbook-proof .proof-diagram .geo{height:150px;min-height:0;padding:0;background:transparent}
-.textbook-proof .proof-diagram .geo svg{height:150px;width:min(100%,240px);max-height:none}
-.textbook-proof .proof-if{
-  direction:rtl;display:grid;gap:6px;justify-items:center;align-content:center
-}
-.textbook-proof .if-label{font-size:16px;font-weight:900;color:#244b65}
-.textbook-proof .proof-completion{
-  direction:ltr;unicode-bidi:isolate;display:flex;align-items:center;justify-content:center;
-  gap:11px;white-space:nowrap;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
-  font-size:21px;font-weight:650
-}
-.textbook-proof .proof-completion .answer-line{
-  display:inline-block;width:66px;height:.86em;border-bottom:2px solid #17324d
-}
-.textbook-proof .proof-completion .he{
-  direction:rtl;unicode-bidi:isolate;font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;
-  font-size:14px;font-weight:850
-}
-.textbook-proof .proof-given{
-  direction:ltr;unicode-bidi:isolate;display:flex;align-items:center;justify-content:center;
-  gap:10px;white-space:nowrap;font-family:"Cambria Math","Times New Roman",serif;font-size:20px
-}
-.textbook-proof .proof-given .he{
-  direction:rtl;font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;
-  font-size:14px;font-weight:850
-}
-.textbook-proof .proof-given .answer-line,
-.textbook-proof .conclusion .answer-line{
-  display:inline-block;width:82px;height:.86em;border-bottom:2px solid #17324d
-}
-.textbook-proof .conclusion{
-  font-size:16px;line-height:1.2;font-weight:800;text-align:center
-}
-.textbook-proof .blank{min-width:94px;height:1em;border-bottom:2px solid #17324d;vertical-align:-.05em;margin-inline:3px}
-.textbook-proof .shape{stroke:#17324d!important;stroke-width:3.5!important}
-.textbook-proof .par{stroke:#65737e!important}
-.textbook-proof .tick,.textbook-proof .mid-a,.textbook-proof .mid-b{stroke:#356ed0!important}
-.textbook-proof .lbl{font-size:18px!important}
-.textbook-area{
-  position:absolute;inset:0;padding:16px 26px 22px;background:#fff;
-  display:grid;grid-template-rows:72px 110px 410px 210px 210px;gap:8px;overflow:hidden
-}
-.textbook-area .area-title{
-  position:relative;isolation:isolate;display:grid;place-items:center;
-  font-size:31px;line-height:1;font-weight:950;color:#fff;text-align:center
-}
-.textbook-area .area-title::before{
-  content:"";position:absolute;z-index:-1;inset:4px 0;
-  background:linear-gradient(90deg,#8bdaf0 0%,#3fa8ce 34%,#0c466d 78%,#082f50 100%);
-  clip-path:polygon(0 18%,10% 9%,25% 16%,39% 5%,54% 15%,68% 4%,84% 12%,100% 4%,99% 86%,86% 95%,71% 85%,56% 96%,40% 86%,24% 95%,9% 86%,1% 94%)
-}
-.textbook-area .area-rule{
-  display:flex;align-items:center;justify-content:flex-start;
-  font-size:19px;line-height:1.35;font-weight:740;text-align:right;padding:0 10px
-}
-.textbook-area .area-diagram{display:grid;place-items:center;min-height:0}
-.textbook-area .area-diagram .geo{height:370px;min-height:0;padding:0;background:transparent}
-.textbook-area .area-diagram .geo svg{height:370px;width:min(100%,540px);max-height:none}
-.textbook-area .height-task{
-  display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.55fr);
-  gap:18px;align-items:center;padding:8px 12px;border-top:1px solid #e3eaee
-}
-.textbook-area .height-text{
-  font-size:18px;line-height:1.35;font-weight:720;text-align:right
-}
-.textbook-area .area-formula{
-  direction:ltr;unicode-bidi:isolate;display:flex;align-items:flex-end;justify-content:center;
-  gap:8px;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:25px
-}
-.textbook-area .area-formula .sub{font-size:.62em;transform:translateY(3px)}
-.textbook-area .answer-line{display:inline-block;width:96px;height:.86em;border-bottom:2px solid #17324d}
-.textbook-area .blank{min-width:102px;height:1em;border-bottom:2px solid #17324d;vertical-align:-.05em;margin-inline:4px}
-.textbook-area .shape{stroke:#17324d!important;stroke-width:3.6!important}
-.textbook-area .height{stroke:#168472!important;stroke-width:3!important;stroke-dasharray:7 5}
-.textbook-area .right{stroke:#168472!important;stroke-width:3!important}
-.textbook-area .lbl{font-size:19px!important}
-.source-worksheet{
-  position:absolute;inset:0;padding:16px 24px 20px;background:#fff;
-  display:flex;flex-direction:column;gap:9px;overflow:hidden
-}
-.source-worksheet .sw-title{
-  position:relative;isolation:isolate;display:grid;place-items:center;
-  min-height:70px;margin:0;font-size:34px;line-height:1;font-weight:950;color:#0f3858
-}
-.source-worksheet .sw-title::before{
-  content:"";position:absolute;z-index:-1;inset:4px 0;
-  background:linear-gradient(105deg,rgba(216,248,255,.96),rgba(120,221,245,.76) 48%,rgba(219,249,255,.96));
-  clip-path:polygon(0 13%,8% 5%,18% 12%,31% 3%,44% 10%,57% 2%,72% 9%,84% 4%,100% 12%,99% 87%,87% 94%,74% 87%,61% 96%,48% 89%,34% 97%,19% 90%,7% 96%,1% 86%)
-}
-.source-worksheet .sw-heading{
-  position:relative;isolation:isolate;display:flex;align-items:center;justify-content:flex-start;
-  min-height:54px;font-size:25px;line-height:1;font-weight:950;color:#fff;padding:0 16px
-}
-.source-worksheet .sw-heading::before{
-  content:"";position:absolute;z-index:-1;inset:4px 0;
-  background:linear-gradient(90deg,#8bdaf0 0%,#48b4d6 35%,#0a3b60 78%,#082f50 100%);
-  clip-path:polygon(0 20%,10% 10%,25% 18%,38% 5%,52% 15%,66% 4%,82% 13%,100% 3%,99% 85%,86% 95%,71% 84%,56% 96%,40% 86%,24% 95%,9% 86%,1% 94%)
-}
-.source-worksheet .sw-section{
-  border-bottom:1px solid #e3eaee;padding:7px 6px;min-height:0
-}
-.source-worksheet .sw-section:last-child{border-bottom:0}
-.source-worksheet .sw-text{font-size:17px;line-height:1.34;font-weight:720;text-align:right;margin:4px 0}
-.source-worksheet .sw-note{font-size:15px;line-height:1.3;font-weight:800;color:#244b65}
-.source-worksheet .sw-grid{
-  direction:ltr;display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
-  gap:16px;align-items:center;min-height:0
-}
-.source-worksheet .sw-diagram{display:grid;place-items:center;min-height:0}
-.source-worksheet .sw-diagram .geo{height:170px;min-height:0;padding:0;background:transparent}
-.source-worksheet .sw-diagram .geo svg{height:170px;width:min(100%,260px);max-height:none}
-.source-worksheet .sw-work{
-  direction:rtl;display:grid;gap:7px;justify-items:center;align-content:center
-}
-.source-worksheet .sw-caption{font-size:15px;font-weight:800;color:#244b65;text-align:center}
-.source-worksheet .source-rel,
-.source-worksheet .source-chain{
-  direction:ltr;unicode-bidi:isolate;display:flex;align-items:center;justify-content:center;
-  gap:10px;white-space:nowrap;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
-  font-size:21px;font-weight:650
-}
-.source-worksheet .source-rel .answer-line,
-.source-worksheet .source-chain .answer-line,
-.source-worksheet .sw-work .answer-line{
-  display:inline-block;width:66px;height:.86em;border-bottom:2px solid #17324d
-}
-.source-worksheet .source-rel .he{
-  direction:rtl;font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;
-  font-size:14px;font-weight:850
-}
-.source-worksheet .sw-conclusion{font-size:16px;line-height:1.25;font-weight:800;text-align:center}
-.source-worksheet .sw-conclusion .answer-line{display:inline-block;width:88px;height:.86em;border-bottom:2px solid #17324d}
-.source-worksheet .blank{min-width:96px;height:1em;border-bottom:2px solid #17324d;vertical-align:-.05em;margin-inline:3px}
-.source-worksheet .blank.short{min-width:62px}
-.source-worksheet .math-token{direction:ltr;unicode-bidi:isolate;font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-style:italic;font-weight:650}
-.source-worksheet .shape{stroke:#17324d!important;stroke-width:3.5!important}
-.source-worksheet .par{stroke:#65737e!important}
-.source-worksheet .tick,.source-worksheet .mid-a,.source-worksheet .mid-b{stroke:#356ed0!important}
-.source-worksheet .right{stroke:#168472!important}
-.source-worksheet .lbl{font-size:18px!important}
-.source-worksheet.summary{gap:7px}
-.source-worksheet.summary .sw-text{font-size:18px;line-height:1.42}
-.source-worksheet.summary .summary-list{display:grid;gap:7px;padding:2px 14px}
-.source-worksheet.summary .summary-item{font-size:17px;line-height:1.32;font-weight:720}
-.source-exact .src-text{position:absolute;direction:rtl;text-align:right;white-space:normal;font-size:20px;line-height:1.25;font-weight:650;color:#17324d}
-.source-exact .src-title{font-size:58px;line-height:1.05;font-weight:950;text-align:center}
-.source-exact .src-heading{font-size:34px;line-height:1.1;font-weight:950;text-align:right}
-.source-exact .src-caption{font-size:18px;font-weight:700;text-align:center}
-.source-exact .src-and{font-size:20px;font-weight:800;text-align:center}
-.source-exact .src-eq{font-size:26px;font-weight:700;text-align:center;direction:ltr}
-.source-exact .src-blank{position:absolute;border-bottom:2.4px solid #17324d}
-.source-exact .src-geo{position:absolute;left:70px;top:225px;width:255px;height:175px}
-.source-exact .src-geo2{position:absolute;left:40px;top:590px;width:255px;height:170px}
-.source-exact .src-geo3{position:absolute;left:40px;top:905px;width:255px;height:165px}
-.source-exact .src-geo .geo,.source-exact .src-geo2 .geo,.source-exact .src-geo3 .geo{min-height:0;height:100%;padding:0}
-.source-exact .src-geo svg,.source-exact .src-geo2 svg,.source-exact .src-geo3 svg{width:100%;height:100%;max-height:none}
-.sheet.source-page{padding:0!important}
-.sheet.source-page>.title,.sheet.source-page>.stack,.sheet.source-page>.num,.sheet.source-page>.footer{display:none!important}
-.textbook-source{
-  position:absolute;inset:0;
-  padding:18px 24px 20px;
-  background:#fff;
-  display:grid;
-  grid-template-rows:88px 292px 62px 305px 305px;
-  gap:7px;
-  overflow:hidden
-}
-.textbook-source *{min-width:0}
-.textbook-source .tb-title{
-  position:relative;isolation:isolate;
-  display:grid;place-items:center;
-  text-align:center;font-size:46px;line-height:1;
-  font-weight:950;letter-spacing:.01em;color:#0f3858;
-  margin:0;padding:0 10px
-}
-.textbook-source .tb-title::before{
-  content:"";position:absolute;z-index:-1;
-  inset:6px 0 4px;
-  background:
-    linear-gradient(105deg,rgba(216,248,255,.96),rgba(120,221,245,.78) 48%,rgba(219,249,255,.96)),
-    repeating-linear-gradient(174deg,rgba(255,255,255,.18) 0 3px,rgba(37,99,200,.03) 3px 7px);
-  clip-path:polygon(0 13%,8% 5%,18% 12%,31% 3%,44% 10%,57% 2%,72% 9%,84% 4%,100% 12%,99% 87%,87% 94%,74% 87%,61% 96%,48% 89%,34% 97%,19% 90%,7% 96%,1% 86%)
-}
-.textbook-source .tb-intro{
-  display:grid;
-  grid-template-rows:34px 30px 216px;
-  gap:6px;padding:0 4px
-}
-.textbook-source .tb-line{
-  font-size:18px;line-height:1.28;font-weight:720;
-  text-align:right;overflow:visible
-}
-.textbook-source .tb-two{
-  direction:ltr;
-  display:grid;
-  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
-  gap:22px;align-items:center;min-height:0
-}
-.textbook-source .tb-diagram{
-  display:grid;place-items:center;min-height:0;height:100%
-}
-.textbook-source .tb-diagram .geo{
-  height:100%;min-height:0;max-height:178px;padding:0;background:transparent
-}
-.textbook-source .tb-diagram .geo svg{
-  width:min(100%,285px);height:100%;max-height:178px
-}
-.textbook-source .tb-given{
-  direction:ltr;unicode-bidi:isolate;
-  display:flex;align-items:center;justify-content:center;
-  gap:14px;white-space:nowrap;
-  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
-  font-size:24px;font-weight:650
-}
-.textbook-source .tb-given .he{
-  direction:rtl;unicode-bidi:isolate;
-  font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;
-  font-size:15px;font-weight:850;font-style:normal
-}
-.textbook-source .tb-given .answer-line{
-  display:inline-block;width:94px;height:.9em;border-bottom:2px solid #17324d
-}
-.textbook-source .tb-heading{
-  position:relative;isolation:isolate;
-  display:flex;align-items:center;justify-content:flex-start;
-  font-size:27px;line-height:1;font-weight:950;color:#fff;
-  text-align:right;padding:0 18px
-}
-.textbook-source .tb-heading::before{
-  content:"";position:absolute;z-index:-1;inset:5px 0;
-  background:linear-gradient(90deg,#8bdaf0 0%,#48b4d6 35%,#0a3b60 78%,#082f50 100%);
-  clip-path:polygon(0 20%,10% 10%,25% 18%,38% 5%,52% 15%,66% 4%,82% 13%,100% 3%,99% 85%,86% 95%,71% 84%,56% 96%,40% 86%,24% 95%,9% 86%,1% 94%)
-}
-.textbook-source .tb-property{
-  display:grid;
-  grid-template-rows:38px 257px;
-  gap:7px;padding:0 4px;
-  border-bottom:1px solid #e3eaee;
-  min-height:0
-}
-.textbook-source .tb-property:last-child{border-bottom:0}
-.textbook-source .tb-property-text{
-  font-size:18px;line-height:1.28;font-weight:740;text-align:right;
-  display:flex;align-items:center;justify-content:flex-start;
-  gap:6px
-}
-.textbook-source .tb-property-text::before{
-  content:"❮❮";font-size:14px;letter-spacing:-3px;
-  color:#17324d;font-weight:950;flex:0 0 auto
-}
-.textbook-source .tb-work{
-  direction:ltr;
-  display:grid;
-  grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
-  gap:18px;align-items:center;min-height:0
-}
-.textbook-source .tb-work .tb-diagram .geo{max-height:165px}
-.textbook-source .tb-work .tb-diagram .geo svg{
-  max-height:165px;width:min(100%,250px)
-}
-.textbook-source .tb-derive{
-  direction:rtl;
-  display:grid;
-  grid-template-rows:auto 30px auto;
-  gap:4px;justify-items:center;align-content:center
-}
-.textbook-source .tb-caption{
-  font-size:15px;line-height:1.1;font-weight:800;color:#244b65;
-  text-align:center;white-space:nowrap
-}
-.textbook-source .tb-arrow{width:25px;height:30px;display:block}
-.textbook-source .tb-arrow path{
-  fill:none;stroke:#17324d;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round
-}
-.textbook-source .tb-completion{
-  direction:ltr;unicode-bidi:isolate;
-  display:flex;align-items:center;justify-content:center;
-  gap:12px;white-space:nowrap;
-  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
-  font-size:22px;font-weight:650
-}
-.textbook-source .tb-completion .he{
-  direction:rtl;unicode-bidi:isolate;
-  font-family:"Noto Sans Hebrew","Arial Hebrew","Segoe UI",Arial,sans-serif;
-  font-size:15px;font-weight:850;font-style:normal
-}
-.textbook-source .tb-completion .answer-line{
-  display:inline-block;width:70px;height:.86em;border-bottom:2px solid #17324d
-}
-.textbook-source .tb-completion .symbol{font-size:21px;line-height:1}
-.textbook-source .blank{
-  min-width:108px;height:1em;border-bottom:2px solid #17324d;
-  vertical-align:-.05em;margin-inline:4px
-}
-.textbook-source .math-token{
-  direction:ltr;unicode-bidi:isolate;display:inline-block;
-  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
-  font-style:italic;font-weight:650
-}
-.textbook-source .par{stroke:#65737e!important}
-.textbook-source .tick{stroke:#356ed0!important}
-.textbook-source .shape{stroke:#17324d!important;stroke-width:3.6!important}
-.textbook-source .lbl{font-size:19px!important}
-.sheet.source-page{padding:0!important;direction:rtl}
-.sheet.source-page>.title,.sheet.source-page>.stack,.sheet.source-page>.num,.sheet.source-page>.footer{display:none!important}
-.source-exact{display:none!important}
+/* ============ fonts (self-hosted, SIL Open Font License; see fonts/) ============ */
+@font-face{font-family:"Rubik";font-style:normal;font-weight:300 900;font-display:swap;src:url("fonts/rubik-hebrew-wght-normal.woff2") format("woff2");unicode-range:U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:"Rubik";font-style:normal;font-weight:300 900;font-display:swap;src:url("fonts/rubik-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"STIX Two Math";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/stix-two-math-400-normal.woff2") format("woff2")}
 
-/* Density classes are applied automatically from the real rendered height. */
-.sheet.fit-compact .statement{font-size:17px;line-height:1.28}
-.sheet.fit-compact .box{padding:6px 9px}
-.sheet.fit-compact .box h2{font-size:18px;margin-bottom:3px}
-.sheet.fit-compact .grid2{gap:9px}
-.sheet.fit-compact .geo{min-height:190px}
-.sheet.fit-compact .geo svg{max-height:200px}
-.sheet.fit-compact .list{gap:3px}
-.sheet.fit-compact .li{font-size:16px;line-height:1.24}
-.sheet.fit-dense .statement{font-size:16px;line-height:1.22;margin:2px 0}
-.sheet.fit-dense .box{padding:5px 8px}
-.sheet.fit-dense .box h2{font-size:17px}
-.sheet.fit-dense .geo{min-height:170px}
-.sheet.fit-dense .geo svg{max-height:178px}
-.sheet.fit-dense .li{font-size:15px;line-height:1.2}
-.sheet.fit-airy .statement{font-size:20px}
-.sheet.fit-airy .geo{min-height:300px}
-.sheet.fit-airy .geo svg{max-height:315px;width:min(100%,410px)}
-.sheet.fit-airy .mathline{font-size:24px}
+/* ============ design tokens ============ */
+:root{
+  --ink:#000;
+  --muted-ink:#555;
+  --rule:#000;
+  --paper:#fff;
+  --sep:#0b2a6f;   /* screen-only divider between sheets */
+  --sep-h:6px;
+  --font-body:"Rubik","Segoe UI","Arial Hebrew",Arial,sans-serif;
+  --font-math:"STIX Two Math","Cambria Math","Times New Roman",serif;
+  --a4-width:794px;
+  --a4-height:1123px;
+  --fs-body:16px;
+  --fs-small:13.5px;
+  --fs-h2:19.5px;
+  --fs-h1:28px;
+  --fs-math:18px;
+  --fs-imp:30px;
+  --blank:96px;
+  --blank-s:58px;
+  --blank-l:150px;
+  --blank-rule:1.2px;
+  --scale:1;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:var(--fs-body);line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 
-/* === Professional student-workbook typography v3 === */
+/* ============ navigation (screen only) ============ */
+.top{position:sticky;top:0;z-index:10;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:10px 12px;background:var(--paper);border-bottom:var(--sep-h) solid var(--sep)}
+.top button{font:inherit;font-weight:500;font-size:15px;line-height:1.2;padding:7px 16px;border:1px solid var(--ink);border-radius:4px;background:var(--paper);color:var(--ink);cursor:pointer}
+.top button.active{background:var(--ink);color:var(--paper)}
+.top button:focus-visible{outline:3px double var(--ink);outline-offset:3px}
+.top .print{margin-inline-start:14px;font-weight:400}
+.topic{display:none}
+.topic.active{display:block}
+.pages{display:flex;flex-direction:column;padding:0 0 48px}
+.sheet-shell{box-sizing:content-box;width:100%;height:var(--a4-height);display:flex;justify-content:center;direction:ltr;overflow:hidden}
+.sheet-shell+.sheet-shell{border-top:var(--sep-h) solid var(--sep)}
+
+/* ============ the A4 sheet ============ */
 .sheet{
-  font-family:"Noto Sans Hebrew","Segoe UI",Arial,sans-serif;
-  color:#17324d;
+  position:relative;width:var(--a4-width);height:var(--a4-height);overflow:hidden;
+  padding:38px 44px 30px;background:var(--paper);color:var(--ink);direction:rtl;
+  display:flex;flex-direction:column;gap:var(--sgap,12px);
+  transform-origin:top center;
 }
-.sheet:before{height:2px;background:#9cc8dc}
-.sheet.source-page,.sheet.derived-page{background:#fff}
+.sheet h1{font-size:var(--fs-h1);font-weight:600;line-height:1.15;text-align:center;margin:0;padding-bottom:8px;border-bottom:1.6px solid var(--rule)}
+.sheet h2{font-size:var(--fs-h2);font-weight:600;line-height:1.2;margin:0;padding-bottom:4px;border-bottom:1px solid var(--rule)}
+.sheet h3{font-size:var(--fs-body);font-weight:600;line-height:1.4;margin:0}
+.sheet p{margin:0}
+.sheet b{font-weight:600}
+.sec{display:flex;flex-direction:column;gap:var(--sgap,12px)}
+.pn{margin-top:auto;padding-top:6px;text-align:center;font-size:11px;line-height:1;color:var(--muted-ink)}
 
-/* Page 1 — parallelogram source */
-.textbook-source{
-  padding:14px 22px 16px;
-  grid-template-rows:52px 230px 42px 360px 360px;
-  gap:6px
-}
-.textbook-source .tb-title{
-  font-size:28px;line-height:1.05;font-weight:850;color:#17324d;
-  border-bottom:1px solid #d8e4eb;padding:0;margin:0
-}
-.textbook-source .tb-title::before{display:none}
-.textbook-source .tb-intro{
-  grid-template-rows:27px 24px 167px;
-  gap:4px;padding:0 2px
-}
-.textbook-source .tb-line{font-size:15.5px;line-height:1.34;font-weight:650}
-.textbook-source .tb-two{
-  grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);
-  gap:14px
-}
-.textbook-source .tb-diagram .geo{max-height:148px}
-.textbook-source .tb-diagram .geo svg{width:min(100%,235px);max-height:148px}
-.textbook-source .tb-given{gap:10px;font-size:18px;font-weight:600}
-.textbook-source .tb-given .he{font-size:13px;font-weight:750}
-.textbook-source .tb-given .answer-line{width:68px;border-bottom-width:1.7px}
-.textbook-source .tb-heading{
-  min-height:0;font-size:20px;line-height:1.1;font-weight:800;color:#17324d;
-  padding:0 10px;background:#eef6fa;border-right:4px solid #5ba8c8;
-  border-radius:2px
-}
-.textbook-source .tb-heading::before{display:none}
-.textbook-source .tb-property{
-  grid-template-rows:31px 319px;
-  gap:4px;padding:4px 2px;
-  border-bottom:1px solid #e3eaee
-}
-.textbook-source .tb-property-text{
-  font-size:15.5px;line-height:1.32;font-weight:650;gap:5px
-}
-.textbook-source .tb-property-text::before{display:none}
-.textbook-source .tb-work{
-  grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);
-  gap:12px
-}
-.textbook-source .tb-work .tb-diagram .geo{max-height:145px}
-.textbook-source .tb-work .tb-diagram .geo svg{max-height:145px;width:min(100%,225px)}
-.textbook-source .tb-derive{grid-template-rows:auto 22px auto;gap:3px}
-.textbook-source .tb-caption{font-size:13px;font-weight:700}
-.textbook-source .tb-arrow{width:20px;height:22px}
-.textbook-source .tb-arrow path{stroke-width:2}
-.textbook-source .tb-completion{gap:8px;font-size:17px;font-weight:600}
-.textbook-source .tb-completion .he{font-size:13px;font-weight:750}
-.textbook-source .tb-completion .answer-line{width:54px;border-bottom-width:1.7px}
-.textbook-source .tb-completion .symbol{font-size:17px}
-.textbook-source .blank{min-width:78px;border-bottom-width:1.7px}
-.textbook-source .lbl{font-size:16px!important}
+/* completion blanks */
+.blank{display:inline-block;width:var(--blank);height:1em;border-bottom:var(--blank-rule) solid var(--ink);vertical-align:-.2em;margin:0 3px}
+.blank.s{width:var(--blank-s)}
+.blank.l{width:var(--blank-l)}
+math .blank{border-bottom:var(--blank-rule) solid var(--ink)}
 
-/* Parallelogram page 2 */
-.textbook-source-p2{
-  padding:14px 22px 16px;
-  grid-template-rows:42px 347px 347px 347px;
-  gap:5px
-}
-.textbook-source-p2 .tb-heading{
-  font-size:20px;font-weight:800;color:#17324d;padding:0 10px;
-  background:#eef6fa;border-right:4px solid #5ba8c8;border-radius:2px
-}
-.textbook-source-p2 .tb-heading::before{display:none}
-.textbook-source-p2 .p2-block{grid-template-rows:30px 311px;gap:4px;padding:2px}
-.textbook-source-p2 .p2-text{font-size:15.5px;line-height:1.3;font-weight:650}
-.textbook-source-p2 .p2-text::before{display:none}
-.textbook-source-p2 .p2-row{gap:12px}
-.textbook-source-p2 .p2-diagram,
-.textbook-source-p2 .p2-diagram .geo{height:150px}
-.textbook-source-p2 .p2-diagram .geo svg{height:150px;width:min(100%,230px)}
-.textbook-source-p2 .p2-derive{grid-template-rows:auto 22px auto;gap:3px}
-.textbook-source-p2 .p2-caption{font-size:13px;font-weight:700}
-.textbook-source-p2 .p2-arrow{width:20px;height:22px}
-.textbook-source-p2 .p2-arrow path{stroke-width:2}
-.textbook-source-p2 .p2-completion{gap:8px;font-size:17px}
-.textbook-source-p2 .p2-completion .answer-line{width:54px;border-bottom-width:1.7px}
-.textbook-source-p2 .p2-completion .he{font-size:13px;font-weight:750}
-.textbook-source-p2 .p2-formula{font-size:18px}
-.textbook-source-p2 .blank{min-width:80px;border-bottom-width:1.7px}
-.textbook-source-p2 .blank.short{min-width:54px}
-.textbook-source-p2 .lbl{font-size:16px!important}
+/* mathematics (MathML, STIX Two Math) */
+math{font-family:var(--font-math);font-size:var(--fs-math);line-height:1.2}
+.m{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:4px 14px;margin:0}
+.derive>.m,.work>.m{width:100%}
+.m .he{font-weight:500}
+.imp{display:block;font-family:var(--font-math);font-size:var(--fs-imp);line-height:1;text-align:center;margin:0}
+.derive,.work{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+.derive .cap{font-weight:500}
+.derive .if{font-weight:600}
+.derive .end{line-height:1.5}
 
-/* Proof pages */
-.textbook-proof{
-  padding:14px 22px 16px;gap:5px
-}
-.textbook-proof.p3{grid-template-rows:44px repeat(3,1fr)}
-.textbook-proof.p4{grid-template-rows:44px repeat(2,1fr)}
-.textbook-proof .proof-title{
-  font-size:21px;font-weight:800;color:#17324d;text-align:right;
-  place-items:center end;padding:0 10px;background:#eef6fa;border-right:4px solid #5ba8c8
-}
-.textbook-proof .proof-title::before{display:none}
-.textbook-proof .proof-block{gap:4px;padding:5px 2px}
-.textbook-proof .proof-text{font-size:15px;line-height:1.3;font-weight:650}
-.textbook-proof .proof-work{gap:10px}
-.textbook-proof .proof-diagram,
-.textbook-proof .proof-diagram .geo{height:125px}
-.textbook-proof .proof-diagram .geo svg{height:125px;width:min(100%,205px)}
-.textbook-proof .proof-if{gap:4px}
-.textbook-proof .if-label{font-size:13px;font-weight:750}
-.textbook-proof .proof-completion{gap:7px;font-size:16px}
-.textbook-proof .proof-completion .answer-line{width:52px;border-bottom-width:1.7px}
-.textbook-proof .proof-completion .he{font-size:12.5px;font-weight:750}
-.textbook-proof .proof-given{gap:7px;font-size:16px}
-.textbook-proof .proof-given .he{font-size:12.5px}
-.textbook-proof .proof-given .answer-line,
-.textbook-proof .conclusion .answer-line{width:66px;border-bottom-width:1.7px}
-.textbook-proof .conclusion{font-size:14px;font-weight:700}
-.textbook-proof .blank{min-width:72px;border-bottom-width:1.7px}
-.textbook-proof .lbl{font-size:15px!important}
+/* numbered properties / proof methods */
+ol.props{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--sgap,12px)}
+ol.props>li{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:6px;align-items:baseline}
+ol.props>li>.n{font-weight:600;min-width:1.5em}
+ol.props>li>.item{display:flex;flex-direction:column;gap:6px;min-width:0}
 
-/* Area page */
-.textbook-area{
-  padding:14px 22px 16px;
-  grid-template-rows:44px 72px 365px 285px 285px;
-  gap:5px
-}
-.textbook-area .area-title{
-  font-size:21px;font-weight:800;color:#17324d;text-align:right;
-  place-items:center end;padding:0 10px;background:#eef6fa;border-right:4px solid #5ba8c8
-}
-.textbook-area .area-title::before{display:none}
-.textbook-area .area-rule{font-size:15.5px;line-height:1.32;font-weight:650;padding:0 4px}
-.textbook-area .area-diagram .geo{height:285px}
-.textbook-area .area-diagram .geo svg{height:285px;width:min(100%,430px)}
-.textbook-area .height-task{gap:12px;padding:5px 6px}
-.textbook-area .height-text{font-size:15px;line-height:1.3;font-weight:650}
-.textbook-area .area-formula{gap:6px;font-size:19px}
-.textbook-area .answer-line{width:70px;border-bottom-width:1.7px}
-.textbook-area .blank{min-width:78px;border-bottom-width:1.7px}
-.textbook-area .lbl{font-size:16px!important}
+/* diagram + derivation rows: derivation on the right, drawing on the left */
+.row{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:10px 22px;align-items:center}
+.row.stack{grid-template-columns:minmax(0,1fr);row-gap:var(--sgap,12px)}
+.row.stack .derive{--fs-math:22px;--fs-imp:40px;font-size:18px}
+.row.stack>.geo,.row.stack>.derive,.row.stack>.work{grid-column:1}
+.row>.geo{grid-column:2}
+.row>.derive,.row>.work{grid-column:1}
+.geo{margin:0;display:flex;justify-content:center;align-items:center;--geo-h:215px}
+.geo svg{display:block;overflow:visible;shape-rendering:geometricPrecision;text-rendering:geometricPrecision}
+.geo svg .shape,.geo svg .diag,.geo svg .tick,.geo svg .par,.geo svg .right,.geo svg .arc,.geo svg .height,.geo svg .extension{vector-effect:non-scaling-stroke}
+.geo-xs{--geo-h:150px}.geo-s{--geo-h:178px}.geo-m{--geo-h:215px}.geo-l{--geo-h:260px}.geo-xl{--geo-h:310px}.geo-2x{--geo-h:380px}.geo-3x{--geo-h:520px}
+body.building .topic{display:block}
+.families{display:grid;grid-template-columns:1fr 1fr;gap:10px 30px}
+.fam{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
 
-/* Rectangle / rhombus / square pages */
-.source-worksheet{
-  padding:14px 22px 16px;
-  gap:6px
-}
-.source-worksheet .sw-title{
-  min-height:48px;font-size:27px;line-height:1.05;font-weight:850;color:#17324d;
-  border-bottom:1px solid #d8e4eb
-}
-.source-worksheet .sw-title::before{display:none}
-.source-worksheet .sw-heading{
-  min-height:40px;font-size:19px;line-height:1.15;font-weight:800;color:#17324d;
-  padding:0 10px;background:#eef6fa;border-right:4px solid #5ba8c8;border-radius:2px
-}
-.source-worksheet .sw-heading::before{display:none}
-.source-worksheet .sw-section{padding:5px 4px}
-.source-worksheet .sw-text{font-size:15px;line-height:1.34;font-weight:650;margin:3px 0}
-.source-worksheet .sw-note{font-size:13px;line-height:1.25;font-weight:700}
-.source-worksheet .sw-grid{
-  grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);
-  gap:10px
-}
-.source-worksheet .sw-diagram .geo{height:145px}
-.source-worksheet .sw-diagram .geo svg{height:145px;width:min(100%,225px)}
-.source-worksheet .sw-work{gap:5px}
-.source-worksheet .sw-caption{font-size:13px;font-weight:700}
-.source-worksheet .source-rel,
-.source-worksheet .source-chain{gap:7px;font-size:16.5px;font-weight:600}
-.source-worksheet .source-rel .answer-line,
-.source-worksheet .source-chain .answer-line,
-.source-worksheet .sw-work .answer-line{width:52px;border-bottom-width:1.7px}
-.source-worksheet .source-rel .he{font-size:12.5px;font-weight:750}
-.source-worksheet .sw-conclusion{font-size:14px;font-weight:700}
-.source-worksheet .sw-conclusion .answer-line{width:66px;border-bottom-width:1.7px}
-.source-worksheet .blank{min-width:72px;border-bottom-width:1.7px}
-.source-worksheet .blank.short{min-width:48px}
-.source-worksheet .lbl{font-size:15px!important}
-.source-worksheet.summary{gap:5px}
-.source-worksheet.summary .sw-text{font-size:15.5px;line-height:1.35}
-.source-worksheet.summary .summary-list{gap:5px;padding:2px 8px}
-.source-worksheet.summary .summary-item{font-size:15px;line-height:1.3;font-weight:650}
+/* geometry line hierarchy (all black; dashed gray only for helper extensions) */
+.geo .shape{fill:none;stroke:var(--ink);stroke-width:2.3;stroke-linejoin:round}
+.geo .diag{stroke:var(--ink);stroke-width:1.3}
+.geo .diag.dashed{stroke-dasharray:5 4}
+.geo .tick,.geo .par,.geo .right,.geo .arc,.geo .height{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}
+.geo .tick{stroke-width:1.6}
+.geo .par{stroke-width:1.5}
+.geo .right{stroke-width:1.3}
+.geo .arc{stroke-width:1.2}
+.geo .height{stroke-width:1.4}
+.geo .extension{stroke:#777;stroke-width:1.1;stroke-dasharray:4 4}
+.geo .lbl,.geo .alab{font-family:var(--font-math);fill:var(--ink)}
+.geo .lbl.side{font-style:italic}
 
-/* Keep math clean but restrained */
-.math,.math-token,bdi[dir="ltr"]{
-  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif
-}
-.answer-line,.blank{border-color:#29475d!important}
-.shape{stroke-width:3.2!important}
-.diag{stroke-width:2!important}
-.tick,.par,.right,.arc{stroke-width:2.4!important}
+/* "inherited from the parallelogram" brace + aside */
+.inherit{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;align-items:stretch}
+.aside{display:grid;grid-template-columns:12px 168px;gap:8px;align-items:center}
+.aside svg{width:12px;height:100%;min-height:48px;overflow:visible}
+.aside p{font-size:var(--fs-small);line-height:1.45;font-weight:400}
+.aside .blank{width:var(--blank-s)}
 
-
-/* === DIAGRAM LEGIBILITY V5 START ===
-   Student-workbook geometry layer.
-   Typography/prose/worksheet wording are intentionally untouched.
-*/
-
-/* Give diagrams a useful share of each teaching row. */
-.textbook-source .tb-two,
-.textbook-source .tb-work,
-.textbook-source-p2 .p2-row,
-.textbook-proof .proof-work,
-.source-worksheet .sw-grid {
-  grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr) !important;
+/* ============ mobile: the whole A4 is scaled, never reflowed ============ */
+@media (max-width:800px){
+  body{overflow-x:hidden}
+  .top{padding:6px;gap:5px}
+  .top button{padding:6px 10px;font-size:13px}
+  .top .print{margin-inline-start:4px}
+  .pages{padding:0 0 24px}
+  .sheet-shell{position:relative;height:calc(var(--a4-height) * var(--scale));display:block}
+  .sheet{position:absolute;top:0;left:50%;transform:translateX(-50%) scale(var(--scale));transform-origin:top center}
 }
 
-/* Parallelogram page 1. */
-.textbook-source .tb-diagram .geo {
-  max-height:175px !important;
-}
-.textbook-source .tb-diagram .geo svg {
-  width:min(100%,270px) !important;
-  max-height:175px !important;
-  overflow:visible !important;
-}
-.textbook-source .tb-work .tb-diagram .geo {
-  max-height:180px !important;
-}
-.textbook-source .tb-work .tb-diagram .geo svg {
-  width:min(100%,278px) !important;
-  max-height:180px !important;
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
-/* Properties page. */
-.textbook-source-p2 .p2-diagram,
-.textbook-source-p2 .p2-diagram .geo {
-  height:180px !important;
-}
-.textbook-source-p2 .p2-diagram .geo svg {
-  width:min(100%,275px) !important;
-  height:180px !important;
-  max-height:180px !important;
-  overflow:visible !important;
-}
-
-/* Proof pages: strong enough to read, still secondary to the exercise. */
-.textbook-proof .proof-diagram,
-.textbook-proof .proof-diagram .geo {
-  height:158px !important;
-}
-.textbook-proof .proof-diagram .geo svg {
-  width:min(100%,245px) !important;
-  height:158px !important;
-  max-height:158px !important;
-  overflow:visible !important;
-}
-
-/* Rectangle / rhombus / square worksheets. */
-.source-worksheet .sw-diagram .geo {
-  height:178px !important;
-}
-.source-worksheet .sw-diagram .geo svg {
-  width:min(100%,270px) !important;
-  height:178px !important;
-  max-height:178px !important;
-  overflow:visible !important;
-}
-
-/* Area drawings can be larger because they carry the mathematical idea. */
-.textbook-area .area-diagram .geo {
-  height:305px !important;
-}
-.textbook-area .area-diagram .geo svg {
-  width:min(100%,465px) !important;
-  height:305px !important;
-  max-height:305px !important;
-  overflow:visible !important;
-}
-
-/* Geometry line hierarchy. */
-.sheet .shape {
-  stroke:#17324d !important;
-  stroke-width:3.9px !important;
-  stroke-linejoin:round !important;
-}
-
-.sheet .diag {
-  stroke:#607487 !important;
-  stroke-width:2.45px !important;
-}
-
-.sheet .par {
-  stroke:#325b78 !important;
-  stroke-width:3.25px !important;
-}
-
-.sheet .tick,
-.sheet .mid-a,
-.sheet .mid-b,
-.sheet .diag-eq {
-  stroke-width:3.25px !important;
-}
-
-.sheet .right {
-  stroke:#147868 !important;
-  stroke-width:3.15px !important;
-}
-
-.sheet .arc,
-.sheet .angle-a,
-.sheet .angle-b {
-  stroke-width:3.05px !important;
-}
-
-/* A/B/C/D are instructional labels, not decorative fine print. */
-.sheet .lbl {
-  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif !important;
-  font-size:20px !important;
-  font-weight:700 !important;
-  fill:#102f48 !important;
-  paint-order:stroke !important;
-  stroke:#fff !important;
-  stroke-width:2.6px !important;
-  stroke-linejoin:round !important;
-}
-
-/* Center and angle labels. */
-.sheet .angle-label {
-  font-size:20px !important;
-  font-weight:700 !important;
-}
-.sheet .center {
-  r:4px;
-}
-
-/* Mathematical completion rows remain restrained,
-   so the actual geometry gets the visual emphasis. */
-.textbook-source .tb-completion,
-.textbook-source-p2 .p2-completion,
-.textbook-proof .proof-completion,
-.source-worksheet .source-rel,
-.source-worksheet .source-chain {
-  font-weight:600 !important;
-}
-
-/* Never let SVG artwork be silently clipped. */
-.sheet figure.geo,
-.sheet figure.geo svg {
-  overflow:visible !important;
-}
-
-/* === DIAGRAM LEGIBILITY V5 END === */
-
-/* === DOUBLE ARROW + PROPERTY NUMBERING V1 START === */
-
-.prop-index{
-  display:inline-block;
-  margin-left:6px;
-  color:#17324d;
-  font-weight:800;
-}
-/* === DOUBLE ARROW + PROPERTY NUMBERING V1 END === */
-
-.proof-double-arrow{
-  display:block;
-  direction:ltr;
-  unicode-bidi:isolate;
-  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
-  font-size:31px;
-  line-height:1;
-  font-weight:600;
-  color:#17324d;
-  text-align:center;
-  width:36px;
-  height:34px;
-  margin:0 auto;
-}
-
-
-
-/* === TEXTBOOK MONOCHROME V2 START === */
-/* Hard black-and-white textbook override. */
-html,body{
-  background:#ffffff !important;
-}
-
-/* Kill all colored decorative layers */
-.tb-title::before,
-.sw-title::before,
-.tb-heading::before,
-.proof-title::before,
-.area-title::before,
-.sw-heading::before,
-.sheet::before{
-  display:none !important;
-  background:none !important;
-  content:none !important;
-}
-
-/* Global text: BLACK באמת */
-.sheet,
-.sheet *,
-.sheet *::before,
-.sheet *::after{
-  color:#000000 !important;
-  -webkit-text-fill-color:#000000 !important;
-  text-shadow:none !important;
-  box-shadow:none !important;
-}
-
-/* Titles / headings must be white background + black text only */
-.textbook-source .tb-title,
-.source-worksheet .sw-title,
-.textbook-source .tb-heading,
-.textbook-source-p2 .tb-heading,
-.textbook-proof .proof-title,
-.textbook-area .area-title,
-.source-worksheet .sw-heading{
-  color:#000000 !important;
-  -webkit-text-fill-color:#000000 !important;
-  background:#ffffff !important;
-  background-image:none !important;
-  border-right:0 !important;
-  border-left:0 !important;
-  border-top:0 !important;
-  border-bottom:1.4px solid #000000 !important;
-  border-radius:0 !important;
-}
-
-/* Secondary text */
-.tb-caption,
-.p2-caption,
-.sw-caption,
-.sw-note,
-.if-label,
-.footer,
-.num,
-.prop-index,
-.proof-double-arrow{
-  color:#000000 !important;
-  -webkit-text-fill-color:#000000 !important;
-}
-
-/* Completion lines */
-.blank,
-.answer-line{
-  border-color:#000000 !important;
-}
-
-/* All worksheet containers must stay white */
-.sheet,
-.geo,
-.textbook-source,
-.textbook-source-p2,
-.textbook-proof,
-.textbook-area,
-.source-worksheet,
-.card,
-.box{
-  background:#ffffff !important;
-  background-image:none !important;
-}
-
-/* SVG text and labels – force black */
-svg text,
-svg tspan,
-.lbl,
-.angle-label,
-.angle-label.a,
-.angle-label.b{
-  fill:#000000 !important;
-  color:#000000 !important;
-  stroke:none !important;
-}
-
-/* Geometry strokes – grayscale only */
-.shape,
-.par,
-.tick,
-.right,
-.arc,
-.height,
-.mid-a,
-.mid-b,
-.diag-eq,
-.angle-a,
-.angle-b{
-  stroke:#000000 !important;
-}
-
-.diag,
-.extension{
-  stroke:#666666 !important;
-}
-
-.center,
-.pt{
-  fill:#000000 !important;
-}
-
-/* If any inline hex survived, this class-level override still wins visually */
-.math,
-.math-token,
-.source-rel,
-.source-chain,
-.tb-completion,
-.p2-completion,
-.proof-completion,
-.area-formula,
-bdi[dir="ltr"]{
-  color:#000000 !important;
-  -webkit-text-fill-color:#000000 !important;
-}
-
-/* clean section rules */
-.sw-section,
-.tb-property,
-.p2-block,
-.proof-block,
-.height-task{
-  border-color:#cfcfcf !important;
-}
-/* === TEXTBOOK MONOCHROME V2 END === */
-@media(max-width:800px){
-body{overflow-x:hidden}
-.top{position:sticky;top:0;padding:6px 4px;gap:4px}
-.top button{padding:6px 9px;font-size:12px}
-.top .print-a4{margin-inline-start:0}
-.pages{gap:14px;padding:10px 0 26px}
-.sheet-shell{position:relative;margin:0 auto;overflow:visible;direction:ltr}
-.sheet{position:absolute!important;left:0!important;top:0!important;direction:rtl;width:794px!important;height:1123px!important;min-height:1123px!important;max-height:1123px!important;margin:0!important;transform-origin:top left;border-radius:7px!important;box-shadow:0 7px 20px rgba(22,48,70,.14)}
-.grid2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
-}
+/* ============ print: one A4 sheet per page, active topic only ============ */
 @media print{
-html,body{width:210mm!important;min-width:210mm!important;margin:0!important;padding:0!important;background:#fff!important}
-body{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-.top{display:none!important}.topic{display:none!important}.topic.active{display:block!important}
-.pages{display:block!important;margin:0!important;padding:0!important}
-.sheet-shell{width:210mm!important;height:297mm!important;margin:0!important;overflow:visible!important}
-.sheet{width:210mm!important;height:297mm!important;min-height:297mm!important;max-height:297mm!important;transform:none!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;break-after:page!important;page-break-after:always!important}
-.sheet:last-child{break-after:auto!important;page-break-after:auto!important}
-@page{size:A4 portrait;margin:0}
+  html,body{background:#fff;margin:0}
+  .top{display:none}
+  .topic{display:none}
+  .topic.active{display:block}
+  .pages{display:block;padding:0}
+  .sheet-shell{display:block;width:210mm;height:auto;margin:0;border:0;overflow:visible;break-after:page;page-break-after:always}
+  .sheet-shell:last-child{break-after:auto;page-break-after:auto}
+  .sheet{width:210mm;height:297mm;transform:none;break-inside:avoid}
+  @page{size:A4 portrait;margin:0}
 }
 </style>
 </head>
 <body>
-<nav class="top" aria-label="נושאים"><button data-id="parallelogram" class="active">מקבילית</button><button data-id="rectangle">מלבן</button><button data-id="rhombus">מעויין</button><button data-id="square">ריבוע</button><button class="print-a4" type="button" onclick="window.print()">הדפסת A4</button></nav>
-<main id="root"></main>
+<nav class="top" aria-label="נושאים">
+  <button type="button" data-id="parallelogram" class="active">מקבילית</button>
+  <button type="button" data-id="rectangle">מלבן</button>
+  <button type="button" data-id="rhombus">מעויין</button>
+  <button type="button" data-id="square">ריבוע</button>
+  <button type="button" class="print" onclick="window.print()">הדפסת A4</button>
+</nav>
+<main id="root">
+
+<!-- ================================================================ מקבילית ================================================================ -->
+<section class="topic active" id="parallelogram"><div class="pages">
+
+<div class="sheet-shell"><article class="sheet" data-page="1">
+  <h1>מקבילית</h1>
+  <section class="sec">
+    <p><b>הגדרה:</b> מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות <span class="blank l"></span> זו לזו.</p>
+    <p>המרובע <math><mi>ABCD</mi></math> הוא מקבילית:</p>
+    <div class="row">
+      <div class="work">
+        <div class="m"><math><mrow><mi>AB</mi><mo>∥</mo><mi>DC</mi></mrow></math><span class="he">וגם</span><math><mrow><mi>AD</mi><mo>∥</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+      </div>
+      <figure class="geo geo-m" data-geo="parallelogram" data-show="parallel"></figure>
+    </div>
+  </section>
+  <h2>תכונות המקבילית:</h2>
+  <ol class="props" data-list="props">
+    <li><span class="n">1.</span><div class="item">
+      <p>במקבילית כל זוג צלעות <span class="blank"></span> מקבילות זו לזו (לפי ההגדרה).</p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap"><math><mi>ABCD</mi></math> מקבילית</p>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <div class="m"><math><mrow><mspace class="blank" width="2.6em"/><mo>∥</mo><mspace class="blank" width="2.6em"/></mrow></math><span class="he">וגם</span><math><mrow><mspace class="blank" width="2.6em"/><mo>∥</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+        </div>
+        <figure class="geo geo-l" data-geo="parallelogram" data-show="parallel"></figure>
+      </div>
+    </div></li>
+    <li><span class="n">2.</span><div class="item">
+      <p>במקבילית כל שתי <span class="blank"></span> נגדיות שוות זו לזו.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap"><math><mi>ABCD</mi></math> מקבילית</p>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <div class="m"><math><mrow><mspace class="blank" width="2.6em"/><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math><span class="he">וגם</span><math><mrow><mspace class="blank" width="2.6em"/><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+        </div>
+        <figure class="geo geo-l" data-geo="parallelogram" data-show="oppEqual"></figure>
+      </div>
+    </div></li>
+  </ol>
+  <footer class="pn" data-muted>מקבילית · 1</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="2">
+  <h2>תכונות המקבילית:</h2>
+  <ol class="props" data-list="props">
+    <li><span class="n">3.</span><div class="item">
+      <p>במקבילית כל שתי זוויות נגדיות <span class="blank"></span> זו לזו.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap"><math><mi>ABCD</mi></math> מקבילית</p>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <div class="m"><math><mrow><mo>∠</mo><mspace class="blank" width="2.2em"/><mo>=</mo><mo>∠</mo><mspace class="blank" width="2.2em"/></mrow></math><span class="he">וגם</span><math><mrow><mo>∠</mo><mspace class="blank" width="2.2em"/><mo>=</mo><mo>∠</mo><mspace class="blank" width="2.2em"/></mrow></math></div>
+        </div>
+        <figure class="geo geo-l" data-geo="parallelogram" data-show="oppAngles"></figure>
+      </div>
+    </div></li>
+    <li><span class="n">4.</span><div class="item">
+      <p>במקבילית האלכסונים <span class="blank"></span> זה את זה.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap"><math><mi>ABCD</mi></math> מקבילית</p>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <div class="m"><math><mrow><mspace class="blank" width="2.6em"/><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math><span class="he">וגם</span><math><mrow><mspace class="blank" width="2.6em"/><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+        </div>
+        <figure class="geo geo-l" data-geo="parallelogram" data-show="diag center mid"></figure>
+      </div>
+    </div></li>
+    <li><span class="n">5.</span><div class="item">
+      <p>במקבילית סכום כל שתי זוויות <span class="blank"></span> שווה ל - <span class="blank s"></span></p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap"><math><mi>ABCD</mi></math> מקבילית</p>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <div class="m"><math><mrow><mi>α</mi><mo>+</mo><mi>β</mi><mo>=</mo><mn>180</mn><mo>°</mo></mrow></math></div>
+        </div>
+        <figure class="geo geo-l" data-geo="parallelogram" data-show="adjAngles"></figure>
+      </div>
+    </div></li>
+  </ol>
+  <footer class="pn" data-muted>מקבילית · 2</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="3">
+  <h2>איך מוכיחים שמרובע הוא מקבילית?</h2>
+  <ol class="props" data-list="proofs">
+    <li><span class="n">1.</span><div class="item">
+      <p><b>לפי הגדרה:</b> אם במרובע כל זוג צלעות נגדיות הן <span class="blank"></span> זו לזו, אז המרובע הוא מקבילית.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="if">אם:</p>
+          <div class="m"><math><mrow><mi>AB</mi><mo>∥</mo><mi>DC</mi></mrow></math><span class="he">וגם</span><math><mrow><mi>AD</mi><mo>∥</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא <span class="blank"></span>.</p>
+        </div>
+        <figure class="geo geo-m" data-geo="parallelogram" data-show="parallel"></figure>
+      </div>
+    </div></li>
+    <li><span class="n">2.</span><div class="item">
+      <p>אם במרובע כל זוג של צלעות <span class="blank"></span> הן שוות זו לזו, אז המרובע הוא<span class="blank"></span>.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="if">אם:</p>
+          <div class="m"><math><mrow><mspace class="blank" width="2.6em"/><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math><span class="he">וגם</span><math><mrow><mspace class="blank" width="2.6em"/><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא <span class="blank"></span>.</p>
+        </div>
+        <figure class="geo geo-m" data-geo="parallelogram" data-show="oppEqual"></figure>
+      </div>
+    </div></li>
+    <li><span class="n">3.</span><div class="item">
+      <p>אם במרובע כל זוג של זוויות נגדיות <span class="blank"></span>, אז ה <span class="blank"></span> הוא מקבילית.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="if">אם:</p>
+          <div class="m"><math><mrow><mo>∠</mo><mspace class="blank" width="2.2em"/><mo>=</mo><mo>∠</mo><mspace class="blank" width="2.2em"/></mrow></math><span class="he">וגם</span><math><mrow><mo>∠</mo><mspace class="blank" width="2.2em"/><mo>=</mo><mo>∠</mo><mspace class="blank" width="2.2em"/></mrow></math></div>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא <span class="blank"></span>.</p>
+        </div>
+        <figure class="geo geo-m" data-geo="parallelogram" data-show="oppAngles"></figure>
+      </div>
+    </div></li>
+  </ol>
+  <footer class="pn" data-muted>מקבילית · 3</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="4">
+  <h2>איך מוכיחים שמרובע הוא מקבילית?</h2>
+  <ol class="props" data-list="proofs">
+    <li><span class="n">4.</span><div class="item">
+      <p>אם במרובע האלכסונים <span class="blank"></span> זה את זה, אז המרובע הוא<span class="blank"></span>.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="if">אם:</p>
+          <div class="m"><math><mrow><mspace class="blank" width="2.6em"/><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math><span class="he">וגם</span><math><mrow><mspace class="blank" width="2.6em"/><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא <span class="blank"></span>.</p>
+        </div>
+        <figure class="geo geo-xl" data-geo="parallelogram" data-show="diag center mid"></figure>
+      </div>
+    </div></li>
+    <li><span class="n">5.</span><div class="item">
+      <p>אם במרובע קיים זוג אחד של צלעות נגדיות שהן גם<span class="blank"></span> וגם <span class="blank"></span>, אז המרובע הוא <span class="blank"></span>.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="if">אם:</p>
+          <div class="m"><math><mrow><mspace class="blank" width="2.6em"/><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math><span class="he">וגם</span><math><mrow><mspace class="blank" width="2.6em"/><mo>∥</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא <span class="blank"></span>.</p>
+        </div>
+        <figure class="geo geo-xl" data-geo="parallelogram" data-show="onePairBoth"></figure>
+      </div>
+    </div></li>
+  </ol>
+  <footer class="pn" data-muted>מקבילית · 4</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="5">
+  <h2>איך מחשבים שטח של מקבילית?</h2>
+  <section class="sec">
+    <p>שטח של מקבילית שווה למכפלת צלע המקבילית באורך ה <span class="blank"></span> לצלע זו.</p>
+    <figure class="geo geo-3x" data-geo="parallelogram" data-show="heights"></figure>
+    <div class="row">
+      <div class="work"><div class="m"><math><mrow><msub><mi>S</mi><mi>ABCD</mi></msub><mo>=</mo><mspace class="blank" width="3.4em"/></mrow></math></div></div>
+      <p style="grid-column:2"><span class="blank"></span> הוא גובה במקבילית היוצא מקודקוד <math><mi>DE</mi></math> אל הצלע <span class="blank"></span>.</p>
+    </div>
+    <div class="row">
+      <div class="work"><div class="m"><math><mrow><msub><mi>S</mi><mi>ABCD</mi></msub><mo>=</mo><mspace class="blank" width="3.4em"/></mrow></math></div></div>
+      <p style="grid-column:2"><span class="blank"></span> הוא גובה במקבילית היוצא מקודקוד <span class="blank"></span> אל הצלע <math><mi>BC</mi></math>.</p>
+    </div>
+  </section>
+  <footer class="pn" data-muted>מקבילית · 5</footer>
+</article></div>
+
+</div></section>
+
+<!-- ================================================================ מלבן ================================================================ -->
+<section class="topic" id="rectangle"><div class="pages">
+
+<div class="sheet-shell"><article class="sheet" data-page="1">
+  <h1>מלבן</h1>
+  <section class="sec">
+    <p><b>הגדרה:</b> מלבן הוא מרובע שבו כל ה<span class="blank"></span> ישרות.</p>
+    <p>המרובע <math><mi>ABCD</mi></math> הוא מלבן:</p>
+    <div class="row">
+      <div class="work">
+        <div class="m"><math><mrow><mo>∠</mo><mi>A</mi><mo>=</mo><mo>∠</mo><mi>B</mi><mo>=</mo><mo>∠</mo><mi>C</mi><mo>=</mo><mo>∠</mo><mspace class="blank" width="2.2em"/></mrow></math></div>
+      </div>
+      <figure class="geo geo-xs" data-geo="rectangle" data-show="right"></figure>
+    </div>
+  </section>
+  <h2>תכונות המלבן:</h2>
+  <section class="sec">
+    <div class="inherit">
+      <ol class="props" data-list="props">
+        <li><span class="n">1.</span><div class="item"><p><b>במלבן</b> כל שתי<span class="blank"></span> נגדיות מקבילות זו לזו .</p></div></li>
+        <li><span class="n">2.</span><div class="item"><p><b>במלבן</b> כל שתי צלעות <span class="blank"></span> שוות זו לזו.</p></div></li>
+        <li><span class="n">3.</span><div class="item"><p><b>במלבן</b> ה<span class="blank"></span> חוצים זה את זה.</p></div></li>
+      </ol>
+      <div class="aside">
+        <svg viewBox="0 0 12 100" preserveAspectRatio="none" aria-hidden="true" data-decor><path d="M11 0 C6 0 7 12 6 25 C6 40 6 45 1 50 C6 55 6 60 6 75 C7 88 6 100 11 100" fill="none" stroke="#000" stroke-width="1.2" vector-effect="non-scaling-stroke"/></svg>
+        <p>כל התכונות של המקבילית מתקיימות גם ב <span class="blank"></span>.</p>
+      </div>
+    </div>
+    <h3>וגם:</h3>
+  </section>
+  <section class="sec">
+    <h3>למלבן תכונות מיוחדות שאין לכל מקבילית:</h3>
+    <ol class="props" data-list="props">
+      <li><span class="n">4.</span><div class="item">
+        <p><b>במלבן</b> כל ה<span class="blank"></span> ישרות (לפי הגדרה).</p>
+        <div class="row">
+          <div class="derive">
+            <p class="cap">המרובע <math><mi>ABCD</mi></math> הוא מלבן</p>
+            <span class="imp" aria-hidden="true">⇓</span>
+            <div class="m"><math><mrow><mo>∠</mo><mspace class="blank" width="2em"/><mo>=</mo><mo>∠</mo><mspace class="blank" width="2em"/><mo>=</mo><mspace class="blank" width="2em"/><mo>=</mo><mspace class="blank" width="2em"/><mo>=</mo><mn>90</mn><mo>°</mo></mrow></math></div>
+          </div>
+          <figure class="geo geo-s" data-geo="rectangle" data-show="right"></figure>
+        </div>
+      </div></li>
+    </ol>
+  </section>
+  <footer class="pn" data-muted>מלבן · 1</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="2">
+  <h2>תכונות המלבן:</h2>
+  <section class="sec">
+    <ol class="props" data-list="props">
+      <li><span class="n">5.</span><div class="item">
+        <p><b>במלבן</b> ה <span class="blank"></span> שווים זה לזה.</p>
+        <div class="row stack">
+          <div class="derive">
+            <p class="cap"><math><mi>ABCD</mi></math> מלבן</p>
+            <span class="imp" aria-hidden="true">⇓</span>
+            <div class="m"><math><mrow><mi>DB</mi><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+          </div>
+          <figure class="geo geo-3x" data-geo="rectangle" data-show="diag equalDiag"></figure>
+        </div>
+      </div></li>
+    </ol>
+  </section>
+  <footer class="pn" data-muted>מלבן · 2</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="3">
+  <h2>איך מוכיחים שמרובע הוא מלבן?</h2>
+  <section class="sec">
+    <ol class="props" data-list="proofs">
+      <li><span class="n">1.</span><div class="item">
+        <p><b>לפי הגדרה:</b> אם במרובע יש שלוש זוויות ישרות אז המרובע הוא מלבן.</p>
+        <p class="note">גם הזווית הרביעית ישרה. מדוע?</p>
+        <div class="row stack">
+          <div class="derive">
+            <p class="cap">במרובע <math><mi>ABCD</mi></math>:</p>
+            <div class="m"><span class="if">אם:</span><math><mrow><mo>∠</mo><mspace class="blank" width="2.2em"/><mo>=</mo><mo>∠</mo><mspace class="blank" width="2.2em"/><mo>=</mo><mo>∠</mo><mspace class="blank" width="2.2em"/><mo>=</mo><mn>90</mn><mo>°</mo></mrow></math></div>
+            <span class="imp" aria-hidden="true">⇓</span>
+            <div class="m"><math><mrow><mo>∠</mo><mi>D</mi><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math><span class="he">כי סכום <span class="blank l"></span></span></div>
+            <span class="imp" aria-hidden="true">⇓</span>
+            <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא מלבן</p>
+          </div>
+          <figure class="geo geo-3x" data-geo="rectangle" data-show="right:ABC"></figure>
+        </div>
+      </div></li>
+    </ol>
+  </section>
+  <footer class="pn" data-muted>מלבן · 3</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="4">
+  <h2>איך מוכיחים שמרובע הוא מלבן?</h2>
+  <ol class="props" data-list="proofs">
+    <li><span class="n">2.</span><div class="item">
+      <h3>המלבןהוא מקבילית מיוחדת</h3>
+      <p>אם במקבילית יש <span class="blank"></span> ישרה,אז המקבילית היא <span class="blank"></span>.</p>
+      <p class="note">אז כל הזוויות של המקבילית הן ישרות. מדוע?</p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap">אם המרובע <math><mi>ABCD</mi></math> הוא מקבילית</p>
+          <p class="if">וגם:</p>
+          <div class="m"><math><mrow><mo>∠</mo><mspace class="blank" width="2.4em"/><mo>=</mo><mn>90</mn><mo>°</mo></mrow></math></div>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא <span class="blank"></span>.</p>
+        </div>
+        <figure class="geo geo-xl" data-geo="rectangle" data-show="right:B"></figure>
+      </div>
+    </div></li>
+    <li><span class="n">3.</span><div class="item">
+      <h3>המלבןהוא מקבילית מיוחדת</h3>
+      <p>אם במקבילית האלכסונים <span class="blank"></span> זה לזה, אז המקבילית היא <span class="blank"></span>.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap">אם המרובע <math><mi>ABCD</mi></math> הוא מקבילית</p>
+          <p class="if">וגם:</p>
+          <div class="m"><math><mrow><mi>DB</mi><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <p class="end">המרובע <math><mi>ABCD</mi></math> הוא מלבן</p>
+        </div>
+        <figure class="geo geo-xl" data-geo="parallelogram" data-show="diag"></figure>
+      </div>
+    </div></li>
+  </ol>
+  <footer class="pn" data-muted>מלבן · 4</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="5">
+  <h1>המלבן</h1>
+  <section class="sec">
+    <p><b>הגדרה:</b> מרובע שבו כל הזוויות ישרות הוא מלבן.</p>
+  </section>
+  <h2>תכונות המלבן:</h2>
+  <section class="sec">
+    <div class="inherit">
+      <ol class="props" data-list="summary-props">
+        <li><span class="n">1.</span><div class="item"><p>במלבן כל שתי צלעות נגדיות מקבילות זו לזו</p></div></li>
+        <li><span class="n">2.</span><div class="item"><p>במלבן כל שתי צלעות נגדיות שוות זו לזו</p></div></li>
+        <li><span class="n">3.</span><div class="item"><p>במלבן האלכסונים חוצים זה את זה</p></div></li>
+      </ol>
+      <div class="aside">
+        <svg viewBox="0 0 12 100" preserveAspectRatio="none" aria-hidden="true" data-decor><path d="M11 0 C6 0 7 12 6 25 C6 40 6 45 1 50 C6 55 6 60 6 75 C7 88 6 100 11 100" fill="none" stroke="#000" stroke-width="1.2" vector-effect="non-scaling-stroke"/></svg>
+        <p>כמו במקבילית</p>
+      </div>
+    </div>
+    <ol class="props" data-list="summary-props">
+      <li><span class="n">4.</span><div class="item"><p>במלבן כל הזוויות ישרות</p></div></li>
+      <li><span class="n">5.</span><div class="item"><p>במלבן האלכסונים שווים זה לזה</p></div></li>
+    </ol>
+  </section>
+  <h2>איך מוכיחים שמרובע הוא מלבן?</h2>
+  <section class="sec">
+    <ol class="props" data-list="summary-proofs">
+      <li><span class="n">1.</span><div class="item"><p>לפי הגדרה: אם במרובע יש שלוש זוויות ישרות, אז המרובע הוא מלבן.</p></div></li>
+      <li><span class="n">2.</span><div class="item"><p>אם במקבילית יש זווית ישרה אז המקבילית היא מלבן.</p></div></li>
+      <li><span class="n">3.</span><div class="item"><p>אם במקבילית האלכסונים שווים זה לזה אז המקבילית היא מלבן.</p></div></li>
+    </ol>
+  </section>
+  <footer class="pn" data-muted>מלבן · 5</footer>
+</article></div>
+
+</div></section>
+
+<!-- ================================================================ מעויין ================================================================ -->
+<section class="topic" id="rhombus"><div class="pages">
+
+<div class="sheet-shell"><article class="sheet" data-page="1">
+  <h1>מעויין</h1>
+  <section class="sec">
+    <p><b>הגדרה:</b> מעויין הוא מרובע שכל <span class="blank"></span> שוות זו לזו.</p>
+    <p>המרובע <math><mi>ABCD</mi></math> הוא מעויין:</p>
+    <div class="row">
+      <div class="work">
+        <div class="m"><math><mrow><mi>AB</mi><mo>=</mo><mspace class="blank" width="2.4em"/><mo>=</mo><mi>CD</mi><mo>=</mo><mspace class="blank" width="2.4em"/></mrow></math></div>
+      </div>
+      <figure class="geo geo-xs" data-geo="rhombus" data-show="equal"></figure>
+    </div>
+  </section>
+  <h2>תכונות המעויין:</h2>
+  <section class="sec">
+    <div class="inherit">
+      <ol class="props" data-list="props">
+        <li><span class="n">1.</span><div class="item"><p><b>במעויין</b> כל זוג צלעות <span class="blank"></span> מקבילות זו לזו .</p></div></li>
+        <li><span class="n">2.</span><div class="item"><p><b>במעויין</b> כל שתי זוויות <span class="blank"></span> שוות זו לזו.</p></div></li>
+        <li><span class="n">3.</span><div class="item"><p><b>במעויין</b> סכום כל שתי זוויות <span class="blank"></span> שווה ל - <math><mrow><mn>180</mn><mo>°</mo></mrow></math></p></div></li>
+        <li><span class="n">4.</span><div class="item"><p><b>במעויין</b> ה<span class="blank"></span> חוצים זה את זה.</p></div></li>
+      </ol>
+      <div class="aside">
+        <svg viewBox="0 0 12 100" preserveAspectRatio="none" aria-hidden="true" data-decor><path d="M11 0 C6 0 7 12 6 25 C6 40 6 45 1 50 C6 55 6 60 6 75 C7 88 6 100 11 100" fill="none" stroke="#000" stroke-width="1.2" vector-effect="non-scaling-stroke"/></svg>
+        <p>כל התכונות של המקבילית מתקיימות גם ב <span class="blank"></span>.</p>
+      </div>
+    </div>
+    <h3>וגם:</h3>
+  </section>
+  <section class="sec">
+    <h3>למעויין תכונות מיוחדות שאין לכל מקבילית:</h3>
+    <ol class="props" data-list="props">
+      <li><span class="n">5.</span><div class="item">
+        <p><b>במעויין</b> כל ה<span class="blank"></span> שוות (לפי הגדרה).</p>
+        <div class="row">
+          <div class="derive">
+            <p class="cap">המרובע <math><mi>ABCD</mi></math> הוא מעויין</p>
+            <span class="imp" aria-hidden="true">⇓</span>
+            <div class="m"><math><mrow><mspace class="blank" width="2.4em"/><mo>=</mo><mspace class="blank" width="2.4em"/><mo>=</mo><mspace class="blank" width="2.4em"/><mo>=</mo><mspace class="blank" width="2.4em"/></mrow></math></div>
+          </div>
+          <figure class="geo geo-s" data-geo="rhombus" data-show="equal"></figure>
+        </div>
+      </div></li>
+    </ol>
+  </section>
+  <footer class="pn" data-muted>מעויין · 1</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="2">
+  <h2>תכונות המעויין:</h2>
+  <ol class="props" data-list="props">
+    <li><span class="n">6.</span><div class="item">
+      <p><b>במעויין</b> ה <span class="blank"></span> מאונכים זה לזה.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap"><math><mi>ABCD</mi></math> מעויין</p>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <div class="m"><math><mrow><mi>AC</mi><mo>⟂</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+          <div class="m"><math><mrow><mo>∠</mo><mi>BOC</mi><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+        </div>
+        <figure class="geo geo-2x" data-geo="rhombus" data-show="diag center perp"></figure>
+      </div>
+    </div></li>
+    <li><span class="n">7.</span><div class="item">
+      <p><b>במעויין</b> האלכסונים <span class="blank"></span> את הזוויות.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap"><math><mi>ABCD</mi></math> מעויין</p>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <div class="m"><math><mrow><mo>∠</mo><msub><mi>A</mi><mn>1</mn></msub><mo>=</mo><mo>∠</mo><msub><mi>A</mi><mn>2</mn></msub></mrow></math><span class="he">וגם</span><math><mrow><mo>∠</mo><mspace class="blank" width="1.8em"/><mo>=</mo><mo>∠</mo><mspace class="blank" width="1.8em"/></mrow></math></div>
+          <div class="m"><math><mrow><mo>∠</mo><mspace class="blank" width="1.8em"/><mo>=</mo><mo>∠</mo><mspace class="blank" width="1.8em"/></mrow></math><span class="he">וגם</span><math><mrow><mo>∠</mo><mspace class="blank" width="1.8em"/><mo>=</mo><mo>∠</mo><mspace class="blank" width="1.8em"/></mrow></math></div>
+        </div>
+        <figure class="geo geo-2x" data-geo="rhombus" data-show="diag bisect"></figure>
+      </div>
+    </div></li>
+  </ol>
+  <footer class="pn" data-muted>מעויין · 2</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="3">
+  <h2>איך מוכיחים שמרובע הוא מעויין?</h2>
+  <ol class="props" data-list="proofs">
+    <li><span class="n">1.</span><div class="item">
+      <p><b>לפי הגדרה:</b> אם במרובע כל הצלעות <span class="blank"></span> אז המרובע הוא מעויין.</p>
+      <div class="row">
+        <div class="derive">
+          <div class="m"><span class="if">אם:</span><math><mrow><mi>AB</mi><mo>=</mo><mspace class="blank" width="2.4em"/><mo>=</mo><mi>CD</mi><mo>=</mo><mspace class="blank" width="2.4em"/></mrow></math></div>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא <span class="blank"></span>.</p>
+        </div>
+        <figure class="geo geo-s" data-geo="rhombus" data-show="equal"></figure>
+      </div>
+    </div></li>
+    <li><span class="n">2.</span><div class="item">
+      <h3>המעויין הוא מקבילית מיוחדת</h3>
+      <p>אם במקבילית שתי צלעות <span class="blank"></span> שוות, אז ה <span class="blank"></span> היא מעויין.</p>
+      <p class="note">המסקנה תהיה שכל הצלעות שוות. מדוע?</p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap">אם המרובע <math><mi>ABCD</mi></math> הוא מקבילית</p>
+          <div class="m"><span class="if">וגם:</span><math><mrow><mi>AB</mi><mo>=</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא <span class="blank"></span>.</p>
+        </div>
+        <figure class="geo geo-s" data-geo="rhombus" data-show="equal:AB,BC"></figure>
+      </div>
+    </div></li>
+    <li><span class="n">3.</span><div class="item">
+      <h3>המעויין הוא מקבילית מיוחדת</h3>
+      <p>אם במקבילית ה <span class="blank"></span> מאונכים זה לזה אז המקבילית היא <span class="blank"></span>.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap">אם המרובע <math><mi>ABCD</mi></math> הוא מקבילית וגם:</p>
+          <div class="m"><math><mrow><mi>BD</mi><mo>⟂</mo><mspace class="blank" width="2.6em"/></mrow></math></div>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <p class="end">אז המרובע <span class="blank"></span> הוא מעויין.</p>
+        </div>
+        <figure class="geo geo-s" data-geo="rhombus" data-show="diag center perp"></figure>
+      </div>
+    </div></li>
+  </ol>
+  <footer class="pn" data-muted>מעויין · 3</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="4">
+  <h2>איך מוכיחים שמרובע הוא מעויין?</h2>
+  <section class="sec">
+    <ol class="props" data-list="proofs">
+      <li><span class="n">4.</span><div class="item">
+        <h3>המעויין הוא מקבילית מיוחדת</h3>
+        <p>אם במקבילית אחד האלכסונים חוצה את אחת ה<span class="blank"></span>, אז המקבילית היא <span class="blank"></span>.</p>
+        <div class="row stack">
+          <div class="derive">
+            <p class="cap">אם המרובע <math><mi>ABCD</mi></math> הוא מקבילית</p>
+            <div class="m"><span class="if">וגם</span><math><mrow><mo>∠</mo><msub><mi>A</mi><mn>1</mn></msub><mo>=</mo><mo>∠</mo><mspace class="blank" width="2em"/></mrow></math></div>
+            <span class="imp" aria-hidden="true">⇓</span>
+            <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא <span class="blank"></span>.</p>
+          </div>
+          <figure class="geo geo-3x" data-geo="rhombus" data-show="diag center bisect:A"></figure>
+        </div>
+      </div></li>
+    </ol>
+  </section>
+  <footer class="pn" data-muted>מעויין · 4</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="5">
+  <h2>איך מחשבים שטח של מעויין?</h2>
+  <section class="sec">
+    <p>שטח של עויין שווה למכפלה של צלע המעויין באורך הגובה לצלע זו.</p>
+    <div class="row">
+      <div class="work">
+        <div class="m"><math><mrow><msub><mi>S</mi><mi>ABCD</mi></msub><mo>=</mo><msub><mi>h</mi><mn>1</mn></msub><mo>·</mo><mspace class="blank" width="2em"/><mo>=</mo><mi>a</mi><mo>·</mo><mspace class="blank" width="2em"/></mrow></math></div>
+      </div>
+      <figure class="geo geo-xl" data-geo="rhombus-lean" data-show="sides:a heights:A nolabels"></figure>
+    </div>
+  </section>
+  <h3 style="text-align:center">או</h3>
+  <section class="sec">
+    <p>שטח של מעויין שווה למחצית מכפלת ה <span class="blank"></span>.</p>
+    <div class="row">
+      <div class="work">
+        <div class="m"><math displaystyle="true"><mrow><msub><mi>S</mi><mi>ABCD</mi></msub><mo>=</mo><mfrac><mrow><mi>BD</mi><mo>·</mo><mspace class="blank" width="2em"/></mrow><mn>2</mn></mfrac></mrow></math></div>
+      </div>
+      <figure class="geo geo-xl" data-geo="rhombus" data-show="equal diag:dashed perp"></figure>
+    </div>
+  </section>
+  <footer class="pn" data-muted>מעויין · 5</footer>
+</article></div>
+
+</div></section>
+
+<!-- ================================================================ ריבוע ================================================================ -->
+<section class="topic" id="square"><div class="pages">
+
+<div class="sheet-shell"><article class="sheet" data-page="1">
+  <h1>ריבוע</h1>
+  <section class="sec">
+    <p><b>הגדרה:</b> ריבוע הוא מרובע שכל צלעותיו שוות וכל זוויותיו ישרות.</p>
+    <div class="row">
+      <div class="work">
+        <p class="cap">המרובע <math><mi>ABCD</mi></math> הוא ריבוע</p>
+        <div class="m"><math><mrow><mi>AB</mi><mo>=</mo><mi>BC</mi><mo>=</mo><mi>CD</mi><mo>=</mo><mi>DA</mi></mrow></math></div><div class="m"><math><mrow><mo>∠</mo><mi>A</mi><mo>=</mo><mo>∠</mo><mi>B</mi><mo>=</mo><mo>∠</mo><mi>C</mi><mo>=</mo><mo>∠</mo><mi>D</mi><mo>=</mo><mn>90</mn><mo>°</mo></mrow></math></div>
+      </div>
+      <figure class="geo geo-xl" data-geo="square" data-show="equal right"></figure>
+    </div>
+  </section>
+  <h2>הריבוע שייך לשתי משפחות:</h2>
+  <section class="sec">
+    <div class="families">
+      <div class="fam"><p>הריבוע הוא מלבן כי כל הזוויות שלו ישרות.</p><figure class="geo geo-m" data-geo="square" data-show="right"></figure></div>
+      <div class="fam"><p>הריבוע הוא מעויין כי כל הצלעות שלו שוות.</p><figure class="geo geo-m" data-geo="square" data-show="equal"></figure></div>
+    </div>
+  </section>
+  <footer class="pn" data-muted>ריבוע · 1</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="2">
+  <h2>תכונות הריבוע:</h2>
+  <section class="sec">
+    <ol class="props" data-list="props">
+      <li><span class="n">1.</span><div class="item"><p><b>בריבוע</b> האלכסונים שווים זה לזה.</p></div></li>
+      <li><span class="n">2.</span><div class="item"><p><b>בריבוע</b> האלכסונים מאונכים זה לזה.</p></div></li>
+      <li><span class="n">3.</span><div class="item"><p><b>בריבוע</b> האלכסונים חוצים זה את זה.</p></div></li>
+      <li><span class="n">4.</span><div class="item"><p><b>בריבוע</b> האלכסונים חוצים את הזוויות.</p></div></li>
+    </ol>
+    <div class="row stack">
+      <div class="derive">
+        <p class="cap"><math><mi>ABCD</mi></math> ריבוע</p>
+        <span class="imp" aria-hidden="true">⇓</span>
+        <div class="m"><math><mrow><mi>AC</mi><mo>=</mo><mi>BD</mi></mrow></math></div>
+        <div class="m"><math><mrow><mi>AC</mi><mo>⟂</mo><mi>BD</mi></mrow></math></div>
+        <div class="m"><math><mrow><mi>AO</mi><mo>=</mo><mi>OC</mi></mrow></math><span class="he">וגם</span><math><mrow><mi>BO</mi><mo>=</mo><mi>OD</mi></mrow></math></div>
+      </div>
+      <figure class="geo geo-3x" data-geo="square" data-show="diag center perp equalDiag bisect"></figure>
+    </div>
+  </section>
+  <footer class="pn" data-muted>ריבוע · 2</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="3">
+  <h2>איך מוכיחים שמרובע הוא ריבוע?</h2>
+  <section class="sec">
+    <ol class="props" data-list="proofs">
+      <li><span class="n">1.</span><div class="item">
+        <p><b>לפי הגדרה:</b> אם במרובע כל הצלעות שוות וכל הזוויות ישרות, אז המרובע הוא ריבוע.</p>
+        <div class="row stack">
+          <div class="derive">
+            <p class="if">אם:</p>
+            <div class="m"><math><mrow><mspace class="blank" width="2.4em"/><mo>=</mo><mspace class="blank" width="2.4em"/><mo>=</mo><mspace class="blank" width="2.4em"/><mo>=</mo><mspace class="blank" width="2.4em"/></mrow></math></div>
+            <span class="imp" aria-hidden="true">⇓</span>
+            <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא ריבוע.</p>
+          </div>
+          <figure class="geo geo-3x" data-geo="square" data-show="equal right"></figure>
+        </div>
+      </div></li>
+    </ol>
+  </section>
+  <footer class="pn" data-muted>ריבוע · 3</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="4">
+  <h2>איך מוכיחים שמרובע הוא ריבוע?</h2>
+  <ol class="props" data-list="proofs">
+    <li><span class="n">2.</span><div class="item">
+      <h3>הריבוע הוא מלבן מיוחד</h3>
+      <p>אם במלבן שתי צלעות סמוכות שוות, אז המלבן הוא ריבוע.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap">אם המרובע <math><mi>ABCD</mi></math> הוא מלבן וגם:</p>
+          <div class="m"><math><mrow><mi>AB</mi><mo>=</mo><mi>BC</mi></mrow></math></div>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא ריבוע.</p>
+        </div>
+        <figure class="geo geo-2x" data-geo="square" data-show="right equal:AB,BC"></figure>
+      </div>
+    </div></li>
+    <li><span class="n">3.</span><div class="item">
+      <h3>הריבוע הוא מעויין מיוחד</h3>
+      <p>אם במעויין האלכסונים שווים זה לזה, אז המעויין הוא ריבוע.</p>
+      <div class="row">
+        <div class="derive">
+          <p class="cap">אם המרובע <math><mi>ABCD</mi></math> הוא מעויין וגם:</p>
+          <div class="m"><math><mrow><mi>AC</mi><mo>=</mo><mi>BD</mi></mrow></math></div>
+          <span class="imp" aria-hidden="true">⇓</span>
+          <p class="end">אז המרובע <math><mi>ABCD</mi></math> הוא ריבוע.</p>
+        </div>
+        <figure class="geo geo-2x" data-geo="square" data-show="equal diag center equalDiag"></figure>
+      </div>
+    </div></li>
+  </ol>
+  <footer class="pn" data-muted>ריבוע · 4</footer>
+</article></div>
+
+<div class="sheet-shell"><article class="sheet" data-page="5">
+  <h1>הריבוע</h1>
+  <section class="sec">
+    <p><b>הגדרה:</b> מרובע שכל הצלעות שלו שוות וכל הזוויות שלו ישרות הוא ריבוע.</p>
+  </section>
+  <h2>תכונות הריבוע:</h2>
+  <section class="sec">
+    <ol class="props" data-list="summary-props">
+      <li><span class="n">1.</span><div class="item"><p>בריבוע כל שתי צלעות נגדיות מקבילות זו לזו</p></div></li>
+      <li><span class="n">2.</span><div class="item"><p>בריבוע כל ארבע הצלעות שוות זו לזו</p></div></li>
+      <li><span class="n">3.</span><div class="item"><p>בריבוע האלכסונים חוצים זה את זה</p></div></li>
+      <li><span class="n">4.</span><div class="item"><p>בריבוע כל הזוויות ישרות</p></div></li>
+      <li><span class="n">5.</span><div class="item"><p>בריבוע האלכסונים שווים זה לזה</p></div></li>
+      <li><span class="n">6.</span><div class="item"><p>בריבוע האלכסונים מאונכים זה לזה</p></div></li>
+      <li><span class="n">7.</span><div class="item"><p>בריבוע האלכסונים חוצים את הזוויות</p></div></li>
+    </ol>
+  </section>
+  <h2>איך מוכיחים שמרובע הוא ריבוע?</h2>
+  <section class="sec">
+    <ol class="props" data-list="summary-proofs">
+      <li><span class="n">1.</span><div class="item"><p>לפי הגדרה: אם במרובע כל הצלעות שוות וכל הזוויות ישרות, אז המרובע הוא ריבוע.</p></div></li>
+      <li><span class="n">2.</span><div class="item"><p>אם במלבן שתי צלעות סמוכות שוות אז המלבן הוא ריבוע.</p></div></li>
+      <li><span class="n">3.</span><div class="item"><p>אם במעויין האלכסונים שווים זה לזה אז המעויין הוא ריבוע.</p></div></li>
+    </ol>
+  </section>
+  <footer class="pn" data-muted>ריבוע · 5</footer>
+</article></div>
+
+</div></section>
+</main>
+
 <script>
-const B=(c='')=>`<span class="blank ${c}" aria-hidden="true"></span>`;
-const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-const M=s=>{
-  const str=String(s).trim();
-  if(/[\u0590-\u05FF]/.test(str)) return `<bdi class="math" dir="ltr">${esc(str)}</bdi>`;
-  if(str==='S = (d₁ · d₂) / 2') return `<span class="math"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>S</mi><mo>=</mo><mfrac><mrow><msub><mi>d</mi><mn>1</mn></msub><mo>·</mo><msub><mi>d</mi><mn>2</mn></msub></mrow><mn>2</mn></mfrac></mrow></math></span>`;
-  const toks=str.match(/d[₁₂]|[A-Za-z]+|\d+°?|[=∥⟂·+⇒()]/g)||[str];
-  const parts=toks.map(t=>{
-    if(t==='d₁'||t==='d₂') return `<msub><mi>d</mi><mn>${t==='d₁'?'1':'2'}</mn></msub>`;
-    if(/^[A-Za-z]+$/.test(t)) return `<mi>${t}</mi>`;
-    if(/^\d+°?$/.test(t)) return t.endsWith('°')?`<mrow><mn>${t.slice(0,-1)}</mn><mo>°</mo></mrow>`:`<mn>${t}</mn>`;
-    return `<mo>${esc(t)}</mo>`;
-  }).join('');
-  return `<span class="math"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow>${parts}</mrow></math></span>`;
+(() => {
+'use strict';
+
+/* ---------------- vector helpers ---------------- */
+const sub = (a, b) => [a[0] - b[0], a[1] - b[1]];
+const add = (a, b) => [a[0] + b[0], a[1] + b[1]];
+const mul = (a, s) => [a[0] * s, a[1] * s];
+const dot = (a, b) => a[0] * b[0] + a[1] * b[1];
+const cross = (a, b) => a[0] * b[1] - a[1] * b[0];
+const len = a => Math.hypot(a[0], a[1]);
+const unit = a => mul(a, 1 / (len(a) || 1));
+const perp = a => [-a[1], a[0]];
+const mid = (a, b) => mul(add(a, b), 0.5);
+const lerp = (a, b, t) => add(a, mul(sub(b, a), t));
+const dist = (a, b) => len(sub(a, b));
+const project = (p, a, b) => { const ab = sub(b, a); const t = dot(sub(p, a), ab) / dot(ab, ab); return { q: lerp(a, b, t), t }; };
+const isParallel = (u, v) => Math.abs(cross(u, v)) < 1e-9 * len(u) * len(v);
+const isPerp = (u, v) => Math.abs(dot(u, v)) < 1e-9 * len(u) * len(v);
+const same = (a, b) => Math.abs(a - b) < 1e-9 * Math.max(1, a, b);
+
+/* ---------------- models (viewBox units) ---------------- */
+function lean(side, deg) {
+  const r = deg * Math.PI / 180, D = [10, 200], C = [10 + side, 200];
+  const A = [10 + side * Math.cos(r), 200 - side * Math.sin(r)];
+  return { A, B: [A[0] + side, A[1]], C, D };
+}
+const MODELS = {
+  parallelogram: { A: [60, 30], B: [280, 30], C: [220, 200], D: [0, 200] },
+  rectangle: { A: [10, 40], B: [290, 40], C: [290, 200], D: [10, 200] },
+  rhombus: { A: [160, 10], B: [300, 120], C: [160, 230], D: [20, 120] },
+  'rhombus-lean': lean(170, 62),
+  square: { A: [10, 10], B: [200, 10], C: [200, 200], D: [10, 200] }
 };
-const L=arr=>`<div class="list">${arr.map((x,i)=>`<div class="li"><span class="bullet">${i+1}</span><div>${x}</div></div>`).join('')}</div>`;
+const KIND = { parallelogram: 'parallelogram', rectangle: 'rectangle', rhombus: 'rhombus', 'rhombus-lean': 'rhombus', square: 'square' };
+const NAME = { parallelogram: 'מקבילית', rectangle: 'מלבן', rhombus: 'מעויין', square: 'ריבוע' };
 
-const V={sub:(a,b)=>[a[0]-b[0],a[1]-b[1]],add:(a,b)=>[a[0]+b[0],a[1]+b[1]],mul:(a,s)=>[a[0]*s,a[1]*s],dot:(a,b)=>a[0]*b[0]+a[1]*b[1],cross:(a,b)=>a[0]*b[1]-a[1]*b[0],len:a=>Math.hypot(a[0],a[1]),mid:(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2]};
-const unit=a=>{const l=V.len(a)||1;return [a[0]/l,a[1]/l]};
-const normal=(a,b)=>{const u=unit(V.sub(b,a));return[-u[1],u[0]]};
-const pt=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
-const dist=(a,b)=>V.len(V.sub(a,b));
-const parallel=(u,v)=>Math.abs(V.cross(u,v))<1e-7*Math.max(1,V.len(u)*V.len(v));
-const perp=(u,v)=>Math.abs(V.dot(u,v))<1e-7*Math.max(1,V.len(u)*V.len(v));
-const approx=(a,b)=>Math.abs(a-b)<1e-7*Math.max(1,Math.abs(a),Math.abs(b));
-const MODELS=Object.freeze({
- parallelogram:Object.freeze({A:[88,58],B:[286,58],C:[242,224],D:[44,224]}),
- rectangle:Object.freeze({A:[62,62],B:[298,62],C:[298,220],D:[62,220]}),
- rhombus:Object.freeze({A:[180,34],B:[312,145],C:[180,256],D:[48,145]}),
- square:Object.freeze({A:[65,40],B:[295,40],C:[295,270],D:[65,270]})
-});
-function validateModel(kind,P){
- const AB=V.sub(P.B,P.A),BC=V.sub(P.C,P.B),CD=V.sub(P.D,P.C),DA=V.sub(P.A,P.D);
- const sides=[dist(P.A,P.B),dist(P.B,P.C),dist(P.C,P.D),dist(P.D,P.A)];
- if(!parallel(AB,CD)||!parallel(BC,DA)) throw new Error(`geometry:${kind}:parallel`);
- if((kind==='rectangle'||kind==='square')&&!perp(AB,BC)) throw new Error(`geometry:${kind}:right`);
- if((kind==='rhombus'||kind==='square')&&!(approx(sides[0],sides[1])&&approx(sides[1],sides[2])&&approx(sides[2],sides[3]))) throw new Error(`geometry:${kind}:equal-sides`);
- if(kind==='rectangle'||kind==='square'){if(!approx(dist(P.A,P.C),dist(P.B,P.D)))throw new Error(`geometry:${kind}:equal-diagonals`)}
- if(kind==='rhombus'||kind==='square'){if(!perp(V.sub(P.C,P.A),V.sub(P.D,P.B)))throw new Error(`geometry:${kind}:perp-diagonals`)}
+function validate(kind, P) {
+  const AB = sub(P.B, P.A), BC = sub(P.C, P.B), CD = sub(P.D, P.C), DA = sub(P.A, P.D);
+  const s = [len(AB), len(BC), len(CD), len(DA)];
+  if (!isParallel(AB, CD) || !isParallel(BC, DA)) throw new Error(`geometry:${kind}:parallel`);
+  if ((kind === 'rectangle' || kind === 'square') && !isPerp(AB, BC)) throw new Error(`geometry:${kind}:right`);
+  if ((kind === 'rhombus' || kind === 'square') && !(same(s[0], s[1]) && same(s[1], s[2]) && same(s[2], s[3]))) throw new Error(`geometry:${kind}:equal-sides`);
+  if (kind === 'parallelogram' && (isPerp(AB, BC) || same(s[0], s[1]))) throw new Error('geometry:parallelogram:degenerate');
+  if (kind === 'rectangle' && same(s[0], s[1])) throw new Error('geometry:rectangle:is-square');
 }
-Object.entries(MODELS).forEach(([k,p])=>validateModel(k,p));
-function slash(a,b,t,count,cls){const c=pt(a,b,t),u=unit(V.sub(b,a)),n=normal(a,b),gap=7;let out='';for(let i=0;i<count;i++){const sh=(i-(count-1)/2)*gap;const q=V.add(c,V.mul(u,sh));out+=`<line class="${cls}" x1="${q[0]-n[0]*7}" y1="${q[1]-n[1]*7}" x2="${q[0]+n[0]*7}" y2="${q[1]+n[1]*7}"/>`}return out}
-function chevrons(a,b,count){const m=V.mid(a,b),u=unit(V.sub(b,a)),n=normal(a,b);let out='';for(let k=0;k<count;k++){const sh=(k-(count-1)/2)*10,c=V.add(m,V.mul(u,sh));out+=`<path class="par" d="M ${c[0]-u[0]*8-n[0]*5} ${c[1]-u[1]*8-n[1]*5} L ${c[0]} ${c[1]} L ${c[0]-u[0]*8+n[0]*5} ${c[1]-u[1]*8+n[1]*5}"/>`}return out}
-function projection(p,a,b){const ab=V.sub(b,a),t=V.dot(V.sub(p,a),ab)/V.dot(ab,ab);return {q:V.add(a,V.mul(ab,t)),t}}
-function angleArc(vertex,a,b,r=24){const u=unit(V.sub(a,vertex)),v=unit(V.sub(b,vertex));const p1=V.add(vertex,V.mul(u,r)),p2=V.add(vertex,V.mul(v,r));return `<path class="arc" d="M ${p1[0]} ${p1[1]} Q ${vertex[0]} ${vertex[1]} ${p2[0]} ${p2[1]}"/>`}
-function angleArcC(vertex,a,b,r=24,cls='arc'){const u=unit(V.sub(a,vertex)),v=unit(V.sub(b,vertex));const p1=V.add(vertex,V.mul(u,r)),p2=V.add(vertex,V.mul(v,r));return `<path class="${cls}" d="M ${p1[0]} ${p1[1]} Q ${vertex[0]} ${vertex[1]} ${p2[0]} ${p2[1]}"/>`}
-function rightMark(p,u,v,size=12,cls='right'){const a=unit(u),b=unit(v),p1=V.add(p,V.mul(a,size)),p2=V.add(p1,V.mul(b,size)),p3=V.add(p,V.mul(b,size));return `<path class="${cls}" d="M ${p1[0]} ${p1[1]} L ${p2[0]} ${p2[1]} L ${p3[0]} ${p3[1]}"/>`}
-function svg(kind,opts={}){
- const P=MODELS[kind], pts=[P.A,P.B,P.C,P.D].map(p=>p.join(',')).join(' '), O=V.mid(P.A,P.C);
- const label={parallelogram:'מקבילית',rectangle:'מלבן',rhombus:'מעויין',square:'ריבוע'}[kind];
- let s=`<figure class="geo"><svg viewBox="18 12 324 286" role="img" aria-label="${label} ABCD עם סימונים גאומטריים מדויקים"><polygon class="shape" points="${pts}"/>`;
- if(opts.diag)s+=`<line class="diag" x1="${P.A[0]}" y1="${P.A[1]}" x2="${P.C[0]}" y2="${P.C[1]}"/><line class="diag" x1="${P.B[0]}" y1="${P.B[1]}" x2="${P.D[0]}" y2="${P.D[1]}"/>`;
- if(opts.right){[[P.A,[18,18]],[P.B,[-18,18]],[P.C,[-18,-18]],[P.D,[18,-18]]].forEach(([p,d])=>s+=`<path class="right" d="M ${p[0]} ${p[1]+d[1]/2} L ${p[0]+d[0]/2} ${p[1]+d[1]/2} L ${p[0]+d[0]/2} ${p[1]}"/>`)}
- if(opts.equal){[[P.A,P.B],[P.B,P.C],[P.C,P.D],[P.D,P.A]].forEach(([a,b])=>s+=slash(a,b,.5,1,'tick'))}
- if(opts.oppEqual){s+=slash(P.A,P.B,.5,1,'tick')+slash(P.C,P.D,.5,1,'tick')+slash(P.B,P.C,.5,2,'tick')+slash(P.D,P.A,.5,2,'tick')}
- if(opts.parallel){s+=chevrons(P.A,P.B,1)+chevrons(P.C,P.D,1)+chevrons(P.B,P.C,2)+chevrons(P.D,P.A,2)}
- if(opts.onePairBoth){s+=chevrons(P.A,P.B,1)+chevrons(P.C,P.D,1)+slash(P.A,P.B,.5,1,'tick')+slash(P.C,P.D,.5,1,'tick')}
- if(opts.perp)s+=rightMark(O,V.sub(P.A,O),V.sub(P.B,O),12);
- if(opts.midpoints&&opts.diag){s+=slash(P.A,P.C,.27,1,'mid-a')+slash(P.A,P.C,.73,1,'mid-a')+slash(P.B,P.D,.27,2,'mid-b')+slash(P.B,P.D,.73,2,'mid-b')}
- if(opts.equalDiags&&opts.diag){s+=slash(P.A,P.C,.19,1,'diag-eq')+slash(P.B,P.D,.19,1,'diag-eq')}
- if(opts.angleBisectors&&opts.diag){s+=angleArc(P.A,P.B,O,25)+angleArc(P.A,O,P.D,25)+angleArc(P.C,P.D,O,25)+angleArc(P.C,O,P.B,25);if(opts.angleBisectors!=='ac')s+=angleArc(P.B,P.A,O,25)+angleArc(P.B,O,P.C,25)+angleArc(P.D,P.C,O,25)+angleArc(P.D,O,P.A,25)}
- if(opts.oppAngles){s+=angleArcC(P.A,P.B,P.D,25,'angle-a')+angleArcC(P.C,P.D,P.B,25,'angle-a')+angleArcC(P.B,P.A,P.C,22,'angle-b')+angleArcC(P.D,P.C,P.A,22,'angle-b')}
- if(opts.adjacentAngles){s+=angleArcC(P.A,P.B,P.D,25,'angle-a')+angleArcC(P.D,P.A,P.C,25,'angle-b');s+=`<text class="angle-label a" x="${P.A[0]+26}" y="${P.A[1]+30}">α</text><text class="angle-label b" x="${P.D[0]+25}" y="${P.D[1]-12}">β</text>`}
- if(opts.height){const {q,t}=projection(P.C,P.A,P.B);if(t<0||t>1)s+=`<line class="extension" x1="${P.A[0]}" y1="${P.A[1]}" x2="${q[0]}" y2="${q[1]}"/>`;s+=`<line class="height" x1="${P.C[0]}" y1="${P.C[1]}" x2="${q[0]}" y2="${q[1]}"/>`+rightMark(q,V.sub(P.A,q),V.sub(P.C,q),10)}
- if(opts.height2){const {q,t}=projection(P.A,P.B,P.C);if(t<0||t>1)s+=`<line class="extension" x1="${P.B[0]}" y1="${P.B[1]}" x2="${q[0]}" y2="${q[1]}"/>`;s+=`<line class="height" x1="${P.A[0]}" y1="${P.A[1]}" x2="${q[0]}" y2="${q[1]}"/>`+rightMark(q,V.sub(P.B,q),V.sub(P.A,q),10)}
- if(opts.center)s+=`<circle class="center" cx="${O[0]}" cy="${O[1]}" r="4"/><text class="lbl" x="${O[0]+8}" y="${O[1]-8}">O</text>`;
- [['A',P.A,-14,-8],['B',P.B,8,-8],['C',P.C,8,22],['D',P.D,-18,22]].forEach(([t,p,dx,dy])=>s+=`<circle class="pt" cx="${p[0]}" cy="${p[1]}" r="3"/><text class="lbl" x="${p[0]+dx}" y="${p[1]+dy}">${t}</text>`);
- return s+`</svg></figure>`;
-}
-const GEO=(k,o)=>svg(k,o);
-const box=(cls,title,html)=>`<section class="box ${cls}">${title?`<h2>${title}</h2>`:""}${html}</section>`;
-const st=x=>`<p class="statement">${x}</p>`;
-const REL=(op='=')=>`<span class="answer-line"></span><span class="rel-op">${op}</span><span class="answer-line"></span>`;
-const REL2=(op='=')=>`<div class="source-rel">${REL(op)}<span class="he">וגם</span>${REL(op)}</div>`;
-const CHAIN4=()=>`<div class="source-chain"><span class="answer-line"></span><span>=</span><span class="answer-line"></span><span>=</span><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>`;
+for (const [m, P] of Object.entries(MODELS)) validate(KIND[m], P);
 
-const sourceText=(text,top,left,width,height,cls='')=>`<div class="src-text ${cls}" style="top:${top}px;left:${left}px;width:${width}px;min-height:${height}px">${text}</div>`;
-const sourceBlank=(top,left,width=67,height=25)=>`<span class="src-blank" style="top:${top}px;left:${left}px;width:${width}px;height:${height}px"></span>`;
-const page=(t,n,title,sub,html)=>`<article class="sheet" data-t="${t}" data-page="${n}"><span class="num">${n}</span><h1 class="title">${title}</h1><div class="stack">${html}</div><div class="footer">${n}</div></article>`;
-const topics={
-parallelogram:{label:'מקבילית',t:'p',pages:[
-()=>`<article class="sheet source-page" data-t="p" data-page="1">
-<div class="textbook-source">
-  <h1 class="tb-title">מקבילית</h1>
+/* ---------------- SVG builder ---------------- */
+function build(fig) {
+  const model = fig.dataset.geo, kind = KIND[model], P = MODELS[model];
+  const show = (fig.dataset.show || '').split(/\s+/).filter(Boolean).map(t => { const [k, a] = t.split(':'); return { k, a: a || '' }; });
+  const has = k => show.some(t => t.k === k);
+  const arg = k => (show.find(t => t.k === k) || {}).a;
+  const O = mid(P.A, P.C);
+  const V = { ...P, O };
+  const centroid = mul(add(add(P.A, P.B), add(P.C, P.D)), 0.25);
+  const seg = s => [V[s[0]], V[s[1]]];
+  const out = [];
+  const bb = { x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity };
+  const ext = (p, pad = 1.5) => { bb.x0 = Math.min(bb.x0, p[0] - pad); bb.y0 = Math.min(bb.y0, p[1] - pad); bb.x1 = Math.max(bb.x1, p[0] + pad); bb.y1 = Math.max(bb.y1, p[1] + pad); };
+  const extText = (p, chars, fs) => { const w = 0.8 * fs * chars, h = 1.4 * fs; bb.x0 = Math.min(bb.x0, p[0] - w / 2); bb.x1 = Math.max(bb.x1, p[0] + w / 2); bb.y0 = Math.min(bb.y0, p[1] - h / 2); bb.y1 = Math.max(bb.y1, p[1] + h / 2); };
+  const _xs = [P.A, P.B, P.C, P.D].map(p => p[0]), _ys = [P.A, P.B, P.C, P.D].map(p => p[1]);
+  const _sw = Math.max(..._xs) - Math.min(..._xs), _sh = Math.max(..._ys) - Math.min(..._ys);
+  const _H = parseFloat(getComputedStyle(fig).getPropertyValue('--geo-h')) || 215, _W = fig.clientWidth || 706;
+  const k = _sh / Math.min(_H, _W / (_sw / _sh));  /* viewBox units per screen px */
+  const FS = 22 * k, FA = 15 * k, OFF = 18 * k;
+  const pt = p => `${p[0]} ${p[1]}`;
+  const data = o => Object.entries(o).filter(([, v]) => v !== undefined && v !== '').map(([k, v]) => ` data-${k}="${v}"`).join('');
 
-  <section class="tb-intro">
-    <div class="tb-line">הגדרה: מקבילית הוא מרובע בעל שני זוגות של צלעות נגדיות <span class="blank long"></span> זו לזו.</div>
-    <div class="tb-line">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מקבילית:</div>
-    <div class="tb-two">
-      <div class="tb-diagram">${GEO('parallelogram',{parallel:true})}</div>
-      <div class="tb-given" aria-label="השלמה לפי ההגדרה">
-        <bdi class="math-token" dir="ltr">AB ∥ DC</bdi>
-        <span class="he">וגם</span>
-        <bdi class="math-token" dir="ltr">AD ∥</bdi>
-        <span class="answer-line" aria-hidden="true"></span>
-      </div>
-    </div>
-  </section>
+  /* shape */
+  const poly = [P.A, P.B, P.C, P.D];
+  poly.forEach(p => ext(p, 2));
+  out.push(`<polygon class="shape" points="${poly.map(p => p.join(',')).join(' ')}"/>`);
 
-  <div class="tb-heading">תכונות המקבילית:</div>
+  /* diagonals */
+  if (has('diag')) {
+    const dashed = arg('diag') === 'dashed' ? ' dashed' : '';
+    out.push(`<line class="diag${dashed}" data-seg="AC" x1="${P.A[0]}" y1="${P.A[1]}" x2="${P.C[0]}" y2="${P.C[1]}"/>`);
+    out.push(`<line class="diag${dashed}" data-seg="BD" x1="${P.B[0]}" y1="${P.B[1]}" x2="${P.D[0]}" y2="${P.D[1]}"/>`);
+  }
 
-  <section class="tb-property">
-    <div class="tb-property-text">במקבילית כל זוג צלעות <span class="blank"></span> מקבילות זו לזו (לפי ההגדרה).</div>
-    <div class="tb-work">
-      <div class="tb-diagram">${GEO('parallelogram',{parallel:true})}</div>
-      <div class="tb-derive">
-        <div class="tb-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <span class="proof-double-arrow" aria-hidden="true">⇓</span>
-        <div class="tb-completion" aria-label="השלמת זוגות הצלעות המקבילות">
-          <span class="answer-line"></span><span class="symbol">∥</span><span class="answer-line"></span>
-          <span class="he">וגם</span>
-          <span class="answer-line"></span><span class="symbol">∥</span><span class="answer-line"></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="tb-property">
-    <div class="tb-property-text">במקבילית כל שתי <span class="blank"></span> נגדיות שוות זו לזו.</div>
-    <div class="tb-work">
-      <div class="tb-diagram">${GEO('parallelogram',{oppEqual:true})}</div>
-      <div class="tb-derive">
-        <div class="tb-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <span class="proof-double-arrow" aria-hidden="true">⇓</span>
-        <div class="tb-completion" aria-label="השלמת זוגות הצלעות השוות">
-          <span class="answer-line"></span><span class="symbol">=</span><span class="answer-line"></span>
-          <span class="he">וגם</span>
-          <span class="answer-line"></span><span class="symbol">=</span><span class="answer-line"></span>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-</article>`,
-()=>`<article class="sheet source-page" data-t="p" data-page="2">
-<div class="textbook-source-p2">
-  <div class="tb-heading">תכונות המקבילית:</div>
-
-  <section class="p2-block">
-    <div class="p2-text">במקבילית כל שתי זוויות נגדיות <span class="blank"></span> זו לזו.</div>
-    <div class="p2-row">
-      <div class="p2-diagram">${GEO('parallelogram',{oppAngles:true})}</div>
-      <div class="p2-derive">
-        <div class="p2-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <span class="proof-double-arrow" aria-hidden="true">⇓</span>
-        <div class="p2-completion">
-          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
-          <span class="he">וגם</span>
-          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="p2-block">
-    <div class="p2-text">במקבילית האלכסונים <span class="blank"></span> זה את זה.</div>
-    <div class="p2-row">
-      <div class="p2-diagram">${GEO('parallelogram',{diag:true,center:true,midpoints:true})}</div>
-      <div class="p2-derive">
-        <div class="p2-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <span class="proof-double-arrow" aria-hidden="true">⇓</span>
-        <div class="p2-completion">
-          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
-          <span class="he">וגם</span>
-          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="p2-block">
-    <div class="p2-text">במקבילית סכום כל שתי זוויות <span class="blank"></span> שווה ל - <span class="blank short"></span></div>
-    <div class="p2-row">
-      <div class="p2-diagram">${GEO('parallelogram',{adjacentAngles:true})}</div>
-      <div class="p2-derive">
-        <div class="p2-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מקבילית</div>
-        <span class="proof-double-arrow" aria-hidden="true">⇓</span>
-        <div class="p2-formula">α + β = 180°</div>
-      </div>
-    </div>
-  </section>
-</div>
-</article>`,
-()=>`<article class="sheet source-page" data-t="p" data-page="3">
-<div class="textbook-proof p3">
-  <div class="proof-title">איך מוכיחים שמרובע הוא מקבילית?</div>
-
-  <section class="proof-block">
-    <div class="proof-text">לפי הגדרה: אם במרובע כל זוג צלעות נגדיות הן <span class="blank"></span> זו לזו, אז המרובע הוא מקבילית.</div>
-    <div class="proof-work">
-      <div class="proof-diagram">${GEO('parallelogram',{parallel:true})}</div>
-      <div class="proof-if">
-        <div class="if-label">אם:</div>
-        <div class="proof-given">
-          <bdi dir="ltr">AB ∥ DC</bdi><span class="he">וגם</span><bdi dir="ltr">AD ∥</bdi><span class="answer-line"></span>
-        </div>
-      </div>
-    </div>
-    <div class="conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
-  </section>
-
-  <section class="proof-block">
-    <div class="proof-text">אם במרובע כל זוג של צלעות <span class="blank"></span> הן שוות זו לזו, אז המרובע הוא<span class="blank"></span>.</div>
-    <div class="proof-work">
-      <div class="proof-diagram">${GEO('parallelogram',{oppEqual:true})}</div>
-      <div class="proof-if">
-        <div class="if-label">אם:</div>
-        <div class="proof-completion">
-          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
-          <span class="he">וגם</span>
-          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
-        </div>
-      </div>
-    </div>
-    <div class="conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
-  </section>
-
-  <section class="proof-block">
-    <div class="proof-text">אם במרובע כל זוג של זוויות נגדיות <span class="blank"></span>, אז ה <span class="blank"></span> הוא מקבילית.</div>
-    <div class="proof-work">
-      <div class="proof-diagram">${GEO('parallelogram',{oppAngles:true})}</div>
-      <div class="proof-if">
-        <div class="if-label">אם:</div>
-        <div class="proof-completion">
-          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
-          <span class="he">וגם</span>
-          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
-        </div>
-      </div>
-    </div>
-    <div class="conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
-  </section>
-</div>
-</article>`,
-()=>`<article class="sheet source-page" data-t="p" data-page="4">
-<div class="textbook-proof p4">
-  <div class="proof-title">איך מוכיחים שמרובע הוא מקבילית?</div>
-
-  <section class="proof-block">
-    <div class="proof-text">אם במרובע האלכסונים <span class="blank"></span> זה את זה, אז המרובע הוא<span class="blank"></span>.</div>
-    <div class="proof-work">
-      <div class="proof-diagram">${GEO('parallelogram',{diag:true,center:true,midpoints:true})}</div>
-      <div class="proof-if">
-        <div class="if-label">אם:</div>
-        <div class="proof-completion">
-          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
-          <span class="he">וגם</span>
-          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
-        </div>
-      </div>
-    </div>
-    <div class="conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
-  </section>
-
-  <section class="proof-block">
-    <div class="proof-text">אם במרובע קיים זוג אחד של צלעות נגדיות שהן גם<span class="blank"></span> וגם <span class="blank"></span>, אז המרובע הוא <span class="blank"></span>.</div>
-    <div class="proof-work">
-      <div class="proof-diagram">${GEO('parallelogram',{onePairBoth:true})}</div>
-      <div class="proof-if">
-        <div class="if-label">אם:</div>
-        <div class="proof-completion">
-          <span class="answer-line"></span><span>=</span><span class="answer-line"></span>
-          <span class="he">וגם</span>
-          <span class="answer-line"></span><span>∥</span><span class="answer-line"></span>
-        </div>
-      </div>
-    </div>
-    <div class="conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
-  </section>
-</div>
-</article>`,
-()=>`<article class="sheet source-page" data-t="p" data-page="5">
-<div class="textbook-area">
-  <div class="area-title">איך מחשבים שטח של מקבילית?</div>
-  <div class="area-rule">שטח של מקבילית שווה למכפלת צלע המקבילית באורך ה <span class="blank"></span> לצלע זו.</div>
-
-  <div class="area-diagram">${GEO('parallelogram',{height:true,height2:true})}</div>
-
-  <section class="height-task">
-    <div class="height-text"><span class="blank"></span> הוא גובה במקבילית היוצא מקודקוד <bdi class="math-token" dir="ltr">DE</bdi> אל הצלע <span class="blank"></span>.</div>
-    <div class="area-formula"><span>S</span><span class="sub">ABCD</span><span>=</span><span class="answer-line"></span></div>
-  </section>
-
-  <section class="height-task">
-    <div class="height-text"><span class="blank"></span> הוא גובה במקבילית היוצא מקודקוד <span class="blank"></span> אל הצלע <bdi class="math-token" dir="ltr">BC</bdi>.</div>
-    <div class="area-formula"><span>S</span><span class="sub">ABCD</span><span>=</span><span class="answer-line"></span></div>
-  </section>
-</div>
-</article>`
-
-]},
-rectangle:{label:'מלבן',t:'r',pages:[
-()=>`<article class="sheet source-page" data-t="r" data-page="1"><div class="source-worksheet">
-  <h1 class="sw-title">מלבן</h1>
-  <section class="sw-section">
-    <div class="sw-text">הגדרה: מלבן הוא מרובע שבו כל ה<span class="blank"></span> ישרות.</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('rectangle',{right:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מלבן:</div>
-        ${CHAIN4()}
-      </div>
-    </div>
-  </section>
-  <div class="sw-heading">תכונות המלבן:</div>
-  <section class="sw-section">
-    <div class="sw-text">במלבן כל שתי<span class="blank"></span> נגדיות מקבילות זו לזו .</div>
-    <div class="sw-text">במלבן כל שתי צלעות <span class="blank"></span> שוות זו לזו.</div>
-    <div class="sw-text">במלבן ה<span class="blank"></span> חוצים זה את זה.</div>
-    <div class="sw-text">כל התכונות של המקבילית מתקיימות גם ב <span class="blank"></span>.</div>
-    <div class="sw-note">וגם:</div>
-  </section>
-  <section class="sw-section">
-    <div class="sw-text">למלבן תכונות מיוחדות שאין לכל מקבילית:</div>
-    <div class="sw-text">במלבן כל ה<span class="blank"></span> ישרות (לפי הגדרה).</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('rectangle',{right:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מלבן</div>
-        ${CHAIN4()}
-      </div>
-    </div>
-  </section>
-</div></article>`,
-()=>`<article class="sheet source-page" data-t="r" data-page="2"><div class="source-worksheet">
-  <div class="sw-heading">תכונות המלבן:</div>
-  <section class="sw-section" style="flex:1;display:grid;place-items:center">
-    <div style="width:100%">
-      <div class="sw-text" style="font-size:21px">במלבן ה <span class="blank"></span> שווים זה לזה.</div>
-      <div class="sw-grid" style="margin-top:24px">
-        <div class="sw-diagram">${GEO('rectangle',{diag:true,center:true,midpoints:true,equalDiags:true})}</div>
-        <div class="sw-work">
-          <div class="sw-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מלבן</div>
-          <div class="source-rel" style="gap:7px"><bdi dir="ltr">DB</bdi><span>=</span><span class="answer-line"></span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div></article>`,
-()=>`<article class="sheet source-page" data-t="r" data-page="3"><div class="source-worksheet">
-  <div class="sw-heading">איך מוכיחים שמרובע הוא מלבן?</div>
-  <section class="sw-section">
-    <div class="sw-text">לפי הגדרה: אם במרובע יש שלוש זוויות ישרות אז המרובע הוא מלבן.</div>
-    <div class="sw-text">גם הזווית הרביעית ישרה. מדוע?</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('rectangle',{right:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption">במרובע <bdi class="math-token" dir="ltr">ABCD</bdi>:</div>
-        <div class="sw-note">אם:</div>
-        <div class="source-chain"><span class="answer-line"></span><span>=</span><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>
-        <div class="sw-text">כי סכום <span class="blank long"></span></div>
-        <div class="source-rel" style="gap:7px"><bdi dir="ltr">D</bdi><span>=</span><span class="answer-line"></span></div>
-      </div>
-    </div>
-    <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מלבן</div>
-  </section>
-</div></article>`,
-()=>`<article class="sheet source-page" data-t="r" data-page="4"><div class="source-worksheet">
-  <div class="sw-heading">איך מוכיחים שמרובע הוא מלבן?</div>
-  <section class="sw-section" style="flex:1">
-    <div class="sw-text">המלבןהוא מקבילית מיוחדת</div>
-    <div class="sw-text">אם במקבילית יש <span class="blank"></span> ישרה,אז המקבילית היא <span class="blank"></span>.</div>
-    <div class="sw-text">אז כל הזוויות של המקבילית הן ישרות. מדוע?</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('rectangle',{right:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מקבילית</div>
-        <div class="sw-note">וגם:</div>
-        <div class="source-rel" style="gap:7px"><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>
-        <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
-      </div>
-    </div>
-  </section>
-  <section class="sw-section" style="flex:1">
-    <div class="sw-text">המלבןהוא מקבילית מיוחדת</div>
-    <div class="sw-text">אם במקבילית האלכסונים <span class="blank"></span> זה לזה, אז המקבילית היא <span class="blank"></span>.</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('rectangle',{diag:true,equalDiags:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מקבילית</div>
-        <div class="sw-note">וגם:</div>
-        <div class="source-rel" style="gap:7px"><bdi dir="ltr">DB</bdi><span>=</span><span class="answer-line"></span></div>
-        <div class="sw-conclusion">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מלבן</div>
-      </div>
-    </div>
-  </section>
-</div></article>`,
-()=>`<article class="sheet source-page" data-t="r" data-page="5"><div class="source-worksheet summary">
-  <h1 class="sw-title">המלבן</h1>
-  <section class="sw-section"><div class="sw-text">הגדרה: מרובע שבו כל הזוויות ישרות הוא מלבן.</div></section>
-  <div class="sw-heading">תכונות המלבן:</div>
-  <section class="sw-section">
-    <div class="summary-list">
-      <div class="summary-item">במלבן כל שתי צלעות נגדיות מקבילות זו לזו</div>
-      <div class="summary-item">2. במלבן כל שתי צלעות נגדיות שוות זו לזו</div>
-      <div class="summary-item">3. במלבן האלכסונים חוצים זה את זה</div>
-      <div class="summary-item">4. במלבן כל הזוויות ישרות</div>
-      <div class="summary-item">5. במלבן האלכסונים שווים זה לזה</div>
-      <div class="sw-note">כמו במקבילית</div>
-    </div>
-  </section>
-  <div class="sw-heading">איך מוכיחים שמרובע הוא מלבן?</div>
-  <section class="sw-section">
-    <div class="summary-list">
-      <div class="summary-item">לפי הגדרה: אם במרובע יש שלוש זוויות ישרות, אז המרובע הוא מלבן.</div>
-      <div class="summary-item">2. אם במקבילית יש זווית ישרה אז המקבילית היא מלבן.</div>
-      <div class="summary-item">3. אם במקבילית האלכסונים שווים זה לזה אז המקבילית היא מלבן.</div>
-    </div>
-  </section>
-</div></article>`
-]},
-rhombus:{label:'מעויין',t:'h',pages:[
-()=>`<article class="sheet source-page" data-t="h" data-page="1"><div class="source-worksheet">
-  <h1 class="sw-title">מעויין</h1>
-  <section class="sw-section">
-    <div class="sw-text">הגדרה: מעויין הוא מרובע שכל <span class="blank"></span> שוות זו לזו.</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('rhombus',{equal:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מעויין:</div>
-        <div class="source-chain"><bdi dir="ltr">AB</bdi><span>=</span><span class="answer-line"></span><span>=</span><bdi dir="ltr">CD</bdi><span>=</span><span class="answer-line"></span></div>
-      </div>
-    </div>
-  </section>
-  <div class="sw-heading">תכונות המעויין:</div>
-  <section class="sw-section">
-    <div class="sw-text">במעויין כל זוג צלעות <span class="blank"></span> מקבילות זו לזו .</div>
-    <div class="sw-text">במעויין כל שתי זוויות <span class="blank"></span> שוות זו לזו.</div>
-    <div class="sw-text">במעויין סכום כל שתי זוויות <span class="blank"></span> שווה ל - <span class="blank short"></span></div>
-    <div class="sw-text">במעויין ה<span class="blank"></span> חוצים זה את זה.</div>
-    <div class="sw-text">כל התכונות של המקבילית מתקיימות גם ב <span class="blank"></span>.</div>
-    <div class="sw-note">וגם:</div>
-  </section>
-  <section class="sw-section">
-    <div class="sw-text">למעויין תכונות מיוחדות שאין לכל מקבילית:</div>
-    <div class="sw-text">במעויין כל ה<span class="blank"></span> שוות (לפי הגדרה).</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('rhombus',{equal:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מעויין</div>
-        ${CHAIN4()}
-      </div>
-    </div>
-  </section>
-</div></article>`,
-()=>`<article class="sheet source-page" data-t="h" data-page="2"><div class="source-worksheet">
-  <div class="sw-heading">תכונות המעויין:</div>
-  <section class="sw-section" style="flex:1">
-    <div class="sw-text">במעויין ה <span class="blank"></span> מאונכים זה לזה.</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('rhombus',{diag:true,perp:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מעויין</div>
-        <div class="source-rel" style="gap:7px"><bdi dir="ltr">AC</bdi><span class="answer-line"></span><bdi dir="ltr">BD</bdi></div>
-      </div>
-    </div>
-  </section>
-  <section class="sw-section" style="flex:1">
-    <div class="sw-text">במעויין האלכסונים <span class="blank"></span> את הזוויות.</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('rhombus',{diag:true,angleBisectors:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> מעויין</div>
-        <div class="sw-note">וגם</div>
-        <div class="source-rel"><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>
-        <div class="sw-note">וגם</div>
-        <div class="source-rel"><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>
-      </div>
-    </div>
-  </section>
-</div></article>`,
-()=>`<article class="sheet source-page" data-t="h" data-page="3"><div class="source-worksheet">
-  <div class="sw-heading">איך מוכיחים שמרובע הוא מעויין?</div>
-  <section class="sw-section">
-    <div class="sw-text">לפי הגדרה: אם במרובע כל הצלעות <span class="blank"></span> שוות, אז המרובע הוא מעויין.</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('rhombus',{equal:true})}</div>
-      <div class="sw-work"><div class="sw-note">אם:</div><div class="source-chain"><bdi dir="ltr">AB</bdi><span>=</span><span class="answer-line"></span><span>=</span><bdi dir="ltr">CD</bdi><span>=</span><span class="answer-line"></span></div></div>
-    </div>
-    <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
-  </section>
-  <section class="sw-section">
-    <div class="sw-text">המעויין הוא מקבילית מיוחדת</div>
-    <div class="sw-text">אם במקבילית שתי צלעות אז ה <span class="blank"></span> היא מעויין.</div>
-    <div class="sw-note">המסקנה תהיה שכל הצלעות שוות. מדוע?</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('rhombus',{equal:true})}</div>
-      <div class="sw-work"><div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מקבילית</div><div class="sw-note">וגם</div><div class="source-rel" style="gap:7px"><bdi dir="ltr">AB</bdi><span>=</span><span class="answer-line"></span></div></div>
-    </div>
-    <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
-  </section>
-  <section class="sw-section">
-    <div class="sw-text">המעויין הוא מקבילית מיוחדת אם במקבילית ה <span class="blank"></span> מאונכים זה לזה אז המקבילית היא <span class="blank"></span>.</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('rhombus',{diag:true,perp:true})}</div>
-      <div class="sw-work"><div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מקבילית וגם:</div><div class="source-rel" style="gap:7px"><bdi dir="ltr">BD</bdi><span class="answer-line"></span><span class="answer-line"></span></div></div>
-    </div>
-    <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מעויין.</div>
-  </section>
-</div></article>`,
-()=>`<article class="sheet source-page" data-t="h" data-page="4"><div class="source-worksheet">
-  <div class="sw-heading">איך מוכיחים שמרובע הוא מעויין?</div>
-  <section class="sw-section" style="flex:1;display:grid;align-content:center">
-    <div class="sw-text">המעויין הוא מקבילית מיוחדת</div>
-    <div class="sw-text">אם במקבילית אחד האלכסונים חוצה את אחת ה<span class="blank"></span>, אז המקבילית היא <span class="blank"></span>.</div>
-    <div class="sw-grid" style="margin-top:20px">
-      <div class="sw-diagram">${GEO('rhombus',{diag:true,angleBisectors:'ac'})}</div>
-      <div class="sw-work">
-        <div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מקבילית וגם <span class="answer-line"></span></div>
-      </div>
-    </div>
-    <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא <span class="answer-line"></span>.</div>
-  </section>
-</div></article>`,
-()=>`<article class="sheet source-page" data-t="h" data-page="5"><div class="source-worksheet">
-  <div class="sw-heading">איך מחשבים שטח של מעויין?</div>
-  <section class="sw-section" style="flex:1">
-    <div class="sw-text">שטח של עויין שווה למכפלה של צלע המעויין באורך הגובה לצלע זו.</div>
-    <div class="sw-grid" style="margin-top:12px">
-      <div class="sw-diagram">${GEO('rhombus',{height:true,height2:true})}</div>
-      <div class="sw-work">
-        <div class="source-rel" style="gap:8px"><span>S</span><span class="rel-op">=</span><span class="answer-line"></span></div>
-      </div>
-    </div>
-  </section>
-  <div class="sw-note" style="text-align:center;font-size:18px">או</div>
-  <section class="sw-section" style="flex:1">
-    <div class="sw-text">שטח של מעויין שווה למחצית מכפלת ה <span class="blank"></span>.</div>
-    <div class="sw-grid" style="margin-top:12px">
-      <div class="sw-diagram">${GEO('rhombus',{diag:true,perp:true})}</div>
-      <div class="sw-work">
-        <div class="source-rel" style="gap:8px"><span>S</span><span class="rel-op">=</span><span class="answer-line"></span><span style="border-top:2px solid #17324d;padding:5px 14px 0">2</span></div>
-      </div>
-    </div>
-  </section>
-</div></article>`
-]},
-square:{label:'ריבוע',t:'s',pages:[
-()=>`<article class="sheet derived-page" data-t="s" data-page="1"><div class="source-worksheet">
-  <h1 class="sw-title">ריבוע</h1>
-  <section class="sw-section">
-    <div class="sw-text">הגדרה: ריבוע הוא מרובע שכל ה<span class="blank"></span> שוות וכל ה<span class="blank"></span> ישרות.</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('square',{equal:true,right:true,parallel:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption">המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא ריבוע</div>
-        ${CHAIN4()}
-      </div>
-    </div>
-  </section>
-  <div class="sw-heading">הריבוע שייך לשתי משפחות:</div>
-  <section class="sw-section" style="flex:1;display:grid;align-content:center;gap:18px">
-    <div class="sw-text" style="font-size:15.5px">הריבוע הוא מלבן כי כל הזוויות שלו ישרות.</div>
-    <div class="sw-text" style="font-size:15.5px">הריבוע הוא מעויין כי כל הצלעות שלו שוות.</div>
-  </section>
-</div></article>`,
-()=>`<article class="sheet derived-page" data-t="s" data-page="2"><div class="source-worksheet">
-  <div class="sw-heading">תכונות הריבוע:</div>
-  <section class="sw-section" style="flex:1">
-    <div class="sw-text">בריבוע ה <span class="blank"></span> שווים זה לזה.</div>
-    <div class="sw-text">בריבוע ה <span class="blank"></span> מאונכים זה לזה.</div>
-    <div class="sw-text">בריבוע ה<span class="blank"></span> חוצים זה את זה.</div>
-    <div class="sw-text">בריבוע האלכסונים <span class="blank"></span> את הזוויות.</div>
-    <div class="sw-grid" style="margin-top:18px">
-      <div class="sw-diagram">${GEO('square',{diag:true,center:true,perp:true,midpoints:true,equalDiags:true,angleBisectors:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption"><bdi class="math-token" dir="ltr">ABCD</bdi> ריבוע</div>
-        <div class="source-rel"><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>
-        <div class="source-rel"><span class="answer-line"></span><span>⟂</span><span class="answer-line"></span></div>
-        ${REL2('=')}
-      </div>
-    </div>
-  </section>
-</div></article>`,
-()=>`<article class="sheet derived-page" data-t="s" data-page="3"><div class="source-worksheet">
-  <div class="sw-heading">איך מוכיחים שמרובע הוא ריבוע?</div>
-  <section class="sw-section" style="flex:1;display:grid;align-content:center">
-    <div class="sw-text">לפי הגדרה: אם במרובע כל הצלעות <span class="blank"></span> וכל הזוויות <span class="blank"></span>, אז המרובע הוא ריבוע.</div>
-    <div class="sw-grid" style="margin-top:24px">
-      <div class="sw-diagram">${GEO('square',{equal:true,right:true})}</div>
-      <div class="sw-work">
-        <div class="sw-note">אם:</div>
-        <div class="source-chain"><span class="answer-line"></span><span>=</span><span class="answer-line"></span><span>=</span><span class="answer-line"></span><span>=</span><span class="answer-line"></span></div>
-        <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא ריבוע.</div>
-      </div>
-    </div>
-  </section>
-</div></article>`,
-()=>`<article class="sheet derived-page" data-t="s" data-page="4"><div class="source-worksheet">
-  <div class="sw-heading">איך מוכיחים שמרובע הוא ריבוע?</div>
-  <section class="sw-section" style="flex:1">
-    <div class="sw-text">הריבוע הוא מלבן מיוחד</div>
-    <div class="sw-text">אם במלבן שתי צלעות סמוכות <span class="blank"></span>, אז המלבן הוא <span class="blank"></span>.</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('square',{right:true,equal:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מלבן וגם:</div>
-        <div class="source-rel" style="gap:7px"><bdi dir="ltr">AB</bdi><span>=</span><bdi dir="ltr">BC</bdi></div>
-        <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא ריבוע.</div>
-      </div>
-    </div>
-  </section>
-  <section class="sw-section" style="flex:1">
-    <div class="sw-text">הריבוע הוא מעויין מיוחד</div>
-    <div class="sw-text">אם במעויין האלכסונים <span class="blank"></span> זה לזה, אז המעויין הוא <span class="blank"></span>.</div>
-    <div class="sw-grid">
-      <div class="sw-diagram">${GEO('square',{diag:true,equalDiags:true})}</div>
-      <div class="sw-work">
-        <div class="sw-caption">אם המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא מעויין וגם:</div>
-        <div class="source-rel" style="gap:7px"><bdi dir="ltr">AC</bdi><span>=</span><bdi dir="ltr">BD</bdi></div>
-        <div class="sw-conclusion">אז המרובע <bdi class="math-token" dir="ltr">ABCD</bdi> הוא ריבוע.</div>
-      </div>
-    </div>
-  </section>
-</div></article>`,
-()=>`<article class="sheet derived-page" data-t="s" data-page="5"><div class="source-worksheet summary">
-  <h1 class="sw-title">הריבוע</h1>
-  <section class="sw-section"><div class="sw-text">הגדרה: מרובע שכל הצלעות שלו שוות וכל הזוויות שלו ישרות הוא ריבוע.</div></section>
-  <div class="sw-heading">תכונות הריבוע:</div>
-  <section class="sw-section">
-    <div class="summary-list">
-      <div class="summary-item">בריבוע כל שתי צלעות נגדיות מקבילות זו לזו</div>
-      <div class="summary-item">2. בריבוע כל ארבע הצלעות שוות זו לזו</div>
-      <div class="summary-item">3. בריבוע האלכסונים חוצים זה את זה</div>
-      <div class="summary-item">4. בריבוע כל הזוויות ישרות</div>
-      <div class="summary-item">5. בריבוע האלכסונים שווים זה לזה</div>
-      <div class="summary-item">6. בריבוע האלכסונים מאונכים זה לזה</div>
-      <div class="summary-item">7. בריבוע האלכסונים חוצים את הזוויות</div>
-    </div>
-  </section>
-  <div class="sw-heading">איך מוכיחים שמרובע הוא ריבוע?</div>
-  <section class="sw-section">
-    <div class="summary-list">
-      <div class="summary-item">לפי הגדרה: אם במרובע כל הצלעות שוות וכל הזוויות ישרות, אז המרובע הוא ריבוע.</div>
-      <div class="summary-item">2. אם במלבן שתי צלעות סמוכות שוות אז המלבן הוא ריבוע.</div>
-      <div class="summary-item">3. אם במעויין האלכסונים שווים זה לזה אז המעויין הוא ריבוע.</div>
-    </div>
-  </section>
-</div></article>`
-]}
-};
-const root=document.getElementById('root');Object.entries(topics).forEach(([id,t],i)=>{const sec=document.createElement('section');sec.id=id;sec.className='topic'+(i===0?' active':'');sec.innerHTML=`<div class="pages">${t.pages.map(f=>`<div class="sheet-shell">${f()}</div>`).join('')}</div>`;root.appendChild(sec)});function fitWorksheetDensity(){
-  document.querySelectorAll('.sheet').forEach(sheet=>{
-    sheet.classList.remove('fit-airy','fit-compact','fit-dense');
-    const stack=sheet.querySelector('.stack');
-    if(!stack)return;
-    const available=stack.clientHeight;
-    let used=stack.scrollHeight;
-    if(!available||!used)return;
-    if(used>available*1.08){
-      sheet.classList.add('fit-compact');
-      used=stack.scrollHeight;
-      if(used>stack.clientHeight*1.04) sheet.classList.add('fit-dense');
-    }else if(used<available*.62){
-      sheet.classList.add('fit-airy');
-      if(stack.scrollHeight>stack.clientHeight*1.02) sheet.classList.remove('fit-airy');
+  /* marks */
+  const tick = (s, n, group) => {
+    const [a, b] = seg(s), u = unit(sub(b, a)), nv = perp(u), c = mid(a, b), gap = 6 * k, half = 7 * k;
+    for (let i = 0; i < n; i++) {
+      const q = add(c, mul(u, (i - (n - 1) / 2) * gap));
+      const p1 = sub(q, mul(nv, half)), p2 = add(q, mul(nv, half)); ext(p1); ext(p2);
+      out.push(`<line class="tick"${data({ mark: 'equal', seg: s, n: group })} x1="${p1[0]}" y1="${p1[1]}" x2="${p2[0]}" y2="${p2[1]}"/>`);
     }
-  });
-}
-function fitA4Pages(){
-  fitWorksheetDensity();
-  const mobile=window.matchMedia('(max-width:800px)').matches;
-  document.querySelectorAll('.sheet-shell').forEach(shell=>{
-    const sheet=shell.querySelector('.sheet');
-    if(!sheet)return;
-    if(mobile){
-      const available=Math.max(280,window.innerWidth-12);
-      const scale=Math.min(1,available/794);
-      sheet.style.transform=`scale(${scale})`;
-      shell.style.width=(794*scale)+'px';
-      shell.style.height=(1123*scale)+'px';
-    }else{
-      sheet.style.transform='';
-      shell.style.width='';
-      shell.style.height='';
+  };
+  const chev = (s, n, group) => {
+    const [a, b] = seg(s), u = unit(sub(b, a)), nv = perp(u), c = mid(a, b);
+    for (let i = 0; i < n; i++) {
+      const q = add(c, mul(u, (i - (n - 1) / 2) * 9 * k));
+      const p1 = sub(sub(q, mul(u, 7 * k)), mul(nv, 5 * k)), p2 = sub(add(q, mul(nv, 5 * k)), mul(u, 7 * k)); ext(p1); ext(p2);
+      out.push(`<path class="par"${data({ mark: 'parallel', seg: s, n: group })} d="M ${pt(p1)} L ${pt(q)} L ${pt(p2)}"/>`);
     }
+  };
+  const rightMark = (at, r1, r2, size, tested = true) => {
+    const p = V[at] || at, u = unit(sub(V[r1] || r1, p)), v = unit(sub(V[r2] || r2, p));
+    size *= k; const a = add(p, mul(u, size)), c = add(a, mul(v, size)), b = add(p, mul(v, size)); ext(c);
+    const d = tested ? data({ mark: 'right', at, rays: `${r1},${r2}` }) : '';
+    out.push(`<path class="right"${d} d="M ${pt(a)} L ${pt(c)} L ${pt(b)}"/>`);
+  };
+  const arc = (at, r1, r2, r, group, label) => {
+    r *= k; const p = V[at], u = unit(sub(V[r1], p)), v = unit(sub(V[r2], p));
+    const a = add(p, mul(u, r)), b = add(p, mul(v, r)), sweep = cross(u, v) > 0 ? 1 : 0;
+    const bis = unit(add(u, v)); ext(add(p, mul(bis, r))); ext(a); ext(b);
+    out.push(`<path class="arc"${data({ mark: 'angle', at, rays: `${r1},${r2}`, n: group })} d="M ${pt(a)} A ${r} ${r} 0 0 ${sweep} ${pt(b)}"/>`);
+    if (label) { const q = add(p, mul(bis, r + 11 * k)); extText(q, label.length, FA); out.push(`<text class="alab" font-size="${FA.toFixed(2)}" x="${q[0]}" y="${q[1]}" text-anchor="middle" dominant-baseline="central">${label}</text>`); }
+  };
+  const height = (from, s, label, foot) => {
+    const [a, b] = seg(s), p = V[from], { q, t } = project(p, a, b);
+    if (t < 0 || t > 1) { const e = t < 0 ? a : b; out.push(`<line class="extension" data-helper x1="${e[0]}" y1="${e[1]}" x2="${q[0]}" y2="${q[1]}"/>`); ext(q, 2); }
+    out.push(`<line class="height"${data({ mark: 'height', at: from, seg: s })} x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}"/>`);
+    rightMark(q, a, p, 9, false);
+    if (foot) { const l = add(q, mul(unit(sub(q, centroid)), OFF)); extText(l, 1, FS); out.push(`<text class="lbl" font-size="${FS.toFixed(2)}" data-vertex="${foot}" x="${l[0]}" y="${l[1]}" text-anchor="middle" dominant-baseline="central">${foot}</text>`); }
+    if (label) {
+      const m = mid(p, q), nv = perp(unit(sub(q, p))); const side = dot(nv, sub(m, centroid)) > 0 ? -1 : 1;
+      const l = add(m, mul(nv, 11 * k * side)); extText(l, 2, FA);
+      out.push(`<text class="alab" font-size="${FA.toFixed(2)}" x="${l[0]}" y="${l[1]}" text-anchor="middle" dominant-baseline="central"><tspan font-style="italic">h</tspan><tspan dy="${(0.3 * FA).toFixed(2)}" font-size="${(0.7 * FA).toFixed(2)}">${label}</tspan></text>`);
+    }
+  };
+
+  if (has('parallel')) { chev('AB', 1, 1); chev('DC', 1, 1); chev('AD', 2, 2); chev('BC', 2, 2); }
+  if (has('onePairBoth')) { chev('AB', 1, 1); chev('DC', 1, 1); tick('AB', 1, 1); tick('DC', 1, 1); }
+  if (has('oppEqual')) { tick('AB', 1, 1); tick('CD', 1, 1); tick('BC', 2, 2); tick('DA', 2, 2); }
+  if (has('equal')) { const list = arg('equal') ? arg('equal').split(',') : ['AB', 'BC', 'CD', 'DA']; list.forEach(s => tick(s, 1, 1)); }
+  if (has('right')) { const at = arg('right') || 'ABCD'; const prev = { A: 'D', B: 'A', C: 'B', D: 'C' }, next = { A: 'B', B: 'C', C: 'D', D: 'A' }; [...at].forEach(v => rightMark(v, next[v], prev[v], 11)); }
+  if (has('mid')) { tick('AO', 1, 1); tick('OC', 1, 1); tick('BO', 2, 2); tick('OD', 2, 2); }
+  if (has('equalDiag')) { ['AO', 'OC', 'BO', 'OD'].forEach(s => tick(s, 1, 3)); }
+  if (has('perp')) rightMark('O', 'A', 'B', 10);
+  if (has('oppAngles')) { arc('A', 'B', 'D', 22, 1); arc('C', 'D', 'B', 22, 1); arc('B', 'A', 'C', 20, 2); arc('B', 'A', 'C', 25, 2); arc('D', 'C', 'A', 20, 2); arc('D', 'C', 'A', 25, 2); }
+  if (has('adjAngles')) { arc('A', 'B', 'D', 24, '', 'α'); arc('D', 'A', 'C', 24, '', 'β'); }
+  if (has('bisect')) {
+    const at = arg('bisect') || 'ABCD'; const prev = { A: 'D', B: 'A', C: 'B', D: 'C' }, next = { A: 'B', B: 'C', C: 'D', D: 'A' };
+    [...at].forEach(v => { arc(v, next[v], 'O', 20, v, '1'); arc(v, 'O', prev[v], 20, v, '2'); });
+  }
+  if (has('heights')) {
+    if (model === 'parallelogram') { height('D', 'AB', '', 'E'); height('A', 'BC', '', 'F'); }
+    else { height(arg('heights') || 'A', 'BC', '1'); height(arg('heights') || 'A', 'DC', '2'); }
+  }
+  if (has('sides')) {
+    const t = arg('sides') || 'a';
+    ['AB', 'BC', 'CD', 'DA'].forEach(s => { const [a, b] = seg(s), m = mid(a, b), d = unit(sub(m, centroid)), q = add(m, mul(d, 13 * k)); extText(q, t.length, FS); out.push(`<text class="lbl side" font-size="${FS.toFixed(2)}" x="${q[0]}" y="${q[1]}" text-anchor="middle" dominant-baseline="central">${t}</text>`); });
+  }
+
+  /* vertex labels, placed outward from the centroid */
+  if (!has('nolabels')) {
+    ['A', 'B', 'C', 'D'].forEach(v => { const q = add(V[v], mul(unit(sub(V[v], centroid)), OFF)); extText(q, 1, FS); out.push(`<text class="lbl" font-size="${FS.toFixed(2)}" data-vertex="${v}" x="${q[0]}" y="${q[1]}" text-anchor="middle" dominant-baseline="central">${v}</text>`); });
+  }
+  if (has('center')) { const q = add(O, [9 * k, -9 * k]); extText(q, 1, FS); out.push(`<text class="lbl" font-size="${FS.toFixed(2)}" data-vertex="O" x="${q[0]}" y="${q[1]}" text-anchor="middle" dominant-baseline="central">O</text>`); }
+
+  const vb = [bb.x0 - 2, bb.y0 - 2, bb.x1 - bb.x0 + 4, bb.y1 - bb.y0 + 4].map(n => Math.round(n * 100) / 100);
+  const h = Math.min(_H, _W / (vb[2] / vb[3])), w = h * vb[2] / vb[3];
+  fig.innerHTML = `<svg viewBox="${vb.join(' ')}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" data-kind="${kind}" role="img" aria-label="${NAME[kind]} ABCD">${out.join('')}</svg>`;
+}
+/* one uniform vertical gap per sheet, bounded, remainder at the page end */
+function spread(sheet) {
+  const fits = g => { sheet.style.setProperty('--sgap', g.toFixed(2) + 'px'); return sheet.scrollHeight <= sheet.clientHeight; };
+  let lo = 0, hi = 72;
+  if (fits(hi) || !fits(lo)) return;
+  for (let i = 0; i < 8; i++) { const m = (lo + hi) / 2; if (fits(m)) lo = m; else hi = m; }
+  fits(lo);
+}
+function fitMath(sheet) {
+  sheet.querySelectorAll('.m').forEach(m => {
+    const maths = [...m.querySelectorAll('math')];
+    if (!maths.length) return;
+    const set = v => { m.style.fontSize = v; maths.forEach(x => x.style.fontSize = v); };
+    set('');
+    const avail = m.clientWidth;
+    const widest = () => Math.max(...maths.map(x => x.getBoundingClientRect().width));
+    let fs = parseFloat(getComputedStyle(maths[0]).fontSize) || 18, guard = 0;
+    while (widest() > avail - 12 && fs > 9 && guard++ < 40) { fs -= 0.5; set(fs + 'px'); }
   });
 }
-function validateSourceA4(){
-  document.querySelectorAll('.sheet.source-page').forEach(sheet=>{
-    const sr=sheet.getBoundingClientRect();
-    const bad=[...sheet.querySelectorAll('*')].filter(node=>{
-      const r=node.getBoundingClientRect();
-      if(!r.width&&!r.height)return false;
-      return r.left<sr.left-1||r.right>sr.right+1||r.top<sr.top-1||r.bottom>sr.bottom+1;
-    });
-    sheet.dataset.layoutOk=bad.length?'false':'true';
-    sheet.dataset.overflowCount=String(bad.length);
-  });
+function layout(withFigures) {
+  document.body.classList.add('building');
+  if (withFigures) document.querySelectorAll('figure.geo[data-geo]').forEach(build);
+  document.querySelectorAll('.sheet').forEach(fitMath);
+  document.querySelectorAll('.sheet').forEach(spread);
+  document.body.classList.remove('building');
 }
-fitA4Pages();
-validateSourceA4();
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{fitA4Pages();validateSourceA4()});
-window.addEventListener('beforeprint',fitWorksheetDensity);
-window.addEventListener('resize',fitA4Pages,{passive:true});
-window.addEventListener('orientationchange',()=>setTimeout(fitA4Pages,100),{passive:true});
-document.querySelectorAll('.top button[data-id]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.top button[data-id]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.topic').forEach(x=>x.classList.toggle('active',x.id===b.dataset.id));window.scrollTo({top:0,behavior:'smooth'});requestAnimationFrame(fitA4Pages)});
-</script>
-<script id="double-arrow-property-numbering-v1">
-(()=>{
-  function clearOld(el){
-    el.querySelectorAll(':scope > .prop-index').forEach(x=>x.remove());
-    el.dataset.propsNumbered='0';
-  }
+layout(true);
+document.fonts.ready.then(() => layout(false));
 
-  function numberList(nodes){
-    let i=1;
-    nodes.forEach(el=>{
-      clearOld(el);
-      const span=document.createElement('span');
-      span.className='prop-index';
-      span.textContent=i+'.';
-      el.insertBefore(span, el.firstChild);
-      el.dataset.propsNumbered='1';
-      i++;
-    });
-  }
+/* ---------------- topic tabs ---------------- */
+const buttons = [...document.querySelectorAll('.top button[data-id]')];
+function activate(id, push) {
+  buttons.forEach(b => b.classList.toggle('active', b.dataset.id === id));
+  document.querySelectorAll('.topic').forEach(t => t.classList.toggle('active', t.id === id));
+  if (push) history.replaceState(null, '', '#' + id);
+}
+buttons.forEach(b => b.addEventListener('click', () => { activate(b.dataset.id, true); window.scrollTo({ top: 0 }); }));
+const fromHash = location.hash.slice(1);
+if (buttons.some(b => b.dataset.id === fromHash)) activate(fromHash, false);
 
-  function directChildren(parent, selector){
-    return [...parent.children].filter(el=>el.matches(selector));
-  }
-
-  function numberProperties(){
-    document.querySelectorAll('.sheet').forEach(sheet=>{
-      const tb=[...sheet.querySelectorAll('.tb-property-text')];
-      if(tb.length) numberList(tb);
-
-      const p2=[...sheet.querySelectorAll('.p2-text')];
-      if(p2.length) numberList(p2);
-
-      sheet.querySelectorAll('.sw-heading').forEach(h=>{
-        const t=(h.textContent||'').replace(/\s+/g,' ').trim();
-        if(!t.includes('תכונות')) return;
-        let sec=h.nextElementSibling;
-        if(!sec || !sec.classList.contains('sw-section')) return;
-        const items=directChildren(sec,'.sw-text');
-        if(items.length) numberList(items);
-      });
-    });
-  }
-
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',numberProperties,{once:true});
-  }else{
-    numberProperties();
-  }
-  window.addEventListener('load',numberProperties,{once:true});
+/* ---------------- mobile: scale the whole A4 sheet ---------------- */
+const root = document.documentElement;
+let raf = 0;
+function fit() {
+  raf = 0;
+  const w = document.documentElement.clientWidth;
+  root.style.setProperty('--scale', w <= 800 ? String(Math.min(1, (w - 12) / 794)) : '1');
+}
+fit();
+window.addEventListener('resize', () => { if (!raf) raf = requestAnimationFrame(fit); }, { passive: true });
 })();
 </script>
 </body>

@@ -1,0 +1,97 @@
+name: quadrilaterals visual QA
+
+# Deterministic browser, print, geometry, source-lock and provenance QA for
+# quadrilaterals-preview/index.html. No deploy side effects, no secrets.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'quadrilaterals-preview/**'
+      - '.github/workflows/quadrilaterals-visual.yml'
+  pull_request:
+    paths:
+      - 'quadrilaterals-preview/**'
+      - '.github/workflows/quadrilaterals-visual.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: quadrilaterals-preview/qa
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Validate canonical-source provenance
+        working-directory: quadrilaterals-preview
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path(".")
+          manifest = json.loads((root / "canva-source/manifest.json").read_text(encoding="utf-8"))
+          designs = manifest.get("designs", {})
+          expected = {"parallelogram": 5, "rectangle": 5, "rhombus": 5, "square": 5}
+
+          assert set(designs) == set(expected), (
+              "Canva manifest scope must cover exactly the four quadrilateral topics: "
+              + repr(sorted(designs))
+          )
+          for topic, count in expected.items():
+              pages = designs[topic].get("pages", [])
+              assert len(pages) == count, f"{topic}: expected {count} canonical pages, got {len(pages)}"
+              assert designs[topic].get("canva_design_id"), f"{topic}: missing Canva design ID"
+              assert designs[topic].get("canonical_page_size") == {"width": 794, "height": 1123}, (
+                  f"{topic}: canonical page size must be 794x1123"
+              )
+              for page in pages:
+                  assert page.get("page_id"), f"{topic} page {page.get('page')}: missing Canva page ID"
+                  source_png = page.get("source_png")
+                  if source_png:
+                      png = root / "canva-source" / source_png
+                      assert png.is_file(), f"missing canonical Canva snapshot: {png}"
+
+          assert sum(len(designs[t]["pages"]) for t in expected) == 20
+          ssot = (root / "SSOT.md").read_text(encoding="utf-8")
+          assert "All 20 pages now have verified Canva design provenance" in ssot
+          assert "A blank in a canonical source is student work" in ssot
+          print("PROVENANCE_GUARD_PASS: 20/20 pages have verified Canva design/page provenance; rectangle/rhombus also have committed PNG snapshots")
+          PY
+
+      - name: Set up Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20.18.1'
+
+      - name: Set up Python
+        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
+        with:
+          python-version: '3.12'
+
+      - name: Install PyMuPDF (PDF rasterization)
+        run: python -m pip install -r requirements.txt
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Run visual QA
+        run: node run.mjs --out artifacts
+
+      - name: Upload QA report and screenshots
+        if: always()
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        with:
+          name: quadrilaterals-qa
+          path: quadrilaterals-preview/qa/artifacts
+          retention-days: 14
