@@ -878,7 +878,7 @@ function build(fig) {
   const _sw = Math.max(..._xs) - Math.min(..._xs), _sh = Math.max(..._ys) - Math.min(..._ys);
   const _H = parseFloat(getComputedStyle(fig).getPropertyValue('--geo-h')) || 215, _W = fig.clientWidth || 706;
   const k = _sh / Math.min(_H, _W / (_sw / _sh));  /* viewBox units per screen px */
-  const FS = 21 * k, FA = 15 * k, OFF = 17 * k;
+  const FS = 22 * k, FA = 15 * k, OFF = 18 * k;
   const pt = p => `${p[0]} ${p[1]}`;
   const data = o => Object.entries(o).filter(([, v]) => v !== undefined && v !== '').map(([k, v]) => ` data-${k}="${v}"`).join('');
 
