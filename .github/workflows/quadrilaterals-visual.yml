@@ -1,6 +1,6 @@
 name: quadrilaterals visual QA
 
-# Deterministic browser, print, geometry and source-lock QA for
+# Deterministic browser, print, geometry, source-lock and provenance QA for
 # quadrilaterals-preview/index.html. No deploy side effects, no secrets.
 
 on:
@@ -27,6 +27,36 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Validate canonical-source provenance
+        working-directory: quadrilaterals-preview
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path(".")
+          manifest = json.loads((root / "canva-source/manifest.json").read_text(encoding="utf-8"))
+          designs = manifest.get("designs", {})
+          expected = {"rectangle": 5, "rhombus": 5}
+
+          assert set(designs) == set(expected), (
+              "Canva manifest scope changed. Update SSOT/provenance deliberately before claiming new coverage: "
+              + repr(sorted(designs))
+          )
+          for topic, count in expected.items():
+              pages = designs[topic].get("pages", [])
+              assert len(pages) == count, f"{topic}: expected {count} canonical pages, got {len(pages)}"
+              for page in pages:
+                  png = root / "canva-source" / page["source_png"]
+                  assert png.is_file(), f"missing canonical Canva snapshot: {png}"
+
+          ssot = (root / "SSOT.md").read_text(encoding="utf-8")
+          assert "MUST NOT claim **20/20 Canva-fidelity-verified pages**" in ssot
+          assert "A blank in a canonical source is student work" in ssot
+          print("PROVENANCE_GUARD_PASS: 10/20 pages have committed canonical Canva snapshots")
+          PY
 
       - name: Set up Node.js
         uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
