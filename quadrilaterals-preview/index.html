@@ -42,6 +42,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-bo
 .top{position:sticky;top:0;z-index:10;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:10px 12px;background:var(--paper);border-bottom:var(--sep-h) solid var(--sep)}
 .top button{font:inherit;font-weight:500;font-size:15px;line-height:1.2;padding:7px 16px;border:1px solid var(--ink);border-radius:4px;background:var(--paper);color:var(--ink);cursor:pointer}
 .top button.active{background:var(--ink);color:var(--paper)}
+.top button:focus-visible{outline:3px double var(--ink);outline-offset:3px}
 .top .print{margin-inline-start:14px;font-weight:400}
 .topic{display:none}
 .topic.active{display:block}
@@ -95,7 +96,7 @@ ol.props>li>.item{display:flex;flex-direction:column;gap:6px;min-width:0}
 .row>.geo{grid-column:2}
 .row>.derive,.row>.work{grid-column:1}
 .geo{margin:0;display:flex;justify-content:center;align-items:center;--geo-h:215px}
-.geo svg{display:block;overflow:visible}
+.geo svg{display:block;overflow:visible;shape-rendering:geometricPrecision;text-rendering:geometricPrecision}
 .geo svg .shape,.geo svg .diag,.geo svg .tick,.geo svg .par,.geo svg .right,.geo svg .arc,.geo svg .height,.geo svg .extension{vector-effect:non-scaling-stroke}
 .geo-xs{--geo-h:150px}.geo-s{--geo-h:178px}.geo-m{--geo-h:215px}.geo-l{--geo-h:260px}.geo-xl{--geo-h:310px}.geo-2x{--geo-h:380px}.geo-3x{--geo-h:520px}
 body.building .topic{display:block}
@@ -132,6 +133,11 @@ body.building .topic{display:block}
   .pages{padding:0 0 24px}
   .sheet-shell{position:relative;height:calc(var(--a4-height) * var(--scale));display:block}
   .sheet{position:absolute;top:0;left:50%;transform:translateX(-50%) scale(var(--scale));transform-origin:top center}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
 /* ============ print: one A4 sheet per page, active topic only ============ */
