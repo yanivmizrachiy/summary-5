@@ -39,23 +39,31 @@ jobs:
           root = Path(".")
           manifest = json.loads((root / "canva-source/manifest.json").read_text(encoding="utf-8"))
           designs = manifest.get("designs", {})
-          expected = {"rectangle": 5, "rhombus": 5}
+          expected = {"parallelogram": 5, "rectangle": 5, "rhombus": 5, "square": 5}
 
           assert set(designs) == set(expected), (
-              "Canva manifest scope changed. Update SSOT/provenance deliberately before claiming new coverage: "
+              "Canva manifest scope must cover exactly the four quadrilateral topics: "
               + repr(sorted(designs))
           )
           for topic, count in expected.items():
               pages = designs[topic].get("pages", [])
               assert len(pages) == count, f"{topic}: expected {count} canonical pages, got {len(pages)}"
+              assert designs[topic].get("canva_design_id"), f"{topic}: missing Canva design ID"
+              assert designs[topic].get("canonical_page_size") == {"width": 794, "height": 1123}, (
+                  f"{topic}: canonical page size must be 794x1123"
+              )
               for page in pages:
-                  png = root / "canva-source" / page["source_png"]
-                  assert png.is_file(), f"missing canonical Canva snapshot: {png}"
+                  assert page.get("page_id"), f"{topic} page {page.get('page')}: missing Canva page ID"
+                  source_png = page.get("source_png")
+                  if source_png:
+                      png = root / "canva-source" / source_png
+                      assert png.is_file(), f"missing canonical Canva snapshot: {png}"
 
+          assert sum(len(designs[t]["pages"]) for t in expected) == 20
           ssot = (root / "SSOT.md").read_text(encoding="utf-8")
-          assert "MUST NOT claim **20/20 Canva-fidelity-verified pages**" in ssot
+          assert "All 20 pages now have verified Canva design provenance" in ssot
           assert "A blank in a canonical source is student work" in ssot
-          print("PROVENANCE_GUARD_PASS: 10/20 pages have committed canonical Canva snapshots")
+          print("PROVENANCE_GUARD_PASS: 20/20 pages have verified Canva design/page provenance; rectangle/rhombus also have committed PNG snapshots")
           PY
 
       - name: Set up Node.js
