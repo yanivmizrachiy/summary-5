@@ -2,11 +2,13 @@
 
 This folder is the source-of-truth bridge from the user's Canva designs into this repository **for the designs actually captured here**. See `../SSOT.md` for the authority hierarchy and provenance rules for all 20 worksheets.
 
-## Canonical designs currently captured
-- Rectangle / מלבן — Canva design `DAGlS_3_YFA` — 5 pages
-- Rhombus / מעויין — Canva design `DAGlPGPc5sM` — 5 pages
+## Canonical designs verified
+- Parallelogram / מקבילית — Canva design `DAHWZm8MckE` — 5 pages — ID/page/text provenance registered in `manifest.json`
+- Rectangle / מלבן — Canva design `DAGlS_3_YFA` — 5 pages — committed PNGs + manifest
+- Rhombus / מעויין — Canva design `DAGlPGPc5sM` — 5 pages — committed PNGs + manifest
+- Square / ריבוע — Canva design `DAHWZrMtYEc` — 5 pages — ID/page/text provenance registered in `manifest.json`
 
-There is currently no equivalent committed PNG+manifest source package in this folder for parallelogram or square. Do not describe those 10 pages as Canva-fidelity-verified until their canonical sources are captured and audited.
+All 20 pages now have verified Canva design provenance. Rectangle/rhombus have durable local PNG snapshots; parallelogram/square still need durable local snapshots for offline visual comparison.
 
 ## Durable visual source
 Claude Code MUST inspect the PNG files in:
